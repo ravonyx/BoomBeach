@@ -3,6 +3,6 @@
 
 void main()
 {
-	Building *building = new Building();
-	std::cout << building << std::endl;
+	//Building *building = new Building();
+	//std::cout << building << std::endl;
 }

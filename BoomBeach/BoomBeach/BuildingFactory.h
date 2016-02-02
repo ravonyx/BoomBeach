@@ -12,6 +12,14 @@ class BuildingFactory
 		
 	public:
 		BuildingFactory();
-		Building* build(std::string name);
+		Building* build(std::string name)
+		{
+			if (name != "")
+			{
+				Building *building = new Building();
+				return building;
+			}
+			return nullptr;
+		}
 		Building* readNextBuilding(std::istream &stream);
 };
