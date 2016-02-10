@@ -5,6 +5,7 @@
 class Building
 {
 	private:
+		Building();
 		std::string name;
 		int maxInstances;
 		int cost;
@@ -21,7 +22,7 @@ class Building
 		Zone zone;
 
 	public:
-		Building();
+		friend class BuildingFactory;
 		int nextUpdateCost();
 		int levelUp();
 		friend std::ostream& operator<<(std::ostream& os, const Building &building);
