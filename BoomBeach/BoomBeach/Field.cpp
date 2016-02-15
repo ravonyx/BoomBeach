@@ -6,8 +6,10 @@ Field::Field()
 {
 }
 
-Field::Field(int, int)
+Field::Field(int w, int h)
 {
+	width = w;
+	height = h;
 }
 
 bool Field::IsEmpty(Zone z)
@@ -21,6 +23,7 @@ bool Field::IsEmpty(Zone z)
 Zone Field::FindEmptyZone(int w, int h)
 {
 	Zone z = Zone();
+	for (int i = 0; i < width*height;i++)
 	return Zone();
 }
 
@@ -43,12 +46,9 @@ Field::~Field()
 {
 }
 
-std::ostream & operator<<(std::ostream os, Field f)
+std::ostream & operator<<(std::ostream os, Field& f)
 {
 	// TODO: insert return statement here
-}
-
-std::istream & operator>>(std::istream os, Field f)
-{
-	// TODO: insert return statement here
+	os << "Name:" << std::endl;
+	return os;
 }

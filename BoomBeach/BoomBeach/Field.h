@@ -22,6 +22,6 @@ class Field
 
 };
 
-std::ostream& operator << (std::ostream os,  Field f); //Ecrit dans le flux la largeur, la hauteur et le contenu de chaque case
+std::ostream& operator << (std::ostream os,  Field& f); //Ecrit dans le flux la largeur, la hauteur et le contenu de chaque case
 
-std::istream& operator >> (std::istream os, Field f); //qui lira dans le flux la largeur, la hauteur et le contenu de chaque case, et modifiera le Field en conséquences.
+std::istream& operator >> (std::istream os, Field& f); //qui lira dans le flux la largeur, la hauteur et le contenu de chaque case, et modifiera le Field en conséquences.
