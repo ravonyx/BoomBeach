@@ -85,11 +85,28 @@ Zone Field::FindEmptyZone(int w, int h)
 
 bool Field::Build(Zone z)
 {
-	return false;
+	if (z.getId() == 0)
+	{
+		for (int i = z.getX(); i < z.getWidth(); i++)
+		{
+			for (int j = z.getY(); i < z.getHeight(); j++)
+			{
+				data[i + j * z.getWidth()] = z.getId();
+			}
+		}
+	}
+	//zone non vide
+	else
+		return false;
 }
 
 void Field::Erase(Zone z)
 {
+	for (int i = z.getX(); i < z.getWidth(); i++)
+	{
+		for (int j = z.getY(); i < z.getHeight(); j++)
+			data[i + j * z.getWidth()] = -1;
+	}
 }
 
 int Field::GetNearestBuilding(int x, int y)

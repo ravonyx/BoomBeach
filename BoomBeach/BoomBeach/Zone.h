@@ -17,4 +17,10 @@ class Zone
 
 		void setWidth(const int width);
 		void setHeight(const int height);
+
+		int getWidth() const;
+		int getHeight() const;
+		int getX() const;
+		int getY() const;
+		int getId() const;
 };

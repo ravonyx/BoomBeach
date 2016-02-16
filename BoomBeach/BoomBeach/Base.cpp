@@ -16,3 +16,18 @@ Base::~Base()
 {
 	delete &field;
 }
+
+bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
+{
+	if (buildingFactory == NULL)
+		return false;
+	else
+	{
+		Building* building = buildingFactory->build(name);
+		if (building != nullptr)
+			return true;
+		else
+			return false;
+	}
+
+}

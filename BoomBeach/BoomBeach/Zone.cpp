@@ -35,3 +35,26 @@ void Zone::setHeight(const int pheight)
 {
 	height = pheight;
 }
+
+int Zone::getId() const
+{
+	return id;
+}
+
+int Zone::getWidth() const
+{
+	return width;
+}
+int Zone::getHeight() const
+{
+	return height;
+}
+
+int Zone::getX() const
+{
+	return x;
+}
+int Zone::getY() const
+{
+	return y;
+}

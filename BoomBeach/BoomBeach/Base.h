@@ -10,7 +10,7 @@ public:
 	Base();
 	Base(Field *f, int pmoney);
 	~Base();
-	void AddBuilding();
+	bool AddBuilding(BuildingFactory *buildingFactory, const char *name);
 	void DestroyBuilding();
 	void ListBuildings();
 
