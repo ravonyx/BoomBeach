@@ -111,12 +111,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Building.cpp" />
-    <ClCompile Include="BuildingFactorycpp.cpp" />
+    <ClCompile Include="BuildingFactory.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Building Factory.h" />
+    <ClInclude Include="BuildingFactory.h" />
     <ClInclude Include="Building.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
