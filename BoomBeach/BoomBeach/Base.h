@@ -7,7 +7,8 @@
 class Base
 {
 public:
-	Base(Field f, int m);
+	Base();
+	Base(Field *f, int pmoney);
 	~Base();
 	void AddBuilding();
 	void DestroyBuilding();
@@ -17,7 +18,7 @@ public:
 	Base loadBase();
 
 private:
-	Field field;
+	Field *field;
 	//vector <Unit> units
 	int money;
 
