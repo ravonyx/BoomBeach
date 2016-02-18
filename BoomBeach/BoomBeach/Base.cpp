@@ -11,3 +11,11 @@ Base::Base(Field f, int m)
 Base::~Base()
 {
 }
+
+void Base::saveBase()
+{
+	std::ofstream myfile;
+	myfile.open("example.txt");
+	myfile << "Writing this to a file.\n";
+	myfile.close();
+}

@@ -3,6 +3,8 @@
 #include "BuildingFactory.h"
 #include "Building.h"
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 class Base
 {
