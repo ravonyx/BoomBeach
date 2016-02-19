@@ -17,6 +17,7 @@ public:
 	void saveBase();
 	Base loadBase();
 
+	Field* GetField();
 private:
 	Field *field;
 	//vector <Unit> units
