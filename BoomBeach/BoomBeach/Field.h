@@ -29,9 +29,10 @@ class Field
 		{
 			os << "Width: " << f.width;
 			os << " Height: " << f.height << std::endl;
-			for (int i = 0; i < f.width; i++)
+
+			for (int j = 0; j < f.height; j++)
 			{
-				for (int j = 0; j < f.height; j++)
+				for (int i = 0; i < f.width; i++)
 				{
 					os << std::setw(2) << f.data[i + j * f.width];
 				}

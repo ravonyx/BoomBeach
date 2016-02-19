@@ -2,10 +2,10 @@
 
 Field::Field()
 {
-	data = new int[5 * 5];
-	width = 5;
-	height = 5;
-	for (int i = 0; i < 5 * 5; i++)
+	data = new int[20 * 20];
+	width = 20;
+	height = 20;
+	for (int i = 0; i < 20 * 20; i++)
 	{
 		data[i] = -1;
 	}
@@ -46,7 +46,7 @@ Zone Field::FindEmptyZone(int w, int h)
 				for (int k = 0; k < w; k++)
 				{
 					if (data[i + j * width] == -1 && k == 0)
-						x = i + j * width;
+						x = i;
 					else if (data[i + j * width] == -1 && k == w - 1)
 						widthOK = true;
 					else if (data[i + j * width] != -1)
@@ -64,7 +64,7 @@ Zone Field::FindEmptyZone(int w, int h)
 						for (int f = 0; f < h; f++)
 						{
 							if (data[i + j * width] == -1 && k == 0 && f == 0)
-								y = i + j * width;
+								y = j;
 							else if (data[i + j * width] == -1 && f == h - 1)
 								heightOK = true;
 							else if (data[i + j * width] != -1)
@@ -98,9 +98,12 @@ bool Field::Build(Zone &z)
 {
 	if (z.getId() == 0)
 	{
-		for (int i = z.getX(); i < z.getX() + z.getHeight() + z.getWidth(); i++)
+		for (int i = z.getX(); i < z.getX() + z.getWidth(); i++)
 		{
-				data[i] = z.getId();
+			for (int j = z.getY(); j <  z.getY() + z.getHeight(); j++)
+			{
+				data[i + j * width] = z.getId();
+			}
 		}
 	}
 	//zone non vide
