@@ -14,10 +14,10 @@ void Army::CreateUnit(unitType type)
 
 void Army::DestroyUnit(unitType type, int level)
 {
-	for (size_t i = 0; i < _unitArray.size; i++)
+	for (size_t i = 0; i < _unitArray.size(); i++)
 	{
 		int unitIndex = -1;
-		if (_unitArray[i].getName == type && _unitArray[i].getLevel == level) {
+		if (_unitArray[i].getName() == type && _unitArray[i].getLevel() == level) {
 			unitIndex = 1;
 			break;
 		}

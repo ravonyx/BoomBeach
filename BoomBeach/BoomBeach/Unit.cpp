@@ -31,15 +31,26 @@ Unit::Unit(unitType name)
 	}
 }
 
-int Unit::UpgradeUnit()
+int Unit::nextUpdateCost()
 {
-	cost*= costUpdateRate;
+	return cost * costUpdateRate;
+}
+
+int Unit::levelUp()
+{
+	cost *= costUpdateRate;
 	attack *= attackUpdateRate;
 	firerate *= firerateUpdateRate;
 	range *= rangeUpdateRate;
 	health *= healthUpdateRate;
 	return cost /= costUpdateRate;
 }
+
+/*std::ostream& operator<<(std::ostream& os, const Unit &building)
+{
+	os << "Name:" << building.name << "Niveau:" << building.level << std::endl;
+	return os;
+}*/
 
 Unit::~Unit()
 {

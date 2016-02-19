@@ -6,6 +6,7 @@ enum unitType {princess, mushroom, badguy, goodguy};
 class Unit
 {
 private:
+	Unit(unitType name);
 	unitType name;
 	int maxInstances;
 	int cost;
@@ -20,10 +21,14 @@ private:
 	float healthUpdateRate;
 	float costUpdateRate;
 public:
-	Unit(unitType name);
-	int UpgradeUnit();
 	float getName() const { return name; };
 	float getLevel() const { return level; };
+
+	friend class UnitFactory;
+	friend class Army;
+	int nextUpdateCost();
+	int levelUp();
+	//friend std::ostream& operator<<(std::ostream& os, const Unit &building);
 	~Unit();
 };
 
