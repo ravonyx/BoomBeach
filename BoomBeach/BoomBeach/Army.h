@@ -7,8 +7,10 @@ class Army
 public:
 	Army();
 	std::vector<Unit> _unitArray;
-	void CreateUnit(unitType type);
+	void AddUnit(Unit &unit);
 	void DestroyUnit(unitType type, int level);
+	void SaveArmy();
+	void LoadArmy();
 	~Army();
 };
 

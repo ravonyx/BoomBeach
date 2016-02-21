@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Unit.h"
+#include "Army.h"
 #include <vector>
 #include <string>
 
@@ -16,11 +17,12 @@ public:
 	UnitFactory();
 	std::vector<std::string>UnitList();
 	friend std::ostream& operator<<(std::ostream& os, const Unit &unit);
-	Unit* Create(unitType name)
+	Unit* Create(const unitType type, Army &army)
 	{
-		if (nameInList(name))
+		if (nameInList(type))
 		{
-			Unit *unit = new Unit(name);
+			Unit *unit = new Unit(type);
+			army.AddUnit(*unit);
 			return unit;
 		}
 		return nullptr;

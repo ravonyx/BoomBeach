@@ -24,7 +24,10 @@ std::ostream& operator<<(std::ostream& os, const Unit &unit)
 bool UnitFactory::nameInList(unitType name)
 {
 	switch (name) {
-	case princess || mushroom || badguy || goodguy:
+	case princess:
+	case mushroom:
+	case badguy:
+	case goodguy:
 		return true;
 	default:
 		return false;

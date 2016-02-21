@@ -6,8 +6,9 @@ enum unitType {princess, mushroom, badguy, goodguy};
 class Unit
 {
 private:
-	Unit(unitType name);
-	unitType name;
+	Unit(unitType type, int level = 1);
+	unitType type;
+	std::string name;
 	int maxInstances;
 	int cost;
 	int attack;
@@ -21,8 +22,9 @@ private:
 	float healthUpdateRate;
 	float costUpdateRate;
 public:
-	float getName() const { return name; };
-	float getLevel() const { return level; };
+	std::string getName() const { return name; };
+	unitType getType() const { return type; };
+	int getLevel() const { return level; };
 
 	friend class UnitFactory;
 	friend class Army;

@@ -112,16 +112,16 @@
   <ItemGroup>
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="Building.cpp" />
-    <ClCompile Include="BuildingFactorycpp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitFactory.cpp" />
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Army.h" />
-    <ClInclude Include="Building Factory.h" />
     <ClInclude Include="Building.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitFactory.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

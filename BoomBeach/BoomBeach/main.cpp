@@ -5,6 +5,7 @@
 void main()
 {
 	Building *building = new Building();
+	Army *army = new Army();
 	std::cout << building << std::endl;
 	std::cout << "You can create:" << std::endl;
 	UnitFactory *unitFactory = new UnitFactory();
@@ -12,6 +13,13 @@ void main()
 	{
 		std::cout << "(" << i +1 << ") " << unitFactory->UnitList()[i] << std::endl;;
 	}
+	unitFactory->Create(unitType(0), *army);
+	unitFactory->Create(unitType(1), *army);
+	army->SaveArmy();
+	unitFactory->Create(unitType(1), *army);
+	army->LoadArmy();
+	unitFactory->Create(unitType(0), *army);
+	army->SaveArmy();
 	int a;
 	std::cin >> a;
 }
