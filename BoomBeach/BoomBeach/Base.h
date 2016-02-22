@@ -2,6 +2,7 @@
 #include "Field.h"
 #include "BuildingFactory.h"
 #include "Building.h"
+#include "UnitFactory.h"
 #include <vector>
 #include <iostream>
 #include <fstream>

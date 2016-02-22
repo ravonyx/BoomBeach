@@ -14,6 +14,19 @@ void Army::AddUnit(Unit &unit)
 	_unitArray.push_back(unit);
 }
 
+void Army::DeleteUnit(Unit & unit)
+{
+	int id = 0;
+	for (size_t i = 0; i < _unitArray.size(); i++)
+	{
+		if (_unitArray[i].getType() == unit.getType() && _unitArray[i].getLevel() && unit.getLevel()) {
+			id = i;
+			break;
+		}
+	}
+	_unitArray.erase(_unitArray.begin() + id);
+}
+
 void Army::DestroyUnit(unitType type, int level)
 {
 	for (size_t i = 0; i < _unitArray.size(); i++)
@@ -32,8 +45,8 @@ void Army::DestroyUnit(unitType type, int level)
 void Army::SaveArmy()
 {
 	std::ofstream fichier;
-	// Créer un repertoire ?
-	fichier.open("save.txt", std::ios::out | std::ios::trunc);  //déclaration du flux et ouverture du fichier
+
+	fichier.open("saveArmy.txt", std::ios::out | std::ios::trunc);  //déclaration du flux et ouverture du fichier
 
 	//fichier.fail() lecture
 	if (fichier.bad()) //permet de tester si le fichier s'est ouvert sans probleme 
@@ -44,6 +57,7 @@ void Army::SaveArmy()
 		std::cout << "Sauvergarde en cours" << std::endl;
 		// instructions
 		fichier.seekp(0, std::ios::end);
+		fichier << getMoney() << std::endl;
 		for (size_t i = 0; i < _unitArray.size(); i++)
 		{
 			fichier << _unitArray[i].getType() << " " << _unitArray[i].getLevel();
@@ -61,7 +75,7 @@ void Army::SaveArmy()
 
 void Army::LoadArmy()
 {
-	std::ifstream fichier("save.txt", std::ios::in);
+	std::ifstream fichier("saveArmy.txt", std::ios::in);
 
 	if (!fichier.fail())
 	{
@@ -71,12 +85,10 @@ void Army::LoadArmy()
 		std::string ligne{}; // Une variable pour stocker les lignes lues
 		int type{};
 		int level{};
+		int money{};
 
-		fichier >> type;
-		fichier >> level;
-		Unit *unit = new Unit(unitType(type), level);
-		AddUnit(*unit);
-		std::cout << unit->getName() << " " << unit->getLevel() << std::endl;
+		fichier >> money;
+		this->setMoney(money);
 
 		while (getline(fichier, ligne)) // Tant qu'on n'est pas à la fin, on lit
 		{
@@ -84,7 +96,7 @@ void Army::LoadArmy()
 			fichier >> level;
 			Unit *unit = new Unit(unitType(type), level);
 			AddUnit(*unit);
-			std::cout << unit->getName() << " " << unit->getLevel() << std::endl;
+			//std::cout << unit->getName() << " " << unit->getLevel() << std::endl;
 		}
 
 		fichier.close();
