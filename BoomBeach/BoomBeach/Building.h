@@ -43,6 +43,7 @@ class Building
 		int getHeight();
 		int getId();
 		Zone getZone();
+		int getCost();
 
 		void setId(int pid);
 		void setZone(Zone pzone);

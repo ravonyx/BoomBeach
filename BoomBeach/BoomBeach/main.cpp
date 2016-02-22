@@ -211,6 +211,7 @@ void main()
 			}
 			case 5:
 			{
+				base->loadBase();
 				army->LoadArmy();
 				break;
             }

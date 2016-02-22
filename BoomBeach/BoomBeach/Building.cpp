@@ -83,6 +83,10 @@ Zone Building::getZone()
 {
 	return zone;
 }
+int Building::getCost()
+{
+	return cost;
+}
 
 int Building::getId()
 {
