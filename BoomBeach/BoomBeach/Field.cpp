@@ -82,10 +82,12 @@ bool Field::Build(Zone &z)
 
 void Field::Erase(Zone z)
 {
-	for (int i = z.getX(); i < z.getWidth(); i++)
+	for (int i = z.getX(); i < z.getX() + z.getWidth(); i++)
 	{
-		for (int j = z.getY(); i < z.getHeight(); j++)
-			data[i + j * z.getWidth()] = -1;
+		for (int j = z.getY(); j < z.getY() + z.getHeight(); j++)
+		{
+			data[i + j * width] = -1;
+		}
 	}
 }
 

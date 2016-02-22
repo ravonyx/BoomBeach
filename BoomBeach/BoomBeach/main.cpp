@@ -87,6 +87,7 @@ void main()
 							{
 								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
+								base->DestroyBuilding(input);
 								std::cout << "Delete Suceed" << std::endl;
 								break;
 							}

@@ -41,5 +41,9 @@ class Building
 		std::string getName();
 		int getWidth();
 		int getHeight();
-		void setId(int newid);
+		int getId();
+		Zone getZone();
+
+		void setId(int pid);
+		void setZone(Zone pzone);
 };
