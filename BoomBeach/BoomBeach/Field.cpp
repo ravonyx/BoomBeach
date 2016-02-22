@@ -1,4 +1,6 @@
 #include "Field.h"
+#include <cstdlib>
+#include <ctime>
 
 Field::Field()
 {
@@ -6,9 +8,44 @@ Field::Field()
 	height = 20;
 	data = new int[width * height];
 
+	int x, y;
+	int offset;
+	srand(std::time(0));
+	int rand = std::rand() % 4;
+	if (rand == 0)
+	{
+		x = 0;
+		y = 0;
+		offset = 1;
+	}
+	else if (rand == 1)
+	{
+		x = 0;
+		y = 0;
+		offset = width;
+	}
+	else if (rand == 2)
+	{
+		x = 0;
+		y = height - 1;
+		offset = 1;
+	}
+	else if (rand == 3)
+	{
+		x = width - 1;
+		y = 0;
+		offset = width;
+	}
+
 	for (int i = 0; i < width * height; i++)
 	{
 		data[i] = -1;
+	}
+
+	for (int i = 0; i < 12; i++)
+	{
+		data[x + y * width] = -2;
+		x += offset;
 	}
 }
 
