@@ -64,17 +64,15 @@ void Base::saveBase()
 {
 	std::cout << "Saving" << std::endl;
 	std::ofstream myfile;
-	myfile.open("base.txt");
-	myfile << money;
-	myfile << "FIELD";
-	myfile << field->getHeight();
-	myfile << field->getWidth();
-	
-	for (int i = 0; i < field->getWidth()*field->getHeight(); i++) {
-		myfile << field[i]; //Operateur sur field qui donne un index de data
-	}
+	myfile.open("base.txt", std::ofstream::out | std::ofstream::trunc);
+	if (myfile.is_open())
+	{
+		myfile << money;
+		myfile << *field;
 
+	}
 	myfile.close();
+
 }
 
 Base Base::loadBase()
@@ -89,7 +87,6 @@ Base Base::loadBase()
 	{
 		std::getline(myfile, line) ; //On récupère money
 		myfile >> mon;
-		std::getline(myfile, line); //On récupère "FIELD" 
 		std::getline(myfile, line); //On récupère Height
 		myfile >> h;
 		std::getline(myfile, line); //On récupère Width
@@ -99,7 +96,7 @@ Base Base::loadBase()
 		while (std::getline(myfile, line))
 		{
 			//Récupérer une case du field
-			//myfile >> f[i]
+			//myfile >> *f[i];
 			i++;
 			std::cout << line << '\n';
 		}

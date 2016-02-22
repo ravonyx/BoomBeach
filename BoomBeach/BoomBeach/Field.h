@@ -42,6 +42,7 @@ class Field
 			os << std::endl;
 			return os;
 		}
+
 	private:
 		int height;
 		int width;
