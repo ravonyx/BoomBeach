@@ -36,6 +36,11 @@ void Zone::setHeight(const int pheight)
 	height = pheight;
 }
 
+void Zone::setId(const int pid)
+{
+	id = pid;
+}
+
 int Zone::getId() const
 {
 	return id;

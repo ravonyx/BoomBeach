@@ -2,14 +2,56 @@
 
 Building::Building()
 {
+	id = 0;
+	name = "Default";
 	life = 2000;
 	cost = 1000;
 	level = 0;
 
+	width = 1;
+	height = 1;
+
 	healthUpdateRate = 0.1;
 	costUpdateRate = 0.2;
+	maxInstances = 1;
 
 	zone = Zone();
+}
+
+Building::Building(std::string pname, int plife, int pcost, int phealthUpdateRate, int pcostUpdateRate, int pmaxInstances, int pwidth, int pheight)
+{
+	id = 0;
+	name = pname;
+	life = plife;
+	cost = pcost;
+	level = 0;
+
+	width = pwidth;
+	height = pheight;
+
+	healthUpdateRate = phealthUpdateRate;
+	costUpdateRate = pcostUpdateRate;
+	maxInstances = pmaxInstances;
+
+	zone = Zone();
+}
+
+Building::Building(const Building& model)
+{
+	id = 0;
+	name = model.name;
+	life = model.life;
+	cost = model.cost;
+	level = 0;
+
+	width = model.width;
+	height = model.height;
+	
+	healthUpdateRate = model.healthUpdateRate;
+	costUpdateRate = model.costUpdateRate; 
+	
+	maxInstances = maxInstances;
+	zone = Zone(model.zone);
 }
 
 int Building::nextUpdateCost()
@@ -25,8 +67,20 @@ int Building::levelUp()
 	return cost /= costUpdateRate;
 }
 
-std::ostream& operator<<(std::ostream& os, const Building &building)
+std::string Building::getName()
 {
-	os << "Name:" << building.name << "Niveau:" << building.level << std::endl;
-	return os;
+	return name;
+}
+int Building::getWidth()
+{
+	return width;
+}
+int Building::getHeight()
+{
+	return height;
+}
+
+void Building::setId(int newid)
+{
+	id = newid;
 }

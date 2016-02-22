@@ -20,24 +20,47 @@ Base::~Base()
 bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 {
 	if (buildingFactory == NULL)
-		return false;
+		std::cout << "Building factory not initialised" << std::endl;
 	else
 	{
-		Zone zoneToBuild = field->FindEmptyZone(2, 2);
 		Building* building = buildingFactory->build(name);
 		if (building != nullptr)
 		{
-			field->Build(zoneToBuild);
-			return true;
-		}
+			Zone zoneToBuild = field->FindEmptyZone(building->getWidth(), building->getHeight());
+			if (!zoneToBuild.isEmpty())
+			{
+				building->setId(_currentId);
+				zoneToBuild.setId(_currentId);
+				_currentId++;
+				field->Build(zoneToBuild);
+				buildings.push_back(building);
+				return true;
+			}
+			else
+				std::cout << "No more space for building" << std::endl;
 			
+		}
 		else
-			return false;
+			std::cout << "Building name does not exist" << std::endl;
 	}
-
+	std::cout << "Fail to build building" << std::endl;
+	return false;
 }
 
-Field* Base::GetField()
+void Base::printBuildings()
+{
+	if (buildings.size() <= 0)
+		std::cout << "No buildings";
+	else
+	{
+		for (int i = 0; i < buildings.size(); i++)
+		{
+			std::cout << *(buildings[i]) << std::endl;
+		}
+	}
+}
+
+Field* Base::getField()
 {
 	return field;
 }

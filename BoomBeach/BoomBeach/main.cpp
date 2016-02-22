@@ -1,4 +1,5 @@
 #include "Building.h"
+#include "Base.h"
 #include <iostream>
 
 void main()
@@ -7,10 +8,7 @@ void main()
 	std::cout << "Create Base and building factory";
 	Base *base = new Base();
 	BuildingFactory *buildingFactory = new BuildingFactory();
-	/*bool ret = base->AddBuilding(buildingFactory, "Example1");
-	ret = base->AddBuilding(buildingFactory, "Example");
-	ret = base->AddBuilding(buildingFactory, "Example");
-	ret = base->AddBuilding(buildingFactory, "Example");*/
+
 	/*Army *army = new Army();
 	std::cout << building << std::endl;
 	std::cout << "You can create:" << std::endl;
@@ -47,14 +45,7 @@ void main()
 				break;
 			case 1:
 			{
-				for (size_t i = 0; i < 10; i++)
-				{
-					for (size_t i = 0; i < 10; i++)
-					{
-						std::cout << "O";
-					}
-					std::cout << std::endl;
-				}
+				std::cout << *(base->getField());
 				while (exitCode != 1)
 				{
 					std::cout << "What do you want to do ?" << std::endl;
@@ -69,6 +60,7 @@ void main()
 						exitCode = 1;
 						break;
 					case 1:
+						base->printBuildings();
 						while (exitCode != 1)
 						{
 							std::cout << "What do you want to do ?" << std::endl;
@@ -84,18 +76,19 @@ void main()
 								break;
 							case 1: 
 							{
-								std::cout << "Wich ?" << std::endl;
+								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
 								std::cout << "Upgrade Suceed" << std::endl;
 								break;
 							}
 							case 2:
 							{
-								std::cout << "Wich ?" << std::endl;
+								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
 								std::cout << "Delete Suceed" << std::endl;
 								break;
 							}
+							
 							default:
 								std::cout << "This is not a valid input" << std::endl;
 								break;
@@ -128,6 +121,7 @@ void main()
 								std::cout << "Wich ?" << std::endl;
 								break;
 							}
+						
 							default:
 								std::cout << "This is not a valid input" << std::endl;
 								break;
@@ -150,6 +144,7 @@ void main()
 				{
 					std::cout << "What do you want to do ?" << std::endl;
 					std::cout << "(1) Build building" << std::endl;
+					std::cout << "(2) View building Possibilities" << std::endl;
 					std::cout << "(0) Back To Menu" << std::endl;
 					int input;
 					std::cin >> input;
@@ -160,13 +155,15 @@ void main()
 							break;
 						case 1:
 						{
-							bool ret = base->AddBuilding(buildingFactory, "Example2");
-							if (ret == false)
-								std::cout << " Fail" << std::endl;
-							else
-								std::cout << " Suceed" << std::endl;
-
-							std::cout << "End" << std::endl;
+							std::string name;
+							std::cout << "Name: ";
+							std::cin >> name;
+							base->AddBuilding(buildingFactory, name.c_str());
+							break;
+						}
+						case 2:
+						{
+							std::cout << *buildingFactory << std::endl;
 							break;
 						}
 						default:

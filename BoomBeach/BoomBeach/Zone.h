@@ -17,6 +17,7 @@ class Zone
 
 		void setWidth(const int width);
 		void setHeight(const int height);
+		void setId(const int pid);
 
 		int getWidth() const;
 		int getHeight() const;
