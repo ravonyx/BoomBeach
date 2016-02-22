@@ -12,5 +12,15 @@ class Zone
 
 	public:
 		Zone();
+		Zone(int pwidth, int pheight, int px, int py);
 		bool isEmpty();
+
+		void setWidth(const int width);
+		void setHeight(const int height);
+
+		int getWidth() const;
+		int getHeight() const;
+		int getX() const;
+		int getY() const;
+		int getId() const;
 };

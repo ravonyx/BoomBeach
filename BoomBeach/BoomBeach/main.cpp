@@ -1,17 +1,18 @@
-#include "Building.h"
-#include <iostream>
-#include "Field.h"
 #include "Base.h"
+#include <iostream>
 
 void main()
 {
-	int i(0);
+	std::cout << "Hi !" << std::endl;
+	std::cout << "Create Base and building factory";
+	Base *base = new Base();
+	BuildingFactory *buildingFactory = new BuildingFactory();
+	bool ret = base->AddBuilding(buildingFactory, "Example2");
+	if (ret == false)
+		std::cout << " Fail" << std::endl;
+	else
+		std::cout << " Suceed" << std::endl;
 
-	Base b = Base(Field(), 0);
-
-	b.saveBase();
-
-	std::cin >> i;
-	//Building *building = new Building();
-	//std::cout << building << std::endl;
+	std::cout << "End" << std::endl;
+	getchar();
 }

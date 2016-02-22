@@ -25,6 +25,7 @@ int Building::levelUp()
 	return cost /= costUpdateRate;
 }
 
+
 std::ostream& operator<<(std::ostream& os, const Building &building)
 {
 	os << "Name:" << building.name << "Niveau:" << building.level << std::endl;

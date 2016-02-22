@@ -25,5 +25,7 @@ class Building
 		friend class BuildingFactory;
 		int nextUpdateCost();
 		int levelUp();
+		int getLevel();
 		friend std::ostream& operator<<(std::ostream& os, const Building &building);
+		
 };

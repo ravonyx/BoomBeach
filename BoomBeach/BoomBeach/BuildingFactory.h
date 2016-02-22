@@ -8,13 +8,14 @@
 class BuildingFactory
 {
 	private:
-		std::vector <Building>buildingList;
-		
+		//std::vector <Building>buildingList;
+		std::vector <std::string>buildingList;
+		bool nameInList(std::string name);
 	public:
 		BuildingFactory();
 		Building* build(std::string name)
 		{
-			if (name != "")
+			if (nameInList(name))
 			{
 				Building *building = new Building();
 				return building;

@@ -41,7 +41,7 @@
     <ClInclude Include="Building.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Building Factory.h">
+    <ClInclude Include="BuildingFactory.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Field.h">

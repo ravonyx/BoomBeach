@@ -9,17 +9,21 @@
 class Base
 {
 public:
-	Base(Field f, int m);
+	Base();
+	Base(Field &f, int pmoney);
 	~Base();
-	void AddBuilding();
+	bool AddBuilding(BuildingFactory *buildingFactory, const char *name);
+	void EnhanceBuilding(int id);
 	void DestroyBuilding();
 	void ListBuildings();
+	Building GetBuilding(int id);
 
 	void saveBase();
 	Base loadBase();
 
 private:
 	Field field;
+	std::vector<Building> buildings;
 	//vector <Unit> units
 	int money;
 
