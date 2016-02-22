@@ -2,14 +2,16 @@
 
 Field::Field()
 {
-	data = new int[20 * 20];
 	width = 20;
 	height = 20;
-	for (int i = 0; i < 20 * 20; i++)
+	data = new int[width * height];
+
+	for (int i = 0; i < width * height; i++)
 	{
 		data[i] = -1;
 	}
 }
+
 Field::~Field()
 {
 	delete &data;
@@ -32,6 +34,27 @@ bool Field::IsEmpty(Zone z)
 Zone Field::FindEmptyZone(int w, int h)
 {
 	Zone z = Zone();
+
+	for (int i = 0; i < width * height; ++i)
+	{
+		int x = 0;
+		int y = 0;
+		for (; x < w; x++)
+		{
+			for (; y < h; y++)
+			{
+				if (data[i + x + y * width] != -1)
+					break;
+			}
+			if (y < h)
+				break;
+		}
+		if (x == w && y == h)
+		{
+			return Zone(w, h, i % width, i / width);
+		}
+	}
+	return Zone();
 
 	bool widthOK = false;
 	bool heightOK = false;
