@@ -36,10 +36,15 @@ Field::Field()
 		y = 0;
 		offset = width;
 	}
+	int randUnreach;
 
 	for (int i = 0; i < width * height; i++)
 	{
-		data[i] = -1;
+		randUnreach = std::rand() % width/2 - width/4;
+		if (randUnreach == 0)
+			data[i] = -3;
+		else
+			data[i] = -1;
 	}
 
 	for (int i = 0; i < 12; i++)
@@ -89,9 +94,14 @@ Field::Field(int w, int h)
 		offset = width;
 	}
 
+	int randUnreach;
 	for (int i = 0; i < w * h; i++)
 	{
-		data[i] = -1;
+		randUnreach = std::rand() % width / 2 - width / 4;
+		if (randUnreach == 0)
+			data[i] = -3;
+		else
+			data[i] = -1;
 	}
 
 	for (int i = 0; i < 12; i++)
