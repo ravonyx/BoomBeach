@@ -8,26 +8,9 @@ void main()
 	std::cout << "Create Base and building factory";
 	Base *base = new Base();
 	BuildingFactory *buildingFactory = new BuildingFactory();
-
-	
-
-	/*Army *army = new Army();
-	std::cout << building << std::endl;
-	std::cout << "You can create:" << std::endl;
+	Army *army = new Army();
 	UnitFactory *unitFactory = new UnitFactory();
-	for (size_t i = 0; i < unitFactory->UnitList().size(); i++)
-	{
-		std::cout << "(" << i +1 << ") " << unitFactory->UnitList()[i] << std::endl;;
-	}
-	unitFactory->Create(unitType(0), *army);
-	unitFactory->Create(unitType(1), *army);
-	army->SaveArmy();
-	unitFactory->Create(unitType(1), *army);
-	army->LoadArmy();
-	unitFactory->Create(unitType(0), *army);
-	army->SaveArmy();
-	int a;
-	std::cin >> a;*/
+
 	int exitCode = 0;
 	while (exitCode != 1)
 	{
@@ -177,11 +160,36 @@ void main()
 				exitCode = 0;
 				break;
 			}
-			case 4:
+			case 3:
 			{
-				base->saveBase();
+				while (exitCode != 1)
+				{
+					std::cout << "You can create:" << std::endl;
+					for (size_t i = 0; i < unitFactory->UnitList().size(); i++)
+					{
+						std::cout << "(" << i + 1 << ") " << unitFactory->UnitList()[i] << std::endl;;
+					}
+					std::cout << "(0) Back" << std::endl;
+					int input;
+					std::cin >> input;
+					if(input == 0)
+						exitCode = 1;
+					else
+						unitFactory->CreateUnit(unitType(input-1), *army);
+				}
+				exitCode = 0;
 				break;
 			}
+			case 4:
+			{
+                base->saveBase();
+				army->SaveArmy();
+				break;
+			}
+			case 5:
+			{
+				army->LoadArmy();
+            }
 			default:
 				std::cout << "This is not a valid input" << std::endl;
 				break;

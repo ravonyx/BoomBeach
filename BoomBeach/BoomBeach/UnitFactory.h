@@ -17,15 +17,16 @@ public:
 	UnitFactory();
 	std::vector<std::string>UnitList();
 	friend std::ostream& operator<<(std::ostream& os, const Unit &unit);
-	Unit* Create(const unitType type, Army &army)
+	void CreateUnit(const unitType type, Army &army)
 	{
 		if (nameInList(type))
 		{
 			Unit *unit = new Unit(type);
-			army.AddUnit(*unit);
-			return unit;
+			if (army.getMoney() - unit->cost > 0) {
+				army.AddUnit(*unit);
+				army.setMoney(army.getMoney() - unit->cost);
+			}
 		}
-		return nullptr;
 	}
 	Unit* ReadNextUnit(std::istream &stream);
 	~UnitFactory();

@@ -1,4 +1,5 @@
 #include "Unit.h"
+#include <iostream>
 
 Unit::Unit(unitType type, int level)
 {
@@ -12,37 +13,61 @@ Unit::Unit(unitType type, int level)
 		rangeUpdateRate = 1.2;
 		healthUpdateRate = 1.3;
 		costUpdateRate = 1.5;
-		cost = 2000 + (2000 * level * costUpdateRate);
-		attack = 10;
-		firerate = 100;
-		range = 20;
-		health = 300;
+		cost = 2000 + ( 2000 * level * costUpdateRate);
+		attack = 10 + (10 * level * attackUpdateRate);
+		firerate = 100 + (100 * level * firerateUpdateRate);
+		range = 20 + (20 * level * rangeUpdateRate);
+		health = 300 + (300 * level * healthUpdateRate);
 		break;
 	case mushroom:
 		this->type = type;
 		name = "mushroom";
 		maxInstances = 5;
-		cost = 500;
-		attack = 2;
-		firerate = 25;
-		range = 5;
-		health = 75;
 		attackUpdateRate = 1.1;
 		firerateUpdateRate = 1.1;
 		rangeUpdateRate = 1.1;
 		healthUpdateRate = 1.3;
 		costUpdateRate = 1.1;
+		cost = 500 + (500 * level * costUpdateRate);
+		attack = 2 + (2 * level * attackUpdateRate);
+		firerate = 25 + (25 * level * firerateUpdateRate);
+		range = 5 + (5 * level * rangeUpdateRate);
+		health = 75 + (75 * level * healthUpdateRate);
 		break;
 	case badguy:
-		// Code
+		this->type = type;
+		name = "badguy";
+		maxInstances = 5;
+		attackUpdateRate = 1.1;
+		firerateUpdateRate = 1.1;
+		rangeUpdateRate = 1.1;
+		healthUpdateRate = 1.3;
+		costUpdateRate = 1.1;
+		cost = 500 + (500 * level * costUpdateRate);
+		attack = 2 + (2 * level * attackUpdateRate);
+		firerate = 25 + (25 * level * firerateUpdateRate);
+		range = 5 + (5 * level * rangeUpdateRate);
+		health = 75 + (75 * level * healthUpdateRate);
 		break;
 	case goodguy:
-		// Code
+		this->type = type;
+		name = "goodguy";
+		maxInstances = 5;
+		attackUpdateRate = 1.1;
+		firerateUpdateRate = 1.1;
+		rangeUpdateRate = 1.1;
+		healthUpdateRate = 1.3;
+		costUpdateRate = 1.1;
+		cost = 500 + (500 * level * costUpdateRate);
+		attack = 2 + (2 * level * attackUpdateRate);
+		firerate = 25 + (25 * level * firerateUpdateRate);
+		range = 5 + (5 * level * rangeUpdateRate);
+		health = 75 + (75 * level * healthUpdateRate);
 		break;
 	default:
-		// Code
 		break;
 	}
+	std::cout << "Creation of " << this->name << " level " << this->level << " for " << this->cost << " gold" << std::endl << std::endl;
 }
 
 int Unit::nextUpdateCost()
@@ -60,12 +85,13 @@ int Unit::levelUp()
 	return cost /= costUpdateRate;
 }
 
+Unit::~Unit()
+{
+}
+
 /*std::ostream& operator<<(std::ostream& os, const Unit &building)
 {
 	os << "Name:" << building.name << "Niveau:" << building.level << std::endl;
 	return os;
 }*/
 
-Unit::~Unit()
-{
-}

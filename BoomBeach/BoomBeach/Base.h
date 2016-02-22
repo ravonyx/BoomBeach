@@ -2,6 +2,7 @@
 #include "Field.h"
 #include "BuildingFactory.h"
 #include "Building.h"
+#include "UnitFactory.h"
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -20,7 +21,7 @@ public:
 	Building* GetBuilding(int id);
 
 	void saveBase();
-	Base loadBase();
+	void loadBase();
 
 	Field* getField();
 private:

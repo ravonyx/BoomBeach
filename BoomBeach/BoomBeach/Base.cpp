@@ -98,7 +98,7 @@ void Base::saveBase()
 
 }
 
-Base Base::loadBase()
+void Base::loadBase()
 {
 	Field *f;
 	int mon;
@@ -108,27 +108,40 @@ Base Base::loadBase()
 	std::ifstream myfile("base.txt", std::ios::in);
 	if (myfile.is_open())
 	{
+
+		//On trouve l'argent
 		std::getline(myfile, line) ; //On récupère money
 		myfile >> mon;
-		std::getline(myfile, line); //On récupère Height
-		myfile >> h;
-		std::getline(myfile, line); //On récupère Width
-		myfile >> w;
+
+		//On trouve la largeur 
+		std::getline(myfile, line);
+		std::string token = line.substr(0, line.find(" "));
+		line.erase(0, line.find(" ") + 1);
+		w = std::stoi(line);
+
+		//On trouve la hauteur
+		std::getline(myfile, line);
+		token = line.substr(0, line.find(" "));
+		line.erase(0, line.find(" ") + 1);
+		h = std::stoi(line);
+
+
 		f = new Field(w, h);
 		int i = 0;
 		while (std::getline(myfile, line))
 		{
-			//Récupérer une case du field
-			//myfile >> *f[i];
-			i++;
-			std::cout << line << '\n';
+			if (i < w*h)
+			{
+				f->getData()[i] = std::stoi(line);
+				i++;
+			}
+			
 		}
 		myfile.close();
 	}
 
-	else std::cout << "Unable to open file";
+	else std::cout << "Impossible d'ouvrir Base";
 	
-	return Base();
 	//return Base(f, mon);
 }
 
