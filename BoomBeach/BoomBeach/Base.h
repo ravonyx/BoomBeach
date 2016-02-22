@@ -10,7 +10,7 @@ class Base
 {
 public:
 	Base();
-	Base(Field &f, int pmoney);
+	Base(Field *f, int pmoney);
 	~Base();
 	bool AddBuilding(BuildingFactory *buildingFactory, const char *name);
 	void EnhanceBuilding(int id);
@@ -23,7 +23,7 @@ public:
 
 	Field* GetField();
 private:
-	Field field;
+	Field *field;
 	std::vector<Building> buildings;
 	//vector <Unit> units
 	int money;
