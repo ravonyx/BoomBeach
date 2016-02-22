@@ -5,13 +5,15 @@
 class Army
 {
 private : 
-	int money = 2000;
+	int money = 20000;
 public:
 	Army();
 	std::vector<Unit> _unitArray;
 	void AddUnit(Unit &unit);
 	void DeleteUnit(Unit &unit);
-	void DestroyUnit(unitType type, int level);
+	void DeleteUnit(unitType type, int level);
+	void showUnits();
+	int NumberOfInstance(unitType type);
 	void SaveArmy();
 	void LoadArmy();
 	int getMoney() { return money; }

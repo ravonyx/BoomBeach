@@ -5,17 +5,19 @@
 void main()
 {
 	std::cout << "Hi !" << std::endl;
-	std::cout << "Create Base and building factory";
+	std::cout << "Welcome in Ravonyxland" << std::endl << std::endl;
+	std::cout << "Initialization" << std::endl;
 	Base *base = new Base();
 	BuildingFactory *buildingFactory = new BuildingFactory();
 	Army *army = new Army();
 	UnitFactory *unitFactory = new UnitFactory();
+	std::cout << "/////////////////////////////////" << std::endl << std::endl;
 
 	int exitCode = 0;
 	while (exitCode != 1)
 	{
 		std::cout << "What do you want to do ?" << std::endl;
-		std::cout << "(1) View map" << std::endl;
+		std::cout << "(1) View base" << std::endl;
 		std::cout << "(2) Select Building Factory" << std::endl;
 		std::cout << "(3) Select Unit Factory" << std::endl;
 		std::cout << "(4) Save base" << std::endl;
@@ -30,10 +32,13 @@ void main()
 				break;
 			case 1:
 			{
+				std::cout << "--------------------------------" << std::endl;
 				std::cout << *(base->getField());
+				std::cout << "--------------------------------" << std::endl;
 				while (exitCode != 1)
 				{
-					std::cout << "What do you want to do ?" << std::endl;
+					std::cout  << std::endl;
+					std::cout << "What do you want to see ?" << std::endl;
 					std::cout << "(1) List of building" << std::endl;
 					std::cout << "(2) List of units" << std::endl;
 					std::cout << "(0) Back To Menu" << std::endl;
@@ -48,6 +53,7 @@ void main()
 						base->printBuildings();
 						while (exitCode != 1)
 						{
+							std::cout << std::endl;
 							std::cout << "What do you want to do ?" << std::endl;
 							std::cout << "(1) Upgrade building" << std::endl;
 							std::cout << "(2) Delete building" << std::endl;
@@ -86,6 +92,11 @@ void main()
 					{
 						while (exitCode != 1)
 						{
+							for (size_t i = 0; i < army->_unitArray.size(); i++)
+							{
+								std::cout << "(" << i + 1 << ") " << army->_unitArray[i].getName() << " level " << army->_unitArray[i].getLevel() << std::endl;
+							}
+							std::cout << std::endl;
 							std::cout << "What do you want to do ?" << std::endl;
 							std::cout << "(1) Upgrade unit" << std::endl;
 							std::cout << "(2) Delete unit" << std::endl;
@@ -100,11 +111,17 @@ void main()
 							case 1:
 							{
 								std::cout << "Wich ?" << std::endl;
+								std::cin >> input;
+								if(input>0 && input < army->_unitArray.size()+1)
+									army->_unitArray[input-1].levelUp();
 								break;
 							}
 							case 2:
 							{
 								std::cout << "Wich ?" << std::endl;
+								std::cin >> input;
+								if (input>0 && input < army->_unitArray.size() + 1)
+									army->DeleteUnit(army->_unitArray[input-1].getType(), army->_unitArray[input - 1].getLevel());
 								break;
 							}
 						
@@ -128,6 +145,7 @@ void main()
 			{
 				while (exitCode != 1)
 				{
+					std::cout << std::endl;
 					std::cout << "What do you want to do ?" << std::endl;
 					std::cout << "(1) Build building" << std::endl;
 					std::cout << "(2) View building Possibilities" << std::endl;
@@ -164,6 +182,9 @@ void main()
 			{
 				while (exitCode != 1)
 				{
+					std::cout << std::endl;
+					std::cout << "You have " << army->getMoney() << " gold to army" << std::endl;
+
 					std::cout << "You can create:" << std::endl;
 					for (size_t i = 0; i < unitFactory->UnitList().size(); i++)
 					{
@@ -174,8 +195,10 @@ void main()
 					std::cin >> input;
 					if(input == 0)
 						exitCode = 1;
-					else
-						unitFactory->CreateUnit(unitType(input-1), *army);
+					else {
+						unitFactory->CreateUnit(unitType(input - 1), *army);
+					}
+						
 				}
 				exitCode = 0;
 				break;
@@ -189,11 +212,12 @@ void main()
 			case 5:
 			{
 				army->LoadArmy();
+				break;
             }
 			default:
 				std::cout << "This is not a valid input" << std::endl;
 				break;
 		}
-		std::cout << "//////////////////////////////////" << std::endl;
+		std::cout << "//////////////////////////////////" << std::endl << std::endl;
 	}
 }

@@ -27,34 +27,52 @@ void Army::DeleteUnit(Unit & unit)
 	_unitArray.erase(_unitArray.begin() + id);
 }
 
-void Army::DestroyUnit(unitType type, int level)
+void Army::DeleteUnit(unitType type, int level)
 {
+	int unitIndex = -1;
 	for (size_t i = 0; i < _unitArray.size(); i++)
 	{
-		int unitIndex = -1;
 		if (_unitArray[i].getType() == type && _unitArray[i].getLevel() == level) {
-			unitIndex = 1;
+			unitIndex = i;
 			break;
 		}
-		if (unitIndex != -1) {
-			_unitArray.erase(_unitArray.begin() + unitIndex);
+	}
+	if (unitIndex != -1) {
+		_unitArray.erase(_unitArray.begin() + unitIndex);
+	}
+}
+
+void Army::showUnits()
+{
+
+}
+
+int Army::NumberOfInstance(unitType type)
+{
+	int result = 0;
+	for (size_t i = 0; i < _unitArray.size(); i++)
+	{
+		if (_unitArray[i].getType() == type) {
+			result++;
 		}
 	}
+	return result;
 }
 
 void Army::SaveArmy()
 {
+	std::cout << "Army step" << std::endl;
 	std::ofstream fichier;
 
 	fichier.open("saveArmy.txt", std::ios::out | std::ios::trunc);  //déclaration du flux et ouverture du fichier
 
 	//fichier.fail() lecture
 	if (fichier.bad()) //permet de tester si le fichier s'est ouvert sans probleme 
-		std::cout << "Impossible de sauvegarder !" << std::endl;
+		std::cout << "Save faild !" << std::endl;
 
 	if (fichier)  // si l'ouverture a réussi
 	{
-		std::cout << "Sauvergarde en cours" << std::endl;
+		std::cout << "Save in progress" << std::endl;
 		// instructions
 		fichier.seekp(0, std::ios::end);
 		fichier << getMoney() << std::endl;
@@ -67,20 +85,21 @@ void Army::SaveArmy()
 		}
 
 		fichier.close();  // on ferme le fichier
-		std::cout << "Sauvergade OK !" << std::endl;
+		std::cout << "Save complete !" << std::endl;
 	}
 	else  // sinon
-		std::cerr << "Impossible de sauvegarder !" << std::endl;
+		std::cerr << "Save faild !" << std::endl;
 }
 
 void Army::LoadArmy()
 {
+	std::cout << "Army step" << std::endl;
 	std::ifstream fichier("saveArmy.txt", std::ios::in);
 
 	if (!fichier.fail())
 	{
 		_unitArray.clear();
-		std::cout << "Chargement de la sauvergarde en cours" << std::endl;
+		std::cout << "Loading save in progress" << std::endl;
 
 		std::string ligne{}; // Une variable pour stocker les lignes lues
 		int type{};
@@ -102,7 +121,7 @@ void Army::LoadArmy()
 		fichier.close();
 	}
 	else
-		std::cerr << "Impossible de charger la sauvegarde !" << std::endl;
+		std::cerr << "Save faild !" << std::endl;
 }
 
 Army::~Army()
