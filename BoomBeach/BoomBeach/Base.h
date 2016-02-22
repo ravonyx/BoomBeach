@@ -20,7 +20,7 @@ public:
 	Building GetBuilding(int id);
 
 	void saveBase();
-	Base loadBase();
+	void loadBase();
 
 	Field* getField();
 private:

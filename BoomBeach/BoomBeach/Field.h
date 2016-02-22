@@ -28,7 +28,7 @@ class Field
 		friend std::ostream& operator << (std::ostream& os, const Field& f)
 		{
 			os << "Width: " << f.width;
-			os << " Height: " << f.height << std::endl;
+			os << "Height: " << f.height << std::endl;
 
 			for (int j = 0; j < f.height; j++)
 			{
