@@ -7,6 +7,7 @@ Unit::Unit(unitType type, int level)
 	case princess:
 		this->type = type;
 		name = "princess";
+		this->level = level;
 		maxInstances = 2;
 		attackUpdateRate = 1.2;
 		firerateUpdateRate = 1.1;
@@ -22,6 +23,7 @@ Unit::Unit(unitType type, int level)
 	case mushroom:
 		this->type = type;
 		name = "mushroom";
+		this->level = level;
 		maxInstances = 5;
 		attackUpdateRate = 1.1;
 		firerateUpdateRate = 1.1;
@@ -37,6 +39,7 @@ Unit::Unit(unitType type, int level)
 	case badguy:
 		this->type = type;
 		name = "badguy";
+		this->level = level;
 		maxInstances = 5;
 		attackUpdateRate = 1.1;
 		firerateUpdateRate = 1.1;
@@ -52,6 +55,7 @@ Unit::Unit(unitType type, int level)
 	case goodguy:
 		this->type = type;
 		name = "goodguy";
+		this->level = level;
 		maxInstances = 5;
 		attackUpdateRate = 1.1;
 		firerateUpdateRate = 1.1;
@@ -77,6 +81,7 @@ int Unit::nextUpdateCost()
 
 int Unit::levelUp()
 {
+	level++;
 	cost *= costUpdateRate;
 	attack *= attackUpdateRate;
 	firerate *= firerateUpdateRate;
