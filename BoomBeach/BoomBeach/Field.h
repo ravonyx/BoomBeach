@@ -3,6 +3,7 @@
 #include "Zone.h"
 #include <iomanip>
 #include <fstream>
+#include <string>
 
 class Field
 {
@@ -30,7 +31,7 @@ class Field
 		friend std::ostream& operator << (std::ostream& os, const Field& f)
 		{
 			os << "Width: " << f.width;
-			os << "Height: " << f.height << std::endl;
+			os << " Height: " << f.height << std::endl;
 
 			for (int j = 0; j < f.height; j++)
 			{
@@ -44,6 +45,29 @@ class Field
 			os << std::endl;
 			return os;
 		}
+		friend std::istream& operator >> (std::istream& is, Field& f)
+		{
+			std::string junk;
+			is >> junk;
+			is >> f.width;
+			is >> junk;
+			is >> f.height;
+
+			const int size = f.width * f.height;
+			int data;
+			int index = 0;
+			while (is.good())
+			{
+				is >> data;
+				if (index < size)
+				{
+					f.data[index] = data;
+					index++;
+				}
+			}
+			return is;
+		}
+
 
 	private:
 		int height;
@@ -53,12 +77,3 @@ class Field
 		
 
 };
-
-
-
-//qui lira dans le flux la largeur, la hauteur et le contenu de chaque case, et modifiera le Field en conséquences.
-inline std::istream& operator >> (std::istream is, Field& f)
-{
-
-	return is;
-}

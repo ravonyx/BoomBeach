@@ -91,58 +91,25 @@ void Base::saveBase()
 	if (myfile.is_open())
 	{
 		myfile << money;
+		myfile << std::endl;
 		myfile << *field;
-
 	}
 	myfile.close();
-
 }
 
 void Base::loadBase()
 {
-	Field *f;
-	int mon;
-	int h ;
-	int w;
 	std::string line;
 	std::ifstream myfile("base.txt", std::ios::in);
 	if (myfile.is_open())
 	{
-
 		//On trouve l'argent
-		std::getline(myfile, line) ; //On récupère money
-		myfile >> mon;
+		myfile >> money;
 
-		//On trouve la largeur 
-		std::getline(myfile, line);
-		std::string token = line.substr(0, line.find(" "));
-		line.erase(0, line.find(" ") + 1);
-		w = std::stoi(line);
-
-		//On trouve la hauteur
-		std::getline(myfile, line);
-		token = line.substr(0, line.find(" "));
-		line.erase(0, line.find(" ") + 1);
-		h = std::stoi(line);
-
-
-		f = new Field(w, h);
-		int i = 0;
-		while (std::getline(myfile, line))
-		{
-			if (i < w*h)
-			{
-				f->getData()[i] = std::stoi(line);
-				i++;
-			}
-			
-		}
+		myfile >> *field;
 		myfile.close();
 	}
-
 	else std::cout << "Impossible d'ouvrir Base";
-	
-	//return Base(f, mon);
 }
 
 Building* Base::GetBuilding(int id)
