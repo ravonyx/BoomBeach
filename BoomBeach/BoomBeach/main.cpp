@@ -70,6 +70,7 @@ void main()
 							{
 								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
+								base->DestroyBuilding(input);
 								std::cout << "Delete Suceed" << std::endl;
 								break;
 							}
@@ -181,14 +182,14 @@ void main()
 			}
 			case 4:
 			{
+                base->saveBase();
 				army->SaveArmy();
 				break;
 			}
 			case 5:
 			{
 				army->LoadArmy();
-				break;
-			}
+            }
 			default:
 				std::cout << "This is not a valid input" << std::endl;
 				break;

@@ -1,4 +1,5 @@
 #include "Base.h"
+#include <algorithm> 
 
 Base::Base()
 {
@@ -17,6 +18,23 @@ Base::~Base()
 	delete &field;
 }
 
+bool Base::DestroyBuilding(int id)
+{
+	Building* building = GetBuilding(id);
+	if (building != nullptr)
+	{
+		std::cout << "Erase building " << building->getId() << std::endl;
+		std::vector<Building*>::iterator it;
+		it = find(buildings.begin(), buildings.end(), building);
+		buildings.erase(it);
+		field->Erase(building->getZone());
+		return true;
+	}
+
+	std::cout << "L'id n'existe pas" << std::endl;
+	return false;
+}
+
 bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 {
 	if (buildingFactory == NULL)
@@ -31,6 +49,7 @@ bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 			{
 				building->setId(_currentId);
 				zoneToBuild.setId(_currentId);
+				building->setZone(zoneToBuild);
 				_currentId++;
 				field->Build(zoneToBuild);
 				buildings.push_back(building);
@@ -64,20 +83,18 @@ void Base::saveBase()
 {
 	std::cout << "Saving" << std::endl;
 	std::ofstream myfile;
-	myfile.open("base.txt");
-	myfile << money;
-	myfile << "FIELD";
-	myfile << field->getHeight();
-	myfile << field->getWidth();
-	
-	for (int i = 0; i < field->getWidth()*field->getHeight(); i++) {
-		myfile << field[i]; //Operateur sur field qui donne un index de data
-	}
+	myfile.open("base.txt", std::ofstream::out | std::ofstream::trunc);
+	if (myfile.is_open())
+	{
+		myfile << money;
+		myfile << *field;
 
+	}
 	myfile.close();
+
 }
 
-Base Base::loadBase()
+void Base::loadBase()
 {
 	Field *f;
 	int mon;
@@ -87,29 +104,53 @@ Base Base::loadBase()
 	std::ifstream myfile("base.txt", std::ios::in);
 	if (myfile.is_open())
 	{
+
+		//On trouve l'argent
 		std::getline(myfile, line) ; //On récupère money
 		myfile >> mon;
-		std::getline(myfile, line); //On récupère "FIELD" 
-		std::getline(myfile, line); //On récupère Height
-		myfile >> h;
-		std::getline(myfile, line); //On récupère Width
-		myfile >> w;
+
+		//On trouve la largeur 
+		std::getline(myfile, line);
+		std::string token = line.substr(0, line.find(" "));
+		line.erase(0, line.find(" ") + 1);
+		w = std::stoi(line);
+
+		//On trouve la hauteur
+		std::getline(myfile, line);
+		token = line.substr(0, line.find(" "));
+		line.erase(0, line.find(" ") + 1);
+		h = std::stoi(line);
+
+
 		f = new Field(w, h);
 		int i = 0;
 		while (std::getline(myfile, line))
 		{
-			//Récupérer une case du field
-			//myfile >> f[i]
-			i++;
-			std::cout << line << '\n';
+			if (i < w*h)
+			{
+				f->getData()[i] = std::stoi(line);
+				i++;
+			}
+			
 		}
 		myfile.close();
 	}
 
-	else std::cout << "Unable to open file";
+	else std::cout << "Impossible d'ouvrir Base";
 	
-	return Base();
 	//return Base(f, mon);
+}
+
+Building* Base::GetBuilding(int id)
+{
+	for (int i = 0; i < buildings.size(); i++)
+	{
+		if (buildings[i]->getId() == id)
+		{
+			return buildings[i];
+		}
+	}
+	return nullptr;
 }
 
 Field* Base::getField()

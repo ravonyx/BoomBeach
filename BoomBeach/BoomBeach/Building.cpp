@@ -50,7 +50,7 @@ Building::Building(const Building& model)
 	healthUpdateRate = model.healthUpdateRate;
 	costUpdateRate = model.costUpdateRate; 
 	
-	maxInstances = maxInstances;
+	maxInstances = model.maxInstances;
 	zone = Zone(model.zone);
 }
 
@@ -79,8 +79,21 @@ int Building::getHeight()
 {
 	return height;
 }
-
-void Building::setId(int newid)
+Zone Building::getZone()
 {
-	id = newid;
+	return zone;
+}
+
+int Building::getId()
+{
+	return id;
+}
+void Building::setId(int pid)
+{
+	id = pid;
+}
+
+void Building::setZone(Zone pzone)
+{
+	zone = pzone;
 }

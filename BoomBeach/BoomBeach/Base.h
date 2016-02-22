@@ -16,12 +16,12 @@ public:
 	void printBuildings();
 	bool AddBuilding(BuildingFactory *buildingFactory, const char *name);
 	void EnhanceBuilding(int id);
-	void DestroyBuilding();
+	bool DestroyBuilding(int id);
 	void ListBuildings();
-	Building GetBuilding(int id);
+	Building* GetBuilding(int id);
 
 	void saveBase();
-	Base loadBase();
+	void loadBase();
 
 	Field* getField();
 private:
