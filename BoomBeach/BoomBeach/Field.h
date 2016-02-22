@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Zone.h"
 #include <iomanip>
+#include <fstream>
+
 class Field
 {
 	public:

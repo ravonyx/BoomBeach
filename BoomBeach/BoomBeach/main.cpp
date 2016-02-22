@@ -9,6 +9,8 @@ void main()
 	Base *base = new Base();
 	BuildingFactory *buildingFactory = new BuildingFactory();
 
+	
+
 	/*Army *army = new Army();
 	std::cout << building << std::endl;
 	std::cout << "You can create:" << std::endl;
@@ -172,6 +174,11 @@ void main()
 					}
 				}
 				exitCode = 0;
+				break;
+			}
+			case 4:
+			{
+				base->saveBase();
 				break;
 			}
 			default:
