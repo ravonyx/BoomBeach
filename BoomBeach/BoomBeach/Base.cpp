@@ -42,7 +42,7 @@ bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 	else
 	{
 		Building* building = buildingFactory->build(name);
-		if (building != nullptr)
+		if (building != nullptr && building->getCost() < money)
 		{
 			Zone zoneToBuild = field->FindEmptyZone(building->getWidth(), building->getHeight());
 			if (!zoneToBuild.isEmpty())
@@ -53,12 +53,16 @@ bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 				_currentId++;
 				field->Build(zoneToBuild);
 				buildings.push_back(building);
+
+				money -= building->getCost();
 				return true;
 			}
 			else
 				std::cout << "No more space for building" << std::endl;
 			
 		}
+		else if(building->getCost() > money)
+			std::cout << "Not enough money" << std::endl;
 		else
 			std::cout << "Building name does not exist" << std::endl;
 	}
