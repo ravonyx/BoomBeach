@@ -1,4 +1,5 @@
 #include "Base.h"
+#include <algorithm> 
 
 Base::Base()
 {
@@ -17,6 +18,23 @@ Base::~Base()
 	delete &field;
 }
 
+bool Base::DestroyBuilding(int id)
+{
+	Building* building = GetBuilding(id);
+	if (building != nullptr)
+	{
+		std::cout << "Erase building " << building->getId() << std::endl;
+		std::vector<Building*>::iterator it;
+		it = find(buildings.begin(), buildings.end(), building);
+		buildings.erase(it);
+		field->Erase(building->getZone());
+		return true;
+	}
+
+	std::cout << "L'id n'existe pas" << std::endl;
+	return false;
+}
+
 bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 {
 	if (buildingFactory == NULL)
@@ -31,6 +49,7 @@ bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 			{
 				building->setId(_currentId);
 				zoneToBuild.setId(_currentId);
+				building->setZone(zoneToBuild);
 				_currentId++;
 				field->Build(zoneToBuild);
 				buildings.push_back(building);
@@ -120,6 +139,18 @@ void Base::loadBase()
 	else std::cout << "Impossible d'ouvrir Base";
 	
 	//return Base(f, mon);
+}
+
+Building* Base::GetBuilding(int id)
+{
+	for (int i = 0; i < buildings.size(); i++)
+	{
+		if (buildings[i]->getId() == id)
+		{
+			return buildings[i];
+		}
+	}
+	return nullptr;
 }
 
 Field* Base::getField()
