@@ -108,10 +108,11 @@ Base Base::loadBase()
 
 	else std::cout << "Unable to open file";
 	
-	return Base(f, mon);
+	return Base();
+	//return Base(f, mon);
 }
 
-Field* Base::GetField()
+Field* Base::getField()
 {
 	return field;
 }

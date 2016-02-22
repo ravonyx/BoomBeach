@@ -10,7 +10,7 @@ class Base
 {
 public:
 	Base();
-	Base(Field &f, int pmoney);
+	Base(Field *f, int pmoney);
 	~Base();
 	void printBuildings();
 	bool AddBuilding(BuildingFactory *buildingFactory, const char *name);
