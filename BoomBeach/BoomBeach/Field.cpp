@@ -2,12 +2,16 @@
 
 Field::Field()
 {
-	data = new int[20 * 20];
-	for (int i = 0; i < 20 * 20; i++)
+	width = 20;
+	height = 20;
+	data = new int[width * height];
+
+	for (int i = 0; i < width * height; i++)
 	{
 		data[i] = -1;
 	}
 }
+
 Field::~Field()
 {
 	delete &data;
@@ -31,67 +35,97 @@ Zone Field::FindEmptyZone(int w, int h)
 {
 	Zone z = Zone();
 
+	for (int i = 0; i < width * height; ++i)
+	{
+		int x = 0;
+		int y = 0;
+		for (; x < w; x++)
+		{
+			for (; y < h; y++)
+			{
+				if (data[i + x + y * width] != -1)
+					break;
+			}
+			if (y < h)
+				break;
+		}
+		if (x == w && y == h)
+		{
+			return Zone(w, h, i % width, i / width);
+		}
+	}
+	return Zone();
+
 	bool widthOK = false;
 	bool heightOK = false;
 	int x = 0;
 	int y = 0;
-	for (int i = 0; i < width*height; i++)
+	for (int i = 0; i < width; i++)
 	{
 		for (int j = 0; j < height; j++)
 		{
-			if (data[i] == -1)
+			if (data[i + j * width] == -1)
 			{
-				for (int i = 0; i < width; i++)
+				for (int k = 0; k < w; k++)
 				{
-					if (data[i + j * width] == -1)
-						continue;
-					else if (data[i + j * width] == -1 && i == 0)
-						x = i + j * width;
-					else if (data[i + j * width] == -1 && i == width - 1)
+					if (data[i + j * width] == -1 && k == 0)
+						x = i;
+					else if (data[i + j * width] == -1 && k == w - 1)
 						widthOK = true;
-					else
+					else if (data[i + j * width] != -1)
+					{
+						widthOK = false;
+						heightOK = false;
 						break;
+					}
 				}
 
 				if (widthOK == true)
 				{
-					for (int j = 0; i < height; j++)
+					for (int k = 0; k < w; k++)
 					{
-						if (data[i + j * width] == -1)
-							continue;
-						else if (data[i + j * width] == -1 && j == 0)
-							y = i + j * width;
-						else if (data[i + j * width] == -1 && j == height - 1)
-							heightOK = true;
-						else
-							break;
+						for (int f = 0; f < h; f++)
+						{
+							if (data[i + j * width] == -1 && k == 0 && f == 0)
+								y = j;
+							else if (data[i + j * width] == -1 && f == h - 1)
+								heightOK = true;
+							else if (data[i + j * width] != -1)
+							{
+								widthOK = false;
+								heightOK = false;
+								break;
+							}
+						}
 					}
 				}
 				if (widthOK == true && heightOK == true)
 					break;
 				
 			}
+		
 		}
-	
+		if (widthOK == true && heightOK == true)
+			break;
 	}
 
 	if (widthOK == true && heightOK == true)
 	{
-		return Zone(width, height, x, y);
+		return Zone(w, h, x, y);
 	}
 	else
 		return Zone();
 }
 
-bool Field::Build(Zone z)
+bool Field::Build(Zone &z)
 {
 	if (z.getId() == 0)
 	{
-		for (int i = z.getX(); i < z.getWidth(); i++)
+		for (int i = z.getX(); i < z.getX() + z.getWidth(); i++)
 		{
-			for (int j = z.getY(); i < z.getHeight(); j++)
+			for (int j = z.getY(); j <  z.getY() + z.getHeight(); j++)
 			{
-				data[i + j * z.getWidth()] = z.getId();
+				data[i + j * width] = z.getId();
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include "Zone.h"
-
+#include <iomanip>
 class Field
 {
 	public:
@@ -10,7 +10,7 @@ class Field
 		Field(int, int);
 		bool IsEmpty(Zone);
 		Zone FindEmptyZone(int, int);
-		bool Build(Zone z);
+		bool Build(Zone &z);
 		void Erase(Zone z);
 		int GetNearestBuilding(int, int); 
 		//void ShortestPath(int, int, int, int)​;
@@ -24,12 +24,24 @@ class Field
 		{
 			return data[x + y * width];
 		}
-
-		int operator [] (int i) const
+		//Ecrit dans le flux la largeur, la hauteur et le contenu de chaque case
+		friend std::ostream& operator << (std::ostream& os, const Field& f)
 		{
-			return data[i];
-		}
+			os << "Width: " << f.width;
+			os << " Height: " << f.height << std::endl;
 
+			for (int j = 0; j < f.height; j++)
+			{
+				for (int i = 0; i < f.width; i++)
+				{
+					os << std::setw(2) << f.data[i + j * f.width];
+				}
+				os << std::endl;
+			}
+
+			os << std::endl;
+			return os;
+		}
 	private:
 		int height;
 		int width;
@@ -39,23 +51,11 @@ class Field
 
 };
 
-//Ecrit dans le flux la largeur, la hauteur et le contenu de chaque case
-/*std::ostream& operator << (std::ostream os, Field& f)
-{
-	int *data = f.getData();
-	os << "Width: " << f.getWidth() <<  "Height" << f.getHeight() << std::endl;
-	for (int i = 0; i < f.getWidth() * f.getHeight(); i++)
-	{
-		os << "Type:" << data[i];
-	}
 
-	os << std::endl;
-	return os;
-}
 
 //qui lira dans le flux la largeur, la hauteur et le contenu de chaque case, et modifiera le Field en conséquences.
-std::istream& operator >> (std::istream is, Field& f)
+inline std::istream& operator >> (std::istream is, Field& f)
 {
 
 	return is;
-}*/
+}

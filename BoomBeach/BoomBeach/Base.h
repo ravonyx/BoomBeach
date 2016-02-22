@@ -21,6 +21,7 @@ public:
 	void saveBase();
 	Base loadBase();
 
+	Field* GetField();
 private:
 	Field field;
 	std::vector<Building> buildings;
