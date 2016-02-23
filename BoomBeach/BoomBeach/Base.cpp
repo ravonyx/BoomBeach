@@ -37,12 +37,13 @@ bool Base::DestroyBuilding(int id)
 
 bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 {
+	int instances(0);
+	int max(0);
 	if (buildingFactory == NULL)
 		std::cout << "Building factory not initialised" << std::endl;
 	else
 	{
-		int instances(0);
-		int max;
+		
 		for (int i = 0; i < buildings.size();i++)
 		{
 			if (buildings[i]->getName().compare(std::string(name)) == 0)
