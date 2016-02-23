@@ -35,6 +35,9 @@ void main()
 				std::cout << "--------------------------------" << std::endl;
 				std::cout << *(base->getField());
 				std::cout << "--------------------------------" << std::endl;
+				std::cout << "-1 : Empty ";
+				std::cout << "-2 : Loading Zone ";
+				std::cout << "-3 : Tree" << std::endl;
 				while (exitCode != 1)
 				{
 					std::cout  << std::endl;
