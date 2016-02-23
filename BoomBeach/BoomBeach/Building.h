@@ -44,6 +44,7 @@ class Building
 		int getId();
 		Zone getZone();
 		int getCost();
+		int getMaxInstances();
 
 		void setId(int pid);
 		void setZone(Zone pzone);

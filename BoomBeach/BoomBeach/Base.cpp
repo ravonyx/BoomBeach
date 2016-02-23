@@ -41,33 +41,64 @@ bool Base::AddBuilding(BuildingFactory *buildingFactory, const char *name)
 		std::cout << "Building factory not initialised" << std::endl;
 	else
 	{
-		Building* building = buildingFactory->build(name);
-		if (building != nullptr && building->getCost() < money)
+		int instances(0);
+		int max;
+		for (int i = 0; i < buildings.size();i++)
 		{
-			Zone zoneToBuild = field->FindEmptyZone(building->getWidth(), building->getHeight());
-			if (!zoneToBuild.isEmpty())
+			if (buildings[i]->getName().compare(std::string(name)) == 0)
 			{
-				building->setId(_currentId);
-				zoneToBuild.setId(_currentId);
-				building->setZone(zoneToBuild);
-				_currentId++;
-				field->Build(zoneToBuild);
-				buildings.push_back(building);
-
-				money -= building->getCost();
-				return true;
+				max = buildings[i]->getMaxInstances();
+				instances++;
 			}
-			else
-				std::cout << "No more space for building" << std::endl;
-			
+				
 		}
-		else if(building->getCost() > money)
-			std::cout << "Not enough money" << std::endl;
+		if (instances < max) 
+		{
+			Building* building = buildingFactory->build(name);
+			if (building != nullptr && building->getCost() < money)
+			{
+				Zone zoneToBuild = field->FindEmptyZone(building->getWidth(), building->getHeight());
+				if (!zoneToBuild.isEmpty())
+				{
+					building->setId(_currentId);
+					zoneToBuild.setId(_currentId);
+					building->setZone(zoneToBuild);
+					_currentId++;
+					field->Build(zoneToBuild);
+					buildings.push_back(building);
+
+					money -= building->getCost();
+					return true;
+				}
+				else
+					std::cout << "No more space for building" << std::endl;
+
+			}
+			else if (building->getCost() > money)
+				std::cout << "Not enough money" << std::endl;
+			else
+				std::cout << "Building name does not exist" << std::endl;
+		}
 		else
-			std::cout << "Building name does not exist" << std::endl;
+		{
+			std::cout << "Cannot create another " << name << " building" << std::endl;
+		}
+		
 	}
 	std::cout << "Fail to build building" << std::endl;
 	return false;
+}
+
+void Base::EnhanceBuilding(int id)
+{
+	if (money >= buildings[id]->getCost() ) 
+	{
+		buildings[id]->levelUp();
+	}
+	else
+	{
+		std::cout << "Cannot Upgrade This Building" << std::endl;
+	}
 }
 
 void Base::printBuildings()

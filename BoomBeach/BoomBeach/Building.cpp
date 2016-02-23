@@ -88,6 +88,11 @@ int Building::getCost()
 	return cost;
 }
 
+int Building::getMaxInstances()
+{
+	return maxInstances;
+}
+
 int Building::getId()
 {
 	return id;
