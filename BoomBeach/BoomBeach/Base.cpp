@@ -16,7 +16,12 @@ Base::Base(Field *pf, int pmoney)
 
 Base::~Base()
 {
-	delete &_field;
+	delete _field;
+	delete _buildingFactory;
+	for (int i = 0; i < _buildings.size(); i++)
+	{
+		delete _buildings[i];
+	}
 }
 
 bool Base::destroyBuilding(int id)
@@ -132,6 +137,7 @@ void Base::saveBase()
 
 void Base::loadBase()
 {
+	_buildings.clear();
 	int nbBuildings = 0;
 	std::ifstream myfile("base.txt", std::ios::in);
 	if (myfile.is_open())
@@ -159,7 +165,7 @@ Building* Base::getBuilding(int id)
 	return nullptr;
 }
 
-Field* Base::getField()
+Field* Base::getField() const
 {
 	return _field;
 }

@@ -76,46 +76,46 @@ void Building::setHeathCost(int baseLife, int baseCost, int plevel)
 	cost = baseCost + baseLife * (plevel * costUpdateRate);
 }
 
-int Building::getId()
+int Building::getId() const
 {
 	return id;
 }
-std::string Building::getName()
+std::string Building::getName() const
 {
 	return name;
 }
-int Building::getLife()
+int Building::getLife() const
 {
 	return life;
 }
-int Building::getCost()
+int Building::getCost() const
 {
 	return cost;
 }
 
-float Building::getHealthUpdateRate()
+float Building::getHealthUpdateRate() const
 {
 	return healthUpdateRate;
 }
-float Building::getCostUpdateRate()
+float Building::getCostUpdateRate() const
 {
 	return costUpdateRate;
 }
 
-int Building::getWidth()
+int Building::getWidth() const
 {
 	return width;
 }
-int Building::getHeight()
+int Building::getHeight() const
 {
 	return height;
 }
-int Building::getMaxInstances()
+int Building::getMaxInstances() const
 {
 	return maxInstances;
 }
 
-Zone Building::getZone()
+Zone Building::getZone() const
 {
 	return zone;
 }

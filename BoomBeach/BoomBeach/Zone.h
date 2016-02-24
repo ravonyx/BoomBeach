@@ -15,9 +15,9 @@ class Zone
 		Zone(int pwidth, int pheight, int px, int py);
 		bool isEmpty();
 
-		void setWidth(const int width);
-		void setHeight(const int height);
-		void setId(const int pid);
+		void setWidth(int width);
+		void setHeight(int height);
+		void setId(int pid);
 
 		int getWidth() const;
 		int getHeight() const;

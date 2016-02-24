@@ -24,7 +24,7 @@ public:
 	void saveBase();
 	void loadBase();
 
-	Field* getField();
+	Field* getField() const;
 
 private:
 	BuildingFactory *_buildingFactory;

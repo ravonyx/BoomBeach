@@ -51,18 +51,18 @@ class Building
 		int levelUp();
 		void setHeathCost(int baseLife, int baseCost, int plevel);
 
-		int getId();
-		std::string getName();
-		int getLife();
-		int getCost();
+		int getId() const;
+		std::string getName() const;
+		int getLife() const;
+		int getCost() const;
 
-		float getHealthUpdateRate();
-		float getCostUpdateRate();
-		int getWidth();
-		int getHeight();
-		int getMaxInstances();
+		float getHealthUpdateRate() const;
+		float getCostUpdateRate() const;
+		int getWidth() const;
+		int getHeight() const;
+		int getMaxInstances() const;
 
-		Zone getZone();
+		Zone getZone() const;
 		
 		void setId(int pid);
 		void setZone(Zone pzone);
