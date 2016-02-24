@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <string>
 #include "Zone.h"
+#include <fstream>
 
 class Building
 {
@@ -29,10 +30,21 @@ class Building
 
 	public:
 		friend class BuildingFactory;
-		friend std::ostream& operator<<(std::ostream& os, const Building &building)
+		friend std::ofstream& operator<< (std::ofstream& os, const Building &building)
 		{
-			os << "Id: " << building.id << " Name: " << building.name << " Level: " << building.level << " X: " << 
-				building.zone.getX() << " Y: " << building.zone.getY() << std::endl;
+			os << building.id << std::endl;
+			os << building.name << std::endl;
+			os << building.level << std::endl;
+			os << building.zone.getX() << std::endl;
+			os << building.zone.getY() << std::endl;
+			return os;
+		}
+
+		friend std::ostream& operator<< (std::ostream& os, const Building &building)
+		{
+			os << std::endl;
+			os << "Id: " << building.id << " Name: " << building.name << " Level: " << building.level << " Life: " << building.life <<
+				" Cost: " << building.cost << " X: " << building.zone.getX() << " Y: " << building.zone.getY();
 			return os;
 		}
 		int nextUpdateCost();

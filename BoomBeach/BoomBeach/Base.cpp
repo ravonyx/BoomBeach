@@ -98,9 +98,10 @@ void Base::printBuildings()
 	{
 		for (int i = 0; i < _buildings.size(); i++)
 		{
-			std::cout << *(_buildings[i]) << std::endl;
+			std::cout << *(_buildings[i]);
 		}
 	}
+	std::cout << std::endl;
 }
 
 void Base::printBuildingsPossibilies()
