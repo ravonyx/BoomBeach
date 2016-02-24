@@ -10,7 +10,6 @@ void main()
 	Base *base = new Base();
 	
 	Army *army = new Army();
-	UnitFactory *unitFactory = new UnitFactory();
 	std::cout << "/////////////////////////////////" << std::endl << std::endl;
 
 	int exitCode = 0;
@@ -96,10 +95,7 @@ void main()
 					{
 						while (exitCode != 1)
 						{
-							for (size_t i = 0; i < army->_unitArray.size(); i++)
-							{
-								std::cout << "(" << i + 1 << ") " << army->_unitArray[i].getName() << " level " << army->_unitArray[i].getLevel() << std::endl;
-							}
+							std::cout << *army;
 							std::cout << std::endl;
 							std::cout << "What do you want to do ?" << std::endl;
 							std::cout << "(1) Upgrade unit" << std::endl;
@@ -116,16 +112,16 @@ void main()
 							{
 								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
-								if(input>0 && input < army->_unitArray.size()+1)
-									army->_unitArray[input-1].levelUp();
+								if(input>0 && input < army->GetUnits().size()+1)
+									std::cout << "Updated for " << army->GetUnits()[input-1].levelUp() << " gold" << std::endl;
 								break;
 							}
 							case 2:
 							{
 								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
-								if (input>0 && input < army->_unitArray.size() + 1)
-									army->DeleteUnit(army->_unitArray[input-1].getType(), army->_unitArray[input - 1].getLevel());
+								if (input>0 && input < army->GetUnits().size() + 1)
+									army->DeleteUnit(army->GetUnits()[input-1].getType(), army->GetUnits()[input - 1].getLevel());
 								break;
 							}
 						
@@ -190,9 +186,9 @@ void main()
 					std::cout << "You have " << army->getMoney() << " gold to army" << std::endl;
 
 					std::cout << "You can create:" << std::endl;
-					for (size_t i = 0; i < unitFactory->UnitList().size(); i++)
+					for (size_t i = 0; i < army->GetFactory().UnitList().size(); i++)
 					{
-						std::cout << "(" << i + 1 << ") " << unitFactory->UnitList()[i] << std::endl;;
+						std::cout << "(" << i + 1 << ") " << army->GetFactory().UnitList()[i] << std::endl;;
 					}
 					std::cout << "(0) Back" << std::endl;
 					int input;
@@ -200,7 +196,7 @@ void main()
 					if(input == 0)
 						exitCode = 1;
 					else {
-						unitFactory->CreateUnit(unitType(input - 1), *army);
+						army->GetFactory().CreateUnit(unitType(input - 1), army);
 					}
 						
 				}

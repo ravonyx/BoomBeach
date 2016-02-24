@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <fstream>
 
 enum unitType {princess, mushroom, badguy, goodguy};
 
@@ -30,8 +31,19 @@ public:
 	friend class Army;
 	int nextUpdateCost();
 	int levelUp();
-	//Unit& operator=(const Unit&& u) { this->name = u.name; this->type = u.type; return *this;};
-	//friend std::ostream& operator<<(std::ostream& os, const Unit &building);
+
+	friend std::ofstream& operator << (std::ofstream& os, const Unit& u)
+	{
+		os << u.getType() << " " << u.getLevel();
+		return os;
+	}
+
 	~Unit();
 };
+
+inline std::ostream& operator << (std::ostream& os, const Unit& u)
+{
+	os << u.getName() << " level " << u.getLevel();
+	return os;
+}
 

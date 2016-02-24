@@ -87,7 +87,7 @@ int Unit::levelUp()
 	firerate *= firerateUpdateRate;
 	range *= rangeUpdateRate;
 	health *= healthUpdateRate;
-	return cost /= costUpdateRate;
+	return cost / costUpdateRate;
 }
 
 Unit::~Unit()
