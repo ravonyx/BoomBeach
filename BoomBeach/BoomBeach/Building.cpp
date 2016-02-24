@@ -76,46 +76,63 @@ void Building::setHeathCost(int baseLife, int baseCost, int plevel)
 	cost = baseCost + baseLife * (plevel * costUpdateRate);
 }
 
-int Building::getId()
+std::ofstream& operator<< (std::ofstream& os, const Building &building)
+{
+	os << building.id << std::endl;
+	os << building.name << std::endl;
+	os << building.level << std::endl;
+	os << building.zone.getX() << std::endl;
+	os << building.zone.getY() << std::endl;
+	return os;
+}
+std::ostream& operator<< (std::ostream& os, const Building &building)
+{
+	os << std::endl;
+	os << "Id: " << building.id << " Name: " << building.name << " Level: " << building.level << " Life: " << building.life <<
+		" Cost: " << building.cost << " X: " << building.zone.getX() << " Y: " << building.zone.getY();
+	return os;
+}
+
+int Building::getId() const
 {
 	return id;
 }
-std::string Building::getName()
+std::string Building::getName() const
 {
 	return name;
 }
-int Building::getLife()
+int Building::getLife() const
 {
 	return life;
 }
-int Building::getCost()
+int Building::getCost() const
 {
 	return cost;
 }
 
-float Building::getHealthUpdateRate()
+float Building::getHealthUpdateRate() const
 {
 	return healthUpdateRate;
 }
-float Building::getCostUpdateRate()
+float Building::getCostUpdateRate() const
 {
 	return costUpdateRate;
 }
 
-int Building::getWidth()
+int Building::getWidth() const
 {
 	return width;
 }
-int Building::getHeight()
+int Building::getHeight() const
 {
 	return height;
 }
-int Building::getMaxInstances()
+int Building::getMaxInstances() const
 {
 	return maxInstances;
 }
 
-Zone Building::getZone()
+Zone Building::getZone() const
 {
 	return zone;
 }

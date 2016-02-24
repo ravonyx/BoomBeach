@@ -25,55 +25,14 @@ class Field
 
 		int& operator() (int x, int y)
 		{
-			return data[x + y * width];
+			return _data[x + y * _width];
 		}
-		//Ecrit dans le flux la largeur, la hauteur et le contenu de chaque case
-		friend std::ostream& operator << (std::ostream& os, const Field& f)
-		{
-			os << "Width: " << f.width;
-			os << " Height: " << f.height << std::endl;
-
-			for (int j = 0; j < f.height; j++)
-			{
-				for (int i = 0; i < f.width; i++)
-				{
-					os << std::setw(2) << f.data[i + j * f.width];
-				}
-				os << std::endl;
-			}
-
-			os << std::endl;
-			return os;
-		}
-		friend std::istream& operator >> (std::istream& is, Field& f)
-		{
-			std::string junk;
-			is >> junk;
-			is >> f.width;
-			is >> junk;
-			is >> f.height;
-
-			const int size = f.width * f.height;
-			int data;
-			int index = 0;
-			while (is.good())
-			{
-				is >> data;
-				if (index < size)
-				{
-					f.data[index] = data;
-					index++;
-				}
-			}
-			return is;
-		}
-
+		friend std::ofstream& operator << (std::ofstream& os, const Field& f);
+		friend std::ostream& operator << (std::ostream& os, const Field& f);
+		friend std::istream& operator >> (std::istream& is, Field& f);
 
 	private:
-		int height;
-		int width;
-
-		int *data;
-		
-
+		int _height;
+		int _width;
+		int *_data;
 };

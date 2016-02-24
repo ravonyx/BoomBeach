@@ -29,9 +29,13 @@ Building* BuildingFactory::build(std::string name)
 				return building;
 			}
 			else
-				break;
+			{
+				std::cout << "Max instances of " << name << std::endl;
+				return nullptr;
+			}
 		}
 	}
+	std::cout << "Wrong name" << std::endl;
 	return nullptr;
 }
 
@@ -53,15 +57,10 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 	std::string name;
 	std::string junk;
 
-	stream >> junk;
 	stream >> id;
-	stream >> junk;
 	stream >> name;
-	stream >> junk;
 	stream >> level;
-	stream >> junk;
 	stream >> x;
-	stream >> junk;
 	stream >> y;
 
 	Building *buildingModel = getBuildingModel(name);
