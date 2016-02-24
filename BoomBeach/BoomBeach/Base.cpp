@@ -79,12 +79,15 @@ bool Base::addBuilding(const char *name)
 
 void Base::enhanceBuilding(int id)
 {
-	if (getBuilding(id) != nullptr)
+	std::cout << std::endl;
+	int index = getIndexOfBuilding(id);
+	if (index != -1)
 	{
-		if (_money >= getBuilding(id)->getCost())
+		if (_money >= _buildings[index]->getCost())
 		{
-			int cost = getBuilding(id)->levelUp();
-			std::cout << "Cost you " << cost << " money" << std::endl;
+			int cost = _buildings[index]->levelUp();
+			std::cout << "Cost you " << cost+1 << " gold" << std::endl;
+			_money -= _buildings[index]->getCost();
 		}
 		else
 			std::cout << "Not enough money to upgrade" << std::endl;
@@ -164,7 +167,22 @@ Building* Base::getBuilding(int id)
 	return nullptr;
 }
 
+int Base::getIndexOfBuilding(int id)
+{
+	for (int i = 0; i < _buildings.size(); i++)
+	{
+		if (_buildings[i]->getId() == id)
+			return i;
+	}
+	return -1;
+}
+
 Field* Base::getField() const
 {
 	return _field;
+}
+
+int Base::getMoney() const
+{
+	return _money;
 }

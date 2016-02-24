@@ -67,7 +67,7 @@ int Building::levelUp()
 	life *= healthUpdateRate;
 	cost *= costUpdateRate;
 
-	return cost /= costUpdateRate;
+	return cost / costUpdateRate;
 }
 
 void Building::setHeathCost(int baseLife, int baseCost, int plevel)

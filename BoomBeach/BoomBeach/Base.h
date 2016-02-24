@@ -20,12 +20,13 @@ public:
 	void enhanceBuilding(int id);
 	bool destroyBuilding(int id);
 	Building* getBuilding(int id);
+	int getIndexOfBuilding(int id);
 
 	void saveBase();
 	void loadBase();
 
 	Field* getField() const;
-
+	int getMoney() const;
 private:
 	BuildingFactory *_buildingFactory;
 	std::vector <Building*> _buildings;
