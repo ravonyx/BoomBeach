@@ -90,7 +90,7 @@ void Base::printBuildings()
 	{
 		for (int i = 0; i < _buildings.size(); i++)
 		{
-			std::cout << *(buildings[i]) << std::endl;
+			std::cout << *(_buildings[i]) << std::endl;
 		}
 	}
 }
@@ -114,7 +114,7 @@ void Base::saveBase()
 		myfile << std::endl;
 		for (int i = 0; i < _buildings.size(); i++)
 		{
-			myfile << (*buildings[i]);
+			myfile << (*_buildings[i]);
 		}
 		myfile << *_field;
 	}
