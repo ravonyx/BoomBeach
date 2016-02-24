@@ -43,15 +43,16 @@ bool Base::destroyBuilding(int id)
 
 bool Base::addBuilding(const char *name)
 {
-	int instances(0);
-	int max(0);
+	int cost = 0;
+	std::cout << std::endl;
 	if (_buildingFactory == NULL)
 		std::cout << "Building factory not initialised" << std::endl;
 	else
 	{
 		Building* building = _buildingFactory->build(name);
-		if (building != nullptr && building->getCost() < _money)
+		if (building != nullptr && building->getCost() <= _money)
 		{
+			cost = building->getCost();
 			Zone zoneToBuild = _field->FindEmptyZone(building->getWidth(), building->getHeight());
 			if (!zoneToBuild.isEmpty())
 			{
@@ -63,18 +64,15 @@ bool Base::addBuilding(const char *name)
 				_buildings.push_back(building);
 
 				_money -= building->getCost();
+				std::cout << "Suceed to build building" << std::endl;
 				return true;
 			}
 			else
 				std::cout << "No more space for building" << std::endl;
 		}
-		else if (building == nullptr)
-			std::cout << "Max instances of " << name << std::endl;
-		else
+		else if(cost > _money)
 			std::cout << "Not enough money" << std::endl;
-			
 	}
-
 	std::cout << "Fail to build building" << std::endl;
 	return false;
 }

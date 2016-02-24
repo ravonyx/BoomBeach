@@ -29,9 +29,13 @@ Building* BuildingFactory::build(std::string name)
 				return building;
 			}
 			else
-				break;
+			{
+				std::cout << "Max instances of " << name << std::endl;
+				return nullptr;
+			}
 		}
 	}
+	std::cout << "Wrong name" << std::endl;
 	return nullptr;
 }
 
