@@ -77,7 +77,7 @@ bool Base::addBuilding(const char *name)
 void Base::enhanceBuilding(int id)
 {
 	if (_money >= _buildings[id]->getCost())
-		buildings[id]->levelUp();
+		_buildings[id]->levelUp();
 	else
 		std::cout << "Cannot Upgrade This Building" << std::endl;
 }
@@ -88,7 +88,7 @@ void Base::printBuildings()
 		std::cout << "No buildings";
 	else
 	{
-		for (int i = 0; i < buildings.size(); i++)
+		for (int i = 0; i < _buildings.size(); i++)
 		{
 			std::cout << *(buildings[i]) << std::endl;
 		}
@@ -112,7 +112,7 @@ void Base::saveBase()
 
 		myfile << "NbBuildings: " << _buildings.size();
 		myfile << std::endl;
-		for (int i = 0; i < buildings.size(); i++)
+		for (int i = 0; i < _buildings.size(); i++)
 		{
 			myfile << (*buildings[i]);
 		}
