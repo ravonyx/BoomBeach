@@ -157,7 +157,6 @@ bool Field::Build(Zone &z)
 			}
 		}
 	}
-	//zone non vide
 	else
 		return false;
 }
@@ -194,14 +193,17 @@ std::ostream& operator << (std::ostream& os, const Field& f)
 {
 	os << "Width: " << f._width;
 	os << " Height: " << f._height << std::endl;
-
+	os << std::endl;
 	for (int j = 0; j < f._height; j++)
 	{
+		os << std::setw(4) << "Ligne " << j;
+		if (j < 10)
+			os << " ";
 		for (int i = 0; i < f._width; i++)
 		{
-			os << std::setw(2) << f._data[i + j * f._width];
+			os << std::setw(4) << f._data[i + j * f._width];
 		}
-		os << std::endl;
+		os << std::endl << std::endl;
 	}
 
 	os << std::endl;
