@@ -71,6 +71,7 @@ void main()
 						{
 							std::cout << std::endl;
 							std::cout << "What do you want to do ?" << std::endl;
+							std::cout << "You have " << base->getMoney() << " gold to base" << std::endl;
 							std::cout << "(1) Upgrade building" << std::endl;
 							std::cout << "(2) Delete building" << std::endl;
 							std::cout << "(0) Back To Menu" << std::endl;
@@ -173,6 +174,7 @@ void main()
 				{
 					std::cout << std::endl;
 					std::cout << "What do you want to do ?" << std::endl;
+					std::cout << "You have " << base->getMoney() << " gold to base" << std::endl;
 					std::cout << "(1) Build building" << std::endl;
 					std::cout << "(2) View building Possibilities" << std::endl;
 					std::cout << "(0) Back To Menu" << std::endl;
