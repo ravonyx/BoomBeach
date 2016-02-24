@@ -4,9 +4,9 @@
 
 Field::Field()
 {
-	width = 20;
-	height = 20;
-	data = new int[width * height];
+	_width = 20;
+	_height = 20;
+	_data = new int[_width * _height];
 
 	int x, y;
 	int offset;
@@ -22,48 +22,48 @@ Field::Field()
 	{
 		x = 0;
 		y = 0;
-		offset = width;
+		offset = _width;
 	}
 	else if (rand == 2)
 	{
 		x = 0;
-		y = height - 1;
+		y = _height - 1;
 		offset = 1;
 	}
 	else if (rand == 3)
 	{
-		x = width - 1;
+		x = _width - 1;
 		y = 0;
-		offset = width;
+		offset = _width;
 	}
 	int randUnreach;
 
-	for (int i = 0; i < width * height; i++)
+	for (int i = 0; i < _width * _height; i++)
 	{
-		randUnreach = std::rand() % width/2 - width/4;
+		randUnreach = std::rand() % _width /2 - _width /4;
 		if (randUnreach == 0)
-			data[i] = -3;
+			_data[i] = -3;
 		else
-			data[i] = -1;
+			_data[i] = -1;
 	}
 
 	for (int i = 0; i < 12; i++)
 	{
-		data[x + y * width] = -2;
+		_data[x + y * _width] = -2;
 		x += offset;
 	}
 }
 
 Field::~Field()
 {
-	delete &data;
+	delete _data;
 }
 
 Field::Field(int w, int h)
 {
-	width = w;
-	height = h;
-	data = new int[w * h];
+	_width = w;
+	_height = h;
+	_data = new int[w * h];
 
 	int x, y;
 	int offset;
@@ -79,34 +79,34 @@ Field::Field(int w, int h)
 	{
 		x = 0;
 		y = 0;
-		offset = width;
+		offset = _width;
 	}
 	else if (rand == 2)
 	{
 		x = 0;
-		y = height - 1;
+		y = _height - 1;
 		offset = 1;
 	}
 	else if (rand == 3)
 	{
-		x = width - 1;
+		x = _width - 1;
 		y = 0;
-		offset = width;
+		offset = _width;
 	}
 
 	int randUnreach;
 	for (int i = 0; i < w * h; i++)
 	{
-		randUnreach = std::rand() % width / 2 - width / 4;
+		randUnreach = std::rand() % _width / 2 - _width / 4;
 		if (randUnreach == 0)
-			data[i] = -3;
+			_data[i] = -3;
 		else
-			data[i] = -1;
+			_data[i] = -1;
 	}
 
 	for (int i = 0; i < 12; i++)
 	{
-		data[x + y * width] = -2;
+		_data[x + y * _width] = -2;
 		x += offset;
 	}
 }
@@ -123,7 +123,7 @@ Zone Field::FindEmptyZone(int w, int h)
 {
 	Zone z = Zone();
 
-	for (int i = 0; i < width * height; ++i)
+	for (int i = 0; i < _width * _height; ++i)
 	{
 		int x = 0;
 		int y = 0;
@@ -131,7 +131,7 @@ Zone Field::FindEmptyZone(int w, int h)
 		{
 			for (; y < h; y++)
 			{
-				if (data[i + x + y * width] != -1)
+				if (_data[i + x + y * _width] != -1)
 					break;
 			}
 			if (y < h)
@@ -139,7 +139,7 @@ Zone Field::FindEmptyZone(int w, int h)
 		}
 		if (x == w && y == h)
 		{
-			return Zone(w, h, i % width, i / width);
+			return Zone(w, h, i % _width, i / _width);
 		}
 	}
 	return Zone();
@@ -153,7 +153,7 @@ bool Field::Build(Zone &z)
 		{
 			for (int j = z.getY(); j <  z.getY() + z.getHeight(); j++)
 			{
-				data[i + j * width] = z.getId();
+				_data[i + j * _width] = z.getId();
 			}
 		}
 	}
@@ -168,9 +168,63 @@ void Field::Erase(Zone z)
 	{
 		for (int j = z.getY(); j < z.getY() + z.getHeight(); j++)
 		{
-			data[i + j * width] = -1;
+			_data[i + j * _width] = -1;
 		}
 	}
+}
+
+std::ofstream& operator << (std::ofstream& os, const Field& f)
+{
+	os << f._width << std::endl;
+	os << f._height << std::endl;
+
+	for (int j = 0; j < f._height; j++)
+	{
+		for (int i = 0; i < f._width; i++)
+		{
+			os << std::setw(2) << f._data[i + j * f._width];
+		}
+		os << std::endl;
+	}
+
+	os << std::endl;
+	return os;
+}
+std::ostream& operator << (std::ostream& os, const Field& f)
+{
+	os << "Width: " << f._width;
+	os << " Height: " << f._height << std::endl;
+
+	for (int j = 0; j < f._height; j++)
+	{
+		for (int i = 0; i < f._width; i++)
+		{
+			os << std::setw(2) << f._data[i + j * f._width];
+		}
+		os << std::endl;
+	}
+
+	os << std::endl;
+	return os;
+}
+std::istream& operator >> (std::istream& is, Field& f)
+{
+	is >> f._width;
+	is >> f._height;
+
+	const int size = f._width * f._height;
+	int data;
+	int index = 0;
+	while (is.good())
+	{
+		is >> data;
+		if (index < size)
+		{
+			f._data[index] = data;
+			index++;
+		}
+	}
+	return is;
 }
 
 int Field::GetNearestBuilding(int x, int y)
@@ -178,19 +232,17 @@ int Field::GetNearestBuilding(int x, int y)
 	return 0;
 }
 
-
-
 int Field::getWidth() const
 {
-	return width;
+	return _width;
 }
 
 int Field::getHeight() const
 {
-	return height;
+	return _height;
 }
 
 int* Field::getData()
 {
-	return data;
+	return _data;
 }

@@ -149,6 +149,7 @@ void Base::loadBase()
 		for (int i = 0; i < nbBuildings; i++)
 		{
 			_buildings.push_back(_buildingFactory->readNextBuilding(myfile));
+			_currentId++;
 		}
 		myfile >> *_field;
 	}
