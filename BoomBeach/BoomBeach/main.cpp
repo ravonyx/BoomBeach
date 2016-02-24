@@ -8,7 +8,7 @@ void main()
 	std::cout << "Welcome in Ravonyxland" << std::endl << std::endl;
 	std::cout << "Initialization" << std::endl;
 	Base *base = new Base();
-	BuildingFactory *buildingFactory = new BuildingFactory();
+	
 	Army *army = new Army();
 	UnitFactory *unitFactory = new UnitFactory();
 	std::cout << "/////////////////////////////////" << std::endl << std::endl;
@@ -113,7 +113,7 @@ void main()
 								break;
 							case 1:
 							{
-								std::cout << "Wich ?" << std::endl;
+								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
 								if(input>0 && input < army->_unitArray.size()+1)
 									army->_unitArray[input-1].levelUp();
@@ -121,7 +121,7 @@ void main()
 							}
 							case 2:
 							{
-								std::cout << "Wich ?" << std::endl;
+								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
 								if (input>0 && input < army->_unitArray.size() + 1)
 									army->DeleteUnit(army->_unitArray[input-1].getType(), army->_unitArray[input - 1].getLevel());
@@ -165,12 +165,12 @@ void main()
 							std::string name;
 							std::cout << "Name: ";
 							std::cin >> name;
-							base->AddBuilding(buildingFactory, name.c_str());
+							base->AddBuilding(name.c_str());
 							break;
 						}
 						case 2:
 						{
-							std::cout << *buildingFactory << std::endl;
+							base->printBuildingsPossibilies();
 							break;
 						}
 						default:

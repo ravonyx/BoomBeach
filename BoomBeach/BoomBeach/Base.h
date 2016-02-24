@@ -14,10 +14,10 @@ public:
 	Base(Field *f, int pmoney);
 	~Base();
 	void printBuildings();
-	bool AddBuilding(BuildingFactory *buildingFactory, const char *name);
+	void printBuildingsPossibilies();
+	bool AddBuilding(const char *name);
 	void EnhanceBuilding(int id);
 	bool DestroyBuilding(int id);
-	void ListBuildings();
 	Building* GetBuilding(int id);
 
 	void saveBase();
@@ -25,10 +25,10 @@ public:
 
 	Field* getField();
 private:
+	BuildingFactory *_buildingFactory;
 	std::vector <Building*> buildings;
 	int _currentId = 1;
-	Field *field;
-	//vector <Unit> units
+	Field *_field;
 	int money;
 
 };

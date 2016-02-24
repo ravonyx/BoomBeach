@@ -30,18 +30,17 @@ class Building
 		friend class BuildingFactory;
 		friend std::ostream& operator<<(std::ostream& os, const Building &building)
 		{
-			os << "Id: " << building.id << " Name:" << building.name << " Life:" << building.life << " Cost: " << building.cost << " Max instances: " << building.maxInstances
-				<< " Width: " << building.width << " Height: " << building.height;
+			os << "Id: " << building.id << " Name: " << building.name << " Level: " << building.level;
 			return os;
 		}
 		int nextUpdateCost();
 		int levelUp();
-		friend std::ostream& operator<<(std::ostream& os, const Building &building);
 
 		std::string getName();
 		int getWidth();
 		int getHeight();
 		int getId();
+		int getLife();
 		Zone getZone();
 		int getCost();
 		int getMaxInstances();

@@ -106,3 +106,8 @@ void Building::setZone(Zone pzone)
 {
 	zone = pzone;
 }
+
+int Building::getLife()
+{
+	return life;
+}
