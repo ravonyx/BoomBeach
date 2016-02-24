@@ -31,12 +31,12 @@ void Zone::setWidth(int pwidth)
 	width = pwidth;
 }
 
-void Zone::setHeight(const int pheight)
+void Zone::setHeight(int pheight)
 {
 	height = pheight;
 }
 
-void Zone::setId(const int pid)
+void Zone::setId(int pid)
 {
 	id = pid;
 }
