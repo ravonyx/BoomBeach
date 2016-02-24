@@ -67,8 +67,12 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 	Building *buildingModel = getBuildingModel(name);
 	Zone zone = Zone(buildingModel->getWidth(), buildingModel->getHeight(), x, y);
 	zone.setId(id);
-	Building *building = new Building(id, name, buildingModel->getLife(), buildingModel->getCost(), level, buildingModel->getHealthUpdateRate(), 
+	
+	Building *building = new Building(id, name, 0, 0, level, buildingModel->getHealthUpdateRate(), 
 		buildingModel->getCostUpdateRate(), buildingModel->getMaxInstances(), buildingModel->getWidth(), buildingModel->getHeight(), zone);
+
+	building->setHeathCost(buildingModel->getLife(), buildingModel->getCost(), level);
+	std::cout << building->getLife() << " " << building->getCost() << std::endl;
 	return building;
 }
 

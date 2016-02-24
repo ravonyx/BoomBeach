@@ -37,6 +37,7 @@ class Building
 		}
 		int nextUpdateCost();
 		int levelUp();
+		void setHeathCost(int baseLife, int baseCost, int plevel);
 
 		int getId();
 		std::string getName();

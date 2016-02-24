@@ -70,6 +70,12 @@ int Building::levelUp()
 	return cost /= costUpdateRate;
 }
 
+void Building::setHeathCost(int baseLife, int baseCost, int plevel)
+{
+	life = baseLife + baseLife * (plevel * healthUpdateRate);
+	cost = baseCost + baseLife * (plevel * costUpdateRate);
+}
+
 int Building::getId()
 {
 	return id;
@@ -78,7 +84,10 @@ std::string Building::getName()
 {
 	return name;
 }
-
+int Building::getLife()
+{
+	return life;
+}
 int Building::getCost()
 {
 	return cost;
@@ -115,13 +124,7 @@ void Building::setId(int pid)
 {
 	id = pid;
 }
-
 void Building::setZone(Zone pzone)
 {
 	zone = pzone;
-}
-
-int Building::getLife()
-{
-	return life;
 }
