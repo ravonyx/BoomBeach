@@ -79,7 +79,7 @@ void main()
 							{
 								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
-								base->DestroyBuilding(input);
+								base->destroyBuilding(input);
 								std::cout << "Delete Suceed" << std::endl;
 								break;
 							}
@@ -165,7 +165,7 @@ void main()
 							std::string name;
 							std::cout << "Name: ";
 							std::cin >> name;
-							base->AddBuilding(name.c_str());
+							base->addBuilding(name.c_str());
 							break;
 						}
 						case 2:

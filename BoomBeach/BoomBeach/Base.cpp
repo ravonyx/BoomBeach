@@ -5,13 +5,13 @@ Base::Base()
 {
 	_buildingFactory = new BuildingFactory();
 	_field = new Field();
-	money = 1500;
+	_money = 1500;
 }
 
 Base::Base(Field *pf, int pmoney)
 {
 	_field = pf;
-	money = pmoney;
+	_money = pmoney;
 }
 
 Base::~Base()
@@ -19,15 +19,15 @@ Base::~Base()
 	delete &_field;
 }
 
-bool Base::DestroyBuilding(int id)
+bool Base::destroyBuilding(int id)
 {
-	Building* building = GetBuilding(id);
+	Building* building = getBuilding(id);
 	if (building != nullptr)
 	{
 		std::cout << "Erase building " << building->getId() << std::endl;
 		std::vector<Building*>::iterator it;
-		it = find(buildings.begin(), buildings.end(), building);
-		buildings.erase(it);
+		it = find(_buildings.begin(), _buildings.end(), building);
+		_buildings.erase(it);
 		_field->Erase(building->getZone());
 		return true;
 	}
@@ -36,7 +36,7 @@ bool Base::DestroyBuilding(int id)
 	return false;
 }
 
-bool Base::AddBuilding(const char *name)
+bool Base::addBuilding(const char *name)
 {
 	int instances(0);
 	int max(0);
@@ -45,7 +45,7 @@ bool Base::AddBuilding(const char *name)
 	else
 	{
 		Building* building = _buildingFactory->build(name);
-		if (building != nullptr && building->getCost() < money)
+		if (building != nullptr && building->getCost() < _money)
 		{
 			Zone zoneToBuild = _field->FindEmptyZone(building->getWidth(), building->getHeight());
 			if (!zoneToBuild.isEmpty())
@@ -55,9 +55,9 @@ bool Base::AddBuilding(const char *name)
 				building->setZone(zoneToBuild);
 				_currentId++;
 				_field->Build(zoneToBuild);
-				buildings.push_back(building);
+				_buildings.push_back(building);
 
-				money -= building->getCost();
+				_money -= building->getCost();
 				return true;
 			}
 			else
@@ -74,9 +74,9 @@ bool Base::AddBuilding(const char *name)
 	return false;
 }
 
-void Base::EnhanceBuilding(int id)
+void Base::enhanceBuilding(int id)
 {
-	if (money >= buildings[id]->getCost()) 
+	if (_money >= _buildings[id]->getCost())
 		buildings[id]->levelUp();
 	else
 		std::cout << "Cannot Upgrade This Building" << std::endl;
@@ -84,7 +84,7 @@ void Base::EnhanceBuilding(int id)
 
 void Base::printBuildings()
 {
-	if (buildings.size() <= 0)
+	if (_buildings.size() <= 0)
 		std::cout << "No buildings";
 	else
 	{
@@ -107,10 +107,10 @@ void Base::saveBase()
 	myfile.open("base.txt", std::ofstream::out | std::ofstream::trunc);
 	if (myfile.is_open())
 	{
-		myfile << money;
+		myfile << _money;
 		myfile << std::endl;
 
-		myfile << "NbBuildings: " << buildings.size();
+		myfile << "NbBuildings: " << _buildings.size();
 		myfile << std::endl;
 		for (int i = 0; i < buildings.size(); i++)
 		{
@@ -127,25 +127,25 @@ void Base::loadBase()
 	std::ifstream myfile("base.txt", std::ios::in);
 	if (myfile.is_open())
 	{
-		myfile >> money;
+		myfile >> _money;
 		std::string junk;
 		myfile >> junk;
 		myfile >> nbBuildings;
 		for (int i = 0; i < nbBuildings; i++)
 		{
-			buildings.push_back(_buildingFactory->readNextBuilding(myfile));
+			_buildings.push_back(_buildingFactory->readNextBuilding(myfile));
 		}
 		myfile >> *_field;
 	}
 	myfile.close();
 }
 
-Building* Base::GetBuilding(int id)
+Building* Base::getBuilding(int id)
 {
-	for (int i = 0; i < buildings.size(); i++)
+	for (int i = 0; i < _buildings.size(); i++)
 	{
-		if (buildings[i]->getId() == id)
-			return buildings[i];
+		if (_buildings[i]->getId() == id)
+			return _buildings[i];
 	}
 	return nullptr;
 }
