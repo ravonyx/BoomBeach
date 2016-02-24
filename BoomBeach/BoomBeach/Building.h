@@ -8,7 +8,8 @@ class Building
 		
 		Building();
 		Building(const Building& model);
-		Building(std::string pname, int plife, int pcost, int phealthUpdateRate, int pcostUpdateRate, int pmaxInstances, int pwidth, int pheight);
+		Building(int pid, std::string pname, int plife, int pcost, int plevel, float phealthUpdateRate, 
+			float pcostUpdateRate, int pmaxInstances, int pwidth, int pheight, Zone zone);
 
 		int id;
 		std::string name;
@@ -30,22 +31,27 @@ class Building
 		friend class BuildingFactory;
 		friend std::ostream& operator<<(std::ostream& os, const Building &building)
 		{
-			os << "Id: " << building.id << " Name:" << building.name << " Life:" << building.life << " Cost: " << building.cost << " Max instances: " << building.maxInstances
-				<< " Width: " << building.width << " Height: " << building.height;
+			os << "Id: " << building.id << " Name: " << building.name << " Level: " << building.level << " X: " << 
+				building.zone.getX() << " Y: " << building.zone.getY() << std::endl;
 			return os;
 		}
 		int nextUpdateCost();
 		int levelUp();
-		//friend std::ostream& operator<<(std::ostream& os, const Building &building);
+		void setHeathCost(int baseLife, int baseCost, int plevel);
 
+		int getId();
 		std::string getName();
+		int getLife();
+		int getCost();
+
+		float getHealthUpdateRate();
+		float getCostUpdateRate();
 		int getWidth();
 		int getHeight();
-		int getId();
-		Zone getZone();
-		int getCost();
 		int getMaxInstances();
 
+		Zone getZone();
+		
 		void setId(int pid);
 		void setZone(Zone pzone);
 };

@@ -18,13 +18,14 @@ Building::Building()
 	zone = Zone();
 }
 
-Building::Building(std::string pname, int plife, int pcost, int phealthUpdateRate, int pcostUpdateRate, int pmaxInstances, int pwidth, int pheight)
+Building::Building(int pid, std::string pname, int plife, int pcost, int plevel, float phealthUpdateRate, float pcostUpdateRate, 
+	int pmaxInstances, int pwidth, int pheight, Zone pzone)
 {
-	id = 0;
+	id = pid;
 	name = pname;
 	life = plife;
 	cost = pcost;
-	level = 0;
+	level = plevel;
 
 	width = pwidth;
 	height = pheight;
@@ -33,7 +34,7 @@ Building::Building(std::string pname, int plife, int pcost, int phealthUpdateRat
 	costUpdateRate = pcostUpdateRate;
 	maxInstances = pmaxInstances;
 
-	zone = Zone();
+	zone = pzone;
 }
 
 Building::Building(const Building& model)
@@ -61,16 +62,46 @@ int Building::nextUpdateCost()
 
 int Building::levelUp()
 {
+	level++;
+
 	life *= healthUpdateRate;
 	cost *= costUpdateRate;
 
 	return cost /= costUpdateRate;
 }
 
+void Building::setHeathCost(int baseLife, int baseCost, int plevel)
+{
+	life = baseLife + baseLife * (plevel * healthUpdateRate);
+	cost = baseCost + baseLife * (plevel * costUpdateRate);
+}
+
+int Building::getId()
+{
+	return id;
+}
 std::string Building::getName()
 {
 	return name;
 }
+int Building::getLife()
+{
+	return life;
+}
+int Building::getCost()
+{
+	return cost;
+}
+
+float Building::getHealthUpdateRate()
+{
+	return healthUpdateRate;
+}
+float Building::getCostUpdateRate()
+{
+	return costUpdateRate;
+}
+
 int Building::getWidth()
 {
 	return width;
@@ -79,29 +110,20 @@ int Building::getHeight()
 {
 	return height;
 }
-Zone Building::getZone()
-{
-	return zone;
-}
-int Building::getCost()
-{
-	return cost;
-}
-
 int Building::getMaxInstances()
 {
 	return maxInstances;
 }
 
-int Building::getId()
+Zone Building::getZone()
 {
-	return id;
+	return zone;
 }
+
 void Building::setId(int pid)
 {
 	id = pid;
 }
-
 void Building::setZone(Zone pzone)
 {
 	zone = pzone;
