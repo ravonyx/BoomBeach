@@ -76,14 +76,10 @@ bool Base::AddBuilding(const char *name)
 
 void Base::EnhanceBuilding(int id)
 {
-	if (money >= buildings[id]->getCost() ) 
-	{
+	if (money >= buildings[id]->getCost()) 
 		buildings[id]->levelUp();
-	}
 	else
-	{
 		std::cout << "Cannot Upgrade This Building" << std::endl;
-	}
 }
 
 void Base::printBuildings()
@@ -113,29 +109,36 @@ void Base::saveBase()
 	{
 		myfile << money;
 		myfile << std::endl;
-		myfile << *_field;
+
+		myfile << "NbBuildings: " << buildings.size();
+		myfile << std::endl;
 		for (int i = 0; i < buildings.size(); i++)
 		{
 			myfile << (*buildings[i]);
 			myfile << std::endl;
 		}
+		myfile << *_field;
 	}
 	myfile.close();
 }
 
 void Base::loadBase()
 {
-	std::string line;
+	int nbBuildings = 0;
 	std::ifstream myfile("base.txt", std::ios::in);
 	if (myfile.is_open())
 	{
-		//On trouve l'argent
 		myfile >> money;
-
+		std::string junk;
+		myfile >> junk;
+		myfile >> nbBuildings;
+		for (int i = 0; i < nbBuildings; i++)
+		{
+			buildings.push_back(_buildingFactory->readNextBuilding(myfile));
+		}
 		myfile >> *_field;
-		myfile.close();
 	}
-	else std::cout << "Impossible d'ouvrir Base";
+	myfile.close();
 }
 
 Building* Base::GetBuilding(int id)
@@ -143,9 +146,7 @@ Building* Base::GetBuilding(int id)
 	for (int i = 0; i < buildings.size(); i++)
 	{
 		if (buildings[i]->getId() == id)
-		{
 			return buildings[i];
-		}
 	}
 	return nullptr;
 }

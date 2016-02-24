@@ -2,9 +2,9 @@
 
 BuildingFactory::BuildingFactory()
 {
-	Building* tower = new Building("Tower", 500, 100, 0.3, 0.2, 4, 2, 2);
-	Building* mortar = new Building("Mortar", 800, 300, 0.2, 0.3, 2, 2, 3);
-	Building* house = new Building("House", 1000, 500, 0.1, 0.3, 1, 4, 4);
+	Building* tower = new Building(0, "Tower", 500, 100, 0, 0.3, 0.2, 4, 2, 2);
+	Building* mortar = new Building(0, "Mortar", 800, 300, 0, 0.2, 0.3, 2, 2, 3);
+	Building* house = new Building(0, "House", 1000, 500, 0, 0.1, 0.3, 1, 4, 4);
 
 	buildingModels.push_back(tower);
 	buildingModels.push_back(mortar);
@@ -49,10 +49,30 @@ bool BuildingFactory::nameInList(std::string name)
 
 Building* BuildingFactory::readNextBuilding(std::istream &stream)
 {
+	int id = 0, level = 0;
+	std::string name;
 	std::string junk;
+
 	stream >> junk;
-	std::cout << junk << std::endl;
-	return nullptr;
+	stream >> id;
+	stream >> junk;
+	stream >> name;
+	stream >> junk;
+	stream >> level;
+
+	Building *buildingModel = getBuildingModel(name);
+	Building *building = new Building(id, name, buildingModel->getLife(), buildingModel->getCost(), level, buildingModel->getHealthUpdateRate(), 
+		buildingModel->getCostUpdateRate(), buildingModel->getMaxInstances(), buildingModel->getWidth(), buildingModel->getHeight());
+	return building;
+}
+
+Building* BuildingFactory::getBuildingModel(std::string name)
+{
+	for (int i = 0; i < buildingModels.size(); i++)
+	{
+		if (buildingModels[i]->name == name)
+			return buildingModels[i];
+	}
 }
 
 void BuildingFactory::buildingList()

@@ -8,9 +8,9 @@
 class BuildingFactory
 {
 	private:
-		//std::vector <Building>buildingList;
 		std::vector <Building*>buildingModels;
 		bool nameInList(std::string name);
+		Building* getBuildingModel(std::string name);
 
 		int instanceTower;
 		int instanceMortar;
