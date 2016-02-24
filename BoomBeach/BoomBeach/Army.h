@@ -20,6 +20,5 @@ public:
 	void setMoney(int _money) { money = _money; }
 	~Army();
 
-	
 };
 
