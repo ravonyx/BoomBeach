@@ -23,8 +23,15 @@ void main()
 		std::cout << "(4) Save base" << std::endl;
 		std::cout << "(5) Load a base" << std::endl;
 		std::cout << "(0) Exit application" << std::endl;
-		int input;
-		std::cin >> input;
+		int input(99);
+		std::cin >> input ;
+
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+			std::cin >> input;
+		}
 		switch (input)
 		{
 			case 0:
@@ -47,6 +54,12 @@ void main()
 					std::cout << "(0) Back To Menu" << std::endl;
 					int input;
 					std::cin >> input;
+					if (std::cin.fail())
+					{
+						std::cin.clear();
+						std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+						std::cin >> input;
+					}
 					switch (input)
 					{
 					case 0:
@@ -86,6 +99,7 @@ void main()
 							
 							default:
 								std::cout << "This is not a valid input" << std::endl;
+								exitCode = 1;
 								break;
 							}
 						}
@@ -106,6 +120,12 @@ void main()
 							std::cout << "(0) Back To Menu" << std::endl;
 							int input;
 							std::cin >> input;
+							if (std::cin.fail())
+							{
+								std::cin.clear();
+								std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+								std::cin >> input;
+							}
 							switch (input)
 							{
 							case 0:
@@ -130,6 +150,7 @@ void main()
 						
 							default:
 								std::cout << "This is not a valid input" << std::endl;
+								exitCode = 0;
 								break;
 							}
 						}
@@ -138,10 +159,11 @@ void main()
 					}
 					default:
 						std::cout << "This is not a valid input" << std::endl;
+						exitCode = 0;
 						break;
 					}
 				}
-				exitCode = 0;
+				exitCode = 1;
 				break;
 			}
 			case 2:
@@ -155,6 +177,12 @@ void main()
 					std::cout << "(0) Back To Menu" << std::endl;
 					int input;
 					std::cin >> input;
+					if (std::cin.fail())
+					{
+						std::cin.clear();
+						std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+						std::cin >> input;
+					}
 					switch (input)
 					{
 						case 0:
@@ -175,6 +203,7 @@ void main()
 						}
 						default:
 							std::cout << "This is not a valid input" << std::endl;
+							exitCode = 0;
 							break;
 					}
 				}
@@ -196,6 +225,12 @@ void main()
 					std::cout << "(0) Back" << std::endl;
 					int input;
 					std::cin >> input;
+					if (std::cin.fail())
+					{
+						std::cin.clear();
+						std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+						std::cin >> input;
+					}
 					if(input == 0)
 						exitCode = 1;
 					else {
@@ -220,6 +255,7 @@ void main()
             }
 			default:
 				std::cout << "This is not a valid input" << std::endl;
+				exitCode = 0;
 				break;
 		}
 		std::cout << "//////////////////////////////////" << std::endl << std::endl;
