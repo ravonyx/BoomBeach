@@ -100,7 +100,6 @@ void main()
 							
 							default:
 								std::cout << "This is not a valid input" << std::endl;
-								exitCode = 1;
 								break;
 							}
 						}
@@ -151,7 +150,6 @@ void main()
 						
 							default:
 								std::cout << "This is not a valid input" << std::endl;
-								exitCode = 0;
 								break;
 							}
 						}
@@ -160,11 +158,10 @@ void main()
 					}
 					default:
 						std::cout << "This is not a valid input" << std::endl;
-						exitCode = 0;
 						break;
 					}
 				}
-				exitCode = 1;
+				exitCode = 0;
 				break;
 			}
 			case 2:
@@ -204,7 +201,6 @@ void main()
 						}
 						default:
 							std::cout << "This is not a valid input" << std::endl;
-							exitCode = 0;
 							break;
 					}
 				}
@@ -256,7 +252,6 @@ void main()
             }
 			default:
 				std::cout << "This is not a valid input" << std::endl;
-				exitCode = 0;
 				break;
 		}
 		std::cout << "//////////////////////////////////" << std::endl << std::endl;
