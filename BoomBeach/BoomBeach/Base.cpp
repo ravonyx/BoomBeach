@@ -5,7 +5,7 @@ Base::Base()
 {
 	_buildingFactory = new BuildingFactory();
 	_field = new Field();
-	_money = 1500;
+	_money = 5000;
 }
 
 Base::Base(Field *pf, int pmoney)
@@ -76,10 +76,18 @@ bool Base::addBuilding(const char *name)
 
 void Base::enhanceBuilding(int id)
 {
-	if (_money >= _buildings[id]->getCost())
-		_buildings[id]->levelUp();
+	if (getBuilding(id) != nullptr)
+	{
+		if (_money >= getBuilding(id)->getCost())
+		{
+			int cost = getBuilding(id)->levelUp();
+			std::cout << "Cost you " << cost << " money" << std::endl;
+		}
+		else
+			std::cout << "Not enough money to upgrade" << std::endl;
+	}
 	else
-		std::cout << "Cannot Upgrade This Building" << std::endl;
+		std::cout << "Wrong ID" << std::endl;
 }
 
 void Base::printBuildings()

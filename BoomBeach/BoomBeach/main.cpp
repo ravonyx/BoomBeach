@@ -72,6 +72,7 @@ void main()
 							{
 								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
+								base->enhanceBuilding(input);
 								std::cout << "Upgrade Suceed" << std::endl;
 								break;
 							}
