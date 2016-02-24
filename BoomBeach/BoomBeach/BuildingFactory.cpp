@@ -2,9 +2,9 @@
 
 BuildingFactory::BuildingFactory()
 {
-	Building* tower = new Building(0, "Tower", 500, 100, 0, 0.3, 0.2, 4, 2, 2);
-	Building* mortar = new Building(0, "Mortar", 800, 300, 0, 0.2, 0.3, 2, 2, 3);
-	Building* house = new Building(0, "House", 1000, 500, 0, 0.1, 0.3, 1, 4, 4);
+	Building* tower = new Building(0, "Tower", 500, 100, 0, 0.3, 0.2, 4, 2, 2, Zone());
+	Building* mortar = new Building(0, "Mortar", 800, 300, 0, 0.2, 0.3, 2, 2, 3, Zone());
+	Building* house = new Building(0, "House", 1000, 500, 0, 0.1, 0.3, 1, 4, 4, Zone());
 
 	buildingModels.push_back(tower);
 	buildingModels.push_back(mortar);
@@ -49,7 +49,7 @@ bool BuildingFactory::nameInList(std::string name)
 
 Building* BuildingFactory::readNextBuilding(std::istream &stream)
 {
-	int id = 0, level = 0;
+	int id = 0, level = 0, x = 0, y = 0;
 	std::string name;
 	std::string junk;
 
@@ -59,10 +59,16 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 	stream >> name;
 	stream >> junk;
 	stream >> level;
+	stream >> junk;
+	stream >> x;
+	stream >> junk;
+	stream >> y;
 
 	Building *buildingModel = getBuildingModel(name);
+	Zone zone = Zone(buildingModel->getWidth(), buildingModel->getHeight(), x, y);
+	zone.setId(id);
 	Building *building = new Building(id, name, buildingModel->getLife(), buildingModel->getCost(), level, buildingModel->getHealthUpdateRate(), 
-		buildingModel->getCostUpdateRate(), buildingModel->getMaxInstances(), buildingModel->getWidth(), buildingModel->getHeight());
+		buildingModel->getCostUpdateRate(), buildingModel->getMaxInstances(), buildingModel->getWidth(), buildingModel->getHeight(), zone);
 	return building;
 }
 

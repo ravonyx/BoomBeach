@@ -18,7 +18,8 @@ Building::Building()
 	zone = Zone();
 }
 
-Building::Building(int pid, std::string pname, int plife, int pcost, int plevel, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances, int pwidth, int pheight)
+Building::Building(int pid, std::string pname, int plife, int pcost, int plevel, float phealthUpdateRate, float pcostUpdateRate, 
+	int pmaxInstances, int pwidth, int pheight, Zone pzone)
 {
 	id = pid;
 	name = pname;
@@ -33,7 +34,7 @@ Building::Building(int pid, std::string pname, int plife, int pcost, int plevel,
 	costUpdateRate = pcostUpdateRate;
 	maxInstances = pmaxInstances;
 
-	zone = Zone();
+	zone = pzone;
 }
 
 Building::Building(const Building& model)

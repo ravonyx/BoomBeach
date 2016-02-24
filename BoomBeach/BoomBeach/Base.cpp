@@ -115,7 +115,6 @@ void Base::saveBase()
 		for (int i = 0; i < buildings.size(); i++)
 		{
 			myfile << (*buildings[i]);
-			myfile << std::endl;
 		}
 		myfile << *_field;
 	}
