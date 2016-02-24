@@ -36,7 +36,7 @@ class Building
 		}
 		int nextUpdateCost();
 		int levelUp();
-		friend std::ostream& operator<<(std::ostream& os, const Building &building);
+		//friend std::ostream& operator<<(std::ostream& os, const Building &building);
 
 		std::string getName();
 		int getWidth();
@@ -48,24 +48,4 @@ class Building
 
 		void setId(int pid);
 		void setZone(Zone pzone);
-
-		friend std::ostream& operator << (std::ostream& os, const Building& b)
-		{
-			os << id << std::endl;
-			os << name << std::endl;
-
-			os << "level: " << level;
-
-			os << "max: " << maxInstances << std::endl;
-			os << "cost: " << cost << std::endl;
-
-			os << "width: " << width << std::endl;
-			os << "height: " << height << std::endl;
-
-			os << "life: " << life << std::endl;
-
-			os << "health update rate: " << healthUpdateRate << std::endl;
-			os << "cost update rate: " << costUpdateRate << std::endl;
-
-		}
 };
