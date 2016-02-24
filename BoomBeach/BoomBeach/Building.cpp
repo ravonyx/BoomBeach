@@ -76,6 +76,23 @@ void Building::setHeathCost(int baseLife, int baseCost, int plevel)
 	cost = baseCost + baseLife * (plevel * costUpdateRate);
 }
 
+std::ofstream& operator<< (std::ofstream& os, const Building &building)
+{
+	os << building.id << std::endl;
+	os << building.name << std::endl;
+	os << building.level << std::endl;
+	os << building.zone.getX() << std::endl;
+	os << building.zone.getY() << std::endl;
+	return os;
+}
+std::ostream& operator<< (std::ostream& os, const Building &building)
+{
+	os << std::endl;
+	os << "Id: " << building.id << " Name: " << building.name << " Level: " << building.level << " Life: " << building.life <<
+		" Cost: " << building.cost << " X: " << building.zone.getX() << " Y: " << building.zone.getY();
+	return os;
+}
+
 int Building::getId() const
 {
 	return id;
