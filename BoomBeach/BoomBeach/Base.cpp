@@ -16,7 +16,12 @@ Base::Base(Field *pf, int pmoney)
 
 Base::~Base()
 {
-	delete &_field;
+	delete _field;
+	delete _buildingFactory;
+	for (int i = 0; i < _buildings.size(); i++)
+	{
+		delete _buildings[i];
+	}
 }
 
 bool Base::destroyBuilding(int id)
@@ -38,15 +43,16 @@ bool Base::destroyBuilding(int id)
 
 bool Base::addBuilding(const char *name)
 {
-	int instances(0);
-	int max(0);
+	int cost = 0;
+	std::cout << std::endl;
 	if (_buildingFactory == NULL)
 		std::cout << "Building factory not initialised" << std::endl;
 	else
 	{
 		Building* building = _buildingFactory->build(name);
-		if (building != nullptr && building->getCost() < _money)
+		if (building != nullptr && building->getCost() <= _money)
 		{
+			cost = building->getCost();
 			Zone zoneToBuild = _field->FindEmptyZone(building->getWidth(), building->getHeight());
 			if (!zoneToBuild.isEmpty())
 			{
@@ -58,30 +64,30 @@ bool Base::addBuilding(const char *name)
 				_buildings.push_back(building);
 
 				_money -= building->getCost();
+				std::cout << "Suceed to build building" << std::endl;
 				return true;
 			}
 			else
 				std::cout << "No more space for building" << std::endl;
 		}
-		else if (building == nullptr)
-			std::cout << "Max instances of " << name << std::endl;
-		else
+		else if(cost > _money)
 			std::cout << "Not enough money" << std::endl;
-			
 	}
-
 	std::cout << "Fail to build building" << std::endl;
 	return false;
 }
 
 void Base::enhanceBuilding(int id)
 {
-	if (getBuilding(id) != nullptr)
+	std::cout << std::endl;
+	int index = getIndexOfBuilding(id);
+	if (index != -1)
 	{
-		if (_money >= getBuilding(id)->getCost())
+		if (_money >= _buildings[index]->getCost())
 		{
-			int cost = getBuilding(id)->levelUp();
-			std::cout << "Cost you " << cost << " money" << std::endl;
+			int cost = _buildings[index]->levelUp();
+			std::cout << "Cost you " << cost+1 << " gold" << std::endl;
+			_money -= _buildings[index]->getCost();
 		}
 		else
 			std::cout << "Not enough money to upgrade" << std::endl;
@@ -98,9 +104,10 @@ void Base::printBuildings()
 	{
 		for (int i = 0; i < _buildings.size(); i++)
 		{
-			std::cout << *(_buildings[i]) << std::endl;
+			std::cout << *(_buildings[i]);
 		}
 	}
+	std::cout << std::endl;
 }
 
 void Base::printBuildingsPossibilies()
@@ -131,6 +138,7 @@ void Base::saveBase()
 
 void Base::loadBase()
 {
+	_buildings.clear();
 	int nbBuildings = 0;
 	std::ifstream myfile("base.txt", std::ios::in);
 	if (myfile.is_open())
@@ -142,6 +150,7 @@ void Base::loadBase()
 		for (int i = 0; i < nbBuildings; i++)
 		{
 			_buildings.push_back(_buildingFactory->readNextBuilding(myfile));
+			_currentId++;
 		}
 		myfile >> *_field;
 	}
@@ -158,7 +167,22 @@ Building* Base::getBuilding(int id)
 	return nullptr;
 }
 
-Field* Base::getField()
+int Base::getIndexOfBuilding(int id)
+{
+	for (int i = 0; i < _buildings.size(); i++)
+	{
+		if (_buildings[i]->getId() == id)
+			return i;
+	}
+	return -1;
+}
+
+Field* Base::getField() const
 {
 	return _field;
+}
+
+int Base::getMoney() const
+{
+	return _money;
 }

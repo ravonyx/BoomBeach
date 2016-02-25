@@ -2,9 +2,9 @@
 
 BuildingFactory::BuildingFactory()
 {
-	Building* tower = new Building(0, "Tower", 500, 100, 0, 0.3, 0.2, 4, 2, 2, Zone());
-	Building* mortar = new Building(0, "Mortar", 800, 300, 0, 0.2, 0.3, 2, 2, 3, Zone());
-	Building* house = new Building(0, "House", 1000, 500, 0, 0.1, 0.3, 1, 4, 4, Zone());
+	Building* tower = new Building(0, "Tower", 500, 100, 0, 1.3, 1.2, 4, 2, 2, Zone());
+	Building* mortar = new Building(0, "Mortar", 800, 300, 0, 1.2, 1.3, 2, 2, 3, Zone());
+	Building* house = new Building(0, "House", 1000, 500, 0, 1.1, 1.3, 1, 4, 4, Zone());
 
 	buildingModels.push_back(tower);
 	buildingModels.push_back(mortar);
@@ -29,9 +29,13 @@ Building* BuildingFactory::build(std::string name)
 				return building;
 			}
 			else
-				break;
+			{
+				std::cout << "Max instances of " << name << std::endl;
+				return nullptr;
+			}
 		}
 	}
+	std::cout << "Wrong name" << std::endl;
 	return nullptr;
 }
 
@@ -53,15 +57,10 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 	std::string name;
 	std::string junk;
 
-	stream >> junk;
 	stream >> id;
-	stream >> junk;
 	stream >> name;
-	stream >> junk;
 	stream >> level;
-	stream >> junk;
 	stream >> x;
-	stream >> junk;
 	stream >> y;
 
 	Building *buildingModel = getBuildingModel(name);

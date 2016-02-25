@@ -22,8 +22,15 @@ void main()
 		std::cout << "(4) Save base" << std::endl;
 		std::cout << "(5) Load a base" << std::endl;
 		std::cout << "(0) Exit application" << std::endl;
-		int input;
-		std::cin >> input;
+		int input(99);
+		std::cin >> input ;
+
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+			std::cin >> input;
+		}
 		switch (input)
 		{
 			case 0:
@@ -46,6 +53,12 @@ void main()
 					std::cout << "(0) Back To Menu" << std::endl;
 					int input;
 					std::cin >> input;
+					if (std::cin.fail())
+					{
+						std::cin.clear();
+						std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+						std::cin >> input;
+					}
 					switch (input)
 					{
 					case 0:
@@ -57,6 +70,7 @@ void main()
 						{
 							std::cout << std::endl;
 							std::cout << "What do you want to do ?" << std::endl;
+							std::cout << "You have " << base->getMoney() << " gold to base" << std::endl;
 							std::cout << "(1) Upgrade building" << std::endl;
 							std::cout << "(2) Delete building" << std::endl;
 							std::cout << "(0) Back To Menu" << std::endl;
@@ -103,6 +117,12 @@ void main()
 							std::cout << "(0) Back To Menu" << std::endl;
 							int input;
 							std::cin >> input;
+							if (std::cin.fail())
+							{
+								std::cin.clear();
+								std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+								std::cin >> input;
+							}
 							switch (input)
 							{
 							case 0:
@@ -147,11 +167,18 @@ void main()
 				{
 					std::cout << std::endl;
 					std::cout << "What do you want to do ?" << std::endl;
+					std::cout << "You have " << base->getMoney() << " gold to base" << std::endl;
 					std::cout << "(1) Build building" << std::endl;
 					std::cout << "(2) View building Possibilities" << std::endl;
 					std::cout << "(0) Back To Menu" << std::endl;
 					int input;
 					std::cin >> input;
+					if (std::cin.fail())
+					{
+						std::cin.clear();
+						std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+						std::cin >> input;
+					}
 					switch (input)
 					{
 						case 0:
@@ -193,6 +220,12 @@ void main()
 					std::cout << "(0) Back" << std::endl;
 					int input;
 					std::cin >> input;
+					if (std::cin.fail())
+					{
+						std::cin.clear();
+						std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+						std::cin >> input;
+					}
 					if(input == 0)
 						exitCode = 1;
 					else {
