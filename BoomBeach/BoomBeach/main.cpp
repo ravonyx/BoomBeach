@@ -133,7 +133,7 @@ void main()
 								std::cout << "Which ?" << std::endl;
 								std::cin >> input;
 								if(input>0 && input < army->GetUnits().size()+1)
-									std::cout << "Updated for " << army->GetUnits()[input-1].levelUp() << " gold" << std::endl;
+									std::cout << "Updated for " << army->LevelUpUnit(input-1) << " gold" << std::endl;
 								break;
 							}
 							case 2:
