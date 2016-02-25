@@ -17,7 +17,8 @@ public:
 	void DeleteUnit(unitType type, int level);
 	int NumberOfInstance(unitType type);
 	std::vector<Unit> GetUnits() const { return _unitArray; }
-	UnitFactory GetFactory() const { return *unitFactory; }
+	int LevelUpUnit(int i) { return _unitArray[i].levelUp(); }
+	UnitFactory& GetFactory() const { return *unitFactory; }
 
 	void SaveArmy();
 	void LoadArmy();

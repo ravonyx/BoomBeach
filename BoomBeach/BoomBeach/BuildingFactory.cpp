@@ -71,7 +71,6 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 		buildingModel->getCostUpdateRate(), buildingModel->getMaxInstances(), buildingModel->getWidth(), buildingModel->getHeight(), zone);
 
 	building->setHeathCost(buildingModel->getLife(), buildingModel->getCost(), level);
-	std::cout << building->getLife() << " " << building->getCost() << std::endl;
 	return building;
 }
 
