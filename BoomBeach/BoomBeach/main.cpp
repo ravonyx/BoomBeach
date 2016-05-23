@@ -4,17 +4,34 @@
 #include <iostream>
 #include "glut.h"
 #include "Tools.h"
+#define NOMINMAX
+#define WIN32
+#pragma region include_UI
+#include<FL/Fl.H>
+#include<FL/Fl_Box.H>
+#include<FL/Fl_Widget.H>
+#include<FL/Fl_Button.H>
+#include<FL/Fl_Window.H>
+#pragma endregion
 
 void launchConsole();
 void launchOpengl();
 void reshapeWindow(int w, int h);
 void renderScene(void);
+void menu(int item);
+void processConstructionMenu(int option);
+void processUnitsMenu(int option);
+
+void save_callback(Fl_Widget *w, void *data);
+void load_callback(Fl_Widget *w, void *data);
 
 Base *base = new Base();
 Army *army = new Army();
 GLuint textureImage[3];
 Field *field;
 int *map;
+
+Fl_Button *save, *load;
 
 int main(int argc, char *argv[])
 {
@@ -59,9 +76,38 @@ void launchOpengl()
 	glutReshapeFunc(reshapeWindow);
 	glutIdleFunc(renderScene);
 
+	Fl_Window window(200, 120, "Paramètres");
+	save = new Fl_Button(20, 10, 100, 50, "Save");
+	save->callback(save_callback);
+	load = new Fl_Button(20, 60, 100, 50, "Load");
+	load->callback(load_callback);
+	window.end();
+	window.show();
+
 	textureImage[0] = createTexture("tile-green.png");
 	textureImage[1] = createTexture("tile-sand.png");
 	textureImage[2] = createTexture("tile-rock.png");
+
+	//Create Menu
+	int constructionMenu = glutCreateMenu(processConstructionMenu);
+	glutAddMenuEntry("Tower", 0);
+	glutAddMenuEntry("House", 1);
+	glutAddMenuEntry("Mortar", 1);
+	int unitsMenu = glutCreateMenu(processUnitsMenu);
+	glutAddMenuEntry("Brute", 0);
+	glutAddMenuEntry("Kamikaze", 1);
+	glutAddMenuEntry("Fusilleur", 2);
+	glutAddMenuEntry("Sniper", 3);
+	glutAddMenuEntry("Bazooka", 4);
+	glutAddMenuEntry("Medecin contact", 5);
+	glutAddMenuEntry("Medecin seringue", 6);
+	glutAddMenuEntry("Medecin zone", 7);
+
+	glutCreateMenu(menu);
+	glutAddSubMenu("Construct", constructionMenu);
+	glutAddSubMenu("Units", unitsMenu);
+
+	glutAttachMenu(GLUT_LEFT_BUTTON);
 	glutMainLoop();
 }
 
@@ -123,9 +169,60 @@ void reshapeWindow(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 }
 
+// Menu handling function definition
+void menu(int item)
+{
+	switch (item)
+	{
+		default:
+		{
+			break;
+		}
+	}
+	glutPostRedisplay();
+}
+
+void processConstructionMenu(int option)
+{
+	switch (option)
+	{
+		case 0:
+			 break;
+		case 1:
+			break;
+		default:
+		{
+			break;
+		}
+	}
+}
+
+void processUnitsMenu(int option)
+{
+	switch (option)
+	{
+	
+		default:
+		{
+			break;
+		}
+	}
+}
+
+void save_callback(Fl_Widget *w, void *data)
+{
+	base->saveBase();
+	army->SaveArmy();
+}
+
+void load_callback(Fl_Widget *w, void *data)
+{
+	base->loadBase();
+	army->LoadArmy();
+}
+
 void launchConsole()
 {
-	
 	int exitCode = 0;
 	while (exitCode != 1)
 	{
