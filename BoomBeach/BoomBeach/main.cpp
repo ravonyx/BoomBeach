@@ -24,6 +24,7 @@ void processUnitsMenu(int option);
 
 void save_callback(Fl_Widget *w, void *data);
 void load_callback(Fl_Widget *w, void *data);
+void mouse(int button, int state, int x, int y);
 
 Base *base = new Base();
 Army *army = new Army();
@@ -75,6 +76,7 @@ void launchOpengl()
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(reshapeWindow);
 	glutIdleFunc(renderScene);
+	glutMouseFunc(mouse);
 
 	Fl_Window window(200, 120, "Paramètres");
 	save = new Fl_Button(20, 10, 100, 50, "Save");
@@ -107,7 +109,7 @@ void launchOpengl()
 	glutAddSubMenu("Construct", constructionMenu);
 	glutAddSubMenu("Units", unitsMenu);
 
-	glutAttachMenu(GLUT_LEFT_BUTTON);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	glutMainLoop();
 }
 
@@ -120,7 +122,7 @@ void renderScene(void)
 	//Set view and zoom
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, 800, 0, 800, -1, 1);
+	glOrtho(0, 800, 800, 0, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -154,6 +156,23 @@ void renderScene(void)
 	}
 
 	glutSwapBuffers();
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
+	{
+		std::cout << "X " << x << " Y " << y << std::endl;
+		int size = 800 / (base->getField()->getHeight());
+		int realx = x / size;
+		int realy = y / size;
+		std::cout << "X " << realx << " Y " << realy << std::endl;
+
+		int tile = map[realx + realy *field->getWidth()];
+		std::cout << "tile " << tile << std::endl;
+	}
+
+	glutPostRedisplay();
 }
 
 /** GESTION FENETRE **/
