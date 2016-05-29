@@ -26,9 +26,9 @@ void save_callback(Fl_Widget *w, void *data);
 void load_callback(Fl_Widget *w, void *data);
 void mouse(int button, int state, int x, int y);
 
-Base *base = new Base();
-Army *army = new Army();
-GLuint textureImage[3];
+Base *base;
+Army *army;
+GLuint textureImage[6];
 Field *field;
 int *map;
 
@@ -45,11 +45,16 @@ int main(int argc, char *argv[])
 	int input;
 	std::cin >> input;
 	if (input == 0)
+	{
+		base = new Base();
+		army = new Army();
 		launchConsole();
+
+	}
 	else if (input == 1)
 	{
-		Base *base = new Base();
-		Army *army = new Army();
+		base = new Base();
+		army = new Army();
 
 		std::cout << *(base->getField());
 
@@ -89,12 +94,15 @@ void launchOpengl()
 	textureImage[0] = createTexture("tile-green.png");
 	textureImage[1] = createTexture("tile-sand.png");
 	textureImage[2] = createTexture("tile-rock.png");
+	textureImage[3] = createTexture("tile-tower.png");
+	textureImage[4] = createTexture("tile-house.png");
+	textureImage[5] = createTexture("tile-mortar.png");
 
 	//Create Menu
 	int constructionMenu = glutCreateMenu(processConstructionMenu);
 	glutAddMenuEntry("Tower", 0);
-	glutAddMenuEntry("House", 1);
 	glutAddMenuEntry("Mortar", 1);
+	glutAddMenuEntry("House", 2);
 	int unitsMenu = glutCreateMenu(processUnitsMenu);
 	glutAddMenuEntry("Brute", 0);
 	glutAddMenuEntry("Kamikaze", 1);
@@ -140,6 +148,12 @@ void renderScene(void)
 				glBindTexture(GL_TEXTURE_2D, textureImage[1]);
 			else if (tile == -3)
 				glBindTexture(GL_TEXTURE_2D, textureImage[2]);
+			else if (tile == 1)
+				glBindTexture(GL_TEXTURE_2D, textureImage[3]);
+			else if (tile == 2)
+				glBindTexture(GL_TEXTURE_2D, textureImage[4]);
+			else if (tile == 3)
+				glBindTexture(GL_TEXTURE_2D, textureImage[5]);
 			else
 				glBindTexture(GL_TEXTURE_2D, 0);
 			int size = 800 / (base->getField()->getHeight());
@@ -206,13 +220,19 @@ void processConstructionMenu(int option)
 	switch (option)
 	{
 		case 0:
+			base->addBuilding("Tower");
+			map = field->getData();
 			 break;
 		case 1:
+			base->addBuilding("Mortar");
+			map = field->getData();
+			break;
+		case 2:
+			base->addBuilding("House");
+			map = field->getData();
 			break;
 		default:
-		{
 			break;
-		}
 	}
 }
 
