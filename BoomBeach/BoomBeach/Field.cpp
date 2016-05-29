@@ -121,15 +121,13 @@ bool Field::IsEmpty(Zone z)
 
 Zone Field::FindEmptyZone(int w, int h)
 {
-	Zone z = Zone();
-
 	for (int i = 0; i < _width * _height; ++i)
 	{
 		int x = 0;
 		int y = 0;
 		for (; x < w; x++)
 		{
-			for (; y < h; y++)
+			for (y = 0; y < h; y++)
 			{
 				if (_data[i + x + y * _width] != -1)
 					break;
@@ -138,9 +136,7 @@ Zone Field::FindEmptyZone(int w, int h)
 				break;
 		}
 		if (x == w && y == h)
-		{
 			return Zone(w, h, i % _width, i / _width);
-		}
 	}
 	return Zone();
 }
