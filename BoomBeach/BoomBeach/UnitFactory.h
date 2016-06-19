@@ -19,6 +19,5 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Unit &unit);
 	Unit* CreateUnit(const unitType type, Army *army);
 	Unit* ReadNextUnit(std::istream &stream);
-	~UnitFactory();
 };
 

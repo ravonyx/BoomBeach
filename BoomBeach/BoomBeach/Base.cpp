@@ -14,6 +14,25 @@ Base::Base(Field *pf, int pmoney)
 	_money = pmoney;
 }
 
+Base::Base(const Base &base)
+{
+	_field = base._field;
+	_money = base._money;
+	_buildingFactory = base._buildingFactory;
+	_buildings = base._buildings;
+	_currentId = base._currentId;
+}
+
+Base& Base::operator=(const Base& base) 
+{
+	_field = base._field;
+	_money = base._money;
+	_buildingFactory = base._buildingFactory;
+	_buildings = base._buildings;
+	_currentId = base._currentId;
+	return *this;
+}
+
 Base::~Base()
 {
 	delete _field;
@@ -56,8 +75,14 @@ bool Base::addBuilding(const char *name)
 			Zone zoneToBuild = _field->FindEmptyZone(building->getWidth(), building->getHeight());
 			if (!zoneToBuild.isEmpty())
 			{
+
 				building->setId(_currentId);
-				zoneToBuild.setId(_currentId);
+				if(building->getName() == "Tower")
+					zoneToBuild.setId(1);
+				else if (building->getName() == "House")
+					zoneToBuild.setId(2);
+				else if (building->getName() == "Mortar")
+					zoneToBuild.setId(3);
 				building->setZone(zoneToBuild);
 				_currentId++;
 				_field->Build(zoneToBuild);

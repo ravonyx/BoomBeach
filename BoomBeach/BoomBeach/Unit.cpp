@@ -89,11 +89,6 @@ int Unit::levelUp()
 	health *= healthUpdateRate;
 	return cost / costUpdateRate;
 }
-
-Unit::~Unit()
-{
-}
-
 /*std::ostream& operator<<(std::ostream& os, const Unit &building)
 {
 	os << "Name:" << building.name << "Niveau:" << building.level << std::endl;

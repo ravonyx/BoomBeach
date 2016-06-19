@@ -9,15 +9,17 @@ class Field
 {
 	public:
 		Field();
-		int* Panels;
 		Field(int, int);
+		Field(const Field &field);
+		Field& Field::operator=(const Field& field);
+		~Field();
+
 		bool IsEmpty(Zone);
 		Zone FindEmptyZone(int, int);
 		bool Build(Zone &z);
 		void Erase(Zone z);
 		int GetNearestBuilding(int, int); 
 		//void ShortestPath(int, int, int, int)​;
-		~Field();
 
 		int getWidth() const;
 		int getHeight() const;

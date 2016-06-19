@@ -54,6 +54,22 @@ Field::Field()
 	}
 }
 
+Field::Field(const Field &field)
+{
+	_height = field._height;
+	_width = field._width;
+	_data = field._data;
+}
+
+Field& Field::operator=(const Field& field)
+{
+	_height = field._height;
+	_width = field._width;
+	_data = field._data;
+	return *this;
+}
+
+
 Field::~Field()
 {
 	delete _data;

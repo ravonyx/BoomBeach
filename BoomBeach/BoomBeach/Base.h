@@ -12,6 +12,8 @@ class Base
 public:
 	Base();
 	Base(Field *f, int pmoney);
+	Base(const Base &base);
+	Base& Base::operator=(const Base& base);
 	~Base();
 
 	void printBuildings();

@@ -37,8 +37,6 @@ public:
 		os << u.getType() << " " << u.getLevel();
 		return os;
 	}
-
-	~Unit();
 };
 
 inline std::ostream& operator << (std::ostream& os, const Unit& u)

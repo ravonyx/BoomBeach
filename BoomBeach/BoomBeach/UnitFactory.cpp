@@ -61,7 +61,3 @@ Unit* UnitFactory::ReadNextUnit(std::istream & stream)
 
 	return unit;
 }
-
-UnitFactory::~UnitFactory()
-{
-}
