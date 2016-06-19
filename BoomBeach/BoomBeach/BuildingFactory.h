@@ -12,9 +12,7 @@ class BuildingFactory
 		bool nameInList(std::string name);
 		Building* getBuildingModel(std::string name);
 
-		int instanceTower;
-		int instanceMortar;
-		int instanceHouse;
+		int instances[7];
 
 	public:
 		BuildingFactory();
@@ -23,4 +21,5 @@ class BuildingFactory
 		void buildingList();
 
 		int getInstances(std::string name);
+		std::vector<Building*> BuildingFactory::getBuidingModels();
 };

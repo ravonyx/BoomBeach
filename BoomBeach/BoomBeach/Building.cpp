@@ -18,11 +18,12 @@ Building::Building()
 	zone = Zone();
 }
 
-Building::Building(int pid, std::string pname, int plife, int pcost, int plevel, float phealthUpdateRate, float pcostUpdateRate, 
+Building::Building(int pid, std::string pname, int ptype, int plife, int pcost, int plevel, float phealthUpdateRate, float pcostUpdateRate, 
 	int pmaxInstances, int pwidth, int pheight, Zone pzone)
 {
 	id = pid;
 	name = pname;
+	type = ptype;
 	life = plife;
 	cost = pcost;
 	level = plevel;
@@ -41,6 +42,8 @@ Building::Building(const Building& model)
 {
 	id = 0;
 	name = model.name;
+	type = model.type;
+
 	life = model.life;
 	cost = model.cost;
 	level = 0;
@@ -88,7 +91,7 @@ std::ofstream& operator<< (std::ofstream& os, const Building &building)
 std::ostream& operator<< (std::ostream& os, const Building &building)
 {
 	os << std::endl;
-	os << "Id: " << building.id << " Name: " << building.name << " Level: " << building.level << " Life: " << building.life <<
+	os << "Id: " << building.id << " Name: " << building.name << "Type: " << building.type << "Level: " << building.level << " Life: " << building.life <<
 		" Cost: " << building.cost << " X: " << building.zone.getX() << " Y: " << building.zone.getY();
 	return os;
 }
@@ -101,6 +104,11 @@ std::string Building::getName() const
 {
 	return name;
 }
+int Building::getType() const
+{
+	return type;
+}
+
 int Building::getLife() const
 {
 	return life;

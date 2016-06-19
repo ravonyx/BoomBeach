@@ -9,7 +9,7 @@ class Building
 		
 		Building();
 		Building(const Building& model);
-		Building(int pid, std::string pname, int plife, int pcost, int plevel, float phealthUpdateRate, 
+		Building(int pid, std::string pname, int type, int plife, int pcost, int plevel, float phealthUpdateRate,
 			float pcostUpdateRate, int pmaxInstances, int pwidth, int pheight, Zone zone);
 
 		int id;
@@ -22,6 +22,7 @@ class Building
 
 		int life;
 		int level;
+		int type;
 
 		float healthUpdateRate;
 		float costUpdateRate;
@@ -39,6 +40,8 @@ class Building
 
 		int getId() const;
 		std::string getName() const;
+		int getType() const;
+
 		int getLife() const;
 		int getCost() const;
 

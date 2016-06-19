@@ -77,12 +77,8 @@ bool Base::addBuilding(const char *name)
 			{
 
 				building->setId(_currentId);
-				if(building->getName() == "Tower")
-					zoneToBuild.setId(1);
-				else if (building->getName() == "House")
-					zoneToBuild.setId(2);
-				else if (building->getName() == "Mortar")
-					zoneToBuild.setId(3);
+				zoneToBuild.setId(building->getType());
+
 				building->setZone(zoneToBuild);
 				_currentId++;
 				_field->Build(zoneToBuild);
@@ -138,6 +134,11 @@ void Base::printBuildings()
 void Base::printBuildingsPossibilies()
 {
 	_buildingFactory->buildingList();
+}
+
+std::vector<Building*> Base::getBuildingsPossibilies()
+{
+	return _buildingFactory->getBuidingModels();
 }
 
 void Base::saveBase()

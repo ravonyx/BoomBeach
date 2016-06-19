@@ -26,6 +26,8 @@ void save_callback(Fl_Widget *w, void *data);
 void load_callback(Fl_Widget *w, void *data);
 void mouse(int button, int state, int x, int y);
 
+
+std::vector <Building*> _buildingModels;
 Base *base;
 Army *army;
 GLuint textureImage[6];
@@ -100,9 +102,14 @@ void launchOpengl()
 
 	//Create Menu
 	int constructionMenu = glutCreateMenu(processConstructionMenu);
-	glutAddMenuEntry("Tower", 0);
-	glutAddMenuEntry("Mortar", 1);
-	glutAddMenuEntry("House", 2);
+
+	_buildingModels = base->getBuildingsPossibilies();
+
+	for (int i = 0; i < _buildingModels.size(); i++)
+	{
+		glutAddMenuEntry((_buildingModels[i]->getName()).c_str(), i);
+	}
+	
 	int unitsMenu = glutCreateMenu(processUnitsMenu);
 	glutAddMenuEntry("Brute", 0);
 	glutAddMenuEntry("Kamikaze", 1);
@@ -220,15 +227,31 @@ void processConstructionMenu(int option)
 	switch (option)
 	{
 		case 0:
-			base->addBuilding("Tower");
+			base->addBuilding((_buildingModels[0]->getName()).c_str());
 			map = field->getData();
 			 break;
 		case 1:
-			base->addBuilding("Mortar");
+			base->addBuilding((_buildingModels[1]->getName()).c_str());
 			map = field->getData();
 			break;
 		case 2:
-			base->addBuilding("House");
+			base->addBuilding((_buildingModels[2]->getName()).c_str());
+			map = field->getData();
+			break;
+		case 3:
+			base->addBuilding((_buildingModels[3]->getName()).c_str());
+			map = field->getData();
+			break;
+		case 4:
+			base->addBuilding((_buildingModels[4]->getName()).c_str());
+			map = field->getData();
+			break;
+		case 5:
+			base->addBuilding((_buildingModels[5]->getName()).c_str());
+			map = field->getData();
+			break;
+		case 6:
+			base->addBuilding((_buildingModels[6]->getName()).c_str());
 			map = field->getData();
 			break;
 		default:

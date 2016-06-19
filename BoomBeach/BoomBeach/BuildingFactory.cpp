@@ -2,13 +2,21 @@
 
 BuildingFactory::BuildingFactory()
 {
-	Building* tower = new Building(0, "Tower", 500, 100, 0, 1.3, 1.2, 4, 2, 2, Zone());
-	Building* mortar = new Building(0, "Mortar", 800, 300, 0, 1.2, 1.3, 2, 2, 3, Zone());
-	Building* house = new Building(0, "House", 1000, 500, 0, 1.1, 1.3, 1, 4, 4, Zone());
+	Building* house = new Building(0, "QG", 1, 1000, 500, 1, 1.1, 1.3, 1, 4, 4, Zone());
+	Building* snipertower = new Building(0, "SniperTower", 2, 500, 100, 0, 1.3, 1.2, 4, 2, 2, Zone());
+	Building* lanceflamme = new Building(0, "LanceFlamme", 3, 800, 300, 0, 1.2, 1.3, 2, 2, 3, Zone());
+	Building* mitrailleuse = new Building(0, "Mitrailleuse", 4, 1000, 500, 0, 1.1, 1.3, 2, 4, 4, Zone());
+	Building* repare = new Building(0, "RepareBuilding", 5, 1000, 500, 0, 1.1, 1.3, 2, 4, 4, Zone());
+	Building* shield = new Building(0, "ShieldBuilding", 6, 1000, 500, 0, 1.1, 1.3, 3, 4, 4, Zone());
+	Building* energy = new Building(0, "EnergyBuilding", 7, 1000, 500, 0, 1.1, 1.3, 1, 4, 4, Zone());
 
-	buildingModels.push_back(tower);
-	buildingModels.push_back(mortar);
 	buildingModels.push_back(house);
+	buildingModels.push_back(snipertower);
+	buildingModels.push_back(lanceflamme);
+	buildingModels.push_back(mitrailleuse);
+	buildingModels.push_back(repare);
+	buildingModels.push_back(shield);
+	buildingModels.push_back(energy);
 }
 
 Building* BuildingFactory::build(std::string name)
@@ -20,12 +28,7 @@ Building* BuildingFactory::build(std::string name)
 			if (buildingModels[i]->getMaxInstances() > getInstances(name))
 			{
 				Building *building = new Building(*(buildingModels[i]));
-				if (name == "Tower")
-					instanceTower++;
-				if (name == "Mortar")
-					instanceMortar++;
-				if (name == "House")
-					instanceHouse++;
+				instances[i]++;
 				return building;
 			}
 			else
@@ -53,12 +56,13 @@ bool BuildingFactory::nameInList(std::string name)
 
 Building* BuildingFactory::readNextBuilding(std::istream &stream)
 {
-	int id = 0, level = 0, x = 0, y = 0;
+	int id = 0, level = 0, x = 0, y = 0, type = 0;
 	std::string name;
 	std::string junk;
 
 	stream >> id;
 	stream >> name;
+	stream >> type;
 	stream >> level;
 	stream >> x;
 	stream >> y;
@@ -67,7 +71,7 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 	Zone zone = Zone(buildingModel->getWidth(), buildingModel->getHeight(), x, y);
 	zone.setId(id);
 	
-	Building *building = new Building(id, name, 0, 0, level, buildingModel->getHealthUpdateRate(), 
+	Building *building = new Building(id, name, type, 0, 0, level, buildingModel->getHealthUpdateRate(), 
 		buildingModel->getCostUpdateRate(), buildingModel->getMaxInstances(), buildingModel->getWidth(), buildingModel->getHeight(), zone);
 
 	building->setHeathCost(buildingModel->getLife(), buildingModel->getCost(), level);
@@ -93,10 +97,15 @@ void BuildingFactory::buildingList()
 
 int BuildingFactory::getInstances(std::string name)
 {
-	if (name == "Tower")
-		return instanceTower;
-	else if (name == "Mortar")
-		return instanceMortar;
-	else if (name == "House")
-		return instanceHouse;
+	for (int i = 0; i < buildingModels.size(); i++)
+	{
+		if (buildingModels[i]->getName() == name)
+			return instances[i];
+	}
+}
+
+
+std::vector<Building*> BuildingFactory::getBuidingModels()
+{
+	return buildingModels;
 }
