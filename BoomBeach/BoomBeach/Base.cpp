@@ -202,3 +202,8 @@ int Base::getMoney() const
 {
 	return _money;
 }
+
+std::vector<Building*> Base::getBuildingsPossibilies()
+{
+	return _buildingFactory->getBuidingModels();
+}

@@ -101,3 +101,8 @@ int BuildingFactory::getInstances(std::string name)
 			return instances[i];
 	}
 }
+
+std::vector<Building*> BuildingFactory::getBuidingModels()
+{
+	return buildingModels;
+}

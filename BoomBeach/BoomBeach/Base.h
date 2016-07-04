@@ -22,6 +22,7 @@ public:
 	bool destroyBuilding(int id);
 	Building* getBuilding(int id);
 	int getIndexOfBuilding(int id);
+	std::vector<Building*> getBuildingsPossibilies();
 
 	void saveBase();
 	void loadBase();
