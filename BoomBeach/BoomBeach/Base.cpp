@@ -91,7 +91,7 @@ bool Base::addBuilding(const char *name)
 			else
 				std::cout << "No more space for building" << std::endl;
 		}
-		else if(building->getCost() > _money)
+		else if(building != nullptr && building->getCost() > _money)
 			std::cout << "Not enough money" << std::endl;
 	}
 	std::cout << "Fail to build building" << std::endl;
