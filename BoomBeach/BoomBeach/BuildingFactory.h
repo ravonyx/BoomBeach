@@ -18,8 +18,5 @@ class BuildingFactory
 		BuildingFactory();
 		Building* build(std::string name);
 		Building* readNextBuilding(std::istream &stream);
-		void buildingList();
-
 		int getInstances(std::string name);
-		std::vector<Building*> BuildingFactory::getBuidingModels();
 };

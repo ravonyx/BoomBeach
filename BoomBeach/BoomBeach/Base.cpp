@@ -84,14 +84,14 @@ bool Base::addBuilding(const char *name)
 				_field->Build(zoneToBuild);
 				_buildings.push_back(building);
 
-				_money -= building->getCost();
+				_money -= cost;
 				std::cout << "Suceed to build building" << std::endl;
 				return true;
 			}
 			else
 				std::cout << "No more space for building" << std::endl;
 		}
-		else if(cost > _money)
+		else if(building->getCost() > _money)
 			std::cout << "Not enough money" << std::endl;
 	}
 	std::cout << "Fail to build building" << std::endl;
@@ -129,16 +129,6 @@ void Base::printBuildings()
 		}
 	}
 	std::cout << std::endl;
-}
-
-void Base::printBuildingsPossibilies()
-{
-	_buildingFactory->buildingList();
-}
-
-std::vector<Building*> Base::getBuildingsPossibilies()
-{
-	return _buildingFactory->getBuidingModels();
 }
 
 void Base::saveBase()

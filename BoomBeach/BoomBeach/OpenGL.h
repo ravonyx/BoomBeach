@@ -86,6 +86,15 @@ namespace OpenGLForm
 			SwapBuffers(m_hDC);
 		}
 
+		void processBuildingMenu(int nbBuilding)
+		{
+			add_building(nbBuilding);
+		}
+		void processUnitsMenu(int nbUnits)
+		{
+			add_unit(nbUnits);
+		}
+
 		void  SaveBase() 
 		{
 			save_callback();

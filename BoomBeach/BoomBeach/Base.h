@@ -17,8 +17,6 @@ public:
 	~Base();
 
 	void printBuildings();
-	void printBuildingsPossibilies();
-	std::vector<Building*> getBuildingsPossibilies();
 	bool addBuilding(const char *name);
 	void enhanceBuilding(int id);
 	bool destroyBuilding(int id);

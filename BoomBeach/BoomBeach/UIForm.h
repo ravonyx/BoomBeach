@@ -60,6 +60,25 @@ namespace UIBoomBeach {
 
 	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
 	private: System::Windows::Forms::SplitContainer^  splitContainer2;
+	private: System::Windows::Forms::MenuStrip^  menuStrip2;
+	private: System::Windows::Forms::ToolStripMenuItem^  buildingsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  unitsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  qGToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  sniperTowerToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  lanceFlammeToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  mitrailleusseToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  repareBuildingToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  shieldBuildingToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  energyBuildingToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  bruteToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  kamikazeToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  fusilleurToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  sniperToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  bazookaToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  medecinContactToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  medecinSeringueToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  medecinZoneToolStripMenuItem;
+
 
 	private: System::Windows::Forms::Timer^  timer;
 
@@ -72,29 +91,48 @@ namespace UIBoomBeach {
 			 {
 				 this->components = (gcnew System::ComponentModel::Container());
 				 this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
+				 this->pictureBox = (gcnew System::Windows::Forms::PictureBox());
 				 this->splitContainer2 = (gcnew System::Windows::Forms::SplitContainer());
 				 this->unitsBox = (gcnew System::Windows::Forms::GroupBox());
 				 this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->load = (gcnew System::Windows::Forms::Button());
 				 this->save = (gcnew System::Windows::Forms::Button());
-				 this->pictureBox = (gcnew System::Windows::Forms::PictureBox());
 				 this->timer = (gcnew System::Windows::Forms::Timer(this->components));
+				 this->menuStrip2 = (gcnew System::Windows::Forms::MenuStrip());
+				 this->buildingsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->qGToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->sniperTowerToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->lanceFlammeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->mitrailleusseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->repareBuildingToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->shieldBuildingToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->energyBuildingToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->unitsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->bruteToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->kamikazeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->fusilleurToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->sniperToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->bazookaToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->medecinContactToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->medecinSeringueToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->medecinZoneToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 				 this->splitContainer1->Panel1->SuspendLayout();
 				 this->splitContainer1->Panel2->SuspendLayout();
 				 this->splitContainer1->SuspendLayout();
+				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->BeginInit();
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer2))->BeginInit();
 				 this->splitContainer2->Panel1->SuspendLayout();
 				 this->splitContainer2->Panel2->SuspendLayout();
 				 this->splitContainer2->SuspendLayout();
 				 this->tableLayoutPanel1->SuspendLayout();
-				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->BeginInit();
+				 this->menuStrip2->SuspendLayout();
 				 this->SuspendLayout();
 				 // 
 				 // splitContainer1
 				 // 
 				 this->splitContainer1->Dock = System::Windows::Forms::DockStyle::Fill;
-				 this->splitContainer1->Location = System::Drawing::Point(0, 0);
+				 this->splitContainer1->Location = System::Drawing::Point(0, 24);
 				 this->splitContainer1->Name = L"splitContainer1";
 				 // 
 				 // splitContainer1.Panel1
@@ -104,9 +142,20 @@ namespace UIBoomBeach {
 				 // splitContainer1.Panel2
 				 // 
 				 this->splitContainer1->Panel2->Controls->Add(this->splitContainer2);
-				 this->splitContainer1->Size = System::Drawing::Size(889, 479);
-				 this->splitContainer1->SplitterDistance = 509;
+				 this->splitContainer1->Size = System::Drawing::Size(659, 342);
+				 this->splitContainer1->SplitterDistance = 377;
 				 this->splitContainer1->TabIndex = 0;
+				 // 
+				 // pictureBox
+				 // 
+				 this->pictureBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->pictureBox->Location = System::Drawing::Point(3, 3);
+				 this->pictureBox->Name = L"pictureBox";
+				 this->pictureBox->Size = System::Drawing::Size(371, 336);
+				 this->pictureBox->TabIndex = 0;
+				 this->pictureBox->TabStop = false;
 				 // 
 				 // splitContainer2
 				 // 
@@ -124,8 +173,8 @@ namespace UIBoomBeach {
 				 // splitContainer2.Panel2
 				 // 
 				 this->splitContainer2->Panel2->Controls->Add(this->tableLayoutPanel1);
-				 this->splitContainer2->Size = System::Drawing::Size(370, 473);
-				 this->splitContainer2->SplitterDistance = 411;
+				 this->splitContainer2->Size = System::Drawing::Size(272, 336);
+				 this->splitContainer2->SplitterDistance = 291;
 				 this->splitContainer2->TabIndex = 1;
 				 // 
 				 // unitsBox
@@ -135,7 +184,7 @@ namespace UIBoomBeach {
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->unitsBox->Location = System::Drawing::Point(7, 3);
 				 this->unitsBox->Name = L"unitsBox";
-				 this->unitsBox->Size = System::Drawing::Size(357, 405);
+				 this->unitsBox->Size = System::Drawing::Size(259, 285);
 				 this->unitsBox->TabIndex = 0;
 				 this->unitsBox->TabStop = false;
 				 this->unitsBox->Text = L"Units";
@@ -156,8 +205,8 @@ namespace UIBoomBeach {
 				 this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 				 this->tableLayoutPanel1->RowCount = 1;
 				 this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-				 this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 133)));
-				 this->tableLayoutPanel1->Size = System::Drawing::Size(363, 52);
+				 this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 35)));
+				 this->tableLayoutPanel1->Size = System::Drawing::Size(265, 35);
 				 this->tableLayoutPanel1->TabIndex = 1;
 				 // 
 				 // load
@@ -166,9 +215,9 @@ namespace UIBoomBeach {
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->load->AutoSize = true;
-				 this->load->Location = System::Drawing::Point(184, 3);
+				 this->load->Location = System::Drawing::Point(135, 3);
 				 this->load->Name = L"load";
-				 this->load->Size = System::Drawing::Size(176, 46);
+				 this->load->Size = System::Drawing::Size(127, 29);
 				 this->load->TabIndex = 2;
 				 this->load->Text = L"Load";
 				 this->load->UseVisualStyleBackColor = true;
@@ -182,22 +231,11 @@ namespace UIBoomBeach {
 				 this->save->AutoSize = true;
 				 this->save->Location = System::Drawing::Point(3, 3);
 				 this->save->Name = L"save";
-				 this->save->Size = System::Drawing::Size(175, 46);
+				 this->save->Size = System::Drawing::Size(126, 29);
 				 this->save->TabIndex = 1;
 				 this->save->Text = L"Save";
 				 this->save->UseVisualStyleBackColor = true;
 				 this->save->Click += gcnew System::EventHandler(this, &UIForm::saveClick);
-				 // 
-				 // pictureBox
-				 // 
-				 this->pictureBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-					 | System::Windows::Forms::AnchorStyles::Left)
-					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->pictureBox->Location = System::Drawing::Point(3, 3);
-				 this->pictureBox->Name = L"pictureBox";
-				 this->pictureBox->Size = System::Drawing::Size(503, 473);
-				 this->pictureBox->TabIndex = 0;
-				 this->pictureBox->TabStop = false;
 				 // 
 				 // timer
 				 // 
@@ -205,26 +243,169 @@ namespace UIBoomBeach {
 				 this->timer->Interval = 10;
 				 this->timer->Tick += gcnew System::EventHandler(this, &UIForm::timer_Tick);
 				 // 
+				 // menuStrip2
+				 // 
+				 this->menuStrip2->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+					 this->buildingsToolStripMenuItem,
+						 this->unitsToolStripMenuItem
+				 });
+				 this->menuStrip2->Location = System::Drawing::Point(0, 0);
+				 this->menuStrip2->Name = L"menuStrip2";
+				 this->menuStrip2->Size = System::Drawing::Size(659, 24);
+				 this->menuStrip2->TabIndex = 1;
+				 this->menuStrip2->Text = L"menuStrip2";
+				 // 
+				 // buildingsToolStripMenuItem
+				 // 
+				 this->buildingsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(7) {
+					 this->qGToolStripMenuItem,
+						 this->sniperTowerToolStripMenuItem, this->lanceFlammeToolStripMenuItem, this->mitrailleusseToolStripMenuItem, this->repareBuildingToolStripMenuItem,
+						 this->shieldBuildingToolStripMenuItem, this->energyBuildingToolStripMenuItem
+				 });
+				 this->buildingsToolStripMenuItem->Name = L"buildingsToolStripMenuItem";
+				 this->buildingsToolStripMenuItem->Size = System::Drawing::Size(68, 20);
+				 this->buildingsToolStripMenuItem->Text = L"Buildings";
+				 // 
+				 // qGToolStripMenuItem
+				 // 
+				 this->qGToolStripMenuItem->Name = L"qGToolStripMenuItem";
+				 this->qGToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+				 this->qGToolStripMenuItem->Text = L"QG";
+				 this->qGToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::QGClick);
+				 // 
+				 // sniperTowerToolStripMenuItem
+				 // 
+				 this->sniperTowerToolStripMenuItem->Name = L"sniperTowerToolStripMenuItem";
+				 this->sniperTowerToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+				 this->sniperTowerToolStripMenuItem->Text = L"SniperTower";
+				 this->sniperTowerToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::sniperTowerClick);
+				 // 
+				 // lanceFlammeToolStripMenuItem
+				 // 
+				 this->lanceFlammeToolStripMenuItem->Name = L"lanceFlammeToolStripMenuItem";
+				 this->lanceFlammeToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+				 this->lanceFlammeToolStripMenuItem->Text = L"Lance Flamme";
+				 this->lanceFlammeToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::lanceFlammeClick);
+				 // 
+				 // mitrailleusseToolStripMenuItem
+				 // 
+				 this->mitrailleusseToolStripMenuItem->Name = L"mitrailleusseToolStripMenuItem";
+				 this->mitrailleusseToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+				 this->mitrailleusseToolStripMenuItem->Text = L"Mitrailleuse";
+				 this->mitrailleusseToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::mitrailleuseClick);
+				 // 
+				 // repareBuildingToolStripMenuItem
+				 // 
+				 this->repareBuildingToolStripMenuItem->Name = L"repareBuildingToolStripMenuItem";
+				 this->repareBuildingToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+				 this->repareBuildingToolStripMenuItem->Text = L"RepareBuilding";
+				 this->repareBuildingToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::repareBuildingClick);
+				 // 
+				 // shieldBuildingToolStripMenuItem
+				 // 
+				 this->shieldBuildingToolStripMenuItem->Name = L"shieldBuildingToolStripMenuItem";
+				 this->shieldBuildingToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+				 this->shieldBuildingToolStripMenuItem->Text = L"ShieldBuilding";
+				 this->shieldBuildingToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::shieldBuildingClick);
+				 // 
+				 // energyBuildingToolStripMenuItem
+				 // 
+				 this->energyBuildingToolStripMenuItem->Name = L"energyBuildingToolStripMenuItem";
+				 this->energyBuildingToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+				 this->energyBuildingToolStripMenuItem->Text = L"EnergyBuilding";
+				 this->energyBuildingToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::energyBuildingClick);
+				 // 
+				 // unitsToolStripMenuItem
+				 // 
+				 this->unitsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(8) {
+					 this->bruteToolStripMenuItem,
+						 this->kamikazeToolStripMenuItem, this->fusilleurToolStripMenuItem, this->sniperToolStripMenuItem, this->bazookaToolStripMenuItem,
+						 this->medecinContactToolStripMenuItem, this->medecinSeringueToolStripMenuItem, this->medecinZoneToolStripMenuItem
+				 });
+				 this->unitsToolStripMenuItem->Name = L"unitsToolStripMenuItem";
+				 this->unitsToolStripMenuItem->Size = System::Drawing::Size(46, 20);
+				 this->unitsToolStripMenuItem->Text = L"Units";
+				 // 
+				 // bruteToolStripMenuItem
+				 // 
+				 this->bruteToolStripMenuItem->Name = L"bruteToolStripMenuItem";
+				 this->bruteToolStripMenuItem->Size = System::Drawing::Size(168, 22);
+				 this->bruteToolStripMenuItem->Text = L"Brute";
+				 this->bruteToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::bruteClick);
+				 // 
+				 // kamikazeToolStripMenuItem
+				 // 
+				 this->kamikazeToolStripMenuItem->Name = L"kamikazeToolStripMenuItem";
+				 this->kamikazeToolStripMenuItem->Size = System::Drawing::Size(168, 22);
+				 this->kamikazeToolStripMenuItem->Text = L"Kamikaze";
+				 this->kamikazeToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::kamikazeClick);
+				 // 
+				 // fusilleurToolStripMenuItem
+				 // 
+				 this->fusilleurToolStripMenuItem->Name = L"fusilleurToolStripMenuItem";
+				 this->fusilleurToolStripMenuItem->Size = System::Drawing::Size(168, 22);
+				 this->fusilleurToolStripMenuItem->Text = L"Fusilleur";
+				 this->fusilleurToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::fusilleurClick);
+				 // 
+				 // sniperToolStripMenuItem
+				 // 
+				 this->sniperToolStripMenuItem->Name = L"sniperToolStripMenuItem";
+				 this->sniperToolStripMenuItem->Size = System::Drawing::Size(168, 22);
+				 this->sniperToolStripMenuItem->Text = L"Sniper";
+				 this->sniperToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::sniperClick);
+				 // 
+				 // bazookaToolStripMenuItem
+				 // 
+				 this->bazookaToolStripMenuItem->Name = L"bazookaToolStripMenuItem";
+				 this->bazookaToolStripMenuItem->Size = System::Drawing::Size(168, 22);
+				 this->bazookaToolStripMenuItem->Text = L"Bazooka";
+				 this->bazookaToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::bazookaClick);
+				 // 
+				 // medecinContactToolStripMenuItem
+				 // 
+				 this->medecinContactToolStripMenuItem->Name = L"medecinContactToolStripMenuItem";
+				 this->medecinContactToolStripMenuItem->Size = System::Drawing::Size(168, 22);
+				 this->medecinContactToolStripMenuItem->Text = L"Medecin contact";
+				 this->medecinContactToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::medecinContactClick);
+				 // 
+				 // medecinSeringueToolStripMenuItem
+				 // 
+				 this->medecinSeringueToolStripMenuItem->Name = L"medecinSeringueToolStripMenuItem";
+				 this->medecinSeringueToolStripMenuItem->Size = System::Drawing::Size(168, 22);
+				 this->medecinSeringueToolStripMenuItem->Text = L"Medecin seringue";
+				 this->medecinSeringueToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::medecinSeringueClick);
+				 // 
+				 // medecinZoneToolStripMenuItem
+				 // 
+				 this->medecinZoneToolStripMenuItem->Name = L"medecinZoneToolStripMenuItem";
+				 this->medecinZoneToolStripMenuItem->Size = System::Drawing::Size(168, 22);
+				 this->medecinZoneToolStripMenuItem->Text = L"Medecin zone";
+				 this->medecinZoneToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::medecinZoneClick);
+				 // 
 				 // UIForm
 				 // 
 				 this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-				 this->ClientSize = System::Drawing::Size(889, 479);
+				 this->ClientSize = System::Drawing::Size(659, 366);
 				 this->Controls->Add(this->splitContainer1);
+				 this->Controls->Add(this->menuStrip2);
 				 this->Name = L"UIForm";
 				 this->Resize += gcnew System::EventHandler(this, &UIForm::UIForm_Resize);
 				 this->splitContainer1->Panel1->ResumeLayout(false);
 				 this->splitContainer1->Panel2->ResumeLayout(false);
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->EndInit();
 				 this->splitContainer1->ResumeLayout(false);
+				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->EndInit();
 				 this->splitContainer2->Panel1->ResumeLayout(false);
 				 this->splitContainer2->Panel2->ResumeLayout(false);
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer2))->EndInit();
 				 this->splitContainer2->ResumeLayout(false);
 				 this->tableLayoutPanel1->ResumeLayout(false);
 				 this->tableLayoutPanel1->PerformLayout();
-				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox))->EndInit();
+				 this->menuStrip2->ResumeLayout(false);
+				 this->menuStrip2->PerformLayout();
 				 this->ResumeLayout(false);
+				 this->PerformLayout();
 
 			 }
 #pragma endregion
@@ -249,6 +430,70 @@ namespace UIBoomBeach {
 	private: System::Void loadClick(System::Object^  sender, System::EventArgs^  e) 
 	{
 		OpenGL->LoadBase();
+	}
+
+	// BUILDINGS CREATION
+	private: System::Void QGClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processBuildingMenu(0);
+	}
+	private: System::Void sniperTowerClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processBuildingMenu(1);
+	}
+	private: System::Void lanceFlammeClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processBuildingMenu(2);
+	}
+	private: System::Void mitrailleuseClick(System::Object^  sender, System::EventArgs^  e)
+	{
+		OpenGL->processBuildingMenu(3);
+	}
+	private: System::Void repareBuildingClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processBuildingMenu(4);
+	}
+	private: System::Void shieldBuildingClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processBuildingMenu(5);
+	}
+	private: System::Void energyBuildingClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processBuildingMenu(6);
+	}
+
+	// UNITS CREATION
+	private: System::Void bruteClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processUnitsMenu(0);
+	}
+	private: System::Void kamikazeClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processUnitsMenu(1);
+	}
+	private: System::Void fusilleurClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processUnitsMenu(2);
+	}
+	private: System::Void sniperClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processUnitsMenu(3);
+	}
+	private: System::Void bazookaClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processUnitsMenu(4);
+	}
+	private: System::Void medecinContactClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processUnitsMenu(0);
+	}
+	private: System::Void medecinSeringueClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processUnitsMenu(5);
+	}
+	private: System::Void medecinZoneClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processUnitsMenu(6);
 	}
 };
 }

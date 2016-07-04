@@ -279,30 +279,8 @@ void processConstructionMenu(int option)
 	}
 }
 
-void processUnitsMenu(int option)
-{
-	switch (option)
-	{
-	
-		default:
-		{
-			break;
-		}
-	}
-}
 */
-/*void save_callback(Fl_Widget *w, void *data)
-{
-	base->saveBase();
-	army->SaveArmy();
-}
-
-void load_callback(Fl_Widget *w, void *data)
-{
-	base->loadBase();
-	army->LoadArmy();
-}
-
+/*
 void launchConsole()
 {
 	int exitCode = 0;

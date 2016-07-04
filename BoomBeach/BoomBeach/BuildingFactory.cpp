@@ -2,7 +2,7 @@
 
 BuildingFactory::BuildingFactory()
 {
-	Building* house = new Building(0, "QG", 1, 1000, 500, 1, 1.1, 1.3, 1, 4, 4, Zone());
+	Building* house = new Building(0, "QG", 1, 1000, 500, 0, 1.1, 1.3, 1, 4, 4, Zone());
 	Building* snipertower = new Building(0, "SniperTower", 2, 500, 100, 0, 1.3, 1.2, 4, 2, 2, Zone());
 	Building* lanceflamme = new Building(0, "LanceFlamme", 3, 800, 300, 0, 1.2, 1.3, 2, 2, 3, Zone());
 	Building* mitrailleuse = new Building(0, "Mitrailleuse", 4, 1000, 500, 0, 1.1, 1.3, 2, 4, 4, Zone());
@@ -21,25 +21,31 @@ BuildingFactory::BuildingFactory()
 
 Building* BuildingFactory::build(std::string name)
 {
-	for (int i = 0; i < buildingModels.size(); i++)
+	if (nameInList(name))
 	{
-		if (buildingModels[i]->getName() == name)
+		for (int i = 0; i < buildingModels.size(); i++)
 		{
-			if (buildingModels[i]->getMaxInstances() > getInstances(name))
+			if (buildingModels[i]->getName() == name)
 			{
-				Building *building = new Building(*(buildingModels[i]));
-				instances[i]++;
-				return building;
-			}
-			else
-			{
-				std::cout << "Max instances of " << name << std::endl;
-				return nullptr;
+				if (buildingModels[i]->getMaxInstances() > getInstances(name))
+				{
+					Building *building = new Building(*(buildingModels[i]));
+					instances[i]++;
+					return building;
+				}
+				else
+				{
+					std::cout << "Max instances of " << name << std::endl;
+					return nullptr;
+				}
 			}
 		}
 	}
-	std::cout << "Wrong name" << std::endl;
-	return nullptr;
+	else
+	{
+		std::cout << "Wrong name" << std::endl;
+		return nullptr;
+	}
 }
 
 bool BuildingFactory::nameInList(std::string name)
@@ -87,14 +93,6 @@ Building* BuildingFactory::getBuildingModel(std::string name)
 	}
 }
 
-void BuildingFactory::buildingList()
-{
-	for (int i = 0; i < buildingModels.size(); i++)
-	{
-		std::cout << "Name: " << buildingModels[i]->getName() << " Cost: " << buildingModels[i]->getCost() << " Life :" << buildingModels[i]->getLife() << std::endl;
-	}
-}
-
 int BuildingFactory::getInstances(std::string name)
 {
 	for (int i = 0; i < buildingModels.size(); i++)
@@ -102,10 +100,4 @@ int BuildingFactory::getInstances(std::string name)
 		if (buildingModels[i]->getName() == name)
 			return instances[i];
 	}
-}
-
-
-std::vector<Building*> BuildingFactory::getBuidingModels()
-{
-	return buildingModels;
 }

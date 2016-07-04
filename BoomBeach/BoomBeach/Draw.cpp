@@ -114,64 +114,13 @@ void load_callback()
 	army->LoadArmy();
 }
 
-void processConstructionMenu(int option)
+void add_building(int nbBuilding)
 {
-	switch (option)
-	{
-	case 0:
-		base->addBuilding((_buildingModels[0]->getName()).c_str());
-		map = field->getData();
-		break;
-	case 1:
-		base->addBuilding((_buildingModels[1]->getName()).c_str());
-		map = field->getData();
-		break;
-	case 2:
-		base->addBuilding((_buildingModels[2]->getName()).c_str());
-		map = field->getData();
-		break;
-	case 3:
-		base->addBuilding((_buildingModels[3]->getName()).c_str());
-		map = field->getData();
-		break;
-	case 4:
-		base->addBuilding((_buildingModels[4]->getName()).c_str());
-		map = field->getData();
-		break;
-	case 5:
-		base->addBuilding((_buildingModels[5]->getName()).c_str());
-		map = field->getData();
-		break;
-	case 6:
-		base->addBuilding((_buildingModels[6]->getName()).c_str());
-		map = field->getData();
-		break;
-	default:
-		break;
-	}
+	base->addBuilding((_buildingModels[nbBuilding]->getName()).c_str());
+	map = field->getData();
 }
 
-void processUnitsMenu(int option)
+void add_unit(int nbUnits)
 {
-	switch (option)
-	{
-
-	default:
-	{
-		break;
-	}
-	}
-}
-
-// Menu handling function definition
-void menu(int item)
-{
-	switch (item)
-	{
-	default:
-	{
-		break;
-	}
-	}
-	glutPostRedisplay();
+	army->GetFactory().CreateUnit((unitType)nbUnits, army);
 }
