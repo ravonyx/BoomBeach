@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <vector>
 
 class Field
 {
@@ -24,6 +25,8 @@ class Field
 		int getWidth() const;
 		int getHeight() const;
 		int* getData();
+
+		std::vector<std::vector<int>> getBuilings();
 
 		int& operator() (int x, int y)
 		{

@@ -243,6 +243,8 @@ std::istream& operator >> (std::istream& is, Field& f)
 
 int Field::GetNearestBuilding(int x, int y)
 {
+	//A* Algo
+	
 	return 0;
 }
 
@@ -259,4 +261,16 @@ int Field::getHeight() const
 int* Field::getData()
 {
 	return _data;
+}
+
+std::vector<std::vector<int>> Field::getBuilings()
+{
+	int* map;
+	map = this->getData();
+	for (int i = 0; i < getWidth() + getHeight(); i++) {
+		if (map[i] == 0/*La valeur d'un building sur un Tile*/) {
+			//retenir la position x, y : i/largeur, i%quelqueChose
+		}
+	}
+	return std::vector<std::vector<int>>();
 }
