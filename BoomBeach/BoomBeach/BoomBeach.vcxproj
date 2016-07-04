@@ -29,6 +29,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>true</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -131,10 +132,12 @@
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="BuildingFactory.cpp" />
+    <ClCompile Include="Draw.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="UIForm.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitFactory.cpp" />
     <ClCompile Include="Zone.cpp" />
@@ -143,12 +146,31 @@
     <ClInclude Include="Base.h" />
     <ClInclude Include="BuildingFactory.h" />
     <ClInclude Include="Building.h" />
+    <ClInclude Include="Draw.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="Army.h" />
+    <ClInclude Include="OpenGL.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="UIForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitFactory.h" />
     <ClInclude Include="Zone.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UIForm.resx">
+      <DependentUpon>UIForm.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

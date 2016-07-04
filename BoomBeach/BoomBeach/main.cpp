@@ -27,16 +27,36 @@ void load_callback(Fl_Widget *w, void *data);
 void mouse(int button, int state, int x, int y);
 
 
-std::vector <Building*> _buildingModels;
-Base *base;
-Army *army;
-GLuint textureImage[6];
-Field *field;
-int *map;
+//std::vector <Building*> _buildingModels;
+//Base *base;
+//Army *army;
+//GLuint textureImage[6];
+//Field *field;
+//int *map;
 
 Fl_Button *save, *load;
 
+
+#include "UIForm.h"
+using namespace UIBoomBeach;
+
+[STAThreadAttribute]
 int main(int argc, char *argv[])
+{
+	// Enabling Windows XP visual effects before any controls are created
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+
+	// Create the main window and run it
+	glutInit(&argc, argv);
+	Application::Run(gcnew UIForm());
+	return 0;
+
+
+}
+
+
+/*int main(int argc, char *argv[])
 {
 	std::cout << "Hi !" << std::endl;
 	std::cout << "Welcome in Ravonyxland" << std::endl << std::endl;
@@ -69,18 +89,18 @@ int main(int argc, char *argv[])
 		launchOpengl();
 	}
 	return 1;
-}
+}*/
 
-void launchOpengl()
+/*void launchOpengl()
 {
 	/** CREATION FENETRE **/
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+	/*glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(800, 800);
-	glutCreateWindow("Boom Beach");
+	glutCreateWindow("Boom Beach");*/
 
 	/** FONCTIONS GLUT **/
-	glutDisplayFunc(renderScene);
+	/*glutDisplayFunc(renderScene);
 	glutReshapeFunc(reshapeWindow);
 	glutIdleFunc(renderScene);
 	glutMouseFunc(mouse);
@@ -126,9 +146,9 @@ void launchOpengl()
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	glutMainLoop();
-}
+}*/
 
-void renderScene(void)
+/*void renderScene(void)
 {
 	//Clear screen
 	glClearColor(0, 0, 0, 1);
@@ -177,9 +197,9 @@ void renderScene(void)
 	}
 
 	glutSwapBuffers();
-}
+}*/
 
-void mouse(int button, int state, int x, int y)
+/*void mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
 	{
@@ -194,7 +214,7 @@ void mouse(int button, int state, int x, int y)
 	}
 
 	glutPostRedisplay();
-}
+}*/
 
 /** GESTION FENETRE **/
 void reshapeWindow(int w, int h)
@@ -210,7 +230,7 @@ void reshapeWindow(int w, int h)
 }
 
 // Menu handling function definition
-void menu(int item)
+/*void menu(int item)
 {
 	switch (item)
 	{
@@ -270,8 +290,8 @@ void processUnitsMenu(int option)
 		}
 	}
 }
-
-void save_callback(Fl_Widget *w, void *data)
+*/
+/*void save_callback(Fl_Widget *w, void *data)
 {
 	base->saveBase();
 	army->SaveArmy();
@@ -527,4 +547,4 @@ void launchConsole()
 		}
 		std::cout << "//////////////////////////////////" << std::endl << std::endl;
 	}
-}
+}*/
