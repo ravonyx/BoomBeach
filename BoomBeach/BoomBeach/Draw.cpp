@@ -124,3 +124,13 @@ void add_unit(int nbUnits)
 {
 	army->GetFactory().CreateUnit((unitType)nbUnits, army);
 }
+
+int get_army_money()
+{
+	return army->getMoney();
+}
+
+int get_base_money()
+{
+	return base->getMoney();
+}

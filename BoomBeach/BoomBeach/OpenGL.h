@@ -104,6 +104,15 @@ namespace OpenGLForm
 			load_callback();
 		}
 
+		int GetArmyMoney()
+		{
+			return get_army_money();
+		}
+		int GetBaseMoney()
+		{
+			return get_base_money();
+		}
+
 	private:
 		HDC m_hDC;
 		HGLRC m_hglrc;
