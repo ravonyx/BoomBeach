@@ -16,12 +16,13 @@ namespace OpenGLForm
 		COpenGL(System::Windows::Forms::PictureBox ^ parentForm, GLsizei iWidth, GLsizei iHeight)
 		{
 			this->Cursor = System::Windows::Forms::Cursors::Cross;
+			//this->Cursor->Hide();
 			this->Location = System::Drawing::Point(20, 20);
 
 			//this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(keyboard);
 			this->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(mouse);
 			//this->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(mouseDown);
-			//this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(mouseMotion);
+			this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(mouseMotion);
 			//this->MouseWheel += gcnew System::Windows::Forms::MouseEventHandler(mouseWheel);
 
 			// Specify the form as the parent.
@@ -63,6 +64,8 @@ namespace OpenGLForm
 			UINT flags = SWP_NOZORDER | SWP_NOACTIVATE;
 			SetWindowPos((HWND)this->Handle.ToPointer(), 0, 0, 0,
 				width, height, flags);
+
+			SetDimensionMap(width, height);
 		}
 
 		virtual System::Void Render(System::Void)
@@ -73,9 +76,6 @@ namespace OpenGLForm
 
 			//Set view and zoom
 			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0, 800, 800, 0, -1, 1);
-			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
 
 			DrawRender();

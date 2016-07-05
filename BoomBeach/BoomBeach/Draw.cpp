@@ -10,23 +10,72 @@ Army *army;
 Field *field;
 int *map;
 
+int currentBuilding;
+int widthMap, heightMap;
+
+typedef struct Square {
+	float x;
+	float y;
+	float width;
+	float height;
+} Square_p;
+
+Square_p currentSquare;
+float squarex = 0;
+float squarey = 0;
+
 void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
 
 	if (e->Button == System::Windows::Forms::MouseButtons::Left)
 	{
+		float x = e->X;
+		float y = e->Y;
+		float sizeheight = heightMap / (base->getField()->getHeight());
+		float sizewidth = widthMap / (base->getField()->getWidth());
+
+		float realx = x / sizewidth;
+		float realy = y / sizeheight;
+
+		realx = roundf(realx);
+		realy = roundf(realy);
+
+		//std::cout << "X " << realx << " Y " << realy << std::endl;
+
+		int tile = map[(int)realx + (int)realy *field->getWidth()];
+		//std::cout << "tile " << tile << std::endl;
+	
+
+		//base->addBuilding((_buildingModels[nbBuilding]->getName()).c_str());
+		//map = field->getData();
+	}
+}
+
+void mouseMotion(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
+{
+
 		int x = e->X;
 		int y = e->Y;
 
-		std::cout << "X " << x << " Y " << y << std::endl;
-		//int size = 800 / (base->getField()->getHeight());
-		//int realx = x / size;
-		//int realy = y / size;
+		float sizeheight = heightMap / (base->getField()->getHeight());
+		float sizewidth = widthMap / (base->getField()->getWidth());
+
+		float realx = x / sizewidth;
+		float realy = y / sizeheight;
+
+		realx = roundf(realx);
+		realy = roundf(realy);
+		
 		//std::cout << "X " << realx << " Y " << realy << std::endl;
-		//
-		//int tile = map[realx + realy *field->getWidth()];
+		
+		int tile = map[(int)realx + (int)realy *field->getWidth()];
 		//std::cout << "tile " << tile << std::endl;
-	}
+
+		squarex = realx;
+		squarey = realy;
+		currentSquare.width = sizewidth;
+		currentSquare.height = sizeheight;
+
 }
 
 void Initialize()
@@ -48,25 +97,20 @@ void Initialize()
 	textureImage[4] = createTexture("tile-house.png");
 	textureImage[5] = createTexture("tile-mortar.png");
 
-	//Create Menu
 	_buildingModels = base->getBuildingsPossibilies();
-
-
-	/*int unitsMenu = glutCreateMenu(processUnitsMenu);
-	glutAddMenuEntry("Brute", 0);
-	glutAddMenuEntry("Kamikaze", 1);
-	glutAddMenuEntry("Fusilleur", 2);
-	glutAddMenuEntry("Sniper", 3);
-	glutAddMenuEntry("Bazooka", 4);
-	glutAddMenuEntry("Medecin contact", 5);
-	glutAddMenuEntry("Medecin seringue", 6);
-	glutAddMenuEntry("Medecin zone", 7);*/
 }
 
 
 void DrawRender()
 {
 	int tile;
+	glOrtho(0, widthMap, heightMap, 0, -1, 1);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	float sizewidth = widthMap / (base->getField()->getWidth() - 0.05f);
+	float sizeheight = heightMap / (base->getField()->getHeight() - 0.05f);
+
 	for (int y = 0; y < field->getHeight(); y++)
 	{
 		for (int x = 0; x < field->getWidth(); x++)
@@ -88,18 +132,37 @@ void DrawRender()
 				glBindTexture(GL_TEXTURE_2D, textureImage[5]);
 			else
 				glBindTexture(GL_TEXTURE_2D, 0);
-			int size = 800 / (base->getField()->getHeight());
-			int realx = x * size;
-			int realy = y * size;
-
+			
+			float realx = x * sizewidth;
+			float realy = y * sizeheight;
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.0f, 0.0f); glVertex3f(float(realx), float(realy), 0.0f);
-			glTexCoord2f(1.0f, 0.0f); glVertex3f(float(realx + size), float(realy), 0.0f);
-			glTexCoord2f(1.0f, 1.0f); glVertex3f(float(realx + size), float(realy + size), 0.0f);
-			glTexCoord2f(0.0f, 1.0f); glVertex3f(float(realx), float(realy + size), 0.0f);
+			glTexCoord2f(1.0f, 0.0f); glVertex3f(float(realx + sizewidth), float(realy), 0.0f);
+			glTexCoord2f(1.0f, 1.0f); glVertex3f(float(realx + sizewidth), float(realy + sizeheight), 0.0f);
+			glTexCoord2f(0.0f, 1.0f); glVertex3f(float(realx), float(realy + sizeheight), 0.0f);
 			glEnd();
 		}
 	}
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	//std::cout << currentSquare.x << " " << currentSquare.y << " " << currentSquare.width << " " << currentSquare.height << std::endl;
+	//glColor3f(1.0f, 0.0f, 0.0f);
+	glPointSize(20);
+	currentSquare.x = squarex * sizewidth;
+	currentSquare.y = squarey * sizeheight;
+	glBegin(GL_LINE_LOOP);
+	glVertex3f(float(currentSquare.x), float(currentSquare.y), 0.0f);
+	glVertex3f(float(currentSquare.x + currentSquare.width), float(currentSquare.y), 0.0f);
+	glVertex3f(float(currentSquare.x + currentSquare.width), float(currentSquare.y + currentSquare.height), 0.0f);
+	glVertex3f(float(currentSquare.x), float(currentSquare.y + currentSquare.height), 0.0f);
+	glEnd();
+}
+
+void SetDimensionMap(GLsizei width, GLsizei height)
+{
+	widthMap = width;
+	heightMap = height;
 }
 
 void save_callback()
@@ -116,8 +179,7 @@ void load_callback()
 
 void add_building(int nbBuilding)
 {
-	base->addBuilding((_buildingModels[nbBuilding]->getName()).c_str());
-	map = field->getData();
+	currentBuilding = nbBuilding;
 }
 
 void add_unit(int nbUnits)

@@ -97,7 +97,11 @@ namespace UIBoomBeach {
 				 this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
 				 this->pictureBox = (gcnew System::Windows::Forms::PictureBox());
 				 this->splitContainer2 = (gcnew System::Windows::Forms::SplitContainer());
+				 this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->unitsBox = (gcnew System::Windows::Forms::GroupBox());
+				 this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
+				 this->baseMoney = (gcnew System::Windows::Forms::Label());
+				 this->armyMoney = (gcnew System::Windows::Forms::Label());
 				 this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->load = (gcnew System::Windows::Forms::Button());
 				 this->save = (gcnew System::Windows::Forms::Button());
@@ -120,10 +124,6 @@ namespace UIBoomBeach {
 				 this->medecinContactToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinSeringueToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinZoneToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->tableLayoutPanel2 = (gcnew System::Windows::Forms::TableLayoutPanel());
-				 this->tableLayoutPanel3 = (gcnew System::Windows::Forms::TableLayoutPanel());
-				 this->baseMoney = (gcnew System::Windows::Forms::Label());
-				 this->armyMoney = (gcnew System::Windows::Forms::Label());
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 				 this->splitContainer1->Panel1->SuspendLayout();
 				 this->splitContainer1->Panel2->SuspendLayout();
@@ -133,10 +133,10 @@ namespace UIBoomBeach {
 				 this->splitContainer2->Panel1->SuspendLayout();
 				 this->splitContainer2->Panel2->SuspendLayout();
 				 this->splitContainer2->SuspendLayout();
-				 this->tableLayoutPanel1->SuspendLayout();
-				 this->menuStrip2->SuspendLayout();
 				 this->tableLayoutPanel2->SuspendLayout();
 				 this->tableLayoutPanel3->SuspendLayout();
+				 this->tableLayoutPanel1->SuspendLayout();
+				 this->menuStrip2->SuspendLayout();
 				 this->SuspendLayout();
 				 // 
 				 // splitContainer1
@@ -161,6 +161,7 @@ namespace UIBoomBeach {
 				 this->pictureBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->pictureBox->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
 				 this->pictureBox->Location = System::Drawing::Point(3, 3);
 				 this->pictureBox->Name = L"pictureBox";
 				 this->pictureBox->Size = System::Drawing::Size(371, 336);
@@ -187,6 +188,24 @@ namespace UIBoomBeach {
 				 this->splitContainer2->SplitterDistance = 291;
 				 this->splitContainer2->TabIndex = 1;
 				 // 
+				 // tableLayoutPanel2
+				 // 
+				 this->tableLayoutPanel2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->tableLayoutPanel2->ColumnCount = 1;
+				 this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 50)));
+				 this->tableLayoutPanel2->Controls->Add(this->unitsBox, 0, 1);
+				 this->tableLayoutPanel2->Controls->Add(this->tableLayoutPanel3, 0, 0);
+				 this->tableLayoutPanel2->Location = System::Drawing::Point(0, 3);
+				 this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
+				 this->tableLayoutPanel2->RowCount = 2;
+				 this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 32.2807F)));
+				 this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 67.7193F)));
+				 this->tableLayoutPanel2->Size = System::Drawing::Size(269, 285);
+				 this->tableLayoutPanel2->TabIndex = 0;
+				 // 
 				 // unitsBox
 				 // 
 				 this->unitsBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
@@ -198,6 +217,52 @@ namespace UIBoomBeach {
 				 this->unitsBox->TabIndex = 0;
 				 this->unitsBox->TabStop = false;
 				 this->unitsBox->Text = L"Units";
+				 // 
+				 // tableLayoutPanel3
+				 // 
+				 this->tableLayoutPanel3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->tableLayoutPanel3->ColumnCount = 2;
+				 this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 50)));
+				 this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 50)));
+				 this->tableLayoutPanel3->Controls->Add(this->baseMoney, 0, 0);
+				 this->tableLayoutPanel3->Controls->Add(this->armyMoney, 1, 0);
+				 this->tableLayoutPanel3->Location = System::Drawing::Point(3, 3);
+				 this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
+				 this->tableLayoutPanel3->RowCount = 1;
+				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
+				 this->tableLayoutPanel3->Size = System::Drawing::Size(263, 85);
+				 this->tableLayoutPanel3->TabIndex = 1;
+				 // 
+				 // baseMoney
+				 // 
+				 this->baseMoney->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->baseMoney->AutoSize = true;
+				 this->baseMoney->ImageAlign = System::Drawing::ContentAlignment::TopRight;
+				 this->baseMoney->Location = System::Drawing::Point(3, 0);
+				 this->baseMoney->Name = L"baseMoney";
+				 this->baseMoney->Size = System::Drawing::Size(125, 85);
+				 this->baseMoney->TabIndex = 0;
+				 this->baseMoney->Text = L"Base Money :";
+				 this->baseMoney->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+				 // 
+				 // armyMoney
+				 // 
+				 this->armyMoney->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->armyMoney->AutoSize = true;
+				 this->armyMoney->Location = System::Drawing::Point(134, 0);
+				 this->armyMoney->Name = L"armyMoney";
+				 this->armyMoney->Size = System::Drawing::Size(126, 85);
+				 this->armyMoney->TabIndex = 1;
+				 this->armyMoney->Text = L"Army Money :";
+				 this->armyMoney->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // tableLayoutPanel1
 				 // 
@@ -392,70 +457,6 @@ namespace UIBoomBeach {
 				 this->medecinZoneToolStripMenuItem->Text = L"Medecin zone";
 				 this->medecinZoneToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::medecinZoneClick);
 				 // 
-				 // tableLayoutPanel2
-				 // 
-				 this->tableLayoutPanel2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-					 | System::Windows::Forms::AnchorStyles::Left)
-					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->tableLayoutPanel2->ColumnCount = 1;
-				 this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 50)));
-				 this->tableLayoutPanel2->Controls->Add(this->unitsBox, 0, 1);
-				 this->tableLayoutPanel2->Controls->Add(this->tableLayoutPanel3, 0, 0);
-				 this->tableLayoutPanel2->Location = System::Drawing::Point(0, 3);
-				 this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
-				 this->tableLayoutPanel2->RowCount = 2;
-				 this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 32.2807F)));
-				 this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 67.7193F)));
-				 this->tableLayoutPanel2->Size = System::Drawing::Size(269, 285);
-				 this->tableLayoutPanel2->TabIndex = 0;
-				 // 
-				 // tableLayoutPanel3
-				 // 
-				 this->tableLayoutPanel3->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-					 | System::Windows::Forms::AnchorStyles::Left)
-					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->tableLayoutPanel3->ColumnCount = 2;
-				 this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 50)));
-				 this->tableLayoutPanel3->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 50)));
-				 this->tableLayoutPanel3->Controls->Add(this->baseMoney, 0, 0);
-				 this->tableLayoutPanel3->Controls->Add(this->armyMoney, 1, 0);
-				 this->tableLayoutPanel3->Location = System::Drawing::Point(3, 3);
-				 this->tableLayoutPanel3->Name = L"tableLayoutPanel3";
-				 this->tableLayoutPanel3->RowCount = 1;
-				 this->tableLayoutPanel3->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-				 this->tableLayoutPanel3->Size = System::Drawing::Size(263, 85);
-				 this->tableLayoutPanel3->TabIndex = 1;
-				 // 
-				 // baseMoney
-				 // 
-				 this->baseMoney->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-					 | System::Windows::Forms::AnchorStyles::Left)
-					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->baseMoney->AutoSize = true;
-				 this->baseMoney->ImageAlign = System::Drawing::ContentAlignment::TopRight;
-				 this->baseMoney->Location = System::Drawing::Point(3, 0);
-				 this->baseMoney->Name = L"baseMoney";
-				 this->baseMoney->Size = System::Drawing::Size(125, 85);
-				 this->baseMoney->TabIndex = 0;
-				 this->baseMoney->Text = L"Base Money :";
-				 this->baseMoney->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-				 // 
-				 // armyMoney
-				 // 
-				 this->armyMoney->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-					 | System::Windows::Forms::AnchorStyles::Left)
-					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->armyMoney->AutoSize = true;
-				 this->armyMoney->Location = System::Drawing::Point(134, 0);
-				 this->armyMoney->Name = L"armyMoney";
-				 this->armyMoney->Size = System::Drawing::Size(126, 85);
-				 this->armyMoney->TabIndex = 1;
-				 this->armyMoney->Text = L"Army Money :";
-				 this->armyMoney->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-				 // 
 				 // UIForm
 				 // 
 				 this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
@@ -474,13 +475,13 @@ namespace UIBoomBeach {
 				 this->splitContainer2->Panel2->ResumeLayout(false);
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer2))->EndInit();
 				 this->splitContainer2->ResumeLayout(false);
+				 this->tableLayoutPanel2->ResumeLayout(false);
+				 this->tableLayoutPanel3->ResumeLayout(false);
+				 this->tableLayoutPanel3->PerformLayout();
 				 this->tableLayoutPanel1->ResumeLayout(false);
 				 this->tableLayoutPanel1->PerformLayout();
 				 this->menuStrip2->ResumeLayout(false);
 				 this->menuStrip2->PerformLayout();
-				 this->tableLayoutPanel2->ResumeLayout(false);
-				 this->tableLayoutPanel3->ResumeLayout(false);
-				 this->tableLayoutPanel3->PerformLayout();
 				 this->ResumeLayout(false);
 				 this->PerformLayout();
 
