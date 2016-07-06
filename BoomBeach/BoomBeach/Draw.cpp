@@ -195,3 +195,20 @@ int get_base_money()
 {
 	return base->getMoney();
 }
+
+int get_building_max(int nbBuilding)
+{
+	return _buildingModels[nbBuilding]->getMaxInstances();
+}
+int get_building_instances(int nbBuilding)
+{
+	return base->getBuildingFactory()->getInstances(_buildingModels[nbBuilding]->getName());
+}
+int get_unit_max(int nbUnits)
+{
+	return 0;
+}
+int get_unit_instances(int nbUnits)
+{
+	return 0;
+}

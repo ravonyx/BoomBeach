@@ -6,13 +6,6 @@
 #include "Tools.h"
 #define NOMINMAX
 #define WIN32
-#pragma region include_UI
-#include<FL/Fl.H>
-#include<FL/Fl_Box.H>
-#include<FL/Fl_Widget.H>
-#include<FL/Fl_Button.H>
-#include<FL/Fl_Window.H>
-#pragma endregion
 
 void launchConsole();
 void launchOpengl();
@@ -22,8 +15,6 @@ void menu(int item);
 void processConstructionMenu(int option);
 void processUnitsMenu(int option);
 
-void save_callback(Fl_Widget *w, void *data);
-void load_callback(Fl_Widget *w, void *data);
 void mouse(int button, int state, int x, int y);
 
 
@@ -33,8 +24,6 @@ void mouse(int button, int state, int x, int y);
 //GLuint textureImage[6];
 //Field *field;
 //int *map;
-
-Fl_Button *save, *load;
 
 
 #include "UIForm.h"
@@ -51,8 +40,6 @@ int main(int argc, char *argv[])
 	glutInit(&argc, argv);
 	Application::Run(gcnew UIForm());
 	return 0;
-
-
 }
 
 

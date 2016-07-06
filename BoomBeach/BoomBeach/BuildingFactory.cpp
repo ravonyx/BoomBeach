@@ -2,13 +2,13 @@
 
 BuildingFactory::BuildingFactory()
 {
-	Building* house = new Building(0, "QG", 1, 1000, 500, 0, 1.1, 1.3, 1, 4, 4, Zone());
-	Building* snipertower = new Building(0, "SniperTower", 2, 500, 100, 0, 1.3, 1.2, 4, 2, 2, Zone());
-	Building* lanceflamme = new Building(0, "LanceFlamme", 3, 800, 300, 0, 1.2, 1.3, 2, 2, 3, Zone());
-	Building* mitrailleuse = new Building(0, "Mitrailleuse", 4, 1000, 500, 0, 1.1, 1.3, 2, 4, 4, Zone());
-	Building* repare = new Building(0, "RepareBuilding", 5, 1000, 500, 0, 1.1, 1.3, 2, 4, 4, Zone());
-	Building* shield = new Building(0, "ShieldBuilding", 6, 1000, 500, 0, 1.1, 1.3, 3, 4, 4, Zone());
-	Building* energy = new Building(0, "EnergyBuilding", 7, 1000, 500, 0, 1.1, 1.3, 1, 4, 4, Zone());
+	Building* house = new Building(0, "QG", 1, 1000, 500, 0, 1.1f, 1.3f, 1, 4, 4, Zone());
+	Building* snipertower = new Building(0, "SniperTower", 2, 500, 100, 0, 1.3f, 1.2f, 4, 2, 2, Zone());
+	Building* lanceflamme = new Building(0, "LanceFlamme", 3, 800, 300, 0, 1.2f, 1.3f, 2, 2, 3, Zone());
+	Building* mitrailleuse = new Building(0, "Mitrailleuse", 4, 1000, 500, 0, 1.1f, 1.3f, 2, 4, 4, Zone());
+	Building* repare = new Building(0, "RepareBuilding", 5, 1000, 500, 0, 1.1f, 1.3f, 2, 4, 4, Zone());
+	Building* shield = new Building(0, "ShieldBuilding", 6, 1000, 500, 0, 1.1f, 1.3f, 3, 4, 4, Zone());
+	Building* energy = new Building(0, "EnergyBuilding", 7, 1000, 500, 0, 1.1f, 1.3f, 1, 4, 4, Zone());
 
 	buildingModels.push_back(house);
 	buildingModels.push_back(snipertower);
@@ -23,7 +23,7 @@ Building* BuildingFactory::build(std::string name)
 {
 	if (nameInList(name))
 	{
-		for (int i = 0; i < buildingModels.size(); i++)
+		for (unsigned int i = 0; i < buildingModels.size(); i++)
 		{
 			if (buildingModels[i]->getName() == name)
 			{
@@ -40,16 +40,13 @@ Building* BuildingFactory::build(std::string name)
 			}
 		}
 	}
-	else
-	{
-		std::cout << "Wrong name" << std::endl;
-		return nullptr;
-	}
+	std::cout << "Wrong name" << std::endl;
+	return nullptr;
 }
 
 bool BuildingFactory::nameInList(std::string name)
 {
-	for (int i = 0; i < buildingModels.size(); i++)
+	for (unsigned int i = 0; i < buildingModels.size(); i++)
 	{
 		if (name == buildingModels[i]->getName())
 		{
@@ -85,25 +82,27 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 
 Building* BuildingFactory::getBuildingModel(std::string name)
 {
-	for (int i = 0; i < buildingModels.size(); i++)
+	for (unsigned int i = 0; i < buildingModels.size(); i++)
 	{
 		if (buildingModels[i]->name == name)
 			return buildingModels[i];
 	}
+	return NULL;
 }
 
 int BuildingFactory::getInstances(std::string name)
 {
-	for (int i = 0; i < buildingModels.size(); i++)
+	for (unsigned int i = 0; i < buildingModels.size(); i++)
 	{
 		if (buildingModels[i]->getName() == name)
 			return instances[i];
 	}
+	return -1;
 }
 
 void BuildingFactory::addInstances(std::string name)
 {
-	for (int i = 0; i < buildingModels.size(); i++)
+	for (unsigned int i = 0; i < buildingModels.size(); i++)
 	{
 		if (buildingModels[i]->getName() == name)
 			instances[i]++;

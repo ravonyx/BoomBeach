@@ -37,7 +37,7 @@ Base::~Base()
 {
 	delete _field;
 	delete _buildingFactory;
-	for (int i = 0; i < _buildings.size(); i++)
+	for (unsigned int i = 0; i < _buildings.size(); i++)
 	{
 		delete _buildings[i];
 	}
@@ -127,7 +127,7 @@ void Base::printBuildings()
 		std::cout << "No buildings";
 	else
 	{
-		for (int i = 0; i < _buildings.size(); i++)
+		for (unsigned int i = 0; i < _buildings.size(); i++)
 		{
 			std::cout << *(_buildings[i]);
 		}
@@ -147,7 +147,7 @@ void Base::saveBase()
 
 		myfile << "NbBuildings: " << _buildings.size();
 		myfile << std::endl;
-		for (int i = 0; i < _buildings.size(); i++)
+		for (unsigned int i = 0; i < _buildings.size(); i++)
 		{
 			myfile << (*_buildings[i]);
 		}
@@ -179,7 +179,7 @@ void Base::loadBase()
 
 Building* Base::getBuilding(int id)
 {
-	for (int i = 0; i < _buildings.size(); i++)
+	for (unsigned int i = 0; i < _buildings.size(); i++)
 	{
 		if (_buildings[i]->getId() == id)
 			return _buildings[i];
@@ -189,7 +189,7 @@ Building* Base::getBuilding(int id)
 
 int Base::getIndexOfBuilding(int id)
 {
-	for (int i = 0; i < _buildings.size(); i++)
+	for (unsigned int i = 0; i < _buildings.size(); i++)
 	{
 		if (_buildings[i]->getId() == id)
 			return i;
@@ -210,4 +210,9 @@ int Base::getMoney() const
 std::vector<Building*> Base::getBuildingsPossibilies()
 {
 	return _buildingFactory->getBuidingModels();
+}
+
+BuildingFactory* Base::getBuildingFactory()
+{
+	return _buildingFactory;
 }

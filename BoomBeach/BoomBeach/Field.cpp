@@ -186,9 +186,9 @@ bool Field::Build(Zone &z)
 				_data[i + j * _width] = z.getId();
 			}
 		}
+		return true;
 	}
-	else
-		return false;
+	return false;
 }
 
 void Field::Erase(Zone z)

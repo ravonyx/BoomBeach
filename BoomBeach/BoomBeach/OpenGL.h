@@ -115,6 +115,23 @@ namespace OpenGLForm
 			return get_base_money();
 		}
 
+		int GetBuildingMax(int nbBuilding)
+		{
+			return get_building_max(nbBuilding);
+		}
+		int GetBuildingInstances(int nbBuilding)
+		{
+			return get_building_instances(nbBuilding);
+		}
+		int GetUnitMax(int nbUnits)
+		{
+			return get_unit_max(nbUnits);
+		}
+		int GetUnitInstances(int nbUnits)
+		{
+			return get_unit_instances(nbUnits);
+		}
+
 		void mouseEnter(System::Object^  sender, System::EventArgs^  e)
 		{
 			Cursor->Hide();
