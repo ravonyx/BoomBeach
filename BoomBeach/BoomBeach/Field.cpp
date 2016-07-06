@@ -161,6 +161,20 @@ Zone Field::FindEmptyZone(int w, int h)
 	return Zone();
 }
 
+Zone Field::FindEmptyZoneWithInd(int w, int h, int px, int py)
+{
+	for (int i = px; i < px + w; i++)
+	{
+		for (int j = py; j < py + h; j++)
+		{
+			if (_data[i + j * _width] != -1)
+				return Zone();
+		}
+	}
+
+	return Zone(w, h, px, py);
+}
+
 bool Field::Build(Zone &z)
 {
 	if (z.getId() != -1)

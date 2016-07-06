@@ -10,7 +10,7 @@ Army *army;
 Field *field;
 int *map;
 
-int currentBuilding;
+int currentBuilding = -1;
 int widthMap, heightMap;
 
 typedef struct Square {
@@ -40,14 +40,16 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 		realx = roundf(realx);
 		realy = roundf(realy);
 
-		//std::cout << "X " << realx << " Y " << realy << std::endl;
-
 		int tile = map[(int)realx + (int)realy *field->getWidth()];
-		//std::cout << "tile " << tile << std::endl;
-	
-
-		//base->addBuilding((_buildingModels[nbBuilding]->getName()).c_str());
-		//map = field->getData();
+		//if can construct on that tile
+		if (tile == -1 && currentBuilding != -1)
+		{
+			if (base->addBuilding((_buildingModels[currentBuilding]->getName()).c_str(), realx, realy) == true)
+			{
+				map = field->getData();
+				currentBuilding = -1;
+			}
+		}
 	}
 }
 
@@ -66,10 +68,7 @@ void mouseMotion(System::Object^  sender, System::Windows::Forms::MouseEventArgs
 		realx = roundf(realx);
 		realy = roundf(realy);
 		
-		//std::cout << "X " << realx << " Y " << realy << std::endl;
-		
 		int tile = map[(int)realx + (int)realy *field->getWidth()];
-		//std::cout << "tile " << tile << std::endl;
 
 		squarex = realx;
 		squarey = realy;

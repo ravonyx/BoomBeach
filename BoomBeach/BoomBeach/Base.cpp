@@ -60,7 +60,7 @@ bool Base::destroyBuilding(int id)
 	return false;
 }
 
-bool Base::addBuilding(const char *name)
+bool Base::addBuilding(const char *name, int x, int y)
 {
 	int cost = 0;
 	std::cout << std::endl;
@@ -72,10 +72,14 @@ bool Base::addBuilding(const char *name)
 		if (building != nullptr && building->getCost() <= _money)
 		{
 			cost = building->getCost();
-			Zone zoneToBuild = _field->FindEmptyZone(building->getWidth(), building->getHeight());
+			Zone zoneToBuild;
+			if (x == -1 || y == -1)
+				zoneToBuild = _field->FindEmptyZone(building->getWidth(), building->getHeight());
+			else
+				zoneToBuild = _field->FindEmptyZoneWithInd(building->getWidth(), building->getHeight(), x, y);
 			if (!zoneToBuild.isEmpty())
 			{
-
+				_buildingFactory->addInstances(name);
 				building->setId(_currentId);
 				zoneToBuild.setId(building->getType());
 

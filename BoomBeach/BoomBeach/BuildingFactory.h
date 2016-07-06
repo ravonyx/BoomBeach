@@ -19,5 +19,7 @@ class BuildingFactory
 		Building* build(std::string name);
 		Building* readNextBuilding(std::istream &stream);
 		int getInstances(std::string name);
+		void addInstances(std::string name);
+
 		std::vector<Building*> getBuidingModels();
 };

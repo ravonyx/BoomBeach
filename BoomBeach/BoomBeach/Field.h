@@ -15,7 +15,10 @@ class Field
 		~Field();
 
 		bool IsEmpty(Zone);
-		Zone FindEmptyZone(int, int);
+
+		Zone FindEmptyZone(int w, int h);
+		Zone FindEmptyZoneWithInd(int w, int h, int px, int py);
+
 		bool Build(Zone &z);
 		void Erase(Zone z);
 		int GetNearestBuilding(int, int); 

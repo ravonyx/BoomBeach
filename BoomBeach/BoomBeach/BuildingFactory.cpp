@@ -30,7 +30,6 @@ Building* BuildingFactory::build(std::string name)
 				if (buildingModels[i]->getMaxInstances() > getInstances(name))
 				{
 					Building *building = new Building(*(buildingModels[i]));
-					instances[i]++;
 					return building;
 				}
 				else
@@ -99,6 +98,15 @@ int BuildingFactory::getInstances(std::string name)
 	{
 		if (buildingModels[i]->getName() == name)
 			return instances[i];
+	}
+}
+
+void BuildingFactory::addInstances(std::string name)
+{
+	for (int i = 0; i < buildingModels.size(); i++)
+	{
+		if (buildingModels[i]->getName() == name)
+			instances[i]++;
 	}
 }
 

@@ -17,7 +17,7 @@ public:
 	~Base();
 
 	void printBuildings();
-	bool addBuilding(const char *name);
+	bool addBuilding(const char *name, int x = -1, int y = -1);
 	void enhanceBuilding(int id);
 	bool destroyBuilding(int id);
 	Building* getBuilding(int id);
