@@ -15,12 +15,15 @@ namespace OpenGLForm
 	public:
 		COpenGL(System::Windows::Forms::PictureBox ^ parentForm, GLsizei iWidth, GLsizei iHeight)
 		{
+			cursor = false;
 			this->Cursor = System::Windows::Forms::Cursors::Cross;
 			//this->Cursor->Hide();
 			this->Location = System::Drawing::Point(20, 20);
 
 			//this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(keyboard);
 			this->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(mouse);
+			this->MouseEnter += gcnew System::EventHandler(this, &COpenGL::mouseEnter);
+			this->MouseLeave += gcnew System::EventHandler(this, &COpenGL::mouseLeave);
 			//this->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(mouseDown);
 			this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(mouseMotion);
 			//this->MouseWheel += gcnew System::Windows::Forms::MouseEventHandler(mouseWheel);
@@ -113,6 +116,15 @@ namespace OpenGLForm
 			return get_base_money();
 		}
 
+		void mouseEnter(System::Object^  sender, System::EventArgs^  e)
+		{
+			Cursor->Hide();
+		}
+		void mouseLeave(System::Object^  sender, System::EventArgs^  e)
+		{
+			Cursor->Show();
+
+		}
 	private:
 		HDC m_hDC;
 		HGLRC m_hglrc;
