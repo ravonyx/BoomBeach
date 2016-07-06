@@ -15,7 +15,6 @@ namespace OpenGLForm
 	public:
 		COpenGL(System::Windows::Forms::PictureBox ^ parentForm, GLsizei iWidth, GLsizei iHeight)
 		{
-			cursor = false;
 			this->Cursor = System::Windows::Forms::Cursors::Cross;
 			//this->Cursor->Hide();
 			this->Location = System::Drawing::Point(20, 20);
