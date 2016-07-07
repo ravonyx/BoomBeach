@@ -16,13 +16,6 @@ namespace UIBoomBeach {
 
 	/// <summary>
 	/// </summary>
-	public ref class MyTableLayout : System::Windows::Forms::TableLayoutPanel
-	{
-		public: MyTableLayout()
-			{
-				this->DoubleBuffered = true;
-			}
-	};
 
 	public ref class UIForm : public System::Windows::Forms::Form
 	{
@@ -136,7 +129,7 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::TabPage^  generalPage;
 	private: System::Windows::Forms::TabPage^  buildingsPage;
 	private: System::Windows::Forms::TabPage^  unitsPage;
-private: MyTableLayout^  panelBuildings;
+private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 private: System::Windows::Forms::Button^  button1;
 
 
@@ -198,7 +191,10 @@ private: System::Windows::Forms::Button^  button1;
 				 this->shieldBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->energyBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->buildingsPage = (gcnew System::Windows::Forms::TabPage());
-				 this->panelBuildings = (gcnew MyTableLayout());
+				 this->panelBuildings = (gcnew System::Windows::Forms::TableLayoutPanel());
+
+				
+
 				 this->unitsPage = (gcnew System::Windows::Forms::TabPage());
 				 this->saveLoad = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->load = (gcnew System::Windows::Forms::Button());
@@ -1283,6 +1279,9 @@ private: System::Windows::Forms::Button^  button1;
 		std::vector<Building*> buildings = OpenGL->GetBuildings();
 		std::vector<Unit*> units = OpenGL->GetUnits();
 
+		Type^ myType = System::Windows::Forms::Control::typeid;
+		System::Reflection::PropertyInfo^ controlProperty = myType->GetProperty("DoubleBuffered", System::Reflection::BindingFlags::NonPublic | System::Reflection::BindingFlags::Instance);
+		controlProperty->SetValue(panelBuildings, true, nullptr);
 		//Clear all the controls
 		panelBuildings->Controls->Clear();
 		panelBuildings->RowStyles->Clear();
@@ -1348,5 +1347,6 @@ private: System::Windows::Forms::Button^  button1;
 		}
 	}
 };
+
 }
 
