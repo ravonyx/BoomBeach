@@ -212,6 +212,11 @@ std::vector<Building*> Base::getBuildingsPossibilities()
 	return _buildingFactory->getBuidingModels();
 }
 
+std::vector<Building*> Base::getCurrentBuildings()
+{
+	return _buildings;
+}
+
 BuildingFactory* Base::getBuildingFactory()
 {
 	return _buildingFactory;

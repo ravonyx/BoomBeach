@@ -132,6 +132,16 @@ namespace OpenGLForm
 			return get_unit_instances(nbUnits);
 		}
 
+		std::vector<Building*> GetBuildings()
+		{
+			return get_buildings();
+		}
+		std::vector<Unit*> GetUnits()
+		{
+			return get_units();
+		}
+
+
 		void mouseEnter(System::Object^  sender, System::EventArgs^  e)
 		{
 			Cursor->Hide();

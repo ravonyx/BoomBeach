@@ -56,26 +56,20 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 
 void mouseMotion(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
+	int x = e->X;
+	int y = e->Y;
 
-		int x = e->X;
-		int y = e->Y;
+	float sizeheight = heightMap / (base->getField()->getHeight());
+	float sizewidth = widthMap / (base->getField()->getWidth());
 
-		float sizeheight = heightMap / (base->getField()->getHeight());
-		float sizewidth = widthMap / (base->getField()->getWidth());
+	float realx = x / sizewidth;
+	float realy = y / sizeheight;
 
-		float realx = x / sizewidth;
-		float realy = y / sizeheight;
-
-		realx = roundf(realx);
-		realy = roundf(realy);
+	realx = roundf(realx);
+	realy = roundf(realy);
 		
-		int tile = map[(int)realx + (int)realy *field->getWidth()];
-
-		squarex = realx;
-		squarey = realy;
-		currentSquare.width = sizewidth;
-		currentSquare.height = sizeheight;
-
+	squarex = realx;
+	squarey = realy;
 }
 
 void Initialize()
@@ -150,11 +144,33 @@ void DrawRender()
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	//std::cout << currentSquare.x << " " << currentSquare.y << " " << currentSquare.width << " " << currentSquare.height << std::endl;
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glPointSize(20);
 	currentSquare.x = squarex * sizewidth;
 	currentSquare.y = squarey * sizeheight;
+
+	if (currentBuilding != -1)
+	{
+		float sizeheight = heightMap / (base->getField()->getHeight());
+		float sizewidth = widthMap / (base->getField()->getWidth());
+
+		currentSquare.width = sizewidth;
+		currentSquare.height = sizeheight;
+
+		currentSquare.width *= _buildingModels[currentBuilding]->getWidth();
+		currentSquare.height *= _buildingModels[currentBuilding]->getHeight();
+
+		std::cout << _buildingModels[currentBuilding]->getWidth() << " " << _buildingModels[currentBuilding]->getHeight() << std::endl;
+		std::cout << currentSquare.width << " " << currentSquare.height << std::endl;
+	}
+
+	else
+	{
+		float sizeheight = heightMap / (base->getField()->getHeight());
+		float sizewidth = widthMap / (base->getField()->getWidth());
+
+		currentSquare.width = sizewidth;
+		currentSquare.height = sizeheight;
+	}
+
 	glBegin(GL_LINE_LOOP);
 	glVertex3f(float(currentSquare.x), float(currentSquare.y), 0.0f);
 	glVertex3f(float(currentSquare.x + currentSquare.width), float(currentSquare.y), 0.0f);
@@ -216,4 +232,13 @@ int get_unit_max(int nbUnits)
 int get_unit_instances(int nbUnits)
 {
 	return army->getUnitFactory()->getInstances(_unitModels[nbUnits]->getName());
+}
+
+std::vector<Building*> get_buildings()
+{
+	return base->getCurrentBuildings();
+}
+std::vector<Unit*> get_units()
+{
+	return army->GetUnits();
 }

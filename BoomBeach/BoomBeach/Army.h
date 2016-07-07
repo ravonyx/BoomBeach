@@ -23,6 +23,8 @@ class Army
 		UnitFactory& GetFactory() const { return *_unitFactory; }
 
 		std::vector<Unit*> getUnitsPossibilities();
+		std::vector<Unit*> Army::getCurrentUnits();
+
 		UnitFactory* getUnitFactory();
 
 		void SaveArmy();

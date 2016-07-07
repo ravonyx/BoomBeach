@@ -63,47 +63,28 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::SplitContainer^  splitContainer2;
 	private: System::Windows::Forms::MenuStrip^  menu;
 	private: System::Windows::Forms::ToolStripMenuItem^  buildingsMenuItem;
-
-
 	private: System::Windows::Forms::ToolStripMenuItem^  unitsMenu;
 	private: System::Windows::Forms::ToolStripMenuItem^  QGMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  sniperTowerMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  lanceFlammeMenuItem;
-
-
-
-
-
 	private: System::Windows::Forms::ToolStripMenuItem^  mitrailleuseMenuItem;
-
 	private: System::Windows::Forms::ToolStripMenuItem^  repareBuildingMenuItem;
-
 	private: System::Windows::Forms::ToolStripMenuItem^  shieldBuildingMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  energyBuildingMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  bruteMenuItem;
-
-
-
 	private: System::Windows::Forms::ToolStripMenuItem^  kamikazeMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  fusilleurMenuItem;
-
-
 	private: System::Windows::Forms::ToolStripMenuItem^  sniperMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  bazookaMenuItem;
-
-
 	private: System::Windows::Forms::ToolStripMenuItem^  medecinContactMenuItem;
-
 	private: System::Windows::Forms::ToolStripMenuItem^  medecinSeringueMenuItem;
-
 	private: System::Windows::Forms::ToolStripMenuItem^  medecinZoneMenuItem;
 
 	private: System::Windows::Forms::TableLayoutPanel^  visualisationValuesGame;
 	private: System::Windows::Forms::TableLayoutPanel^  money;
-
-
 	private: System::Windows::Forms::Label^  baseMoney;
 	private: System::Windows::Forms::Label^  armyMoney;
+
 	private: System::Windows::Forms::TableLayoutPanel^  layoutUnits;
 
 	private: System::Windows::Forms::Label^  bruteName;
@@ -112,13 +93,6 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::Label^  kamikazeName;
 	private: System::Windows::Forms::Label^  fusilleurName;
 	private: System::Windows::Forms::Label^  kamikazeValue;
-
-
-
-
-
-
-
 
 	private: System::Windows::Forms::Label^  sniperName;
 	private: System::Windows::Forms::Label^  bazookaName;
@@ -142,63 +116,19 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::Label^  repareBuildingName;
 	private: System::Windows::Forms::Label^  shieldBuildingName;
 
-
-
-
-
-
-private: System::Windows::Forms::Label^  energyBuildingName;
-private: System::Windows::Forms::Label^  QGValue;
-private: System::Windows::Forms::Label^  sniperTowerValue;
-private: System::Windows::Forms::Label^  lanceflammeValue;
-private: System::Windows::Forms::Label^  mitrailleuseValue;
-private: System::Windows::Forms::Label^  repareBuildingValue;
-private: System::Windows::Forms::Label^  shieldBuildingValue;
-private: System::Windows::Forms::Label^  energyBuildingValue;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	private: System::Windows::Forms::Label^  energyBuildingName;
+	private: System::Windows::Forms::Label^  QGValue;
+	private: System::Windows::Forms::Label^  sniperTowerValue;
+	private: System::Windows::Forms::Label^  lanceflammeValue;
+	private: System::Windows::Forms::Label^  mitrailleuseValue;
+	private: System::Windows::Forms::Label^  repareBuildingValue;
+	private: System::Windows::Forms::Label^  shieldBuildingValue;
+	private: System::Windows::Forms::Label^  energyBuildingValue;
+	private: System::Windows::Forms::TabControl^  tabController;
+	private: System::Windows::Forms::TabPage^  generalPage;
+	private: System::Windows::Forms::TabPage^  buildingsPage;
+	private: System::Windows::Forms::TabPage^  unitsPage;
+private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 	private: System::Windows::Forms::Timer^  timer;
 
 #pragma region Windows Form Designer generated code
@@ -212,6 +142,8 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
 				 this->pictureBox = (gcnew System::Windows::Forms::PictureBox());
 				 this->splitContainer2 = (gcnew System::Windows::Forms::SplitContainer());
+				 this->tabController = (gcnew System::Windows::Forms::TabControl());
+				 this->generalPage = (gcnew System::Windows::Forms::TabPage());
 				 this->visualisationValuesGame = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->money = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->baseMoney = (gcnew System::Windows::Forms::Label());
@@ -251,6 +183,8 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->repareBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->shieldBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->energyBuildingValue = (gcnew System::Windows::Forms::Label());
+				 this->buildingsPage = (gcnew System::Windows::Forms::TabPage());
+				 this->unitsPage = (gcnew System::Windows::Forms::TabPage());
 				 this->saveLoad = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->load = (gcnew System::Windows::Forms::Button());
 				 this->save = (gcnew System::Windows::Forms::Button());
@@ -273,6 +207,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->medecinContactMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinSeringueMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinZoneMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->panelBuildings = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 				 this->splitContainer1->Panel1->SuspendLayout();
 				 this->splitContainer1->Panel2->SuspendLayout();
@@ -282,6 +217,8 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->splitContainer2->Panel1->SuspendLayout();
 				 this->splitContainer2->Panel2->SuspendLayout();
 				 this->splitContainer2->SuspendLayout();
+				 this->tabController->SuspendLayout();
+				 this->generalPage->SuspendLayout();
 				 this->visualisationValuesGame->SuspendLayout();
 				 this->money->SuspendLayout();
 				 this->buildingsUnits->SuspendLayout();
@@ -289,6 +226,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->layoutUnits->SuspendLayout();
 				 this->buildingsBox->SuspendLayout();
 				 this->layoutBuildings->SuspendLayout();
+				 this->buildingsPage->SuspendLayout();
 				 this->saveLoad->SuspendLayout();
 				 this->menu->SuspendLayout();
 				 this->SuspendLayout();
@@ -306,8 +244,8 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 // splitContainer1.Panel2
 				 // 
 				 this->splitContainer1->Panel2->Controls->Add(this->splitContainer2);
-				 this->splitContainer1->Size = System::Drawing::Size(873, 397);
-				 this->splitContainer1->SplitterDistance = 459;
+				 this->splitContainer1->Size = System::Drawing::Size(952, 397);
+				 this->splitContainer1->SplitterDistance = 465;
 				 this->splitContainer1->TabIndex = 0;
 				 // 
 				 // pictureBox
@@ -318,7 +256,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->pictureBox->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
 				 this->pictureBox->Location = System::Drawing::Point(3, 3);
 				 this->pictureBox->Name = L"pictureBox";
-				 this->pictureBox->Size = System::Drawing::Size(453, 391);
+				 this->pictureBox->Size = System::Drawing::Size(459, 391);
 				 this->pictureBox->TabIndex = 0;
 				 this->pictureBox->TabStop = false;
 				 // 
@@ -333,14 +271,42 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 // 
 				 // splitContainer2.Panel1
 				 // 
-				 this->splitContainer2->Panel1->Controls->Add(this->visualisationValuesGame);
+				 this->splitContainer2->Panel1->Controls->Add(this->tabController);
 				 // 
 				 // splitContainer2.Panel2
 				 // 
 				 this->splitContainer2->Panel2->Controls->Add(this->saveLoad);
-				 this->splitContainer2->Size = System::Drawing::Size(404, 391);
+				 this->splitContainer2->Size = System::Drawing::Size(477, 391);
 				 this->splitContainer2->SplitterDistance = 338;
 				 this->splitContainer2->TabIndex = 1;
+				 // 
+				 // tabController
+				 // 
+				 this->tabController->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->tabController->Controls->Add(this->generalPage);
+				 this->tabController->Controls->Add(this->buildingsPage);
+				 this->tabController->Controls->Add(this->unitsPage);
+				 this->tabController->Location = System::Drawing::Point(4, 4);
+				 this->tabController->Multiline = true;
+				 this->tabController->Name = L"tabController";
+				 this->tabController->SelectedIndex = 0;
+				 this->tabController->Size = System::Drawing::Size(470, 331);
+				 this->tabController->TabIndex = 0;
+				 //this->tabController->SelectedIndexChanged += gcnew System::EventHandler(this, &UIForm::tabSelected);
+				 this->tabController->Selected += gcnew System::Windows::Forms::TabControlEventHandler(this, &UIForm::tabSelected);
+				 // 
+				 // generalPage
+				 // 
+				 this->generalPage->Controls->Add(this->visualisationValuesGame);
+				 this->generalPage->Location = System::Drawing::Point(4, 22);
+				 this->generalPage->Name = L"generalPage";
+				 this->generalPage->Padding = System::Windows::Forms::Padding(3);
+				 this->generalPage->Size = System::Drawing::Size(462, 305);
+				 this->generalPage->TabIndex = 0;
+				 this->generalPage->Text = L"General";
+				 this->generalPage->UseVisualStyleBackColor = true;
 				 // 
 				 // visualisationValuesGame
 				 // 
@@ -352,14 +318,14 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 50)));
 				 this->visualisationValuesGame->Controls->Add(this->money, 0, 0);
 				 this->visualisationValuesGame->Controls->Add(this->buildingsUnits, 0, 1);
-				 this->visualisationValuesGame->Location = System::Drawing::Point(0, 3);
+				 this->visualisationValuesGame->Location = System::Drawing::Point(0, 0);
 				 this->visualisationValuesGame->Name = L"visualisationValuesGame";
 				 this->visualisationValuesGame->RowCount = 2;
 				 this->visualisationValuesGame->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent,
 					 8.421053F)));
 				 this->visualisationValuesGame->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent,
 					 91.57895F)));
-				 this->visualisationValuesGame->Size = System::Drawing::Size(401, 332);
+				 this->visualisationValuesGame->Size = System::Drawing::Size(462, 305);
 				 this->visualisationValuesGame->TabIndex = 0;
 				 // 
 				 // money
@@ -376,7 +342,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->money->Name = L"money";
 				 this->money->RowCount = 1;
 				 this->money->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-				 this->money->Size = System::Drawing::Size(395, 21);
+				 this->money->Size = System::Drawing::Size(456, 19);
 				 this->money->TabIndex = 1;
 				 // 
 				 // baseMoney
@@ -388,7 +354,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->baseMoney->ImageAlign = System::Drawing::ContentAlignment::TopRight;
 				 this->baseMoney->Location = System::Drawing::Point(3, 0);
 				 this->baseMoney->Name = L"baseMoney";
-				 this->baseMoney->Size = System::Drawing::Size(191, 21);
+				 this->baseMoney->Size = System::Drawing::Size(222, 19);
 				 this->baseMoney->TabIndex = 0;
 				 this->baseMoney->Text = L"Base Money :";
 				 this->baseMoney->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -399,9 +365,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->armyMoney->AutoSize = true;
-				 this->armyMoney->Location = System::Drawing::Point(200, 0);
+				 this->armyMoney->Location = System::Drawing::Point(231, 0);
 				 this->armyMoney->Name = L"armyMoney";
-				 this->armyMoney->Size = System::Drawing::Size(192, 21);
+				 this->armyMoney->Size = System::Drawing::Size(222, 19);
 				 this->armyMoney->TabIndex = 1;
 				 this->armyMoney->Text = L"Army Money :";
 				 this->armyMoney->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -418,11 +384,11 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 50)));
 				 this->buildingsUnits->Controls->Add(this->unitsBox, 1, 0);
 				 this->buildingsUnits->Controls->Add(this->buildingsBox, 0, 0);
-				 this->buildingsUnits->Location = System::Drawing::Point(3, 30);
+				 this->buildingsUnits->Location = System::Drawing::Point(3, 28);
 				 this->buildingsUnits->Name = L"buildingsUnits";
 				 this->buildingsUnits->RowCount = 1;
 				 this->buildingsUnits->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-				 this->buildingsUnits->Size = System::Drawing::Size(395, 299);
+				 this->buildingsUnits->Size = System::Drawing::Size(456, 274);
 				 this->buildingsUnits->TabIndex = 2;
 				 // 
 				 // unitsBox
@@ -431,9 +397,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->unitsBox->Controls->Add(this->layoutUnits);
-				 this->unitsBox->Location = System::Drawing::Point(200, 3);
+				 this->unitsBox->Location = System::Drawing::Point(231, 3);
 				 this->unitsBox->Name = L"unitsBox";
-				 this->unitsBox->Size = System::Drawing::Size(192, 293);
+				 this->unitsBox->Size = System::Drawing::Size(222, 268);
 				 this->unitsBox->TabIndex = 0;
 				 this->unitsBox->TabStop = false;
 				 this->unitsBox->Text = L"Units";
@@ -473,7 +439,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->layoutUnits->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 				 this->layoutUnits->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
 				 this->layoutUnits->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 12.5F)));
-				 this->layoutUnits->Size = System::Drawing::Size(180, 268);
+				 this->layoutUnits->Size = System::Drawing::Size(210, 243);
 				 this->layoutUnits->TabIndex = 0;
 				 // 
 				 // bruteName
@@ -484,7 +450,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->bruteName->AutoSize = true;
 				 this->bruteName->Location = System::Drawing::Point(3, 0);
 				 this->bruteName->Name = L"bruteName";
-				 this->bruteName->Size = System::Drawing::Size(109, 33);
+				 this->bruteName->Size = System::Drawing::Size(129, 30);
 				 this->bruteName->TabIndex = 0;
 				 this->bruteName->Text = L"Brute";
 				 this->bruteName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -495,9 +461,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->bruteValue->AutoSize = true;
-				 this->bruteValue->Location = System::Drawing::Point(118, 0);
+				 this->bruteValue->Location = System::Drawing::Point(138, 0);
 				 this->bruteValue->Name = L"bruteValue";
-				 this->bruteValue->Size = System::Drawing::Size(59, 33);
+				 this->bruteValue->Size = System::Drawing::Size(69, 30);
 				 this->bruteValue->TabIndex = 1;
 				 this->bruteValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -507,9 +473,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->kamikazeName->AutoSize = true;
-				 this->kamikazeName->Location = System::Drawing::Point(3, 33);
+				 this->kamikazeName->Location = System::Drawing::Point(3, 30);
 				 this->kamikazeName->Name = L"kamikazeName";
-				 this->kamikazeName->Size = System::Drawing::Size(109, 33);
+				 this->kamikazeName->Size = System::Drawing::Size(129, 30);
 				 this->kamikazeName->TabIndex = 2;
 				 this->kamikazeName->Text = L"Kamikaze";
 				 this->kamikazeName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -520,9 +486,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->fusilleurName->AutoSize = true;
-				 this->fusilleurName->Location = System::Drawing::Point(3, 66);
+				 this->fusilleurName->Location = System::Drawing::Point(3, 60);
 				 this->fusilleurName->Name = L"fusilleurName";
-				 this->fusilleurName->Size = System::Drawing::Size(109, 33);
+				 this->fusilleurName->Size = System::Drawing::Size(129, 30);
 				 this->fusilleurName->TabIndex = 3;
 				 this->fusilleurName->Text = L"Fusilleur";
 				 this->fusilleurName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -533,9 +499,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->kamikazeValue->AutoSize = true;
-				 this->kamikazeValue->Location = System::Drawing::Point(118, 33);
+				 this->kamikazeValue->Location = System::Drawing::Point(138, 30);
 				 this->kamikazeValue->Name = L"kamikazeValue";
-				 this->kamikazeValue->Size = System::Drawing::Size(59, 33);
+				 this->kamikazeValue->Size = System::Drawing::Size(69, 30);
 				 this->kamikazeValue->TabIndex = 4;
 				 this->kamikazeValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -545,9 +511,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->sniperName->AutoSize = true;
-				 this->sniperName->Location = System::Drawing::Point(3, 99);
+				 this->sniperName->Location = System::Drawing::Point(3, 90);
 				 this->sniperName->Name = L"sniperName";
-				 this->sniperName->Size = System::Drawing::Size(109, 33);
+				 this->sniperName->Size = System::Drawing::Size(129, 30);
 				 this->sniperName->TabIndex = 5;
 				 this->sniperName->Text = L"Sniper";
 				 this->sniperName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -558,9 +524,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->bazookaName->AutoSize = true;
-				 this->bazookaName->Location = System::Drawing::Point(3, 132);
+				 this->bazookaName->Location = System::Drawing::Point(3, 120);
 				 this->bazookaName->Name = L"bazookaName";
-				 this->bazookaName->Size = System::Drawing::Size(109, 33);
+				 this->bazookaName->Size = System::Drawing::Size(129, 30);
 				 this->bazookaName->TabIndex = 6;
 				 this->bazookaName->Text = L"Bazooka";
 				 this->bazookaName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -571,9 +537,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->medecinContactName->AutoSize = true;
-				 this->medecinContactName->Location = System::Drawing::Point(3, 165);
+				 this->medecinContactName->Location = System::Drawing::Point(3, 150);
 				 this->medecinContactName->Name = L"medecinContactName";
-				 this->medecinContactName->Size = System::Drawing::Size(109, 33);
+				 this->medecinContactName->Size = System::Drawing::Size(129, 30);
 				 this->medecinContactName->TabIndex = 7;
 				 this->medecinContactName->Text = L"Medecin contact";
 				 this->medecinContactName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -584,9 +550,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->medecinSeringueName->AutoSize = true;
-				 this->medecinSeringueName->Location = System::Drawing::Point(3, 198);
+				 this->medecinSeringueName->Location = System::Drawing::Point(3, 180);
 				 this->medecinSeringueName->Name = L"medecinSeringueName";
-				 this->medecinSeringueName->Size = System::Drawing::Size(109, 33);
+				 this->medecinSeringueName->Size = System::Drawing::Size(129, 30);
 				 this->medecinSeringueName->TabIndex = 8;
 				 this->medecinSeringueName->Text = L"Medecin seringue";
 				 this->medecinSeringueName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -597,9 +563,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->medecinZoneName->AutoSize = true;
-				 this->medecinZoneName->Location = System::Drawing::Point(3, 231);
+				 this->medecinZoneName->Location = System::Drawing::Point(3, 210);
 				 this->medecinZoneName->Name = L"medecinZoneName";
-				 this->medecinZoneName->Size = System::Drawing::Size(109, 37);
+				 this->medecinZoneName->Size = System::Drawing::Size(129, 33);
 				 this->medecinZoneName->TabIndex = 9;
 				 this->medecinZoneName->Text = L"Medecin zone";
 				 this->medecinZoneName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -610,9 +576,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->fusilleurValue->AutoSize = true;
-				 this->fusilleurValue->Location = System::Drawing::Point(118, 66);
+				 this->fusilleurValue->Location = System::Drawing::Point(138, 60);
 				 this->fusilleurValue->Name = L"fusilleurValue";
-				 this->fusilleurValue->Size = System::Drawing::Size(59, 33);
+				 this->fusilleurValue->Size = System::Drawing::Size(69, 30);
 				 this->fusilleurValue->TabIndex = 10;
 				 this->fusilleurValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -622,9 +588,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->sniperValue->AutoSize = true;
-				 this->sniperValue->Location = System::Drawing::Point(118, 99);
+				 this->sniperValue->Location = System::Drawing::Point(138, 90);
 				 this->sniperValue->Name = L"sniperValue";
-				 this->sniperValue->Size = System::Drawing::Size(59, 33);
+				 this->sniperValue->Size = System::Drawing::Size(69, 30);
 				 this->sniperValue->TabIndex = 11;
 				 this->sniperValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -634,9 +600,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->bazookaValue->AutoSize = true;
-				 this->bazookaValue->Location = System::Drawing::Point(118, 132);
+				 this->bazookaValue->Location = System::Drawing::Point(138, 120);
 				 this->bazookaValue->Name = L"bazookaValue";
-				 this->bazookaValue->Size = System::Drawing::Size(59, 33);
+				 this->bazookaValue->Size = System::Drawing::Size(69, 30);
 				 this->bazookaValue->TabIndex = 12;
 				 this->bazookaValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -646,9 +612,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->medecinContactValue->AutoSize = true;
-				 this->medecinContactValue->Location = System::Drawing::Point(118, 165);
+				 this->medecinContactValue->Location = System::Drawing::Point(138, 150);
 				 this->medecinContactValue->Name = L"medecinContactValue";
-				 this->medecinContactValue->Size = System::Drawing::Size(59, 33);
+				 this->medecinContactValue->Size = System::Drawing::Size(69, 30);
 				 this->medecinContactValue->TabIndex = 13;
 				 this->medecinContactValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -658,9 +624,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->medecinSeringueValue->AutoSize = true;
-				 this->medecinSeringueValue->Location = System::Drawing::Point(118, 198);
+				 this->medecinSeringueValue->Location = System::Drawing::Point(138, 180);
 				 this->medecinSeringueValue->Name = L"medecinSeringueValue";
-				 this->medecinSeringueValue->Size = System::Drawing::Size(59, 33);
+				 this->medecinSeringueValue->Size = System::Drawing::Size(69, 30);
 				 this->medecinSeringueValue->TabIndex = 14;
 				 this->medecinSeringueValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -670,9 +636,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->medecinZoneValue->AutoSize = true;
-				 this->medecinZoneValue->Location = System::Drawing::Point(118, 231);
+				 this->medecinZoneValue->Location = System::Drawing::Point(138, 210);
 				 this->medecinZoneValue->Name = L"medecinZoneValue";
-				 this->medecinZoneValue->Size = System::Drawing::Size(59, 37);
+				 this->medecinZoneValue->Size = System::Drawing::Size(69, 33);
 				 this->medecinZoneValue->TabIndex = 15;
 				 this->medecinZoneValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -684,7 +650,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->buildingsBox->Controls->Add(this->layoutBuildings);
 				 this->buildingsBox->Location = System::Drawing::Point(3, 3);
 				 this->buildingsBox->Name = L"buildingsBox";
-				 this->buildingsBox->Size = System::Drawing::Size(191, 293);
+				 this->buildingsBox->Size = System::Drawing::Size(222, 268);
 				 this->buildingsBox->TabIndex = 1;
 				 this->buildingsBox->TabStop = false;
 				 this->buildingsBox->Text = L"Buildings";
@@ -723,7 +689,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->layoutBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.2F)));
 				 this->layoutBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.2F)));
 				 this->layoutBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.2F)));
-				 this->layoutBuildings->Size = System::Drawing::Size(179, 268);
+				 this->layoutBuildings->Size = System::Drawing::Size(210, 243);
 				 this->layoutBuildings->TabIndex = 0;
 				 // 
 				 // QGName
@@ -734,7 +700,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->QGName->AutoSize = true;
 				 this->QGName->Location = System::Drawing::Point(3, 0);
 				 this->QGName->Name = L"QGName";
-				 this->QGName->Size = System::Drawing::Size(106, 38);
+				 this->QGName->Size = System::Drawing::Size(126, 34);
 				 this->QGName->TabIndex = 0;
 				 this->QGName->Text = L"QG";
 				 this->QGName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -745,9 +711,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->sniperTowerName->AutoSize = true;
-				 this->sniperTowerName->Location = System::Drawing::Point(3, 38);
+				 this->sniperTowerName->Location = System::Drawing::Point(3, 34);
 				 this->sniperTowerName->Name = L"sniperTowerName";
-				 this->sniperTowerName->Size = System::Drawing::Size(106, 38);
+				 this->sniperTowerName->Size = System::Drawing::Size(126, 34);
 				 this->sniperTowerName->TabIndex = 1;
 				 this->sniperTowerName->Text = L"SniperTower";
 				 this->sniperTowerName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -758,9 +724,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->lanceflammeName->AutoSize = true;
-				 this->lanceflammeName->Location = System::Drawing::Point(3, 76);
+				 this->lanceflammeName->Location = System::Drawing::Point(3, 68);
 				 this->lanceflammeName->Name = L"lanceflammeName";
-				 this->lanceflammeName->Size = System::Drawing::Size(106, 38);
+				 this->lanceflammeName->Size = System::Drawing::Size(126, 34);
 				 this->lanceflammeName->TabIndex = 2;
 				 this->lanceflammeName->Text = L"Lance Flamme";
 				 this->lanceflammeName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -771,9 +737,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->mitrailleuseName->AutoSize = true;
-				 this->mitrailleuseName->Location = System::Drawing::Point(3, 114);
+				 this->mitrailleuseName->Location = System::Drawing::Point(3, 102);
 				 this->mitrailleuseName->Name = L"mitrailleuseName";
-				 this->mitrailleuseName->Size = System::Drawing::Size(106, 38);
+				 this->mitrailleuseName->Size = System::Drawing::Size(126, 34);
 				 this->mitrailleuseName->TabIndex = 3;
 				 this->mitrailleuseName->Text = L"Mitrailleuse";
 				 this->mitrailleuseName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -784,9 +750,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->repareBuildingName->AutoSize = true;
-				 this->repareBuildingName->Location = System::Drawing::Point(3, 152);
+				 this->repareBuildingName->Location = System::Drawing::Point(3, 136);
 				 this->repareBuildingName->Name = L"repareBuildingName";
-				 this->repareBuildingName->Size = System::Drawing::Size(106, 38);
+				 this->repareBuildingName->Size = System::Drawing::Size(126, 34);
 				 this->repareBuildingName->TabIndex = 4;
 				 this->repareBuildingName->Text = L"Repare Building";
 				 this->repareBuildingName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -797,9 +763,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->shieldBuildingName->AutoSize = true;
-				 this->shieldBuildingName->Location = System::Drawing::Point(3, 190);
+				 this->shieldBuildingName->Location = System::Drawing::Point(3, 170);
 				 this->shieldBuildingName->Name = L"shieldBuildingName";
-				 this->shieldBuildingName->Size = System::Drawing::Size(106, 38);
+				 this->shieldBuildingName->Size = System::Drawing::Size(126, 34);
 				 this->shieldBuildingName->TabIndex = 5;
 				 this->shieldBuildingName->Text = L"Shield Building";
 				 this->shieldBuildingName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -810,9 +776,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->energyBuildingName->AutoSize = true;
-				 this->energyBuildingName->Location = System::Drawing::Point(3, 228);
+				 this->energyBuildingName->Location = System::Drawing::Point(3, 204);
 				 this->energyBuildingName->Name = L"energyBuildingName";
-				 this->energyBuildingName->Size = System::Drawing::Size(106, 40);
+				 this->energyBuildingName->Size = System::Drawing::Size(126, 39);
 				 this->energyBuildingName->TabIndex = 6;
 				 this->energyBuildingName->Text = L"Energy Building";
 				 this->energyBuildingName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -823,9 +789,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->QGValue->AutoSize = true;
-				 this->QGValue->Location = System::Drawing::Point(115, 0);
+				 this->QGValue->Location = System::Drawing::Point(135, 0);
 				 this->QGValue->Name = L"QGValue";
-				 this->QGValue->Size = System::Drawing::Size(61, 38);
+				 this->QGValue->Size = System::Drawing::Size(72, 34);
 				 this->QGValue->TabIndex = 7;
 				 this->QGValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -835,9 +801,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->sniperTowerValue->AutoSize = true;
-				 this->sniperTowerValue->Location = System::Drawing::Point(115, 38);
+				 this->sniperTowerValue->Location = System::Drawing::Point(135, 34);
 				 this->sniperTowerValue->Name = L"sniperTowerValue";
-				 this->sniperTowerValue->Size = System::Drawing::Size(61, 38);
+				 this->sniperTowerValue->Size = System::Drawing::Size(72, 34);
 				 this->sniperTowerValue->TabIndex = 8;
 				 this->sniperTowerValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -847,9 +813,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->lanceflammeValue->AutoSize = true;
-				 this->lanceflammeValue->Location = System::Drawing::Point(115, 76);
+				 this->lanceflammeValue->Location = System::Drawing::Point(135, 68);
 				 this->lanceflammeValue->Name = L"lanceflammeValue";
-				 this->lanceflammeValue->Size = System::Drawing::Size(61, 38);
+				 this->lanceflammeValue->Size = System::Drawing::Size(72, 34);
 				 this->lanceflammeValue->TabIndex = 9;
 				 this->lanceflammeValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -859,9 +825,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->mitrailleuseValue->AutoSize = true;
-				 this->mitrailleuseValue->Location = System::Drawing::Point(115, 114);
+				 this->mitrailleuseValue->Location = System::Drawing::Point(135, 102);
 				 this->mitrailleuseValue->Name = L"mitrailleuseValue";
-				 this->mitrailleuseValue->Size = System::Drawing::Size(61, 38);
+				 this->mitrailleuseValue->Size = System::Drawing::Size(72, 34);
 				 this->mitrailleuseValue->TabIndex = 10;
 				 this->mitrailleuseValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -871,9 +837,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->repareBuildingValue->AutoSize = true;
-				 this->repareBuildingValue->Location = System::Drawing::Point(115, 152);
+				 this->repareBuildingValue->Location = System::Drawing::Point(135, 136);
 				 this->repareBuildingValue->Name = L"repareBuildingValue";
-				 this->repareBuildingValue->Size = System::Drawing::Size(61, 38);
+				 this->repareBuildingValue->Size = System::Drawing::Size(72, 34);
 				 this->repareBuildingValue->TabIndex = 11;
 				 this->repareBuildingValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -883,9 +849,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->shieldBuildingValue->AutoSize = true;
-				 this->shieldBuildingValue->Location = System::Drawing::Point(115, 190);
+				 this->shieldBuildingValue->Location = System::Drawing::Point(135, 170);
 				 this->shieldBuildingValue->Name = L"shieldBuildingValue";
-				 this->shieldBuildingValue->Size = System::Drawing::Size(61, 38);
+				 this->shieldBuildingValue->Size = System::Drawing::Size(72, 34);
 				 this->shieldBuildingValue->TabIndex = 12;
 				 this->shieldBuildingValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -895,11 +861,31 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->energyBuildingValue->AutoSize = true;
-				 this->energyBuildingValue->Location = System::Drawing::Point(115, 228);
+				 this->energyBuildingValue->Location = System::Drawing::Point(135, 204);
 				 this->energyBuildingValue->Name = L"energyBuildingValue";
-				 this->energyBuildingValue->Size = System::Drawing::Size(61, 40);
+				 this->energyBuildingValue->Size = System::Drawing::Size(72, 39);
 				 this->energyBuildingValue->TabIndex = 13;
 				 this->energyBuildingValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+				 // 
+				 // buildingsPage
+				 // 
+				 this->buildingsPage->Controls->Add(this->panelBuildings);
+				 this->buildingsPage->Location = System::Drawing::Point(4, 22);
+				 this->buildingsPage->Name = L"buildingsPage";
+				 this->buildingsPage->Padding = System::Windows::Forms::Padding(3);
+				 this->buildingsPage->Size = System::Drawing::Size(462, 305);
+				 this->buildingsPage->TabIndex = 1;
+				 this->buildingsPage->Text = L"Buildings";
+				 this->buildingsPage->UseVisualStyleBackColor = true;
+				 // 
+				 // unitsPage
+				 // 
+				 this->unitsPage->Location = System::Drawing::Point(4, 22);
+				 this->unitsPage->Name = L"unitsPage";
+				 this->unitsPage->Size = System::Drawing::Size(462, 305);
+				 this->unitsPage->TabIndex = 2;
+				 this->unitsPage->Text = L"Units";
+				 this->unitsPage->UseVisualStyleBackColor = true;
 				 // 
 				 // saveLoad
 				 // 
@@ -916,7 +902,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->saveLoad->RowCount = 1;
 				 this->saveLoad->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
 				 this->saveLoad->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 43)));
-				 this->saveLoad->Size = System::Drawing::Size(397, 43);
+				 this->saveLoad->Size = System::Drawing::Size(470, 43);
 				 this->saveLoad->TabIndex = 1;
 				 // 
 				 // load
@@ -925,9 +911,9 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->load->AutoSize = true;
-				 this->load->Location = System::Drawing::Point(201, 3);
+				 this->load->Location = System::Drawing::Point(238, 3);
 				 this->load->Name = L"load";
-				 this->load->Size = System::Drawing::Size(193, 37);
+				 this->load->Size = System::Drawing::Size(229, 37);
 				 this->load->TabIndex = 2;
 				 this->load->Text = L"Load";
 				 this->load->UseVisualStyleBackColor = true;
@@ -941,7 +927,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->save->AutoSize = true;
 				 this->save->Location = System::Drawing::Point(3, 3);
 				 this->save->Name = L"save";
-				 this->save->Size = System::Drawing::Size(192, 37);
+				 this->save->Size = System::Drawing::Size(229, 37);
 				 this->save->TabIndex = 1;
 				 this->save->Text = L"Save";
 				 this->save->UseVisualStyleBackColor = true;
@@ -958,7 +944,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->menu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->buildingsMenuItem, this->unitsMenu });
 				 this->menu->Location = System::Drawing::Point(0, 0);
 				 this->menu->Name = L"menu";
-				 this->menu->Size = System::Drawing::Size(873, 24);
+				 this->menu->Size = System::Drawing::Size(952, 24);
 				 this->menu->TabIndex = 1;
 				 this->menu->Text = L"menuStrip2";
 				 // 
@@ -1089,11 +1075,32 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->medecinZoneMenuItem->Text = L"Medecin zone";
 				 this->medecinZoneMenuItem->Click += gcnew System::EventHandler(this, &UIForm::medecinZoneClick);
 				 // 
+				 // panelBuildings
+				 // 
+				 this->panelBuildings->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->panelBuildings->ColumnCount = 4;
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 25)));
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 25)));
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 25)));
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 25)));
+				 this->panelBuildings->Location = System::Drawing::Point(3, 3);
+				 this->panelBuildings->Name = L"panelBuildings";
+				 this->panelBuildings->RowCount = 1;
+				 this->panelBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+				 this->panelBuildings->Size = System::Drawing::Size(456, 299);
+				 this->panelBuildings->TabIndex = 0;
+				 // 
 				 // UIForm
 				 // 
 				 this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
 				 this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-				 this->ClientSize = System::Drawing::Size(873, 421);
+				 this->ClientSize = System::Drawing::Size(952, 421);
 				 this->Controls->Add(this->splitContainer1);
 				 this->Controls->Add(this->menu);
 				 this->Name = L"UIForm";
@@ -1107,6 +1114,8 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->splitContainer2->Panel2->ResumeLayout(false);
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer2))->EndInit();
 				 this->splitContainer2->ResumeLayout(false);
+				 this->tabController->ResumeLayout(false);
+				 this->generalPage->ResumeLayout(false);
 				 this->visualisationValuesGame->ResumeLayout(false);
 				 this->money->ResumeLayout(false);
 				 this->money->PerformLayout();
@@ -1117,6 +1126,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->buildingsBox->ResumeLayout(false);
 				 this->layoutBuildings->ResumeLayout(false);
 				 this->layoutBuildings->PerformLayout();
+				 this->buildingsPage->ResumeLayout(false);
 				 this->saveLoad->ResumeLayout(false);
 				 this->saveLoad->PerformLayout();
 				 this->menu->ResumeLayout(false);
@@ -1232,6 +1242,52 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 	private: System::Void medecinZoneClick(System::Object^  sender, System::EventArgs^  e) 
 	{
 		OpenGL->processUnitsMenu(7);
+	}
+
+	private: System::Void tabSelected(System::Object^ sender, System::Windows::Forms::TabControlEventArgs^ e)
+	{
+		if(tabController->SelectedIndex == 1)
+			fillData();
+	}
+
+	private: System::Void fillData()
+	{
+		std::vector<Building*> buildings = OpenGL->GetBuildings();
+		std::vector<Unit*> units = OpenGL->GetUnits();
+
+		//Clear all the controls
+		panelBuildings->Controls->Clear();
+		panelBuildings->RowStyles->Clear();
+		//Set the new count
+		panelBuildings->RowCount = buildings.size();
+		for (int i = 0; i < buildings.size(); i++)
+		{
+			panelBuildings->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Percent, 100/buildings.size()));
+
+			System::Windows::Forms::Label^ nameBuilding = (gcnew System::Windows::Forms::Label());
+			nameBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			nameBuilding->AutoSize = true;
+			nameBuilding->TabIndex = 0;
+			String^ str = gcnew String(buildings[i]->getName().c_str());
+			nameBuilding->Text = str;
+			nameBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+
+			System::Windows::Forms::Label^ lifeBuilding = (gcnew System::Windows::Forms::Label());
+			lifeBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			lifeBuilding->AutoSize = true;
+			lifeBuilding->TabIndex = 1;
+			str = gcnew String(buildings[i]->getLife().ToString());
+			lifeBuilding->Text = str;
+			lifeBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+			panelBuildings->Controls->Add(nameBuilding, 0, i);
+			panelBuildings->Controls->Add(lifeBuilding, 1, i);
+		}
 	}
 };
 }

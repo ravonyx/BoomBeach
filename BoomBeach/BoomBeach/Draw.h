@@ -21,5 +21,8 @@ int get_building_instances(int nbBuilding);
 int get_unit_max(int nbUnits);
 int get_unit_instances(int nbUnits);
 
+std::vector<Building*> get_buildings();
+std::vector<Unit*> get_units();
+
 void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
 void mouseMotion(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);

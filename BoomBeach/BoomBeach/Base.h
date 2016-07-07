@@ -23,6 +23,8 @@ public:
 	Building* getBuilding(int id);
 	int getIndexOfBuilding(int id);
 	std::vector<Building*> getBuildingsPossibilities();
+	std::vector<Building*> getCurrentBuildings();
+	
 	BuildingFactory* getBuildingFactory();
 
 	void saveBase();

@@ -69,6 +69,12 @@ std::vector<Unit*> Army::getUnitsPossibilities()
 {
 	return _unitFactory->getUnitModels();
 }
+
+std::vector<Unit*> Army::getCurrentUnits()
+{
+	return _units;
+}
+
 UnitFactory* Army::getUnitFactory()
 {
 	return _unitFactory;
