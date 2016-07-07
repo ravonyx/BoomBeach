@@ -7,110 +7,109 @@
 
 Army::Army()
 {
-	unitFactory = new UnitFactory();
+	_unitFactory = new UnitFactory();
 }
 
-void Army::AddUnit(Unit &unit)
+bool Army::addUnit(const char* name)
 {
-	_unitArray.push_back(unit);
+	int cost = 0;
+	std::cout << std::endl;
+	if (_unitFactory == NULL)
+		std::cout << "Unit factory not initialised" << std::endl;
+	else
+	{
+		Unit* unit = _unitFactory->create(name);
+		if (unit != nullptr && unit->getCost() <= _money)
+		{
+			cost = unit->getCost();
+			_unitFactory->addInstances(name);
+			//unit->setId(_currentId);
+			//_currentId++;
+			_units.push_back(unit);
+			_money -= cost;
+			std::cout << "Suceed to create unit" << std::endl;
+			return true;
+		}
+		else if (unit != nullptr && unit->getCost() >_money)
+			std::cout << "Not enough money" << std::endl;
+	}
+	std::cout << "Fail to create unit" << std::endl;
+	return false;
 }
 
 void Army::DeleteUnit(Unit & unit)
 {
 	int id = 0;
-	for (size_t i = 0; i < _unitArray.size(); i++)
+	for (size_t i = 0; i < _units.size(); i++)
 	{
-		if (_unitArray[i].getType() == unit.getType() && _unitArray[i].getLevel() && unit.getLevel()) {
+		if (_units[i]->getType() == unit.getType() && _units[i]->getLevel() && unit.getLevel()) {
 			id = i;
 			break;
 		}
 	}
-	_unitArray.erase(_unitArray.begin() + id);
+	_units.erase(_units.begin() + id);
 }
 
-void Army::DeleteUnit(unitType type, int level)
+void Army::DeleteUnit(int type, int level)
 {
 	int unitIndex = -1;
-	for (size_t i = 0; i < _unitArray.size(); i++)
+	for (size_t i = 0; i < _units.size(); i++)
 	{
-		if (_unitArray[i].getType() == type && _unitArray[i].getLevel() == level) {
+		if (_units[i]->getType() == type && _units[i]->getLevel() == level) {
 			unitIndex = i;
 			break;
 		}
 	}
 	if (unitIndex != -1) {
-		_unitArray.erase(_unitArray.begin() + unitIndex);
+		_units.erase(_units.begin() + unitIndex);
 	}
 }
 
-int Army::NumberOfInstance(unitType type)
+std::vector<Unit*> Army::getUnitsPossibilities()
 {
-	int result = 0;
-	for (size_t i = 0; i < _unitArray.size(); i++)
-	{
-		if (_unitArray[i].getType() == type) {
-			result++;
-		}
-	}
-	return result;
+	return _unitFactory->getUnitModels();
+}
+UnitFactory* Army::getUnitFactory()
+{
+	return _unitFactory;
 }
 
 void Army::SaveArmy()
 {
-	std::cout << "Army step" << std::endl;
-	std::ofstream fichier;
-
-	fichier.open("saveArmy.txt", std::ios::out | std::ios::trunc);  //déclaration du flux et ouverture du fichier
-
-	//fichier.fail() lecture
-	if (fichier.bad()) //permet de tester si le fichier s'est ouvert sans probleme 
-		std::cout << "Save faild !" << std::endl;
-
-	if (fichier)  // si l'ouverture a réussi
+	std::cout << "Saving army" << std::endl;
+	std::ofstream myfile;
+	myfile.open("saveArmy.txt", std::ios::out | std::ios::trunc);
+	if (myfile.is_open())
 	{
-		std::cout << "Save in progress" << std::endl;
-		// instructions
-		fichier.seekp(0, std::ios::end);
-		fichier << getMoney() << std::endl;
-		fichier << _unitArray.size() << std::endl;
-		fichier << *this;
+		myfile << _money;
+		myfile << std::endl;
 
-		fichier.close();  // on ferme le fichier
-		std::cout << "Save complete !" << std::endl;
+		myfile << "NbUnits: " << _units.size();
+		myfile << std::endl;
+		for (unsigned int i = 0; i < _units.size(); i++)
+		{
+			myfile << (*_units[i]);
+		}
 	}
-	else  // sinon
-		std::cerr << "Save faild !" << std::endl;
+	myfile.close();
 }
 
 void Army::LoadArmy()
 {
-	std::cout << "Army step" << std::endl;
-	std::ifstream fichier("saveArmy.txt", std::ios::in);
-
-	if (!fichier.fail())
+	_units.clear();
+	int nbUnits = 0;
+	std::ifstream myfile("saveArmy.txt", std::ios::in);
+	if (myfile.is_open())
 	{
-		_unitArray.clear();
-		std::cout << "Loading save in progress" << std::endl;
-
-		std::string ligne{}; // Une variable pour stocker les lignes lues
-		int money{};
-		int nbUnits{};
-
-		fichier >> money;
-		this->setMoney(money);
-		fichier >> nbUnits;
-
-		while (getline(fichier, ligne)) // Tant qu'on n'est pas à la fin, on lit
+		myfile >> _money;
+		std::string junk;
+		myfile >> junk;
+		myfile >> nbUnits;
+		for (int i = 0; i < nbUnits; i++)
 		{
-			for (int i = 0; i < nbUnits; i++)
-			{
-				AddUnit(*unitFactory->ReadNextUnit(fichier));
-			}
+			_units.push_back(_unitFactory->readNextUnit(myfile));
+			//_currentId++;
 		}
-
-		fichier.close();
-		std::cout << "Load complete !" << std::endl;
 	}
-	else
-		std::cerr << "Save faild !" << std::endl;
+	myfile.close();
 }

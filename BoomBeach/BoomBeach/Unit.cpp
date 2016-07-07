@@ -1,77 +1,59 @@
 #include "Unit.h"
 #include <iostream>
 
-Unit::Unit(unitType type, int level)
+Unit::Unit()
 {
-	switch (type) {
-	case princess:
-		this->type = type;
-		name = "princess";
-		this->level = level;
-		maxInstances = 2;
-		attackUpdateRate = 1.2;
-		firerateUpdateRate = 1.1;
-		rangeUpdateRate = 1.2;
-		healthUpdateRate = 1.3;
-		costUpdateRate = 1.5;
-		cost = 2000 + ( 2000 * level * costUpdateRate);
-		attack = 10 + (10 * level * attackUpdateRate);
-		firerate = 100 + (100 * level * firerateUpdateRate);
-		range = 20 + (20 * level * rangeUpdateRate);
-		health = 300 + (300 * level * healthUpdateRate);
-		break;
-	case mushroom:
-		this->type = type;
-		name = "mushroom";
-		this->level = level;
-		maxInstances = 5;
-		attackUpdateRate = 1.1;
-		firerateUpdateRate = 1.1;
-		rangeUpdateRate = 1.1;
-		healthUpdateRate = 1.3;
-		costUpdateRate = 1.1;
-		cost = 500 + (500 * level * costUpdateRate);
-		attack = 2 + (2 * level * attackUpdateRate);
-		firerate = 25 + (25 * level * firerateUpdateRate);
-		range = 5 + (5 * level * rangeUpdateRate);
-		health = 75 + (75 * level * healthUpdateRate);
-		break;
-	case badguy:
-		this->type = type;
-		name = "badguy";
-		this->level = level;
-		maxInstances = 5;
-		attackUpdateRate = 1.1;
-		firerateUpdateRate = 1.1;
-		rangeUpdateRate = 1.1;
-		healthUpdateRate = 1.3;
-		costUpdateRate = 1.1;
-		cost = 500 + (500 * level * costUpdateRate);
-		attack = 2 + (2 * level * attackUpdateRate);
-		firerate = 25 + (25 * level * firerateUpdateRate);
-		range = 5 + (5 * level * rangeUpdateRate);
-		health = 75 + (75 * level * healthUpdateRate);
-		break;
-	case goodguy:
-		this->type = type;
-		name = "goodguy";
-		this->level = level;
-		maxInstances = 5;
-		attackUpdateRate = 1.1;
-		firerateUpdateRate = 1.1;
-		rangeUpdateRate = 1.1;
-		healthUpdateRate = 1.3;
-		costUpdateRate = 1.1;
-		cost = 500 + (500 * level * costUpdateRate);
-		attack = 2 + (2 * level * attackUpdateRate);
-		firerate = 25 + (25 * level * firerateUpdateRate);
-		range = 5 + (5 * level * rangeUpdateRate);
-		health = 75 + (75 * level * healthUpdateRate);
-		break;
-	default:
-		break;
-	}
-	std::cout << "Creation of " << this->name << " level " << this->level << " for " << this->cost << " gold" << std::endl << std::endl;
+	type = 0;
+	name = "Default";
+	level = 0;
+	maxInstances = 2;
+	attackUpdateRate = 1.2;
+	firerateUpdateRate = 1.1;
+	rangeUpdateRate = 1.1;
+	healthUpdateRate = 1.1;
+	costUpdateRate = 1.1;
+	cost = 2000 + (2000 * level * costUpdateRate);
+	attack = 10 + (10 * level * attackUpdateRate);
+	firerate = 100 + (100 * level * firerateUpdateRate);
+	range = 20 + (20 * level * rangeUpdateRate);
+	health = 300 + (300 * level * healthUpdateRate);
+}
+
+Unit::Unit(int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances,
+	float pattackupdaterate, float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth)
+{
+	type = ptype;
+	name = pname;
+	level = 0;
+	maxInstances = pmaxInstances;
+	attackUpdateRate = pattackupdaterate;
+	firerateUpdateRate = pfireupdaterate;
+	rangeUpdateRate = prangeupdaterate;
+	healthUpdateRate = phealthUpdateRate;
+	costUpdateRate = pcostUpdateRate;
+	cost = pcost;
+	attack = pattack;
+	firerate = pfirerate;
+	range = prange;
+	health = phealth;
+}
+
+Unit::Unit(const Unit& model)
+{
+	type = model.type;
+	name = model.name;
+	level = model.level;
+	maxInstances = model.maxInstances;
+	attackUpdateRate = model.attackUpdateRate;
+	firerateUpdateRate = model.firerateUpdateRate;
+	rangeUpdateRate = model.rangeUpdateRate;
+	healthUpdateRate = model.healthUpdateRate;
+	costUpdateRate = model.costUpdateRate;
+	cost = model.cost;
+	attack = model.attack;
+	firerate = model.firerate;
+	range = model.range;
+	health = model.health;
 }
 
 int Unit::nextUpdateCost()
@@ -89,9 +71,86 @@ int Unit::levelUp()
 	health *= healthUpdateRate;
 	return cost / costUpdateRate;
 }
-/*std::ostream& operator<<(std::ostream& os, const Unit &building)
-{
-	os << "Name:" << building.name << "Niveau:" << building.level << std::endl;
-	return os;
-}*/
 
+void Unit::setAttributes(int baseLife, int baseCost, int baseAttack, int baseFirerate, int baseRange, int plevel)
+{
+	health = baseLife + baseLife * (plevel * healthUpdateRate);
+	cost = baseCost + baseCost * (plevel * costUpdateRate);
+	attack = baseAttack + baseAttack * (plevel * attackUpdateRate);
+	firerate = baseFirerate + baseFirerate * (plevel * firerateUpdateRate);
+	range = baseRange + baseRange * (plevel * rangeUpdateRate);
+}
+
+std::ofstream& operator<< (std::ofstream& os, const Unit &unit)
+{
+	os << unit.type << std::endl;
+	os << unit.name << std::endl;
+	os << unit.level << std::endl;
+	return os;
+}
+std::ostream& operator<< (std::ostream& os, const Unit &unit)
+{
+	os << std::endl;
+	os << " Name: " << unit.name << "Type: " << unit.type << "Level: " << unit.level << " Life: " << unit.health << " Cost: " << unit.cost;
+	return os;
+}
+
+
+std::string Unit::getName() const
+{
+	return name;
+}
+int Unit::getType() const
+{
+	return type;
+}
+int Unit::getLevel() const
+{
+	return level;
+}
+int Unit::getLife() const
+{
+	return health;
+}
+int Unit::getCost() const
+{
+	return cost;
+}
+int Unit::getAttack() const
+{
+	return attack;
+}
+int Unit::getFirerate() const
+{
+	return firerate;
+}
+int Unit::getRange() const
+{
+	return range;
+}
+
+float Unit::getHealthUpdateRate() const
+{
+	return healthUpdateRate;
+}
+float Unit::getCostUpdateRate() const
+{
+	return costUpdateRate;
+}
+float Unit::getAttackUpdateRate() const
+{
+	return healthUpdateRate;
+}
+float Unit::getFireUpdateRate() const
+{
+	return costUpdateRate;
+}
+float Unit::getRangeUpdateRate() const
+{
+	return healthUpdateRate;
+}
+
+int Unit::getMaxInstances() const
+{
+	return maxInstances;
+}

@@ -22,7 +22,7 @@ public:
 	bool destroyBuilding(int id);
 	Building* getBuilding(int id);
 	int getIndexOfBuilding(int id);
-	std::vector<Building*> getBuildingsPossibilies();
+	std::vector<Building*> getBuildingsPossibilities();
 	BuildingFactory* getBuildingFactory();
 
 	void saveBase();
@@ -30,6 +30,7 @@ public:
 
 	Field* getField() const;
 	int getMoney() const;
+
 private:
 	BuildingFactory *_buildingFactory;
 	std::vector <Building*> _buildings;

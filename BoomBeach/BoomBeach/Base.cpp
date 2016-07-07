@@ -137,7 +137,7 @@ void Base::printBuildings()
 
 void Base::saveBase()
 {
-	std::cout << "Saving" << std::endl;
+	std::cout << "Saving base" << std::endl;
 	std::ofstream myfile;
 	myfile.open("base.txt", std::ofstream::out | std::ofstream::trunc);
 	if (myfile.is_open())
@@ -207,7 +207,7 @@ int Base::getMoney() const
 	return _money;
 }
 
-std::vector<Building*> Base::getBuildingsPossibilies()
+std::vector<Building*> Base::getBuildingsPossibilities()
 {
 	return _buildingFactory->getBuidingModels();
 }

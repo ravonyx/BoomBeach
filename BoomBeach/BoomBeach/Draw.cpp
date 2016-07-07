@@ -3,8 +3,9 @@
 #include "glut.h"
 #include "Tools.h"
 
-GLuint textureImage[6];
+GLuint textureImage[7];
 std::vector <Building*> _buildingModels;
+std::vector <Unit*> _unitModels;
 Base *base;
 Army *army;
 Field *field;
@@ -95,8 +96,10 @@ void Initialize()
 	textureImage[3] = createTexture("tile-tower.png");
 	textureImage[4] = createTexture("tile-house.png");
 	textureImage[5] = createTexture("tile-mortar.png");
+	textureImage[6] = createTexture("tile-heart.png");
 
-	_buildingModels = base->getBuildingsPossibilies();
+	_buildingModels = base->getBuildingsPossibilities();
+	_unitModels = army->getUnitsPossibilities();
 }
 
 
@@ -129,6 +132,8 @@ void DrawRender()
 				glBindTexture(GL_TEXTURE_2D, textureImage[4]);
 			else if (tile == 3)
 				glBindTexture(GL_TEXTURE_2D, textureImage[5]);
+			else if (tile == 6)
+				glBindTexture(GL_TEXTURE_2D, textureImage[6]);
 			else
 				glBindTexture(GL_TEXTURE_2D, 0);
 			
@@ -183,7 +188,7 @@ void add_building(int nbBuilding)
 
 void add_unit(int nbUnits)
 {
-	army->GetFactory().CreateUnit((unitType)nbUnits, army);
+	army->addUnit((_unitModels[nbUnits]->getName()).c_str());
 }
 
 int get_army_money()
@@ -206,9 +211,9 @@ int get_building_instances(int nbBuilding)
 }
 int get_unit_max(int nbUnits)
 {
-	return 0;
+	return _unitModels[nbUnits]->getMaxInstances();
 }
 int get_unit_instances(int nbUnits)
 {
-	return 0;
+	return army->getUnitFactory()->getInstances(_unitModels[nbUnits]->getName());
 }

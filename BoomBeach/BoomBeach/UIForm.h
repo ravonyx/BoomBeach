@@ -614,6 +614,7 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 				 this->fusilleurValue->Name = L"fusilleurValue";
 				 this->fusilleurValue->Size = System::Drawing::Size(59, 33);
 				 this->fusilleurValue->TabIndex = 10;
+				 this->fusilleurValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // sniperValue
 				 // 
@@ -1137,14 +1138,14 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 		this->armyMoney->Text = "Army Money : " + OpenGL->GetArmyMoney();
 		this->baseMoney->Text = "Base Money : " + OpenGL->GetBaseMoney();
 
-		// this->bruteValue->Text = (System::Windows::Forms::Label)OpenGL->GetUnitValues(0);
-		//this->kamikazeValue->Text = OpenGL->GetUnitValues(0);
-		//this->fusilleurValue->Text = OpenGL->GetUnitValues(0);
-		//this->sniperValue->Text = OpenGL->GetUnitValues(0);
-		//this->bazookaValue->Text = OpenGL->GetUnitValues(0);
-		//this->medecinContactValue->Text = OpenGL->GetUnitValues(0);
-		//this->medecinSeringueValue->Text = OpenGL->GetUnitValues(0);
-		//this->medecinZoneValue->Text = OpenGL->GetUnitValues(0);
+		this->bruteValue->Text = OpenGL->GetUnitInstances(0) + "/" + OpenGL->GetUnitMax(0);
+		this->kamikazeValue->Text = OpenGL->GetUnitInstances(1) + "/" + OpenGL->GetUnitMax(1);
+		this->fusilleurValue->Text = OpenGL->GetUnitInstances(2) + "/" + OpenGL->GetUnitMax(2);
+		this->sniperValue->Text = OpenGL->GetUnitInstances(3) + "/" + OpenGL->GetUnitMax(3);
+		this->bazookaValue->Text = OpenGL->GetUnitInstances(4) + "/" + OpenGL->GetUnitMax(4);
+		this->medecinContactValue->Text = OpenGL->GetUnitInstances(5) + "/" + OpenGL->GetUnitMax(5);
+		this->medecinSeringueValue->Text = OpenGL->GetUnitInstances(6) + "/" + OpenGL->GetUnitMax(6);
+		this->medecinZoneValue->Text = OpenGL->GetUnitInstances(7) + "/" + OpenGL->GetUnitMax(7);
 
 
 		this->QGValue->Text = OpenGL->GetBuildingInstances(0) +  "/" + OpenGL->GetBuildingMax(0);
@@ -1222,15 +1223,15 @@ private: System::Windows::Forms::Label^  energyBuildingValue;
 	}
 	private: System::Void medecinContactClick(System::Object^  sender, System::EventArgs^  e) 
 	{
-		OpenGL->processUnitsMenu(0);
+		OpenGL->processUnitsMenu(5);
 	}
 	private: System::Void medecinSeringueClick(System::Object^  sender, System::EventArgs^  e) 
 	{
-		OpenGL->processUnitsMenu(5);
+		OpenGL->processUnitsMenu(6);
 	}
 	private: System::Void medecinZoneClick(System::Object^  sender, System::EventArgs^  e) 
 	{
-		OpenGL->processUnitsMenu(6);
+		OpenGL->processUnitsMenu(7);
 	}
 };
 }

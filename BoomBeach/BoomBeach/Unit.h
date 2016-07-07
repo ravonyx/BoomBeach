@@ -2,46 +2,54 @@
 #include <string>
 #include <fstream>
 
-enum unitType {princess, mushroom, badguy, goodguy};
-
 class Unit
 {
-private:
-	Unit(unitType type, int level = 0);
-	unitType type;
-	std::string name;
-	int maxInstances;
-	int cost;
-	int attack;
-	int firerate;
-	int range;
-	int health;
-	int level = 0;
-	float attackUpdateRate;
-	float firerateUpdateRate;
-	float rangeUpdateRate;
-	float healthUpdateRate;
-	float costUpdateRate;
-public:
-	std::string getName() const { return name; };
-	unitType getType() const { return type; };
-	int getLevel() const { return level; };
+	private:
+		Unit();
+		Unit(const Unit& model);
+		Unit(int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances, float pattackupdaterate,
+			float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth);
 
-	friend class UnitFactory;
-	friend class Army;
-	int nextUpdateCost();
-	int levelUp();
+		int type;
+		std::string name;
 
-	friend std::ofstream& operator << (std::ofstream& os, const Unit& u)
-	{
-		os << u.getType() << " " << u.getLevel();
-		return os;
-	}
+		int maxInstances;
+		int cost;
+		int attack;
+		int firerate;
+		int range;
+		int health;
+		int level;
+
+		float attackUpdateRate;
+		float firerateUpdateRate;
+		float rangeUpdateRate;
+		float healthUpdateRate;
+		float costUpdateRate;
+
+	public:
+		friend class UnitFactory;
+		friend std::ofstream& operator<< (std::ofstream& os, const Unit &unit);
+		friend std::ostream& operator<< (std::ostream& os, const Unit &unit);
+
+		int nextUpdateCost();
+		int levelUp();
+		void setAttributes(int baseLife, int baseCost, int baseAttack, int baseFirerate, int baseRange, int plevel);
+
+		std::string getName() const;
+		int getType() const;
+		int getLevel() const;
+
+		int getLife() const;
+		int getCost() const;
+		int getAttack() const;
+		int getFirerate() const;
+		int getRange() const;
+
+		float getHealthUpdateRate() const;
+		float getCostUpdateRate() const;
+		float getAttackUpdateRate() const;
+		float getFireUpdateRate() const;
+		float getRangeUpdateRate() const;
+		int getMaxInstances() const;
 };
-
-inline std::ostream& operator << (std::ostream& os, const Unit& u)
-{
-	os << u.getName() << " level " << u.getLevel();
-	return os;
-}
-

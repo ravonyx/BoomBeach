@@ -60,7 +60,6 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 {
 	int id = 0, level = 0, x = 0, y = 0, type = 0;
 	std::string name;
-	std::string junk;
 
 	stream >> id;
 	stream >> name;
@@ -77,6 +76,7 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 		buildingModel->getCostUpdateRate(), buildingModel->getMaxInstances(), buildingModel->getWidth(), buildingModel->getHeight(), zone);
 
 	building->setHeathCost(buildingModel->getLife(), buildingModel->getCost(), level);
+	instances[type-1]++;
 	return building;
 }
 

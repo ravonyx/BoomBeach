@@ -8,16 +8,20 @@
 class UnitFactory
 {
 private:
-	bool nameInList(unitType name);
-	std::vector<std::pair<unitType, std::string>> unitTypes = { std::pair<unitType, std::string>(unitType::princess, "princess"), 
-		std::pair<unitType, std::string>(unitType::mushroom, "mushroom"), 
-		std::pair<unitType, std::string>(unitType::goodguy, "goodguy"), 
-		std::pair<unitType, std::string>(unitType::badguy, "badguy") };
+	std::vector <Unit*>unitModels;
+	bool nameInList(std::string name);
+	Unit* getUnitModel(std::string name);
+
+	int instances[8];
+
 public:
 	UnitFactory();
-	std::vector<std::string>UnitList();
-	friend std::ostream& operator<<(std::ostream& os, const Unit &unit);
-	Unit* CreateUnit(const unitType type, Army *army);
-	Unit* ReadNextUnit(std::istream &stream);
+	Unit* readNextUnit(std::istream &stream);
+	Unit* create(std::string name);
+
+	int getInstances(std::string name);
+	void addInstances(std::string name);
+
+	std::vector<Unit*> getUnitModels();
 };
 

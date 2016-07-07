@@ -76,13 +76,14 @@ int Building::levelUp()
 void Building::setHeathCost(int baseLife, int baseCost, int plevel)
 {
 	life = baseLife + baseLife * (plevel * healthUpdateRate);
-	cost = baseCost + baseLife * (plevel * costUpdateRate);
+	cost = baseCost + baseCost * (plevel * costUpdateRate);
 }
 
 std::ofstream& operator<< (std::ofstream& os, const Building &building)
 {
 	os << building.id << std::endl;
 	os << building.name << std::endl;
+	os << building.type << std::endl;
 	os << building.level << std::endl;
 	os << building.zone.getX() << std::endl;
 	os << building.zone.getY() << std::endl;
