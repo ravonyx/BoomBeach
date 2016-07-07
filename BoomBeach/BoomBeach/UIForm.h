@@ -16,6 +16,14 @@ namespace UIBoomBeach {
 
 	/// <summary>
 	/// </summary>
+	public ref class MyTableLayout : System::Windows::Forms::TableLayoutPanel
+	{
+		public: MyTableLayout()
+			{
+				this->DoubleBuffered = true;
+			}
+	};
+
 	public ref class UIForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -128,7 +136,13 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::TabPage^  generalPage;
 	private: System::Windows::Forms::TabPage^  buildingsPage;
 	private: System::Windows::Forms::TabPage^  unitsPage;
-private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
+private: MyTableLayout^  panelBuildings;
+private: System::Windows::Forms::Button^  button1;
+
+
+
+
+
 	private: System::Windows::Forms::Timer^  timer;
 
 #pragma region Windows Form Designer generated code
@@ -184,6 +198,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->shieldBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->energyBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->buildingsPage = (gcnew System::Windows::Forms::TabPage());
+				 this->panelBuildings = (gcnew MyTableLayout());
 				 this->unitsPage = (gcnew System::Windows::Forms::TabPage());
 				 this->saveLoad = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->load = (gcnew System::Windows::Forms::Button());
@@ -207,7 +222,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->medecinContactMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinSeringueMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinZoneMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->panelBuildings = (gcnew System::Windows::Forms::TableLayoutPanel());
+				 this->button1 = (gcnew System::Windows::Forms::Button());
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 				 this->splitContainer1->Panel1->SuspendLayout();
 				 this->splitContainer1->Panel2->SuspendLayout();
@@ -227,6 +242,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->buildingsBox->SuspendLayout();
 				 this->layoutBuildings->SuspendLayout();
 				 this->buildingsPage->SuspendLayout();
+				 this->panelBuildings->SuspendLayout();
 				 this->saveLoad->SuspendLayout();
 				 this->menu->SuspendLayout();
 				 this->SuspendLayout();
@@ -294,7 +310,6 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->tabController->SelectedIndex = 0;
 				 this->tabController->Size = System::Drawing::Size(470, 331);
 				 this->tabController->TabIndex = 0;
-				 //this->tabController->SelectedIndexChanged += gcnew System::EventHandler(this, &UIForm::tabSelected);
 				 this->tabController->Selected += gcnew System::Windows::Forms::TabControlEventHandler(this, &UIForm::tabSelected);
 				 // 
 				 // generalPage
@@ -878,6 +893,30 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->buildingsPage->Text = L"Buildings";
 				 this->buildingsPage->UseVisualStyleBackColor = true;
 				 // 
+				 // panelBuildings
+				 // 
+				 this->panelBuildings->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->panelBuildings->ColumnCount = 5;
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 25)));
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 15)));
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 20)));
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 20)));
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+					 20)));
+				 this->panelBuildings->Controls->Add(this->button1, 3, 0);
+				 this->panelBuildings->Location = System::Drawing::Point(3, 3);
+				 this->panelBuildings->Name = L"panelBuildings";
+				 this->panelBuildings->RowCount = 1;
+				 this->panelBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+				 this->panelBuildings->Size = System::Drawing::Size(456, 299);
+				 this->panelBuildings->TabIndex = 0;
+				 // 
 				 // unitsPage
 				 // 
 				 this->unitsPage->Location = System::Drawing::Point(4, 22);
@@ -1075,26 +1114,15 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->medecinZoneMenuItem->Text = L"Medecin zone";
 				 this->medecinZoneMenuItem->Click += gcnew System::EventHandler(this, &UIForm::medecinZoneClick);
 				 // 
-				 // panelBuildings
+				 // button1
 				 // 
-				 this->panelBuildings->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-					 | System::Windows::Forms::AnchorStyles::Left)
-					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->panelBuildings->ColumnCount = 4;
-				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 25)));
-				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 25)));
-				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 25)));
-				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 25)));
-				 this->panelBuildings->Location = System::Drawing::Point(3, 3);
-				 this->panelBuildings->Name = L"panelBuildings";
-				 this->panelBuildings->RowCount = 1;
-				 this->panelBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-				 this->panelBuildings->Size = System::Drawing::Size(456, 299);
-				 this->panelBuildings->TabIndex = 0;
+				 this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
+				 this->button1->Location = System::Drawing::Point(276, 138);
+				 this->button1->Name = L"button1";
+				 this->button1->Size = System::Drawing::Size(85, 23);
+				 this->button1->TabIndex = 0;
+				 this->button1->Text = L"button1";
+				 this->button1->UseVisualStyleBackColor = true;
 				 // 
 				 // UIForm
 				 // 
@@ -1127,6 +1155,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->layoutBuildings->ResumeLayout(false);
 				 this->layoutBuildings->PerformLayout();
 				 this->buildingsPage->ResumeLayout(false);
+				 this->panelBuildings->ResumeLayout(false);
 				 this->saveLoad->ResumeLayout(false);
 				 this->saveLoad->PerformLayout();
 				 this->menu->ResumeLayout(false);
@@ -1166,6 +1195,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 		this->shieldBuildingValue->Text = OpenGL->GetBuildingInstances(5) + "/" + OpenGL->GetBuildingMax(5);
 		this->energyBuildingValue->Text = OpenGL->GetBuildingInstances(6) + "/" + OpenGL->GetBuildingMax(6);
 
+		fillDataBuilding();
 		OpenGL->Render();
 		OpenGL->SwapOpenGLBuffers();
 	}
@@ -1246,11 +1276,9 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 
 	private: System::Void tabSelected(System::Object^ sender, System::Windows::Forms::TabControlEventArgs^ e)
 	{
-		if(tabController->SelectedIndex == 1)
-			fillData();
 	}
 
-	private: System::Void fillData()
+	private: System::Void fillDataBuilding()
 	{
 		std::vector<Building*> buildings = OpenGL->GetBuildings();
 		std::vector<Unit*> units = OpenGL->GetUnits();
@@ -1259,7 +1287,8 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 		panelBuildings->Controls->Clear();
 		panelBuildings->RowStyles->Clear();
 		//Set the new count
-		panelBuildings->RowCount = buildings.size();
+		panelBuildings->RowCount = buildings.size() + 1;
+
 		for (int i = 0; i < buildings.size(); i++)
 		{
 			panelBuildings->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Percent, 100/buildings.size()));
@@ -1274,19 +1303,48 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 			nameBuilding->Text = str;
 			nameBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 
+			System::Windows::Forms::Label^ levelBuilding = (gcnew System::Windows::Forms::Label());
+			levelBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			levelBuilding->AutoSize = true;
+			levelBuilding->TabIndex = 1;
+			str = gcnew String(buildings[i]->getLevel().ToString());
+			levelBuilding->Text = str;
+			levelBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 
 			System::Windows::Forms::Label^ lifeBuilding = (gcnew System::Windows::Forms::Label());
 			lifeBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			lifeBuilding->AutoSize = true;
-			lifeBuilding->TabIndex = 1;
+			lifeBuilding->TabIndex = 2;
 			str = gcnew String(buildings[i]->getLife().ToString());
 			lifeBuilding->Text = str;
 			lifeBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 
+			System::Windows::Forms::Button^ enhanceButton = (gcnew System::Windows::Forms::Button());
+			enhanceButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right);
+			enhanceButton->AutoSize = true;
+			enhanceButton->TabIndex = 3;
+			enhanceButton->Text = "Enhance";
+
+			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
+			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right);
+			deleteButton->AutoSize = true;
+			deleteButton->TabIndex = 4;
+			deleteButton->Text = "Delete";
+
+			
+
 			panelBuildings->Controls->Add(nameBuilding, 0, i);
-			panelBuildings->Controls->Add(lifeBuilding, 1, i);
+			panelBuildings->Controls->Add(levelBuilding, 1, i);
+			panelBuildings->Controls->Add(lifeBuilding, 2, i);
+			panelBuildings->Controls->Add(enhanceButton, 3, i);
+			panelBuildings->Controls->Add(deleteButton, 4, i);
+
+			
+
 		}
 	}
 };

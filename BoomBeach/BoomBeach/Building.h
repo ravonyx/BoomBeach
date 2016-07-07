@@ -43,6 +43,7 @@ class Building
 		int getType() const;
 
 		int getLife() const;
+		int getLevel() const;
 		int getCost() const;
 
 		float getHealthUpdateRate() const;

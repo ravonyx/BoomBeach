@@ -114,6 +114,10 @@ int Building::getLife() const
 {
 	return life;
 }
+int Building::getLevel() const
+{
+	return level;
+}
 int Building::getCost() const
 {
 	return cost;
