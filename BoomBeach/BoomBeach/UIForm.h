@@ -130,7 +130,7 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::TabPage^  buildingsPage;
 	private: System::Windows::Forms::TabPage^  unitsPage;
 private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
-private: System::Windows::Forms::Button^  button1;
+
 
 
 
@@ -192,9 +192,6 @@ private: System::Windows::Forms::Button^  button1;
 				 this->energyBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->buildingsPage = (gcnew System::Windows::Forms::TabPage());
 				 this->panelBuildings = (gcnew System::Windows::Forms::TableLayoutPanel());
-
-				
-
 				 this->unitsPage = (gcnew System::Windows::Forms::TabPage());
 				 this->saveLoad = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->load = (gcnew System::Windows::Forms::Button());
@@ -218,7 +215,6 @@ private: System::Windows::Forms::Button^  button1;
 				 this->medecinContactMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinSeringueMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinZoneMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				 this->button1 = (gcnew System::Windows::Forms::Button());
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 				 this->splitContainer1->Panel1->SuspendLayout();
 				 this->splitContainer1->Panel2->SuspendLayout();
@@ -238,7 +234,6 @@ private: System::Windows::Forms::Button^  button1;
 				 this->buildingsBox->SuspendLayout();
 				 this->layoutBuildings->SuspendLayout();
 				 this->buildingsPage->SuspendLayout();
-				 this->panelBuildings->SuspendLayout();
 				 this->saveLoad->SuspendLayout();
 				 this->menu->SuspendLayout();
 				 this->SuspendLayout();
@@ -894,6 +889,7 @@ private: System::Windows::Forms::Button^  button1;
 				 this->panelBuildings->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->panelBuildings->AutoScroll = true;
 				 this->panelBuildings->ColumnCount = 5;
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 25)));
@@ -905,7 +901,6 @@ private: System::Windows::Forms::Button^  button1;
 					 20)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 20)));
-				 this->panelBuildings->Controls->Add(this->button1, 3, 0);
 				 this->panelBuildings->Location = System::Drawing::Point(3, 3);
 				 this->panelBuildings->Name = L"panelBuildings";
 				 this->panelBuildings->RowCount = 1;
@@ -1110,16 +1105,6 @@ private: System::Windows::Forms::Button^  button1;
 				 this->medecinZoneMenuItem->Text = L"Medecin zone";
 				 this->medecinZoneMenuItem->Click += gcnew System::EventHandler(this, &UIForm::medecinZoneClick);
 				 // 
-				 // button1
-				 // 
-				 this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
-				 this->button1->Location = System::Drawing::Point(276, 138);
-				 this->button1->Name = L"button1";
-				 this->button1->Size = System::Drawing::Size(85, 23);
-				 this->button1->TabIndex = 0;
-				 this->button1->Text = L"button1";
-				 this->button1->UseVisualStyleBackColor = true;
-				 // 
 				 // UIForm
 				 // 
 				 this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
@@ -1151,7 +1136,6 @@ private: System::Windows::Forms::Button^  button1;
 				 this->layoutBuildings->ResumeLayout(false);
 				 this->layoutBuildings->PerformLayout();
 				 this->buildingsPage->ResumeLayout(false);
-				 this->panelBuildings->ResumeLayout(false);
 				 this->saveLoad->ResumeLayout(false);
 				 this->saveLoad->PerformLayout();
 				 this->menu->ResumeLayout(false);
@@ -1191,7 +1175,6 @@ private: System::Windows::Forms::Button^  button1;
 		this->shieldBuildingValue->Text = OpenGL->GetBuildingInstances(5) + "/" + OpenGL->GetBuildingMax(5);
 		this->energyBuildingValue->Text = OpenGL->GetBuildingInstances(6) + "/" + OpenGL->GetBuildingMax(6);
 
-		fillDataBuilding();
 		OpenGL->Render();
 		OpenGL->SwapOpenGLBuffers();
 	}
@@ -1270,8 +1253,20 @@ private: System::Windows::Forms::Button^  button1;
 		OpenGL->processUnitsMenu(7);
 	}
 
+	private: System::Void enhanceBuilding(System::Object^  sender, System::EventArgs^  e)
+	{
+		MessageBox::Show(sender->ToString());
+	}
+
+	private: System::Void deleteBuilding(System::Object^  sender, System::EventArgs^  e)
+	{
+		MessageBox::Show(sender->ToString());
+	}
+
+
 	private: System::Void tabSelected(System::Object^ sender, System::Windows::Forms::TabControlEventArgs^ e)
 	{
+		fillDataBuilding();
 	}
 
 	private: System::Void fillDataBuilding()
@@ -1327,26 +1322,22 @@ private: System::Windows::Forms::Button^  button1;
 			enhanceButton->AutoSize = true;
 			enhanceButton->TabIndex = 3;
 			enhanceButton->Text = "Enhance";
+			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceBuilding);
 
 			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
 			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right);
 			deleteButton->AutoSize = true;
 			deleteButton->TabIndex = 4;
 			deleteButton->Text = "Delete";
-
-			
+			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteBuilding);
 
 			panelBuildings->Controls->Add(nameBuilding, 0, i);
 			panelBuildings->Controls->Add(levelBuilding, 1, i);
 			panelBuildings->Controls->Add(lifeBuilding, 2, i);
 			panelBuildings->Controls->Add(enhanceButton, 3, i);
 			panelBuildings->Controls->Add(deleteButton, 4, i);
-
-			
-
 		}
 	}
 };
-
 }
 
