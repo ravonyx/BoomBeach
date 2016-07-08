@@ -890,6 +890,8 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->panelBuildings->AutoScroll = true;
+				 this->panelBuildings->HorizontalScroll->Enabled = false;
+				 this->panelBuildings->HorizontalScroll->Visible = false;
 				 this->panelBuildings->ColumnCount = 5;
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 25)));
@@ -1285,7 +1287,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 
 		for (int i = 0; i < buildings.size(); i++)
 		{
-			panelBuildings->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Percent, 100/buildings.size()));
+			panelBuildings->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Absolute, 30));
 
 			System::Windows::Forms::Label^ nameBuilding = (gcnew System::Windows::Forms::Label());
 			nameBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
@@ -1318,14 +1320,18 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 			lifeBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 
 			System::Windows::Forms::Button^ enhanceButton = (gcnew System::Windows::Forms::Button());
-			enhanceButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right);
+			enhanceButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			enhanceButton->AutoSize = true;
 			enhanceButton->TabIndex = 3;
 			enhanceButton->Text = "Enhance";
 			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceBuilding);
 
 			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
-			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right);
+			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			deleteButton->AutoSize = true;
 			deleteButton->TabIndex = 4;
 			deleteButton->Text = "Delete";
