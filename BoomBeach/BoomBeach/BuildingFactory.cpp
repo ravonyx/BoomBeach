@@ -108,6 +108,14 @@ void BuildingFactory::addInstances(std::string name)
 			instances[i]++;
 	}
 }
+void BuildingFactory::removeInstances(std::string name)
+{
+	for (unsigned int i = 0; i < buildingModels.size(); i++)
+	{
+		if (buildingModels[i]->getName() == name)
+			instances[i]--;
+	}
+}
 
 std::vector<Building*> BuildingFactory::getBuidingModels()
 {
