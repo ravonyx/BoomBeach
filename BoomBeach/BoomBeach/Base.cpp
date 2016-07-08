@@ -53,9 +53,16 @@ bool Base::destroyBuilding(int id)
 		it = find(_buildings.begin(), _buildings.end(), building);
 		_buildings.erase(it);
 		_field->Erase(building->getZone());
+
+		_currentId = 1;
+		for (int i = 0; i < _buildings.size(); i++)
+		{
+			_buildings[i]->setId(_currentId);
+			_currentId++;
+		}
+
 		return true;
 	}
-
 	std::cout << "L'id n'existe pas" << std::endl;
 	return false;
 }
