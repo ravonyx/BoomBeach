@@ -77,7 +77,7 @@ void Initialize()
 	base = new Base();
 	army = new Army();
 
-	std::cout << *(base->getField());
+	//std::cout << *(base->getField());
 
 	field = base->getField();
 	map = field->getData();
@@ -157,9 +157,6 @@ void DrawRender()
 
 		currentSquare.width *= _buildingModels[currentBuilding]->getWidth();
 		currentSquare.height *= _buildingModels[currentBuilding]->getHeight();
-
-		std::cout << _buildingModels[currentBuilding]->getWidth() << " " << _buildingModels[currentBuilding]->getHeight() << std::endl;
-		std::cout << currentSquare.width << " " << currentSquare.height << std::endl;
 	}
 
 	else
@@ -188,13 +185,13 @@ void SetDimensionMap(GLsizei width, GLsizei height)
 void save_callback()
 {
 	base->saveBase();
-	army->SaveArmy();
+	army->saveArmy();
 }
 
 void load_callback()
 {
 	base->loadBase();
-	army->LoadArmy();
+	army->loadArmy();
 }
 
 void add_building(int nbBuilding)
@@ -240,7 +237,7 @@ std::vector<Building*> get_buildings()
 }
 std::vector<Unit*> get_units()
 {
-	return army->GetUnits();
+	return army->getCurrentUnits();
 }
 
 void enhance_building(int index)
@@ -253,9 +250,9 @@ void delete_building(int index)
 }
 void enhance_unit(int index)
 {
-	//army->enhanceUnit(index);
+	army->enhanceUnit(index);
 }
 void delete_unit(int index)
 {
-	//army->deleteUnit(index);
+	army->deleteUnit(index);
 }

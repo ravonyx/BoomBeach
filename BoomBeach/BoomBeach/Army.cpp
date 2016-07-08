@@ -23,8 +23,8 @@ bool Army::addUnit(const char* name)
 		{
 			cost = unit->getCost();
 			_unitFactory->addInstances(name);
-			//unit->setId(_currentId);
-			//_currentId++;
+			unit->setId(_currentId);
+			_currentId++;
 			_units.push_back(unit);
 			_money -= cost;
 			std::cout << "Suceed to create unit" << std::endl;
@@ -37,7 +37,49 @@ bool Army::addUnit(const char* name)
 	return false;
 }
 
-void Army::DeleteUnit(Unit & unit)
+void Army::enhanceUnit(int id)
+{
+	std::cout << std::endl;
+	int index = getIndexOfUnit(id);
+	if (index != -1)
+	{
+		if (_money >= _units[index]->getCost())
+		{
+			int cost = _units[index]->levelUp();
+			std::cout << "Cost you " << cost + 1 << " gold" << std::endl;
+			_money -= _units[index]->getCost();
+		}
+		else
+			std::cout << "Not enough money to upgrade" << std::endl;
+	}
+	else
+		std::cout << "Wrong ID" << std::endl;
+}
+
+bool Army::deleteUnit(int id)
+{
+	Unit* unit = getUnit(id);
+	if (unit != nullptr)
+	{
+		std::cout << "Erase unit " << unit->getId() << std::endl;
+		std::vector<Unit*>::iterator it;
+		it = find(_units.begin(), _units.end(), unit);
+		_units.erase(it);
+		_unitFactory->removeInstances(unit->getName());
+		_currentId = 1;
+		for (int i = 0; i < _units.size(); i++)
+		{
+			_units[i]->setId(_currentId);
+			_currentId++;
+		}
+
+		return true;
+	}
+	std::cout << "L'id n'existe pas" << std::endl;
+	return false;
+}
+
+/*void Army::DeleteUnit(Unit & unit)
 {
 	int id = 0;
 	for (size_t i = 0; i < _units.size(); i++)
@@ -63,6 +105,25 @@ void Army::DeleteUnit(int type, int level)
 	if (unitIndex != -1) {
 		_units.erase(_units.begin() + unitIndex);
 	}
+}*/
+
+Unit* Army::getUnit(int id)
+{
+	for (unsigned int i = 0; i < _units.size(); i++)
+	{
+		if (_units[i]->getId() == id)
+			return _units[i];
+	}
+	return nullptr;
+}
+int Army::getIndexOfUnit(int id)
+{
+	for (unsigned int i = 0; i < _units.size(); i++)
+	{
+		if (_units[i]->getId() == id)
+			return i;
+	}
+	return -1;
 }
 
 std::vector<Unit*> Army::getUnitsPossibilities()
@@ -80,7 +141,7 @@ UnitFactory* Army::getUnitFactory()
 	return _unitFactory;
 }
 
-void Army::SaveArmy()
+void Army::saveArmy()
 {
 	std::cout << "Saving army" << std::endl;
 	std::ofstream myfile;
@@ -100,7 +161,7 @@ void Army::SaveArmy()
 	myfile.close();
 }
 
-void Army::LoadArmy()
+void Army::loadArmy()
 {
 	_units.clear();
 	int nbUnits = 0;
@@ -114,7 +175,7 @@ void Army::LoadArmy()
 		for (int i = 0; i < nbUnits; i++)
 		{
 			_units.push_back(_unitFactory->readNextUnit(myfile));
-			//_currentId++;
+			_currentId++;
 		}
 	}
 	myfile.close();

@@ -1297,10 +1297,26 @@ private: System::Windows::Forms::TableLayoutPanel^  panelUnits;
 		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
 
 		int row = (controller->Location.Y - 3) / 30;
-		std::cout << "row number " << row << std::endl;
-
 		OpenGL->DeleteBuilding(row + 1);
 		fillDataBuilding();
+	}
+
+	private: System::Void enhanceUnit(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
+
+		int row = (controller->Location.Y - 3) / 30;
+		OpenGL->EnhanceUnit(row + 1);
+		fillDataUnit();
+	}
+
+	private: System::Void deleteUnit(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
+
+		int row = (controller->Location.Y - 3) / 30;
+		OpenGL->DeleteUnit(row + 1);
+		fillDataUnit();
 	}
 
 	private: System::Void tabSelected(System::Object^ sender, System::Windows::Forms::TabControlEventArgs^ e)
@@ -1436,7 +1452,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelUnits;
 			enhanceButton->AutoSize = true;
 			enhanceButton->TabIndex = 3;
 			enhanceButton->Text = "Enhance";
-			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceBuilding);
+			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceUnit);
 
 			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
 			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
@@ -1445,7 +1461,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelUnits;
 			deleteButton->AutoSize = true;
 			deleteButton->TabIndex = 4;
 			deleteButton->Text = "Delete";
-			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteBuilding);
+			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteUnit);
 
 			panelUnits->Controls->Add(nameUnit, 0, i);
 			panelUnits->Controls->Add(levelUnit, 1, i);

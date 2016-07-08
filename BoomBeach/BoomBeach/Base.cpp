@@ -52,6 +52,7 @@ bool Base::destroyBuilding(int id)
 		std::vector<Building*>::iterator it;
 		it = find(_buildings.begin(), _buildings.end(), building);
 		_buildings.erase(it);
+		_buildingFactory->removeInstances(building->getName());
 		_field->Erase(building->getZone());
 
 		_currentId = 1;

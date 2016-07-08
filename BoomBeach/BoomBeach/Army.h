@@ -8,6 +8,7 @@ class Army
 {
 	private : 
 		int _money = 10000;
+		int _currentId = 1;
 		std::vector<Unit*> _units;
 		UnitFactory *_unitFactory;
 
@@ -16,25 +17,27 @@ class Army
 		~Army() { delete _unitFactory; };
 
 		bool addUnit(const char* name);
-		void DeleteUnit(Unit &unit);
-		void DeleteUnit(int type, int level);
-		std::vector<Unit*> GetUnits() const { return _units; }
-		int LevelUpUnit(int i) { return _units[i]->levelUp(); }
-		UnitFactory& GetFactory() const { return *_unitFactory; }
-
+		void enhanceUnit(int id);
+		bool deleteUnit(int id);
+		Unit* getUnit(int id);
+		int getIndexOfUnit(int id);
+		
+		//void DeleteUnit(Unit &unit);
+		//void DeleteUnit(int type, int level);
+		//int LevelUpUnit(int i) { return _units[i]->levelUp(); }
 		std::vector<Unit*> getUnitsPossibilities();
 		std::vector<Unit*> Army::getCurrentUnits();
 
 		UnitFactory* getUnitFactory();
 
-		void SaveArmy();
-		void LoadArmy();
+		void saveArmy();
+		void loadArmy();
 
 		int getMoney() { return _money; }
 		void setMoney(int _money) { _money = _money; }
 };
 
-inline std::ofstream& operator << (std::ofstream& of, const Army& a)
+/*inline std::ofstream& operator << (std::ofstream& of, const Army& a)
 {
 	for (size_t i = 0; i < a.GetUnits().size(); i++)
 	{
@@ -56,5 +59,5 @@ inline std::ostream& operator << (std::ostream& os, const Army& a)
 		os << "(" << i + 1 << ") " << a.GetUnits()[i] << std::endl;;
 	}
 	return os;
-}
+}*/
 

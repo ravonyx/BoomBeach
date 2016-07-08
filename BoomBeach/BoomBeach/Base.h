@@ -9,36 +9,36 @@
 
 class Base
 {
-public:
-	Base();
-	Base(Field *f, int pmoney);
-	Base(const Base &base);
-	Base& Base::operator=(const Base& base);
-	~Base();
+	public:
+		Base();
+		Base(Field *f, int pmoney);
+		Base(const Base &base);
+		Base& Base::operator=(const Base& base);
+		~Base();
 
-	void printBuildings();
-	bool addBuilding(const char *name, int x = -1, int y = -1);
-	void enhanceBuilding(int id);
-	bool destroyBuilding(int id);
-	Building* getBuilding(int id);
-	int getIndexOfBuilding(int id);
-	std::vector<Building*> getBuildingsPossibilities();
-	std::vector<Building*> getCurrentBuildings();
+		void printBuildings();
+		bool addBuilding(const char *name, int x = -1, int y = -1);
+		void enhanceBuilding(int id);
+		bool destroyBuilding(int id);
+		Building* getBuilding(int id);
+		int getIndexOfBuilding(int id);
+		std::vector<Building*> getBuildingsPossibilities();
+		std::vector<Building*> getCurrentBuildings();
 	
-	BuildingFactory* getBuildingFactory();
+		BuildingFactory* getBuildingFactory();
 
-	void saveBase();
-	void loadBase();
+		void saveBase();
+		void loadBase();
 
-	Field* getField() const;
-	int getMoney() const;
+		Field* getField() const;
+		int getMoney() const;
 
-private:
-	BuildingFactory *_buildingFactory;
-	std::vector <Building*> _buildings;
-	int _currentId = 1;
-	Field *_field;
-	int _money;
+	private:
+		BuildingFactory *_buildingFactory;
+		std::vector <Building*> _buildings;
+		int _currentId = 1;
+		Field *_field;
+		int _money;
 
 };
 
