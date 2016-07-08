@@ -21,6 +21,12 @@ int get_building_instances(int nbBuilding);
 int get_unit_max(int nbUnits);
 int get_unit_instances(int nbUnits);
 
+void enhance_building(int index);
+void delete_building(int index);
+void enhance_unit(int index);
+void delete_unit(int index);
+
+
 std::vector<Building*> get_buildings();
 std::vector<Unit*> get_units();
 

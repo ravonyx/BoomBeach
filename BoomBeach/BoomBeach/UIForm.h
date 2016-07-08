@@ -130,6 +130,7 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::TabPage^  buildingsPage;
 	private: System::Windows::Forms::TabPage^  unitsPage;
 private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
+private: System::Windows::Forms::TableLayoutPanel^  panelUnits;
 
 
 
@@ -215,6 +216,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->medecinContactMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinSeringueMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->medecinZoneMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->panelUnits = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitContainer1))->BeginInit();
 				 this->splitContainer1->Panel1->SuspendLayout();
 				 this->splitContainer1->Panel2->SuspendLayout();
@@ -234,6 +236,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->buildingsBox->SuspendLayout();
 				 this->layoutBuildings->SuspendLayout();
 				 this->buildingsPage->SuspendLayout();
+				 this->unitsPage->SuspendLayout();
 				 this->saveLoad->SuspendLayout();
 				 this->menu->SuspendLayout();
 				 this->SuspendLayout();
@@ -889,9 +892,9 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->panelBuildings->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->panelBuildings->AutoScroll = true;
 				 this->panelBuildings->HorizontalScroll->Enabled = false;
 				 this->panelBuildings->HorizontalScroll->Visible = false;
+				 this->panelBuildings->AutoScroll = true;
 				 this->panelBuildings->ColumnCount = 5;
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 25)));
@@ -912,6 +915,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 // 
 				 // unitsPage
 				 // 
+				 this->unitsPage->Controls->Add(this->panelUnits);
 				 this->unitsPage->Location = System::Drawing::Point(4, 22);
 				 this->unitsPage->Name = L"unitsPage";
 				 this->unitsPage->Size = System::Drawing::Size(462, 305);
@@ -1107,6 +1111,27 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->medecinZoneMenuItem->Text = L"Medecin zone";
 				 this->medecinZoneMenuItem->Click += gcnew System::EventHandler(this, &UIForm::medecinZoneClick);
 				 // 
+				 // panelUnits
+				 // 
+				 this->panelUnits->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->panelUnits->HorizontalScroll->Enabled = false;
+				 this->panelUnits->HorizontalScroll->Visible = false;
+				 this->panelUnits->ColumnCount = 5;
+				 this->panelUnits->AutoScroll = true;
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 26.04167F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15.625F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.83333F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.83333F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
+				 this->panelUnits->Location = System::Drawing::Point(3, 3);
+				 this->panelUnits->Name = L"panelUnits";
+				 this->panelUnits->RowCount = 1;
+				 this->panelUnits->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+				 this->panelUnits->Size = System::Drawing::Size(456, 299);
+				 this->panelUnits->TabIndex = 0;
+				 // 
 				 // UIForm
 				 // 
 				 this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
@@ -1138,6 +1163,7 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 				 this->layoutBuildings->ResumeLayout(false);
 				 this->layoutBuildings->PerformLayout();
 				 this->buildingsPage->ResumeLayout(false);
+				 this->unitsPage->ResumeLayout(false);
 				 this->saveLoad->ResumeLayout(false);
 				 this->saveLoad->PerformLayout();
 				 this->menu->ResumeLayout(false);
@@ -1257,24 +1283,35 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 
 	private: System::Void enhanceBuilding(System::Object^  sender, System::EventArgs^  e)
 	{
-		MessageBox::Show(sender->ToString());
+		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
+		
+		int row = (controller->Location.Y - 3) / 30;
+		std::cout << "row number " << row << std::endl;
+
+		OpenGL->EnhanceBuilding(row + 1);
+		fillDataBuilding();
 	}
 
 	private: System::Void deleteBuilding(System::Object^  sender, System::EventArgs^  e)
 	{
-		MessageBox::Show(sender->ToString());
-	}
+		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
 
+		int row = (controller->Location.Y - 3) / 30;
+		std::cout << "row number " << row << std::endl;
+
+		OpenGL->DeleteBuilding(row + 1);
+		fillDataBuilding();
+	}
 
 	private: System::Void tabSelected(System::Object^ sender, System::Windows::Forms::TabControlEventArgs^ e)
 	{
 		fillDataBuilding();
+		fillDataUnit();
 	}
 
 	private: System::Void fillDataBuilding()
 	{
 		std::vector<Building*> buildings = OpenGL->GetBuildings();
-		std::vector<Unit*> units = OpenGL->GetUnits();
 
 		Type^ myType = System::Windows::Forms::Control::typeid;
 		System::Reflection::PropertyInfo^ controlProperty = myType->GetProperty("DoubleBuffered", System::Reflection::BindingFlags::NonPublic | System::Reflection::BindingFlags::Instance);
@@ -1342,6 +1379,79 @@ private: System::Windows::Forms::TableLayoutPanel^  panelBuildings;
 			panelBuildings->Controls->Add(lifeBuilding, 2, i);
 			panelBuildings->Controls->Add(enhanceButton, 3, i);
 			panelBuildings->Controls->Add(deleteButton, 4, i);
+		}
+	}
+
+	private: System::Void fillDataUnit()
+	{
+		std::vector<Unit*> units = OpenGL->GetUnits();
+
+		Type^ myType = System::Windows::Forms::Control::typeid;
+		System::Reflection::PropertyInfo^ controlProperty = myType->GetProperty("DoubleBuffered", System::Reflection::BindingFlags::NonPublic | System::Reflection::BindingFlags::Instance);
+		controlProperty->SetValue(panelUnits, true, nullptr);
+		//Clear all the controls
+		panelUnits->Controls->Clear();
+		panelUnits->RowStyles->Clear();
+		//Set the new count
+		panelUnits->RowCount = units.size() + 1;
+
+		for (int i = 0; i < units.size(); i++)
+		{
+			panelUnits->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Absolute, 30));
+
+			System::Windows::Forms::Label^ nameUnit = (gcnew System::Windows::Forms::Label());
+			nameUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			nameUnit->AutoSize = true;
+			nameUnit->TabIndex = 0;
+			String^ str = gcnew String(units[i]->getName().c_str());
+			nameUnit->Text = str;
+			nameUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+			System::Windows::Forms::Label^ levelUnit = (gcnew System::Windows::Forms::Label());
+			levelUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			levelUnit->AutoSize = true;
+			levelUnit->TabIndex = 1;
+			str = gcnew String(units[i]->getLevel().ToString());
+			levelUnit->Text = str;
+			levelUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+			System::Windows::Forms::Label^ lifeUnit = (gcnew System::Windows::Forms::Label());
+			lifeUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			lifeUnit->AutoSize = true;
+			lifeUnit->TabIndex = 2;
+			str = gcnew String(units[i]->getLife().ToString());
+			lifeUnit->Text = str;
+			lifeUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+			System::Windows::Forms::Button^ enhanceButton = (gcnew System::Windows::Forms::Button());
+			enhanceButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			enhanceButton->AutoSize = true;
+			enhanceButton->TabIndex = 3;
+			enhanceButton->Text = "Enhance";
+			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceBuilding);
+
+			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
+			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			deleteButton->AutoSize = true;
+			deleteButton->TabIndex = 4;
+			deleteButton->Text = "Delete";
+			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteBuilding);
+
+			panelUnits->Controls->Add(nameUnit, 0, i);
+			panelUnits->Controls->Add(levelUnit, 1, i);
+			panelUnits->Controls->Add(lifeUnit, 2, i);
+			panelUnits->Controls->Add(enhanceButton, 3, i);
+			panelUnits->Controls->Add(deleteButton, 4, i);
 		}
 	}
 };

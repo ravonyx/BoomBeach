@@ -141,6 +141,23 @@ namespace OpenGLForm
 			return get_units();
 		}
 
+		void EnhanceBuilding(int index)
+		{
+			enhance_building(index);
+		}
+		void DeleteBuilding(int index)
+		{
+			delete_building(index);
+		}
+		void EnhanceUnit(int index)
+		{
+			enhance_unit(index);
+		}
+		void DeleteUnit(int index)
+		{
+			delete_unit(index);
+		}
+
 
 		void mouseEnter(System::Object^  sender, System::EventArgs^  e)
 		{

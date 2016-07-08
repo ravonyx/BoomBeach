@@ -242,3 +242,20 @@ std::vector<Unit*> get_units()
 {
 	return army->GetUnits();
 }
+
+void enhance_building(int index)
+{
+	base->enhanceBuilding(index);
+}
+void delete_building(int index)
+{
+	base->destroyBuilding(index);
+}
+void enhance_unit(int index)
+{
+	//army->enhanceUnit(index);
+}
+void delete_unit(int index)
+{
+	//army->deleteUnit(index);
+}
