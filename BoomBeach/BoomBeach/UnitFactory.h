@@ -21,6 +21,7 @@ public:
 
 	int getInstances(std::string name);
 	void addInstances(std::string name);
+	void removeInstances(std::string name);
 
 	std::vector<Unit*> getUnitModels();
 };

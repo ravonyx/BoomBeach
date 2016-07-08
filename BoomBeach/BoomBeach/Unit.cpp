@@ -3,6 +3,7 @@
 
 Unit::Unit()
 {
+	id = 0;
 	type = 0;
 	name = "Default";
 	level = 0;
@@ -19,9 +20,10 @@ Unit::Unit()
 	health = 300 + (300 * level * healthUpdateRate);
 }
 
-Unit::Unit(int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances,
+Unit::Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances,
 	float pattackupdaterate, float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth)
 {
+	id = pid;
 	type = ptype;
 	name = pname;
 	level = 0;
@@ -40,6 +42,7 @@ Unit::Unit(int ptype, std::string pname, int pcost, float phealthUpdateRate, flo
 
 Unit::Unit(const Unit& model)
 {
+	id = 0;
 	type = model.type;
 	name = model.name;
 	level = model.level;
@@ -83,6 +86,7 @@ void Unit::setAttributes(int baseLife, int baseCost, int baseAttack, int baseFir
 
 std::ofstream& operator<< (std::ofstream& os, const Unit &unit)
 {
+	os << unit.id << std::endl;
 	os << unit.type << std::endl;
 	os << unit.name << std::endl;
 	os << unit.level << std::endl;
@@ -95,7 +99,10 @@ std::ostream& operator<< (std::ostream& os, const Unit &unit)
 	return os;
 }
 
-
+int Unit::getId() const
+{
+	return id;
+}
 std::string Unit::getName() const
 {
 	return name;
@@ -153,4 +160,9 @@ float Unit::getRangeUpdateRate() const
 int Unit::getMaxInstances() const
 {
 	return maxInstances;
+}
+
+void Unit::setId(int pid)
+{
+	id = pid;
 }

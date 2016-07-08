@@ -7,9 +7,10 @@ class Unit
 	private:
 		Unit();
 		Unit(const Unit& model);
-		Unit(int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances, float pattackupdaterate,
+		Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances, float pattackupdaterate,
 			float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth);
 
+		int id;
 		int type;
 		std::string name;
 
@@ -37,6 +38,7 @@ class Unit
 		void setAttributes(int baseLife, int baseCost, int baseAttack, int baseFirerate, int baseRange, int plevel);
 
 		std::string getName() const;
+		int getId() const;
 		int getType() const;
 		int getLevel() const;
 
@@ -52,4 +54,6 @@ class Unit
 		float getFireUpdateRate() const;
 		float getRangeUpdateRate() const;
 		int getMaxInstances() const;
+
+		void setId(int pid);
 };
