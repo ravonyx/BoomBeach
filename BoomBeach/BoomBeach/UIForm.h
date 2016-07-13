@@ -40,6 +40,7 @@ namespace UIBoomBeach {
 			}
 		}
 	private: int counterValue;
+	private: bool inCombat;
 	private: System::ComponentModel::IContainer^  components;
 	protected:
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
@@ -273,7 +274,7 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->counterText->AutoSize = true;
 				 this->counterText->BackColor = System::Drawing::Color::Transparent;
-				 this->counterText->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				 this->counterText->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 					 static_cast<System::Byte>(0)));
 				 this->counterText->Location = System::Drawing::Point(3, 0);
 				 this->counterText->Name = L"counterText";
@@ -1221,9 +1222,13 @@ private: System::Windows::Forms::Button^  combatButton;
 
 	private: System::Void combatButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		this->counter->Enabled = true;
-		this->counter->Start();
-		counterValue = 60;
+		if (!inCombat)
+		{
+			inCombat = true;
+			this->counter->Enabled = true;
+			this->counter->Start();
+			counterValue = 60;
+		}
 	}
 
 	private: System::Void counter_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -1232,10 +1237,17 @@ private: System::Windows::Forms::Button^  combatButton;
 		UNREFERENCED_PARAMETER(e);
 
 		counterValue--;
-		if (counterValue == 0)
+		if(counterValue > 0)
+			this->counterText->Text = counterValue + " seconds";
+		else if(counterValue != -2)
+			this->counterText->Text = "You lose";
+		else
+		{
+			inCombat = false;
+			this->counterText->Text = "";
 			this->counter->Stop();
-		std::cout << counterValue << std::endl;
-		this->counterText->Text = counterValue + " seconds";
+		}
+		
 	}
 	private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e)
 	{
