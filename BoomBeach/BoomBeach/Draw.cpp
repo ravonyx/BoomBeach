@@ -3,7 +3,7 @@
 #include "glut.h"
 #include "Tools.h"
 
-GLuint textureImage[7];
+GLuint textureImage[10];
 std::vector <Building*> _buildingModels;
 std::vector <Unit*> _unitModels;
 Base *base;
@@ -87,10 +87,16 @@ void Initialize()
 	textureImage[0] = createTexture("tile-green.png");
 	textureImage[1] = createTexture("tile-sand.png");
 	textureImage[2] = createTexture("tile-rock.png");
-	textureImage[3] = createTexture("tile-tower.png");
-	textureImage[4] = createTexture("tile-house.png");
-	textureImage[5] = createTexture("tile-mortar.png");
-	textureImage[6] = createTexture("tile-heart.png");
+
+	textureImage[3] = createTexture("tile-house.png");
+
+	textureImage[4] = createTexture("tile-sniper.png");
+	textureImage[5] = createTexture("tile-lanceflamme.png");
+	textureImage[6] = createTexture("tile-mitrailleuse.png");
+
+	textureImage[7] = createTexture("tile-repare.png");
+	textureImage[8] = createTexture("tile-shield.png");
+	textureImage[9] = createTexture("tile-energy.png");
 
 	_buildingModels = base->getBuildingsPossibilities();
 	_unitModels = army->getUnitsPossibilities();
@@ -126,8 +132,14 @@ void DrawRender()
 				glBindTexture(GL_TEXTURE_2D, textureImage[4]);
 			else if (tile == 3)
 				glBindTexture(GL_TEXTURE_2D, textureImage[5]);
-			else if (tile == 6)
+			else if (tile == 4)
 				glBindTexture(GL_TEXTURE_2D, textureImage[6]);
+			else if (tile == 5)
+				glBindTexture(GL_TEXTURE_2D, textureImage[7]);
+			else if (tile == 6)
+				glBindTexture(GL_TEXTURE_2D, textureImage[8]);
+			else if (tile == 7)
+				glBindTexture(GL_TEXTURE_2D, textureImage[9]);
 			else
 				glBindTexture(GL_TEXTURE_2D, 0);
 			
