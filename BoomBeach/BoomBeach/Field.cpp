@@ -1,6 +1,8 @@
 #include "Field.h"
 #include <cstdlib>
 #include <ctime>
+#include <list>
+#include <algorithm>
 
 Field::Field()
 {
@@ -264,7 +266,43 @@ std::istream& operator >> (std::istream& is, Field& f)
 
 int Field::GetNearestBuilding(int x, int y)
 {
-	return 0;
+	//current tile
+	int tile = -1;
+
+	//directions
+	int di = 1;
+	int dj = 0;
+	// length of current segment
+	int length = 1;
+	int segment_passed = 0;
+
+	for (int k = 0; k < (_width * _height)* 2; ++k) 
+	{
+		x += di;
+		y += dj;
+		++segment_passed;
+		if (x > 0 && x < 20 && y > 0 && y < 20)
+		{
+			tile = _data[x + y * _width];
+			if (tile > 0)
+				return tile;
+		}
+		if (segment_passed == length)
+		{
+			// done with current segment
+			segment_passed = 0;
+
+			// 'rotate' directions
+			int buffer = di;
+			di = -dj;
+			dj = buffer;
+
+			// increase segment length if necessary
+			if (dj == 0)
+				++length;
+		}
+	}
+	return -1;
 }
 
 int Field::getWidth() const
