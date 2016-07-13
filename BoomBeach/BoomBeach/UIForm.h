@@ -60,7 +60,8 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::Button^  save;
 	private: System::Windows::Forms::GroupBox^  unitsBox;
 	private: System::Windows::Forms::PictureBox^  pictureBox;
-	private: System::Windows::Forms::TableLayoutPanel^  saveLoad;
+	private: System::Windows::Forms::TableLayoutPanel^  actionsPanel;
+
 
 
 	private: System::Windows::Forms::SplitContainer^  splitContainer2;
@@ -154,7 +155,6 @@ private: System::Windows::Forms::Button^  combatButton;
 			 {
 				 this->components = (gcnew System::ComponentModel::Container());
 				 this->splitContainer1 = (gcnew System::Windows::Forms::SplitContainer());
-				 this->counterText = (gcnew System::Windows::Forms::Label());
 				 this->pictureBox = (gcnew System::Windows::Forms::PictureBox());
 				 this->splitContainer2 = (gcnew System::Windows::Forms::SplitContainer());
 				 this->tabController = (gcnew System::Windows::Forms::TabControl());
@@ -202,10 +202,11 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->panelBuildings = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->unitsPage = (gcnew System::Windows::Forms::TabPage());
 				 this->panelUnits = (gcnew System::Windows::Forms::TableLayoutPanel());
-				 this->saveLoad = (gcnew System::Windows::Forms::TableLayoutPanel());
+				 this->actionsPanel = (gcnew System::Windows::Forms::TableLayoutPanel());
 				 this->load = (gcnew System::Windows::Forms::Button());
 				 this->save = (gcnew System::Windows::Forms::Button());
 				 this->combatButton = (gcnew System::Windows::Forms::Button());
+				 this->counterText = (gcnew System::Windows::Forms::Label());
 				 this->timer = (gcnew System::Windows::Forms::Timer(this->components));
 				 this->counter = (gcnew System::Windows::Forms::Timer(this->components));
 				 this->menu = (gcnew System::Windows::Forms::MenuStrip());
@@ -246,7 +247,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->layoutBuildings->SuspendLayout();
 				 this->buildingsPage->SuspendLayout();
 				 this->unitsPage->SuspendLayout();
-				 this->saveLoad->SuspendLayout();
+				 this->actionsPanel->SuspendLayout();
 				 this->menu->SuspendLayout();
 				 this->SuspendLayout();
 				 // 
@@ -266,22 +267,6 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->splitContainer1->Size = System::Drawing::Size(971, 397);
 				 this->splitContainer1->SplitterDistance = 474;
 				 this->splitContainer1->TabIndex = 0;
-				 // 
-				 // counterText
-				 // 
-				 this->counterText->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-					 | System::Windows::Forms::AnchorStyles::Left)
-					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->counterText->AutoSize = true;
-				 this->counterText->BackColor = System::Drawing::Color::Transparent;
-				 this->counterText->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-					 static_cast<System::Byte>(0)));
-				 this->counterText->Location = System::Drawing::Point(3, 0);
-				 this->counterText->Name = L"counterText";
-				 this->counterText->Size = System::Drawing::Size(114, 43);
-				 this->counterText->TabIndex = 1;
-				 this->counterText->Text = L"0 seconds";
-				 this->counterText->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // pictureBox
 				 // 
@@ -310,7 +295,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 // 
 				 // splitContainer2.Panel2
 				 // 
-				 this->splitContainer2->Panel2->Controls->Add(this->saveLoad);
+				 this->splitContainer2->Panel2->Controls->Add(this->actionsPanel);
 				 this->splitContainer2->Size = System::Drawing::Size(487, 391);
 				 this->splitContainer2->SplitterDistance = 338;
 				 this->splitContainer2->TabIndex = 1;
@@ -965,26 +950,26 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->panelUnits->Size = System::Drawing::Size(466, 299);
 				 this->panelUnits->TabIndex = 0;
 				 // 
-				 // saveLoad
+				 // actionsPanel
 				 // 
-				 this->saveLoad->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				 this->actionsPanel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
-				 this->saveLoad->ColumnCount = 4;
-				 this->saveLoad->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
-				 this->saveLoad->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
-				 this->saveLoad->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
-				 this->saveLoad->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
-				 this->saveLoad->Controls->Add(this->load, 2, 0);
-				 this->saveLoad->Controls->Add(this->save, 3, 0);
-				 this->saveLoad->Controls->Add(this->combatButton, 1, 0);
-				 this->saveLoad->Controls->Add(this->counterText, 0, 0);
-				 this->saveLoad->Location = System::Drawing::Point(4, 3);
-				 this->saveLoad->Name = L"saveLoad";
-				 this->saveLoad->RowCount = 1;
-				 this->saveLoad->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-				 this->saveLoad->Size = System::Drawing::Size(480, 43);
-				 this->saveLoad->TabIndex = 1;
+				 this->actionsPanel->ColumnCount = 4;
+				 this->actionsPanel->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
+				 this->actionsPanel->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
+				 this->actionsPanel->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
+				 this->actionsPanel->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 25)));
+				 this->actionsPanel->Controls->Add(this->load, 2, 0);
+				 this->actionsPanel->Controls->Add(this->save, 3, 0);
+				 this->actionsPanel->Controls->Add(this->combatButton, 1, 0);
+				 this->actionsPanel->Controls->Add(this->counterText, 0, 0);
+				 this->actionsPanel->Location = System::Drawing::Point(4, 3);
+				 this->actionsPanel->Name = L"actionsPanel";
+				 this->actionsPanel->RowCount = 1;
+				 this->actionsPanel->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+				 this->actionsPanel->Size = System::Drawing::Size(480, 43);
+				 this->actionsPanel->TabIndex = 1;
 				 // 
 				 // load
 				 // 
@@ -1026,6 +1011,22 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->combatButton->Text = L"Combat";
 				 this->combatButton->UseVisualStyleBackColor = true;
 				 this->combatButton->Click += gcnew System::EventHandler(this, &UIForm::combatButton_Click);
+				 // 
+				 // counterText
+				 // 
+				 this->counterText->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->counterText->AutoSize = true;
+				 this->counterText->BackColor = System::Drawing::Color::Transparent;
+				 this->counterText->Font = (gcnew System::Drawing::Font(L"Consolas", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+					 static_cast<System::Byte>(0)));
+				 this->counterText->Location = System::Drawing::Point(3, 0);
+				 this->counterText->Name = L"counterText";
+				 this->counterText->Size = System::Drawing::Size(114, 43);
+				 this->counterText->TabIndex = 1;
+				 this->counterText->Text = L"0 seconds";
+				 this->counterText->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // timer
 				 // 
@@ -1206,8 +1207,8 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->layoutBuildings->PerformLayout();
 				 this->buildingsPage->ResumeLayout(false);
 				 this->unitsPage->ResumeLayout(false);
-				 this->saveLoad->ResumeLayout(false);
-				 this->saveLoad->PerformLayout();
+				 this->actionsPanel->ResumeLayout(false);
+				 this->actionsPanel->PerformLayout();
 				 this->menu->ResumeLayout(false);
 				 this->menu->PerformLayout();
 				 this->ResumeLayout(false);
@@ -1222,13 +1223,15 @@ private: System::Windows::Forms::Button^  combatButton;
 
 	private: System::Void combatButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		if (!inCombat)
-		{
-			inCombat = true;
-			this->counter->Enabled = true;
-			this->counter->Start();
-			counterValue = 60;
-		}
+		inCombat = true;
+		this->counter->Enabled = true;
+		this->counter->Start();
+		counterValue = 60;
+		buildingsMenuItem->Enabled = false;
+		unitsMenu->Enabled = false;
+		save->Enabled = false;
+		load->Enabled = false;
+		combatButton->Enabled = false;
 	}
 
 	private: System::Void counter_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -1244,6 +1247,12 @@ private: System::Windows::Forms::Button^  combatButton;
 		else
 		{
 			inCombat = false;
+			buildingsMenuItem->Enabled = true;
+			unitsMenu->Enabled = true;
+			save->Enabled = true;
+			load->Enabled = true;
+			combatButton->Enabled = true;
+
 			this->counterText->Text = "";
 			this->counter->Stop();
 		}
@@ -1451,6 +1460,8 @@ private: System::Windows::Forms::Button^  combatButton;
 			enhanceButton->TabIndex = 3;
 			enhanceButton->Text = "Enhance";
 			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceBuilding);
+			if (inCombat)
+				enhanceButton->Enabled = false;
 
 			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
 			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
@@ -1460,6 +1471,8 @@ private: System::Windows::Forms::Button^  combatButton;
 			deleteButton->TabIndex = 4;
 			deleteButton->Text = "Delete";
 			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteBuilding);
+			if (inCombat)
+				deleteButton->Enabled = false;
 
 			panelBuildings->Controls->Add(nameBuilding, 0, i);
 			panelBuildings->Controls->Add(levelBuilding, 1, i);
@@ -1524,6 +1537,8 @@ private: System::Windows::Forms::Button^  combatButton;
 			enhanceButton->TabIndex = 3;
 			enhanceButton->Text = "Enhance";
 			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceUnit);
+			if (inCombat)
+				enhanceButton->Enabled = false;
 
 			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
 			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
@@ -1533,6 +1548,8 @@ private: System::Windows::Forms::Button^  combatButton;
 			deleteButton->TabIndex = 4;
 			deleteButton->Text = "Delete";
 			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteUnit);
+			if (inCombat)
+				deleteButton->Enabled = false;
 
 			panelUnits->Controls->Add(nameUnit, 0, i);
 			panelUnits->Controls->Add(levelUnit, 1, i);
