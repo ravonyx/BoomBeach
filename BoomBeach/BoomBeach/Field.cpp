@@ -163,11 +163,14 @@ Zone Field::FindEmptyZone(int w, int h)
 
 Zone Field::FindEmptyZoneWithInd(int w, int h, int px, int py)
 {
+	int lineNb = 1;
 	for (int i = px; i < px + w; i++)
 	{
+		if (i % _width == 0)
+			lineNb++;
 		for (int j = py; j < py + h; j++)
 		{
-			if (_data[i + j * _width] != -1)
+			if (_data[i + j * _width] != -1 || lineNb > 1)
 				return Zone();
 		}
 	}
