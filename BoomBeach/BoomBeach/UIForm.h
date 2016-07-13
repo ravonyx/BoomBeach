@@ -1262,6 +1262,45 @@ private: System::Windows::Forms::Button^  combatButton;
 	{
 		UNREFERENCED_PARAMETER(sender);
 		UNREFERENCED_PARAMETER(e);
+
+		if (inCombat)
+		{
+			//clean buildings and units if life < 0
+			std::vector<Building*> buildings = OpenGL->GetBuildings();
+			for (int i = 0; i < buildings.size(); i++)
+			{
+				if(buildings[i]->getLife() <= 0)
+					OpenGL->DeleteBuilding(i);
+			}
+			std::vector<Unit*> units = OpenGL->GetUnits();
+			for (int i = 0; i < units.size(); i++)
+			{
+				if (units[i]->getLife() <= 0)
+					OpenGL->DeleteUnit(i);
+			}
+
+			//check if QG delete
+			if (OpenGL->GetBuildingInstances(0) == 0)
+			{
+				//win
+			}
+
+			//check number units
+			int nbUnits = 0;
+			for (int i = 0; i < 8; i++)
+			{
+				nbUnits += OpenGL->GetUnitInstances(i);
+				if (nbUnits > 0)
+					break;
+			}
+
+			if (nbUnits == 0)
+			{
+				//lose
+			}
+		}
+		
+
 		this->armyMoney->Text = "Army Money : " + OpenGL->GetArmyMoney();
 		this->baseMoney->Text = "Base Money : " + OpenGL->GetBaseMoney();
 
