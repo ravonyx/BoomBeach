@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include <vector>
 
 class Unit
 {
@@ -9,16 +10,17 @@ class Unit
 		Unit(const Unit& model);
 		Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances, float pattackupdaterate,
 			float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth);
-
+	
+	protected:
 		int id;
 		int type;
 		std::string name;
 
 		int maxInstances;
 		int cost;
-		int attack;
-		int firerate;
-		int range;
+		int attack; //Montant des dommages/soins possibles
+		int firerate; //Frequence d'action
+		int range; //Distance d'action
 		int health;
 		int level;
 
