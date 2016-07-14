@@ -937,13 +937,14 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->panelUnits->AutoScroll = true;
-				 this->panelUnits->ColumnCount = 5;
-				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 26.04167F)));
-				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15.625F)));
-				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.83333F)));
-				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.83333F)));
-				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 16.66667F)));
-				 this->panelUnits->Location = System::Drawing::Point(3, 3);
+				 this->panelUnits->ColumnCount = 6;
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 27.46114F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15.54404F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15.28497F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.72539F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.98446F)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 77)));
+				 this->panelUnits->Location = System::Drawing::Point(4, 3);
 				 this->panelUnits->Name = L"panelUnits";
 				 this->panelUnits->RowCount = 1;
 				 this->panelUnits->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
@@ -1429,6 +1430,15 @@ private: System::Windows::Forms::Button^  combatButton;
 		fillDataUnit();
 	}
 
+	private: System::Void dropUnit(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
+
+		int row = (controller->Location.Y - 3) / 30;
+		OpenGL->DropUnit(row + 1);
+		fillDataUnit();
+	}
+
 	private: System::Void deleteUnit(System::Object^  sender, System::EventArgs^  e)
 	{
 		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
@@ -1579,12 +1589,23 @@ private: System::Windows::Forms::Button^  combatButton;
 			if (inCombat)
 				enhanceButton->Enabled = false;
 
+			System::Windows::Forms::Button^ dropButton = (gcnew System::Windows::Forms::Button());
+			dropButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			dropButton->AutoSize = true;
+			dropButton->TabIndex = 4;
+			dropButton->Text = "Drop";
+			dropButton->Click += gcnew System::EventHandler(this, &UIForm::dropUnit);
+			if (!inCombat)
+				dropButton->Enabled = false;
+
 			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
 			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			deleteButton->AutoSize = true;
-			deleteButton->TabIndex = 4;
+			deleteButton->TabIndex = 5;
 			deleteButton->Text = "Delete";
 			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteUnit);
 			if (inCombat)
@@ -1594,7 +1615,8 @@ private: System::Windows::Forms::Button^  combatButton;
 			panelUnits->Controls->Add(levelUnit, 1, i);
 			panelUnits->Controls->Add(lifeUnit, 2, i);
 			panelUnits->Controls->Add(enhanceButton, 3, i);
-			panelUnits->Controls->Add(deleteButton, 4, i);
+			panelUnits->Controls->Add(dropButton, 4, i);
+			panelUnits->Controls->Add(deleteButton, 5, i);
 		}
 	}
 

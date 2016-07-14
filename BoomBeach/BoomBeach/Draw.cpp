@@ -12,6 +12,7 @@ Field *field;
 int *map;
 
 int currentBuilding = -1;
+int currentUnit = -1;
 int widthMap, heightMap;
 
 typedef struct Square {
@@ -49,6 +50,18 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 			{
 				map = field->getData();
 				currentBuilding = -1;
+			}
+		}
+		else {
+			//if can drop unit on that tile
+			if (tile == -2 && currentUnit != -1)
+			{
+				std::cout << "ok" << std::endl;
+				/*if (base->addBuilding((_buildingModels[currentUnit]->getName()).c_str(), realx, realy) == true)
+				{
+					map = field->getData();
+					currentUnit = -1;
+				}*/
 			}
 		}
 	}
@@ -209,6 +222,11 @@ void load_callback()
 void add_building(int nbBuilding)
 {
 	currentBuilding = nbBuilding;
+}
+
+void drop_unit(int nbUnit)
+{
+	currentUnit = nbUnit;
 }
 
 void add_unit(int nbUnits)

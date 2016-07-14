@@ -157,6 +157,10 @@ namespace OpenGLForm
 		{
 			delete_unit(index);
 		}
+		void DropUnit(int index)
+		{
+			drop_unit(index);
+		}
 
 
 		void mouseEnter(System::Object^  sender, System::EventArgs^  e)

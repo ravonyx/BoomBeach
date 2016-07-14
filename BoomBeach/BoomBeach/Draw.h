@@ -13,6 +13,8 @@ void load_callback();
 void add_building(int nbBuilding);
 void add_unit(int nbUnits);
 
+void drop_unit(int nbUnit);
+
 int get_army_money();
 int get_base_money();
 
