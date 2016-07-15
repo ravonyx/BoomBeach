@@ -40,6 +40,7 @@ namespace UIBoomBeach {
 			}
 		}
 	private: int counterValue;
+	private: int counterValueUpdate;
 	private: bool inCombat;
 	private: System::ComponentModel::IContainer^  components;
 	protected:
@@ -1258,6 +1259,8 @@ private: System::Windows::Forms::Button^  combatButton;
 			this->counterText->Text = "";
 			this->counter->Stop();
 		}
+
+
 		
 	}
 	private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -1300,10 +1303,18 @@ private: System::Windows::Forms::Button^  combatButton;
 			{
 				//lose
 			}
+			counterValueUpdate++;
+			if (counterValueUpdate >= 201) {
+				counterValueUpdate = 1;
+			}
 			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
 			for (int i = 0; i < attackUnits.size(); i++)
 			{
-				OpenGL->MoveUnit(attackUnits[i]->getId());
+				if(counterValueUpdate % attackUnits[i]->getSpeed() == 0)
+					OpenGL->MoveUnit(attackUnits[i]->getId());
+				else {
+					//std::cout << "speed : " << attackUnits[i]->getSpeed() << " no : " << counterValueUpdate % (attackUnits[i]->getSpeed() ) << std::endl;
+				}
 			}
 		}
 		

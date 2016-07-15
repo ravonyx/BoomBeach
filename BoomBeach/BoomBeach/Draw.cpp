@@ -318,53 +318,55 @@ void delete_unit(int index)
 
 
 #include <cmath>
-#include <list>
-#include <utility>
 #include <map>
-
-using namespace std;
 
 struct noeud {
 	float cout_g, cout_h, cout_f;
-	std::pair<int, int> parent;    // 'adresse' du parent (qui sera toujours dans la map fermée
+	std::pair<int, int> parent;
 };
 
 struct point {
 	int x, y;
 };
 
-typedef map< pair<int, int>, noeud> l_noeud;
+typedef std::map< std::pair<int, int>, noeud> l_noeud;
 
 l_noeud liste_ouverte;
 l_noeud liste_fermee;
-vector<point> chemin;
+std::vector<point> chemin;
 
 struct point arrivee;
 noeud depart;
 
 float distance(int, int, int, int);
-void ajouter_cases_adjacentes(pair<int, int>&);
-bool deja_present_dans_liste(pair<int, int>,
+void ajouter_cases_adjacentes(std::pair<int, int>&);
+bool deja_present_dans_liste(std::pair<int, int>,
 	l_noeud&);
-pair<int, int> meilleur_noeud(l_noeud&);
-void ajouter_liste_fermee(pair<int, int>&);
+std::pair<int, int> meilleur_noeud(l_noeud&);
+void ajouter_liste_fermee(std::pair<int, int>&);
 void retrouver_chemin();
 
 
-pair<int, int> FindPath(int dx, int dy, int ax, int ay) {
+std::pair<int, int> FindPath(int dx, int dy, int ax, int ay) {
+
+	liste_ouverte.clear();
+	liste_fermee.clear();
+	chemin.clear();
 
 	arrivee.x = ax;
 	arrivee.y = ay;
 
+	std::cout << "dx " << dx << " dy " << dy << " ax " << ax << " ay " << ay << std::endl;
+
 	depart.parent.first = dx;
 	depart.parent.second = dy;
 
-	pair <int, int> courant;
+	std::pair <int, int> courant;
 
-	/* d?roulement de l'algo A* */
+	/* deroulement de l'algo A* */
 
-	courant.first = 0;
-	courant.second = 0;
+	courant.first = dx;
+	courant.second = dy;
 	// ajout de courant dans la liste ouverte
 
 	liste_ouverte[courant] = depart;
@@ -380,7 +382,7 @@ pair<int, int> FindPath(int dx, int dy, int ax, int ay) {
 		// on cherche le meilleur noeud de la liste ouverte, on sait qu'elle n'est pas vide donc il existe
 		courant = meilleur_noeud(liste_ouverte);
 
-		// on le passe dans la liste fermee, il ne peut pas d?j? y ?tre
+		// on le passe dans la liste fermee, il ne peut pas deja etre
 		ajouter_liste_fermee(courant);
 
 		ajouter_cases_adjacentes(courant);
@@ -391,17 +393,19 @@ pair<int, int> FindPath(int dx, int dy, int ax, int ay) {
 	}
 	else {
 		/* pas de solution */
+		std::cout << "Error" << std::endl;
 	}
 
 	std::pair<int, int> result;
 	if (chemin.size() > 1) {
-		result.first = chemin[1].x;
-		result.second = chemin[1].y;
+		result.first = chemin[0].x;
+		result.second = chemin[0].y;
 	}
 	else {
-		result.first = 0;
-		result.second = 0;
+		result.first = dx;
+		result.second = dy;
 	}
+
 
 	return result;
 }
@@ -413,7 +417,7 @@ float distance(int x1, int y1, int x2, int y2) {
 /*
 ajoute toutes les cases adjacentes ? n dans la liste ouverte
 */
-void ajouter_cases_adjacentes(pair <int, int>& n) {
+void ajouter_cases_adjacentes(std::pair <int, int>& n) {
 	noeud tmp;
 
 	// on met tous les noeud adjacents dans la liste ouverte (+v?rif)
@@ -426,11 +430,11 @@ void ajouter_cases_adjacentes(pair <int, int>& n) {
 			if ((i == n.first) && (j == n.second))  // case actuelle n
 				continue;
 
-			/*if (_map[i + j *field->getWidth()] != -1 && _map[i + j *field->getWidth()] != -2)
+			if (_map[i + j *field->getWidth()] != -1 && _map[i + j *field->getWidth()] != -2)
 				// obstace, terrain non franchissable
-				continue;*/
+				continue;
 
-			pair<int, int> it(i, j);
+			std::pair<int, int> it(i, j);
 
 			if (!deja_present_dans_liste(it, liste_fermee)) {
 				/* le noeud n'est pas d?j? pr?sent dans la liste ferm?e */
@@ -450,14 +454,14 @@ void ajouter_cases_adjacentes(pair <int, int>& n) {
 				}
 				else {
 					/* le noeud n'est pas pr?sent dans la liste ouverte, on l'ajoute */
-					liste_ouverte[pair<int, int>(i, j)] = tmp;
+					liste_ouverte[std::pair<int, int>(i, j)] = tmp;
 				}
 			}
 		}
 	}
 }
 
-bool deja_present_dans_liste(pair<int, int> n, l_noeud& l) {
+bool deja_present_dans_liste(std::pair<int, int> n, l_noeud& l) {
 	l_noeud::iterator i = l.find(n);
 	if (i == l.end())
 		return false;
@@ -468,9 +472,9 @@ bool deja_present_dans_liste(pair<int, int> n, l_noeud& l) {
 /*
 fonction qui renvoie la cl? du meilleur noeud de la liste
 */
-pair<int, int> meilleur_noeud(l_noeud& l) {
+std::pair<int, int> meilleur_noeud(l_noeud& l) {
 	float m_coutf = l.begin()->second.cout_f;
-	pair<int, int> m_noeud = l.begin()->first;
+	std::pair<int, int> m_noeud = l.begin()->first;
 
 	for (l_noeud::iterator i = l.begin(); i != l.end(); i++)
 		if (i->second.cout_f< m_coutf) {
@@ -484,13 +488,13 @@ pair<int, int> meilleur_noeud(l_noeud& l) {
 /*
 fonction qui passe l'?l?ment p de la liste ouverte dans la ferm?e
 */
-void ajouter_liste_fermee(pair<int, int>& p) {
+void ajouter_liste_fermee(std::pair<int, int>& p) {
 	noeud& n = liste_ouverte[p];
 	liste_fermee[p] = n;
 
 	// il faut le supprimer de la liste ouverte, ce n'est plus une solution explorable
-	if (liste_ouverte.erase(p) == 0)
-		cerr << "n'apparait pas dans la liste ouverte, impossible ? supprimer" << endl;
+	liste_ouverte.erase(p);
+
 	return;
 }
 
@@ -499,14 +503,14 @@ void retrouver_chemin() {
 	noeud& tmp = liste_fermee[std::pair<int, int>(arrivee.x, arrivee.y)];
 
 	struct point n;
-	pair<int, int> prec;
+	std::pair<int, int> prec;
 	n.x = arrivee.x;
 	n.y = arrivee.y;
 	prec.first = tmp.parent.first;
 	prec.second = tmp.parent.second;
 	chemin.insert(chemin.begin(), n);
 
-	while (prec != pair<int, int>(depart.parent.first, depart.parent.first)) {
+	while (prec != std::pair<int, int>(depart.parent.first, depart.parent.second)) {
 		n.x = prec.first;
 		n.y = prec.second;
 		chemin.insert(chemin.begin(), n);
@@ -519,7 +523,12 @@ void retrouver_chemin() {
 
 void move_unit(int index)
 {
-	army->moveUnit(index, FindPath(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first,
-		army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second, positionOrder.first, positionOrder.second));
-	std::cout << positionOrder.first << std::endl;
+	int unitx = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first;
+	int unity = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second;
+
+	int nearestBuilding = field->GetNearestBuilding(unitx, unity);
+
+	if(unitx != positionOrder.first || unity != positionOrder.second)
+		army->moveUnit(index, FindPath(unitx, unity, positionOrder.first, positionOrder.second));
+	//std::cout << positionOrder.first << std::endl;
 }
