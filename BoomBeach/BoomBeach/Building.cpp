@@ -25,6 +25,7 @@ Building::Building(int pid, std::string pname, int ptype, int plife, int pcost, 
 	name = pname;
 	type = ptype;
 	life = plife;
+	addedLife = 0;
 	cost = pcost;
 	level = plevel;
 
@@ -45,6 +46,7 @@ Building::Building(const Building& model)
 	type = model.type;
 
 	life = model.life;
+	addedLife = 0;
 	cost = model.cost;
 	level = 0;
 
@@ -112,6 +114,10 @@ int Building::getType() const
 
 int Building::getLife() const
 {
+	return life + addedLife;
+}
+int Building::getBaseLife() const
+{
 	return life;
 }
 int Building::getLevel() const
@@ -157,4 +163,19 @@ void Building::setId(int pid)
 void Building::setZone(Zone pzone)
 {
 	zone = pzone;
+}
+
+void Building::setBaseLife(const int value)
+{
+	life = value;
+}
+
+void Building::setAddedLife(const int value)
+{
+	addedLife = value;
+}
+
+void Building::takeDamage(const int amount)
+{
+	life -= amount;
 }

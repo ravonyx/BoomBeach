@@ -21,6 +21,8 @@ class Building
 		int height;
 
 		int life;
+		int addedLife=0;
+		int totalLife;
 		int level;
 		int type;
 
@@ -42,7 +44,8 @@ class Building
 		std::string getName() const;
 		int getType() const;
 
-		int getLife() const;
+		int getLife() const; //Returns total Life
+		int getBaseLife() const; //Returns Base Life
 		int getLevel() const;
 		int getCost() const;
 
@@ -56,4 +59,9 @@ class Building
 		
 		void setId(int pid);
 		void setZone(Zone pzone);
+		void setBaseLife(const int value);
+		void setLife(const int value);
+		void setAddedLife(const int value);
+
+		void takeDamage(const int amount);
 };

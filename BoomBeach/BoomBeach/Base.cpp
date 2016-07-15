@@ -97,6 +97,25 @@ bool Base::addBuilding(const char *name, int x, int y)
 				_buildings.push_back(building);
 
 				_money -= cost;
+
+				// Rule for QG HPs
+				int qGAddedHealth = 0;
+				int qGindex = 0;
+				for (int i = 0; i < _buildings.size(); i++)
+				{
+					if (_buildings[i]->getType() != 1)
+					{
+						qGAddedHealth += _buildings[i]->getLife() * 0.1;
+					}
+					else
+					{
+						qGindex = i;
+					}
+				}
+
+				_buildings[qGindex]->setAddedLife(qGAddedHealth);
+
+
 				std::cout << "Suceed to build building" << std::endl;
 				return true;
 			}
