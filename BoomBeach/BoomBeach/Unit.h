@@ -9,7 +9,7 @@ class Unit
 		Unit();
 		Unit(const Unit& model);
 		Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances, float pattackupdaterate,
-			float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth);
+			float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth, int pspeed, bool parea);
 		
 		int id;
 		int type;
@@ -22,6 +22,8 @@ class Unit
 		int range; //Distance d'action
 		int health;
 		int level;
+		int speed;
+		bool area;
 
 		float attackUpdateRate;
 		float firerateUpdateRate;
@@ -48,6 +50,7 @@ class Unit
 		int getAttack() const;
 		int getFirerate() const;
 		int getRange() const;
+		int getSpeed() const;
 
 		float getHealthUpdateRate() const;
 		float getCostUpdateRate() const;

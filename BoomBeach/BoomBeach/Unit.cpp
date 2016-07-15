@@ -18,10 +18,12 @@ Unit::Unit()
 	firerate = 100 + (100 * level * firerateUpdateRate);
 	range = 20 + (20 * level * rangeUpdateRate);
 	health = 300 + (300 * level * healthUpdateRate);
+	speed = 10;
+	area = false;
 }
 
 Unit::Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances,
-	float pattackupdaterate, float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth)
+	float pattackupdaterate, float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth, int pspeed, bool parea)
 {
 	id = pid;
 	type = ptype;
@@ -38,6 +40,8 @@ Unit::Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdate
 	firerate = pfirerate;
 	range = prange;
 	health = phealth;
+	speed = pspeed;
+	area = parea;
 }
 
 Unit::Unit(const Unit& model)
@@ -57,6 +61,8 @@ Unit::Unit(const Unit& model)
 	firerate = model.firerate;
 	range = model.range;
 	health = model.health;
+	speed = model.speed;
+	area = model.area;
 }
 
 int Unit::nextUpdateCost()
@@ -134,6 +140,10 @@ int Unit::getFirerate() const
 int Unit::getRange() const
 {
 	return range;
+}
+int Unit::getSpeed() const
+{
+	return speed;
 }
 
 float Unit::getHealthUpdateRate() const

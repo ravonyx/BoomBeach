@@ -99,8 +99,9 @@ bool Army::moveUnit(int id, std::pair<int, int> position)
 	int index = getIndexOfAttackUnit(id);
 	if (index != -1)
 	{
-		_attackUnits[index]->setPosition(_attackUnits[index]->position.first + std::max(-1, std::min(position.first - _attackUnits[index]->position.first, 1)),
-			(_attackUnits[index]->position.second + std::max(-1, std::min(position.second - _attackUnits[index]->position.second, 1))));
+		/*_attackUnits[index]->setPosition(_attackUnits[index]->position.first + std::max(-1, std::min(position.first - _attackUnits[index]->position.first, 1)),
+			(_attackUnits[index]->position.second + std::max(-1, std::min(position.second - _attackUnits[index]->position.second, 1))));*/
+		_attackUnits[index]->setPosition(position.first, position.second);
 		//std::cout << "x=" << _attackUnits[index]->position.first << "y=" << _attackUnits[index]->position.second << "    " << position.first << std::endl;
 		return true;
 	}

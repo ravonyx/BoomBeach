@@ -2,14 +2,14 @@
 
 UnitFactory::UnitFactory()
 {
-	Unit* brute = new Unit(0, 0, "Brute", 100, 1.3, 1.4, 2, 1.1, 1.3, 1.2, 2, 75, 2, 500);
-	Unit* kamikaze = new Unit(0, 1, "Kamikaze", 200, 1.2, 1.4, 4, 1.1, 1.3, 0, 2, 75, 2, 10);
-	Unit* fusilleur = new Unit(0, 2, "Fusilleur", 100, 1.2, 1.4, 3, 1.1, 1.3, 1.4, 2, 75, 2, 100);
-	Unit* sniper = new Unit(0, 3, "Sniper", 100, 1.1, 1.2, 2, 1.1, 1.3, 1.4, 2, 75, 2, 100);
-	Unit* bazooka = new Unit(0, 4, "Bazooka", 50, 1.2, 1.4, 2, 1.1, 1.3, 1.2, 2, 75, 2, 200);
-	Unit* medecinContact = new Unit(0, 5, "MedecinContact", 10, 1.2, 1.2, 4, 1.2, 1.4, 0, 3, 75, 0, 150);
-	Unit* medecinSeringue = new Unit(0, 6, "MedecinSeringue", 50, 1.2, 1.4, 3, 1.4, 1.3, 1.3, 4, 75, 2, 170);
-	Unit* medecinZone = new Unit(0, 7, "MedecinZone", 100, 1.2, 1.4, 2, 1.1, 1.3, 1.2, 2, 75, 2, 120);
+	Unit* brute = new Unit(0, 0, "Brute", 100, 1.3, 1.4, 2, 1.1, 1.3, 1.2, 10, 1, 1, 50, 10, true);
+	Unit* kamikaze = new Unit(0, 1, "Kamikaze", 200, 1.2, 1.4, 4, 1.1, 1.3, 10, 0, 50, 1, 10, 20, false);
+	Unit* fusilleur = new Unit(0, 2, "Fusilleur", 100, 1.2, 1.4, 3, 1.1, 1.3, 1.4, 2, 100, 2, 100, 50, false);
+	Unit* sniper = new Unit(0, 3, "Sniper", 100, 1.1, 1.2, 2, 1.1, 1.3, 1.4, 2, 50, 7, 100, 100, false);
+	Unit* bazooka = new Unit(0, 4, "Bazooka", 50, 1.2, 1.4, 2, 1.1, 1.3, 1.2, 2, 50, 5, 200, 100, true);
+	Unit* medecinContact = new Unit(0, 5, "MedecinContact", 10, 1.2, 1.2, 4, 1.2, 1.4, 7, 3, 100, 1, 150, 20, false);
+	Unit* medecinSeringue = new Unit(0, 6, "MedecinSeringue", 50, 1.2, 1.4, 3, 1.4, 1.3, 1.3, 5, 100, 2, 170, 50, false);
+	Unit* medecinZone = new Unit(0, 7, "MedecinZone", 100, 1.2, 1.4, 2, 1.1, 1.3, 1.2, 2, 100, 2, 120, 100, true);
 
 	unitModels.push_back(brute);
 	unitModels.push_back(kamikaze);
@@ -72,7 +72,7 @@ Unit* UnitFactory::readNextUnit(std::istream & stream)
 	stream >> level;
 
 	Unit *unitModel = getUnitModel(name);
-	Unit *unit = new Unit(id, type, name, 0, unitModel->getHealthUpdateRate(), unitModel->getCostUpdateRate(), unitModel->getMaxInstances(), unitModel->getAttackUpdateRate(), unitModel->getFireUpdateRate(), unitModel->getRangeUpdateRate(), 0, 0, 0, 0);
+	Unit *unit = new Unit(id, type, name, 0, unitModel->getHealthUpdateRate(), unitModel->getCostUpdateRate(), unitModel->getMaxInstances(), unitModel->getAttackUpdateRate(), unitModel->getFireUpdateRate(), unitModel->getRangeUpdateRate(), 0, 0, 0, 0, 0, false);
 
 	unit->setAttributes(unitModel->getLife(), unitModel->getCost(), unitModel->getAttack(), unitModel->getFirerate(), unitModel->getRange(), level);
 	instances[type]++;
