@@ -33,12 +33,16 @@ class Base
 		Field* getField() const;
 		int getMoney() const;
 
+		void triggerBuildingActions();
+
 	private:
 		BuildingFactory *_buildingFactory;
 		std::vector <Building*> _buildings;
 		int _currentId = 1;
 		Field *_field;
 		int _money;
+
+		
 
 };
 

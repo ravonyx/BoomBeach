@@ -144,6 +144,7 @@ private: System::Windows::Forms::Label^  counterText;
 
 	private: System::Windows::Forms::Timer^  timer;
 private: System::Windows::Forms::Button^  combatButton;
+
 	private: System::Windows::Forms::Timer^  counter;
 
 #pragma region Windows Form Designer generated code
@@ -903,7 +904,7 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->panelBuildings->AutoScroll = true;
-				 this->panelBuildings->ColumnCount = 5;
+				 this->panelBuildings->ColumnCount = 6;
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 25)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
@@ -943,7 +944,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15.28497F)));
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.72539F)));
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.98446F)));
-				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 77)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 83)));
 				 this->panelUnits->Location = System::Drawing::Point(4, 3);
 				 this->panelUnits->Name = L"panelUnits";
 				 this->panelUnits->RowCount = 1;
@@ -1426,6 +1427,11 @@ private: System::Windows::Forms::Button^  combatButton;
 		fillDataBuilding();
 	}
 
+	private: System::Void changeBuildingBehaviour(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
+	}
+
 	private: System::Void enhanceUnit(System::Object^  sender, System::EventArgs^  e)
 	{
 		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
@@ -1528,11 +1534,25 @@ private: System::Windows::Forms::Button^  combatButton;
 			if (inCombat)
 				deleteButton->Enabled = false;
 
+
+			System::Windows::Forms::Button^ changeBehaviourButton = (gcnew System::Windows::Forms::Button());
+			changeBehaviourButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			changeBehaviourButton->AutoSize = true;
+			changeBehaviourButton->TabIndex = 5;
+			changeBehaviourButton->Text = "Change Behaviour";
+			changeBehaviourButton->Click += gcnew System::EventHandler(this, &UIForm::changeBuildingBehaviour);
+			if (inCombat)
+				deleteButton->Enabled = false;
+
+
 			panelBuildings->Controls->Add(nameBuilding, 0, i);
 			panelBuildings->Controls->Add(levelBuilding, 1, i);
 			panelBuildings->Controls->Add(lifeBuilding, 2, i);
 			panelBuildings->Controls->Add(enhanceButton, 3, i);
 			panelBuildings->Controls->Add(deleteButton, 4, i);
+			panelBuildings->Controls->Add(changeBehaviourButton, 5, i);
 		}
 	}
 
@@ -1625,6 +1645,8 @@ private: System::Windows::Forms::Button^  combatButton;
 		}
 	}
 
+private: System::Void listBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+}
 };
 }
 

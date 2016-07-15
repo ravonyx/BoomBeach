@@ -234,6 +234,60 @@ int Base::getMoney() const
 	return _money;
 }
 
+void Base::triggerBuildingActions()
+{
+	for (int i = 0; i < _buildings.size(); i++)
+	{
+		int distance = 0;
+		//For Support Units
+		if (_buildings[i]->getType() == 5)
+		{
+
+		}
+		else if (_buildings[i]->getType() == 6)
+		{
+
+		}
+		else if (_buildings[i]->getType() == 7)
+		{
+
+		}
+		else
+		//For Attack Units
+		{
+			if (_buildings[i]->getTargetType() == 0) //Nothing
+			{
+
+			}
+			else if (_buildings[i]->getTargetType == 1) //Low HP Unit
+			{
+				//Boucler sur les unités voulues
+			}
+			else if (_buildings[i]->getTargetType == 2) //High HP Unit
+			{
+
+			}
+			else if (_buildings[i]->getTargetType == 3) //Closest Unit
+			{
+
+			}
+			else if (_buildings[i]->getTargetType == 4) //Closest to HQ
+			{
+
+			}
+			else if (_buildings[i]->getTargetType == 5) //Strongest Unit
+			{
+
+			}
+			else if (_buildings[i]->getTargetType == 6) //Closest Support Unit
+			{
+
+			}
+		}
+		
+	}
+}
+
 std::vector<Building*> Base::getBuildingsPossibilities()
 {
 	return _buildingFactory->getBuidingModels();

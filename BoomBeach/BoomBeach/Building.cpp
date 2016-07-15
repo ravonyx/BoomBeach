@@ -175,7 +175,18 @@ void Building::setAddedLife(const int value)
 	addedLife = value;
 }
 
+void Building::setTargetType(const int value)
+{
+	targetType = value;
+}
+
 void Building::takeDamage(const int amount)
 {
 	life -= amount;
+}
+
+void Building::attackUnit(Unit * unit)
+{
+	//Modifier les HP de l'unité visée 
+	//Faire une fonction TakeDamages ou setHP;
 }
