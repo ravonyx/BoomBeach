@@ -13,6 +13,7 @@ void load_callback();
 void add_building(int nbBuilding);
 void add_unit(int nbUnits);
 
+void move_unit(int index);
 void drop_unit(int nbUnit);
 
 int get_army_money();
@@ -31,6 +32,7 @@ void delete_unit(int index);
 
 std::vector<Building*> get_buildings();
 std::vector<Unit*> get_units();
+std::vector<AttackUnit*> get_attackunits();
 
 void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
 void mouseMotion(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);

@@ -3,13 +3,13 @@
 #include "glut.h"
 #include "Tools.h"
 
-GLuint textureImage[10];
+GLuint textureImage[11];
 std::vector <Building*> _buildingModels;
 std::vector <Unit*> _unitModels;
 Base *base;
 Army *army;
 Field *field;
-int *map;
+int *_map;
 
 int currentBuilding = -1;
 int currentUnit = -1;
@@ -25,6 +25,8 @@ typedef struct Square {
 Square_p currentSquare;
 float squarex = 0;
 float squarey = 0;
+
+std::pair<int, int> positionOrder;
 
 void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
@@ -42,13 +44,13 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 		realx = roundf(realx);
 		realy = roundf(realy);
 
-		int tile = map[(int)realx + (int)realy *field->getWidth()];
+		int tile = _map[(int)realx + (int)realy *field->getWidth()];
 		//if can construct on that tile
 		if (tile == -1 && currentBuilding != -1)
 		{
 			if (base->addBuilding((_buildingModels[currentBuilding]->getName()).c_str(), realx, realy) == true)
 			{
-				map = field->getData();
+				_map = field->getData();
 				currentBuilding = -1;
 			}
 		}
@@ -56,14 +58,19 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 			//if can drop unit on that tile
 			if (tile == -2 && currentUnit != -1)
 			{
+				army->addAttackUnit(currentUnit, realx, realy);
 				std::cout << "ok" << std::endl;
+				currentUnit = -1;
 				/*if (base->addBuilding((_buildingModels[currentUnit]->getName()).c_str(), realx, realy) == true)
 				{
-					map = field->getData();
+					_map = field->getData();
 					currentUnit = -1;
 				}*/
 			}
 		}
+
+		positionOrder.first = realx;
+		positionOrder.second = realy;
 	}
 }
 
@@ -93,7 +100,7 @@ void Initialize()
 	//std::cout << *(base->getField());
 
 	field = base->getField();
-	map = field->getData();
+	_map = field->getData();
 
 	memset(textureImage, 0, sizeof(void *) * 1);
 
@@ -111,8 +118,12 @@ void Initialize()
 	textureImage[8] = createTexture("tile-shield.png");
 	textureImage[9] = createTexture("tile-energy.png");
 
+	textureImage[10] = createTexture("tile-brute.png");
+
 	_buildingModels = base->getBuildingsPossibilities();
 	_unitModels = army->getUnitsPossibilities();
+	positionOrder.first = 0;
+	positionOrder.second = 0;
 }
 
 
@@ -130,7 +141,7 @@ void DrawRender()
 	{
 		for (int x = 0; x < field->getWidth(); x++)
 		{
-			tile = map[x + y *field->getWidth()];
+			tile = _map[x + y *field->getWidth()];
 
 			glEnable(GL_TEXTURE_2D);
 			if (tile == -1)
@@ -165,6 +176,18 @@ void DrawRender()
 			glTexCoord2f(0.0f, 1.0f); glVertex3f(float(realx), float(realy + sizeheight), 0.0f);
 			glEnd();
 		}
+	}
+
+	for (int x = 0; x < army->getCurrentAttackUnits().size(); x++) {
+		glBindTexture(GL_TEXTURE_2D, textureImage[10]);
+		float realx = army->getCurrentAttackUnits()[x]->getPosition().first * sizewidth;
+		float realy = army->getCurrentAttackUnits()[x]->getPosition().second * sizeheight;
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(float(realx), float(realy), 0.0f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(float(realx + sizewidth), float(realy), 0.0f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(float(realx + sizewidth), float(realy + sizeheight), 0.0f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(float(realx), float(realy + sizeheight), 0.0f);
+		glEnd();
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -269,6 +292,10 @@ std::vector<Unit*> get_units()
 {
 	return army->getCurrentUnits();
 }
+std::vector<AttackUnit*> get_attackunits()
+{
+	return army->getCurrentAttackUnits();
+}
 
 void enhance_building(int index)
 {
@@ -285,4 +312,214 @@ void enhance_unit(int index)
 void delete_unit(int index)
 {
 	army->deleteUnit(index);
+}
+
+
+
+
+#include <cmath>
+#include <list>
+#include <utility>
+#include <map>
+
+using namespace std;
+
+struct noeud {
+	float cout_g, cout_h, cout_f;
+	std::pair<int, int> parent;    // 'adresse' du parent (qui sera toujours dans la map fermée
+};
+
+struct point {
+	int x, y;
+};
+
+typedef map< pair<int, int>, noeud> l_noeud;
+
+l_noeud liste_ouverte;
+l_noeud liste_fermee;
+vector<point> chemin;
+
+struct point arrivee;
+noeud depart;
+
+float distance(int, int, int, int);
+void ajouter_cases_adjacentes(pair<int, int>&);
+bool deja_present_dans_liste(pair<int, int>,
+	l_noeud&);
+pair<int, int> meilleur_noeud(l_noeud&);
+void ajouter_liste_fermee(pair<int, int>&);
+void retrouver_chemin();
+
+
+pair<int, int> FindPath(int dx, int dy, int ax, int ay) {
+
+	arrivee.x = ax;
+	arrivee.y = ay;
+
+	depart.parent.first = dx;
+	depart.parent.second = dy;
+
+	pair <int, int> courant;
+
+	/* d?roulement de l'algo A* */
+
+	courant.first = 0;
+	courant.second = 0;
+	// ajout de courant dans la liste ouverte
+
+	liste_ouverte[courant] = depart;
+	ajouter_liste_fermee(courant);
+	ajouter_cases_adjacentes(courant);
+
+
+	while (!((courant.first == arrivee.x) && (courant.second == arrivee.y))
+		&&
+		(!liste_ouverte.empty())
+		) {
+
+		// on cherche le meilleur noeud de la liste ouverte, on sait qu'elle n'est pas vide donc il existe
+		courant = meilleur_noeud(liste_ouverte);
+
+		// on le passe dans la liste fermee, il ne peut pas d?j? y ?tre
+		ajouter_liste_fermee(courant);
+
+		ajouter_cases_adjacentes(courant);
+	}
+
+	if ((courant.first == arrivee.x) && (courant.second == arrivee.y)) {
+		retrouver_chemin();
+	}
+	else {
+		/* pas de solution */
+	}
+
+	std::pair<int, int> result;
+	if (chemin.size() > 1) {
+		result.first = chemin[1].x;
+		result.second = chemin[1].y;
+	}
+	else {
+		result.first = 0;
+		result.second = 0;
+	}
+
+	return result;
+}
+
+float distance(int x1, int y1, int x2, int y2) {
+	return sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2));
+}
+
+/*
+ajoute toutes les cases adjacentes ? n dans la liste ouverte
+*/
+void ajouter_cases_adjacentes(pair <int, int>& n) {
+	noeud tmp;
+
+	// on met tous les noeud adjacents dans la liste ouverte (+v?rif)
+	for (int i = n.first - 1; i <= n.first + 1; i++) {
+		if ((i<0) || (i >= field->getWidth()))
+			continue;
+		for (int j = n.second - 1; j <= n.second + 1; j++) {
+			if ((j<0) || (j >= field->getHeight()))
+				continue;
+			if ((i == n.first) && (j == n.second))  // case actuelle n
+				continue;
+
+			/*if (_map[i + j *field->getWidth()] != -1 && _map[i + j *field->getWidth()] != -2)
+				// obstace, terrain non franchissable
+				continue;*/
+
+			pair<int, int> it(i, j);
+
+			if (!deja_present_dans_liste(it, liste_fermee)) {
+				/* le noeud n'est pas d?j? pr?sent dans la liste ferm?e */
+
+				tmp.cout_g = liste_fermee[n].cout_g + distance(i, j, n.first, n.second);
+				tmp.cout_h = distance(i, j, arrivee.x, arrivee.y);
+				tmp.cout_f = tmp.cout_g + tmp.cout_h;
+				tmp.parent = n;
+
+				if (deja_present_dans_liste(it, liste_ouverte)) {
+					/* le noeud est d?j? pr?sent dans la liste ouverte, il faut comparer les couts */
+					if (tmp.cout_f < liste_ouverte[it].cout_f) {
+						/* si le nouveau chemin est meilleur, on update */
+						liste_ouverte[it] = tmp;
+					}
+					/* le noeud courant a un moins bon chemin, on ne change rien */
+				}
+				else {
+					/* le noeud n'est pas pr?sent dans la liste ouverte, on l'ajoute */
+					liste_ouverte[pair<int, int>(i, j)] = tmp;
+				}
+			}
+		}
+	}
+}
+
+bool deja_present_dans_liste(pair<int, int> n, l_noeud& l) {
+	l_noeud::iterator i = l.find(n);
+	if (i == l.end())
+		return false;
+	else
+		return true;
+}
+
+/*
+fonction qui renvoie la cl? du meilleur noeud de la liste
+*/
+pair<int, int> meilleur_noeud(l_noeud& l) {
+	float m_coutf = l.begin()->second.cout_f;
+	pair<int, int> m_noeud = l.begin()->first;
+
+	for (l_noeud::iterator i = l.begin(); i != l.end(); i++)
+		if (i->second.cout_f< m_coutf) {
+			m_coutf = i->second.cout_f;
+			m_noeud = i->first;
+		}
+
+	return m_noeud;
+}
+
+/*
+fonction qui passe l'?l?ment p de la liste ouverte dans la ferm?e
+*/
+void ajouter_liste_fermee(pair<int, int>& p) {
+	noeud& n = liste_ouverte[p];
+	liste_fermee[p] = n;
+
+	// il faut le supprimer de la liste ouverte, ce n'est plus une solution explorable
+	if (liste_ouverte.erase(p) == 0)
+		cerr << "n'apparait pas dans la liste ouverte, impossible ? supprimer" << endl;
+	return;
+}
+
+void retrouver_chemin() {
+	// l'arriv?e est le dernier ?l?ment de la liste ferm?e.
+	noeud& tmp = liste_fermee[std::pair<int, int>(arrivee.x, arrivee.y)];
+
+	struct point n;
+	pair<int, int> prec;
+	n.x = arrivee.x;
+	n.y = arrivee.y;
+	prec.first = tmp.parent.first;
+	prec.second = tmp.parent.second;
+	chemin.insert(chemin.begin(), n);
+
+	while (prec != pair<int, int>(depart.parent.first, depart.parent.first)) {
+		n.x = prec.first;
+		n.y = prec.second;
+		chemin.insert(chemin.begin(), n);
+
+		tmp = liste_fermee[tmp.parent];
+		prec.first = tmp.parent.first;
+		prec.second = tmp.parent.second;
+	}
+}
+
+void move_unit(int index)
+{
+	army->moveUnit(index, FindPath(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first,
+		army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second, positionOrder.first, positionOrder.second));
+	std::cout << positionOrder.first << std::endl;
 }

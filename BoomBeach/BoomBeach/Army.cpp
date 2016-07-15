@@ -1,9 +1,8 @@
 #include "Army.h"
 #include <fstream>
 #include <iostream>
-
-//using namespace std;
-
+#include "Field.h"
+#include <algorithm>
 
 Army::Army()
 {
@@ -34,6 +33,22 @@ bool Army::addUnit(const char* name)
 			std::cout << "Not enough money" << std::endl;
 	}
 	std::cout << "Fail to create unit" << std::endl;
+	return false;
+}
+
+bool Army::addAttackUnit(int id, int x, int y)
+{
+	std::cout << std::endl;
+	int index = getIndexOfUnit(id);
+	if (index != -1)
+	{
+		AttackUnit* attackUnit = new AttackUnit(*_units[index]);
+		attackUnit->setPosition(x, y);
+		_attackUnits.push_back(attackUnit);
+		return true;
+	}
+	else
+		std::cout << "Wrong ID" << std::endl;
 	return false;
 }
 
@@ -76,6 +91,21 @@ bool Army::deleteUnit(int id)
 		return true;
 	}
 	std::cout << "L'id n'existe pas" << std::endl;
+	return false;
+}
+
+bool Army::moveUnit(int id, std::pair<int, int> position)
+{
+	int index = getIndexOfAttackUnit(id);
+	if (index != -1)
+	{
+		_attackUnits[index]->setPosition(_attackUnits[index]->position.first + std::max(-1, std::min(position.first - _attackUnits[index]->position.first, 1)),
+			(_attackUnits[index]->position.second + std::max(-1, std::min(position.second - _attackUnits[index]->position.second, 1))));
+		//std::cout << "x=" << _attackUnits[index]->position.first << "y=" << _attackUnits[index]->position.second << "    " << position.first << std::endl;
+		return true;
+	}
+	else
+		std::cout << "Wrong ID" << std::endl;
 	return false;
 }
 
@@ -126,6 +156,16 @@ int Army::getIndexOfUnit(int id)
 	return -1;
 }
 
+int Army::getIndexOfAttackUnit(int id)
+{
+	for (unsigned int i = 0; i < _attackUnits.size(); i++)
+	{
+		if (_attackUnits[i]->getId() == id)
+			return i;
+	}
+	return -1;
+}
+
 std::vector<Unit*> Army::getUnitsPossibilities()
 {
 	return _unitFactory->getUnitModels();
@@ -134,6 +174,11 @@ std::vector<Unit*> Army::getUnitsPossibilities()
 std::vector<Unit*> Army::getCurrentUnits()
 {
 	return _units;
+}
+
+std::vector<AttackUnit*> Army::getCurrentAttackUnits()
+{
+	return _attackUnits;
 }
 
 UnitFactory* Army::getUnitFactory()

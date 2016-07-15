@@ -2,11 +2,20 @@
 
 
 
-AttackUnit::AttackUnit()
-{
-}
+AttackUnit::AttackUnit(const Unit& model) : Unit(model) {};
 
 
 AttackUnit::~AttackUnit()
 {
+}
+
+void AttackUnit::setPosition(int x, int y)
+{
+	position.first = x;
+	position.second = y;
+}
+
+std::pair<int, int> AttackUnit::getPosition()
+{
+	return position;
 }

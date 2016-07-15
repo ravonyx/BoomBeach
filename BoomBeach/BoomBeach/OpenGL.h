@@ -140,6 +140,10 @@ namespace OpenGLForm
 		{
 			return get_units();
 		}
+		std::vector<AttackUnit*> GetAttackUnits()
+		{
+			return get_attackunits();
+		}
 
 		void EnhanceBuilding(int index)
 		{
@@ -160,6 +164,10 @@ namespace OpenGLForm
 		void DropUnit(int index)
 		{
 			drop_unit(index);
+		}
+		void MoveUnit(int index)
+		{
+			move_unit(index);
 		}
 
 

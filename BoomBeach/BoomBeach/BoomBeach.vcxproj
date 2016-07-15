@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackUnit.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="BuildingFactory.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Army.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SupportUnit.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="UIForm.cpp" />
     <ClCompile Include="Unit.cpp" />
@@ -143,6 +145,7 @@
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackUnit.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="BuildingFactory.h" />
     <ClInclude Include="Building.h" />
@@ -150,6 +153,7 @@
     <ClInclude Include="Field.h" />
     <ClInclude Include="Army.h" />
     <ClInclude Include="OpenGL.h" />
+    <ClInclude Include="SupportUnit.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="UIForm.h">
       <FileType>CppForm</FileType>

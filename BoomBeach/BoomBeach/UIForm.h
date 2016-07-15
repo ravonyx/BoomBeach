@@ -1299,6 +1299,11 @@ private: System::Windows::Forms::Button^  combatButton;
 			{
 				//lose
 			}
+			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
+			for (int i = 0; i < attackUnits.size(); i++)
+			{
+				OpenGL->MoveUnit(attackUnits[i]->getId());
+			}
 		}
 		
 
