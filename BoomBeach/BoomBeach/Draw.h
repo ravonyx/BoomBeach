@@ -13,6 +13,7 @@ void load_callback();
 void add_building(int nbBuilding);
 void add_unit(int nbUnits);
 
+void attack_unit(int index);
 void move_unit(int index);
 void drop_unit(int nbUnit);
 

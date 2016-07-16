@@ -479,7 +479,7 @@ std::pair<int, int> meilleur_noeud(l_noeud& l) {
 	std::pair<int, int> m_noeud = l.begin()->first;
 
 	for (l_noeud::iterator i = l.begin(); i != l.end(); i++)
-		if (i->second.cout_f< m_coutf) {
+		if (i->second.cout_f < m_coutf) {
 			m_coutf = i->second.cout_f;
 			m_noeud = i->first;
 		}
@@ -564,11 +564,21 @@ void move_unit(int index)
 	if (unitx == tmpPosition->first && unity == tmpPosition->second) {
 		goToDestination = false;
 	}
-		//std::cout << std::endl;
+	//std::cout << std::endl;
 
-	if(unitx != positionOrder.first || unity != positionOrder.second)
+	if (unitx != positionOrder.first || unity != positionOrder.second)
 		army->moveUnit(index, FindPath(unitx, unity, positionOrder.first, positionOrder.second));
 	//std::cout << positionOrder.first << std::endl;
+}
+
+void attack_unit(int index) {
+	int unitx = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first;
+	int unity = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second;
+	Zone targetZone;
+	targetZone = base->GetNearestBuilding(unitx, unity)->getZone();
+	std::cout << distance(unitx, unity, targetZone.getX() + targetZone.getWidth() / 2, targetZone.getY() + targetZone.getHeight() / 2) - distance(targetZone.getX(), targetZone.getY(), targetZone.getX() + targetZone.getWidth() / 2, targetZone.getY() + targetZone.getHeight() / 2) << std::endl;
+	if(distance(unitx, unity, targetZone.getX() + targetZone.getWidth() / 2, targetZone.getY() + targetZone.getHeight() / 2) - distance(targetZone.getX(), targetZone.getY(), targetZone.getX() + targetZone.getWidth() / 2, targetZone.getY() + targetZone.getHeight() / 2) <= army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getRange())
+		base->GetNearestBuilding(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first, army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second)->takeDamage(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getAttack());
 }
 
 void triggerBuildingActions()

@@ -1282,10 +1282,10 @@ private: System::Windows::Forms::Button^  combatButton;
 				if(buildings[i]->getLife() <= 0)
 					OpenGL->DeleteBuilding(i);
 			}
-			std::vector<Unit*> units = OpenGL->GetUnits();
-			for (int i = 0; i < units.size(); i++)
+			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
+			for (int i = 0; i < attackUnits.size(); i++)
 			{
-				if (units[i]->getLife() <= 0)
+				if (attackUnits[i]->getLife() <= 0)
 					OpenGL->DeleteUnit(i);
 			}
 
@@ -1316,7 +1316,6 @@ private: System::Windows::Forms::Button^  combatButton;
 			if (counterValueUpdate >= 201) {
 				counterValueUpdate = 1;
 			}
-			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
 			for (int i = 0; i < attackUnits.size(); i++)
 			{
 				if(counterValueUpdate % attackUnits[i]->getSpeed() == 0)
@@ -1324,6 +1323,8 @@ private: System::Windows::Forms::Button^  combatButton;
 				else {
 					//std::cout << "speed : " << attackUnits[i]->getSpeed() << " no : " << counterValueUpdate % (attackUnits[i]->getSpeed() ) << std::endl;
 				}
+				if (counterValueUpdate % attackUnits[i]->getFirerate() == 0)
+					OpenGL->AttackUnit(attackUnits[i]->getId());
 			}
 		}
 		

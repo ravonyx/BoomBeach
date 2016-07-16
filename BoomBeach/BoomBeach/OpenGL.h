@@ -169,6 +169,10 @@ namespace OpenGLForm
 		{
 			move_unit(index);
 		}
+		void AttackUnit(int index)
+		{
+			attack_unit(index);
+		}
 
 		void ChangeBuildingTargetType(int index)
 		{

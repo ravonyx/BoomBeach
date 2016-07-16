@@ -2,7 +2,7 @@
 
 UnitFactory::UnitFactory()
 {
-	Unit* brute = new Unit(0, 0, "Brute", 100, 1.3, 1.4, 2, 1.1, 1.3, 1.2, 10, 1, 1, 50, 10, true);
+	Unit* brute = new Unit(0, 0, "Brute", 100, 1.3, 1.4, 2, 1.1, 1.3, 1.2, 100, 50, 1, 50, 10, true);
 	Unit* kamikaze = new Unit(0, 1, "Kamikaze", 200, 1.2, 1.4, 4, 1.1, 1.3, 10, 0, 50, 1, 10, 20, false);
 	Unit* fusilleur = new Unit(0, 2, "Fusilleur", 100, 1.2, 1.4, 3, 1.1, 1.3, 1.4, 2, 100, 2, 100, 50, false);
 	Unit* sniper = new Unit(0, 3, "Sniper", 100, 1.1, 1.2, 2, 1.1, 1.3, 1.4, 2, 50, 7, 100, 100, false);
