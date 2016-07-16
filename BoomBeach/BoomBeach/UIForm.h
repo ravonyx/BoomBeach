@@ -1280,7 +1280,7 @@ private: System::Windows::Forms::Button^  combatButton;
 			for (int i = 0; i < buildings.size(); i++)
 			{
 				if(buildings[i]->getLife() <= 0)
-					OpenGL->DeleteBuilding(i);
+					OpenGL->DeleteBuilding(i+1);
 			}
 			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
 			for (int i = 0; i < attackUnits.size(); i++)

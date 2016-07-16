@@ -248,6 +248,10 @@ float distance(int x1, int y1, int x2, int y2) {
 	return sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2));
 }
 
+float distance(float x1, float y1, float x2, float y2) {
+	return sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2));
+}
+
 Building * Base::GetNearestBuilding(int x, int y)
 {
 	float minLenght = 100;

@@ -345,6 +345,8 @@ struct point arrivee;
 noeud depart;
 
 float distance(int, int, int, int);
+float distance(float, float, float, float);
+
 void ajouter_cases_adjacentes(std::pair<int, int>&);
 bool deja_present_dans_liste(std::pair<int, int>,
 	l_noeud&);
@@ -362,7 +364,7 @@ std::pair<int, int> FindPath(int dx, int dy, int ax, int ay) {
 	arrivee.x = ax;
 	arrivee.y = ay;
 
-	std::cout << "dx " << dx << " dy " << dy << " ax " << ax << " ay " << ay << std::endl;
+	//std::cout << "dx " << dx << " dy " << dy << " ax " << ax << " ay " << ay << std::endl;
 
 	depart.parent.first = dx;
 	depart.parent.second = dy;
@@ -565,20 +567,21 @@ void move_unit(int index)
 		goToDestination = false;
 	}
 	//std::cout << std::endl;
-
-	if (unitx != positionOrder.first || unity != positionOrder.second)
-		army->moveUnit(index, FindPath(unitx, unity, positionOrder.first, positionOrder.second));
-	//std::cout << positionOrder.first << std::endl;
 }
 
 void attack_unit(int index) {
-	int unitx = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first;
-	int unity = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second;
+	int unitX = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first;
+	int unitY = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second;
 	Zone targetZone;
-	targetZone = base->GetNearestBuilding(unitx, unity)->getZone();
-	std::cout << distance(unitx, unity, targetZone.getX() + targetZone.getWidth() / 2, targetZone.getY() + targetZone.getHeight() / 2) - distance(targetZone.getX(), targetZone.getY(), targetZone.getX() + targetZone.getWidth() / 2, targetZone.getY() + targetZone.getHeight() / 2) << std::endl;
-	if(distance(unitx, unity, targetZone.getX() + targetZone.getWidth() / 2, targetZone.getY() + targetZone.getHeight() / 2) - distance(targetZone.getX(), targetZone.getY(), targetZone.getX() + targetZone.getWidth() / 2, targetZone.getY() + targetZone.getHeight() / 2) <= army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getRange())
-		base->GetNearestBuilding(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first, army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second)->takeDamage(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getAttack());
+	targetZone = base->GetNearestBuilding(unitX, unitY)->getZone();
+	if(distance((float)unitX + 1.0f / 2.0f, (float)unitY + 1.0f / 2.0f, 
+		targetZone.getX() + targetZone.getWidth() / 2.0f, targetZone.getY() + targetZone.getHeight() / 2.0f) 
+		- distance((float)targetZone.getX(), (float)targetZone.getY(), targetZone.getX() + targetZone.getWidth() / 2.0f,
+			targetZone.getY() + targetZone.getHeight() / 2.0f) <= army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getRange())
+
+		base->GetNearestBuilding(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first, 
+			army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second)
+		->takeDamage(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getAttack());
 }
 
 void triggerBuildingActions()
