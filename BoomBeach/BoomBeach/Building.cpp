@@ -151,6 +151,11 @@ int Building::getMaxInstances() const
 	return maxInstances;
 }
 
+int Building::getTargetType() const
+{
+	return targetType;
+}
+
 Zone Building::getZone() const
 {
 	return zone;
@@ -177,7 +182,18 @@ void Building::setAddedLife(const int value)
 
 void Building::setTargetType(const int value)
 {
-	targetType = value;
+	if (value < 0) {
+		targetType = 0;
+	}
+	else if (targetType > 6)
+	{
+		targetType = 0;
+	}
+	else
+	{
+		targetType = value;
+	}
+	
 }
 
 void Building::takeDamage(const int amount)
@@ -189,4 +205,5 @@ void Building::attackUnit(Unit * unit)
 {
 	//Modifier les HP de l'unité visée 
 	//Faire une fonction TakeDamages ou setHP;
+	
 }

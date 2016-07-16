@@ -1441,6 +1441,10 @@ private: System::Windows::Forms::Button^  combatButton;
 	private: System::Void changeBuildingBehaviour(System::Object^  sender, System::EventArgs^  e)
 	{
 		System::Windows::Forms::Control^ controller = (System::Windows::Forms::Control^) sender;
+		int row = (controller->Location.Y - 3) / 30;
+		OpenGL->ChangeBuildingTargetType(row);
+		fillDataBuilding();
+		std::cout << "Type de cible changé : " << row << std::endl;
 	}
 
 	private: System::Void enhanceUnit(System::Object^  sender, System::EventArgs^  e)

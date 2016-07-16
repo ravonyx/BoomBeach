@@ -1,3 +1,4 @@
+#pragma once
 #include "Draw.h"
 #include <iostream>
 #include "glut.h"
@@ -532,3 +533,106 @@ void move_unit(int index)
 		army->moveUnit(index, FindPath(unitx, unity, positionOrder.first, positionOrder.second));
 	//std::cout << positionOrder.first << std::endl;
 }
+
+void triggerBuildingActions()
+{
+
+	for (int i = 0; i < base->getCurrentBuildings().size(); i++)
+	{
+		int targetedIndex;
+		int distance = 0;
+		//For Support Units
+		
+		if (base->getCurrentBuildings()[i]->getType() == 5)
+		{
+
+		}
+		else if (base->getCurrentBuildings()[i]->getType() == 6)
+		{
+
+		}
+		else if (base->getCurrentBuildings()[i]->getType() == 7)
+		{
+
+		}
+		else
+			//For Attack Units
+		{
+			if (base->getCurrentBuildings()[i]->getTargetType() == 0) //Nothing
+			{
+
+			}
+			else if (base->getCurrentBuildings()[i]->getTargetType() == 1) //Low HP Unit
+			{
+				//Boucler sur les unités voulues
+				int lowest=999999;
+				for (int j = 0; j < army->getCurrentUnits().size(); j++) {
+					if (army->getCurrentUnits()[j]->getLife() < lowest)
+					{
+						lowest = army->getCurrentUnits()[j]->getLife();
+						targetedIndex = j;
+					}
+				}
+
+				base->getCurrentBuildings()[i]->attackUnit(army->getCurrentUnits()[targetedIndex]);
+			}
+			else if (base->getCurrentBuildings()[i]->getTargetType() == 2) //High HP Unit
+			{
+				int heighest = 0;
+				for (int j = 0; j < army->getCurrentUnits().size(); j++) {
+					if (army->getCurrentUnits()[j]->getLife() > heighest)
+					{
+						heighest = army->getCurrentUnits()[j]->getLife();
+						targetedIndex = j;
+					}
+				}
+
+				base->getCurrentBuildings()[i]->attackUnit(army->getCurrentUnits()[targetedIndex]);
+			}
+			else if (base->getCurrentBuildings()[i]->getTargetType() == 3) //Closest Unit
+			{
+
+			}
+			else if (base->getCurrentBuildings()[i]->getTargetType() == 4) //Closest to HQ
+			{
+				
+			}
+			else if (base->getCurrentBuildings()[i]->getTargetType() == 5) //Strongest Unit
+			{
+				int heighest = 0;
+				for (int j = 0; j < army->getCurrentUnits().size(); j++) {
+					if (army->getCurrentUnits()[j]->getAttack() > heighest)
+					{
+						heighest = army->getCurrentUnits()[j]->getAttack();
+						targetedIndex = j;
+					}
+				}
+
+				base->getCurrentBuildings()[i]->attackUnit(army->getCurrentUnits()[targetedIndex]);
+			}
+			else if (base->getCurrentBuildings()[i]->getTargetType() == 6) //Closest Support Unit
+			{
+				int closest = 999;
+				for (int j = 0; j < army->getCurrentUnits().size(); j++) {
+					if (army->getCurrentUnits()[j]->getType() == 0 /*Mettre le type pour type d'unité de soutien*/) {
+						
+					}
+					
+				}
+			}
+		}
+
+	}
+}
+
+
+void goToNextTargetType(int index)
+{
+
+	if (base->getCurrentBuildings()[index] != nullptr)
+	{
+		int a = base->getCurrentBuildings()[index]->getTargetType();
+		base->getCurrentBuildings()[index]->setTargetType( a + 1);
+	}
+}
+
