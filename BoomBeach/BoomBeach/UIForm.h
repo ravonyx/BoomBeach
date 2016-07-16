@@ -1286,7 +1286,7 @@ private: System::Windows::Forms::Button^  combatButton;
 			for (int i = 0; i < attackUnits.size(); i++)
 			{
 				if (attackUnits[i]->getLife() <= 0)
-					OpenGL->DeleteUnit(i);
+					OpenGL->DeleteAttackUnit(i+1);
 			}
 
 			//check if QG delete
@@ -1325,6 +1325,11 @@ private: System::Windows::Forms::Button^  combatButton;
 				}
 				if (counterValueUpdate % attackUnits[i]->getFirerate() == 0)
 					OpenGL->AttackUnit(attackUnits[i]->getId());
+			}
+			for (int i = 0; i < buildings.size(); i++)
+			{
+				if (counterValueUpdate % buildings[i]->getFireRate() == 0)
+					OpenGL->AttackBuilding(buildings[i]->getId());
 			}
 		}
 		

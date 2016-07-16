@@ -13,6 +13,8 @@ void load_callback();
 void add_building(int nbBuilding);
 void add_unit(int nbUnits);
 
+void attack_building(int index);
+
 void attack_unit(int index);
 void move_unit(int index);
 void drop_unit(int nbUnit);
@@ -29,6 +31,7 @@ void enhance_building(int index);
 void delete_building(int index);
 void enhance_unit(int index);
 void delete_unit(int index);
+void delete_attackUnit(int index);
 
 void triggerBuildingActions();
 void goToNextTargetType(int index);

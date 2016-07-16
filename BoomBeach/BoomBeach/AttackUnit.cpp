@@ -19,3 +19,8 @@ std::pair<int, int> AttackUnit::getPosition()
 {
 	return position;
 }
+
+void AttackUnit::takeDamage(const int amount)
+{
+	health -= amount;
+}

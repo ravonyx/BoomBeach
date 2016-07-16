@@ -2,13 +2,14 @@
 
 BuildingFactory::BuildingFactory()
 {
-	Building* house = new Building(0, "QG", 1, 1000, 500, 0, 1.1f, 1.3f, 1, 4, 4, Zone());
-	Building* snipertower = new Building(0, "SniperTower", 2, 500, 100, 0, 1.3f, 1.2f, 4, 2, 2, Zone());
-	Building* lanceflamme = new Building(0, "LanceFlamme", 3, 800, 300, 0, 1.2f, 1.3f, 2, 2, 3, Zone());
-	Building* mitrailleuse = new Building(0, "Mitrailleuse", 4, 1000, 500, 0, 1.1f, 1.3f, 2, 2, 1, Zone());
-	Building* repare = new Building(0, "RepareBuilding", 5, 1000, 500, 0, 1.1f, 1.3f, 2, 1, 2, Zone());
-	Building* shield = new Building(0, "ShieldBuilding", 6, 1000, 500, 0, 1.1f, 1.3f, 3, 2, 2, Zone());
-	Building* energy = new Building(0, "EnergyBuilding", 7, 1000, 500, 0, 1.1f, 1.3f, 1, 3, 3, Zone());
+	Building* house = new Building(0, "QG", 1, 2000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 1, 4, 4, Zone());
+	Building* snipertower = new Building(0, "SniperTower", 2, 500, 100, 0, 50, 4, 50, true, 1.3f, 1.2f, 4, 2, 2, Zone());
+	Building* lanceflamme = new Building(0, "LanceFlamme", 3, 800, 300, 0, 10, 1, 30, false, 1.2f, 1.3f, 2, 2, 3, Zone());
+	Building* mitrailleuse = new Building(0, "Mitrailleuse", 4, 1000, 500, 0, 8, 2, 10, true, 1.1f, 1.3f, 2, 2, 1, Zone());
+	Building* Canon = new Building(0, "Canon", 4, 500, 500, 0, 45, 2, 50, false, 1.1f, 1.3f, 2, 2, 1, Zone());
+	Building* repare = new Building(0, "RepareBuilding", 5, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 2, 1, 2, Zone());
+	Building* shield = new Building(0, "ShieldBuilding", 6, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 3, 2, 2, Zone());
+	Building* energy = new Building(0, "EnergyBuilding", 7, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 1, 3, 3, Zone());
 
 	buildingModels.push_back(house);
 	buildingModels.push_back(snipertower);
@@ -72,7 +73,7 @@ Building* BuildingFactory::readNextBuilding(std::istream &stream)
 	Zone zone = Zone(buildingModel->getWidth(), buildingModel->getHeight(), x, y);
 	zone.setId(id);
 	
-	Building *building = new Building(id, name, type, 0, 0, level, buildingModel->getHealthUpdateRate(), 
+	Building *building = new Building(id, name, type, 0, 0, level, 0, 0, 0, false, buildingModel->getHealthUpdateRate(), 
 		buildingModel->getCostUpdateRate(), buildingModel->getMaxInstances(), buildingModel->getWidth(), buildingModel->getHeight(), zone);
 
 	building->setHeathCost(buildingModel->getLife(), buildingModel->getCost(), level);

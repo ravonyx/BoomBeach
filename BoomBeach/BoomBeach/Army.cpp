@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Field.h"
 #include <algorithm>
+#include "Tools.h"
 
 Army::Army()
 {
@@ -94,6 +95,28 @@ bool Army::deleteUnit(int id)
 	return false;
 }
 
+bool Army::deleteAttackUnit(int id)
+{
+	AttackUnit* attackUnit = getAttackUnit(id);
+	if (attackUnit != nullptr)
+	{
+		std::cout << "Erase unit " << attackUnit->getId() << std::endl;
+		std::vector<AttackUnit*>::iterator it;
+		it = find(_attackUnits.begin(), _attackUnits.end(), attackUnit);
+		_attackUnits.erase(it);
+		int _tmpId = 1;
+		for (int i = 0; i < _attackUnits.size(); i++)
+		{
+			_attackUnits[i]->setId(_tmpId);
+			_tmpId++;
+		}
+
+		return true;
+	}
+	std::cout << "L'id n'existe pas" << std::endl;
+	return false;
+}
+
 bool Army::moveUnit(int id, std::pair<int, int> position)
 {
 	int index = getIndexOfAttackUnit(id);
@@ -108,6 +131,28 @@ bool Army::moveUnit(int id, std::pair<int, int> position)
 	else
 		std::cout << "Wrong ID" << std::endl;
 	return false;
+}
+
+AttackUnit * Army::GetNearestUnit(int x, int y)
+{
+	float minLenght = 100;
+	float currentLenght = 0;
+	int minUnit = 0;
+	for (unsigned int i = 0; i < _attackUnits.size(); i++)
+	{
+		currentLenght = distance(_attackUnits[i]->getPosition().first, _attackUnits[i]->getPosition().second, x, y);
+		if (currentLenght < minLenght) {
+			minLenght = currentLenght;
+			minUnit = i;
+		}
+	}
+
+	if (_attackUnits.size() > 0)
+		return _attackUnits[minUnit];
+	else
+	{
+		return nullptr;
+	}
 }
 
 /*void Army::DeleteUnit(Unit & unit)
@@ -144,6 +189,15 @@ Unit* Army::getUnit(int id)
 	{
 		if (_units[i]->getId() == id)
 			return _units[i];
+	}
+	return nullptr;
+}
+AttackUnit* Army::getAttackUnit(int id)
+{
+	for (unsigned int i = 0; i < _attackUnits.size(); i++)
+	{
+		if (_attackUnits[i]->getId() == id)
+			return _attackUnits[i];
 	}
 	return nullptr;
 }

@@ -14,5 +14,7 @@ public:
 
 	void setPosition(int x, int y);
 	std::pair<int, int> getPosition();
+
+	void AttackUnit::takeDamage(const int amount);
 };
 

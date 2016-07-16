@@ -22,10 +22,13 @@ class Army
 		bool addAttackUnit(int id, int x, int y);
 		void enhanceUnit(int id);
 		bool deleteUnit(int id);
+		bool deleteAttackUnit(int id);
 		Unit* getUnit(int id);
+		AttackUnit* Army::getAttackUnit(int id);
 		int getIndexOfUnit(int id);
 		int getIndexOfAttackUnit(int id);
 		bool moveUnit(int id, std::pair<int, int> position);
+		AttackUnit * Army::GetNearestUnit(int x, int y);
 		
 		//void DeleteUnit(Unit &unit);
 		//void DeleteUnit(int type, int level);

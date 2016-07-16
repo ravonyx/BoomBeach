@@ -18,7 +18,7 @@ Building::Building()
 	zone = Zone();
 }
 
-Building::Building(int pid, std::string pname, int ptype, int plife, int pcost, int plevel, float phealthUpdateRate, float pcostUpdateRate, 
+Building::Building(int pid, std::string pname, int ptype, int plife, int pcost, int plevel, int ppower, int prange, int pfireRate, bool parea, float phealthUpdateRate, float pcostUpdateRate,
 	int pmaxInstances, int pwidth, int pheight, Zone pzone)
 {
 	id = pid;
@@ -28,6 +28,10 @@ Building::Building(int pid, std::string pname, int ptype, int plife, int pcost, 
 	addedLife = 0;
 	cost = pcost;
 	level = plevel;
+	power = ppower;
+	range = prange;
+	fireRate = pfireRate;
+	area = parea;
 
 	width = pwidth;
 	height = pheight;
@@ -49,6 +53,10 @@ Building::Building(const Building& model)
 	addedLife = 0;
 	cost = model.cost;
 	level = 0;
+	power = model.power;
+	range = model.range;
+	fireRate = model.fireRate;
+	area = model.area;
 
 	width = model.width;
 	height = model.height;
@@ -127,6 +135,22 @@ int Building::getLevel() const
 int Building::getCost() const
 {
 	return cost;
+}
+int Building::getPower() const
+{
+	return power;
+}
+int Building::getRange() const
+{
+	return range;
+}
+int Building::getFireRate() const
+{
+	return fireRate;
+}
+bool Building::getArea() const
+{
+	return area;
 }
 
 float Building::getHealthUpdateRate() const

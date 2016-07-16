@@ -153,6 +153,10 @@ namespace OpenGLForm
 		{
 			delete_building(index);
 		}
+		void AttackBuilding(int index)
+		{
+			attack_building(index);
+		}
 		void EnhanceUnit(int index)
 		{
 			enhance_unit(index);
@@ -160,6 +164,10 @@ namespace OpenGLForm
 		void DeleteUnit(int index)
 		{
 			delete_unit(index);
+		}
+		void DeleteAttackUnit(int index)
+		{
+			delete_attackUnit(index);
 		}
 		void DropUnit(int index)
 		{

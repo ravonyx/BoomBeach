@@ -10,7 +10,7 @@ class Building
 		
 		Building();
 		Building(const Building& model);
-		Building(int pid, std::string pname, int type, int plife, int pcost, int plevel, float phealthUpdateRate,
+		Building(int pid, std::string pname, int type, int plife, int pcost, int plevel, int power, int range, int fireRate, bool area, float phealthUpdateRate,
 			float pcostUpdateRate, int pmaxInstances, int pwidth, int pheight, Zone zone);
 
 		int id;
@@ -31,6 +31,7 @@ class Building
 		int range; // 1 : Around (Short), 2 : Two Panels (Medium), 3 : Three Panels (Long)
 		int defenseBonus = 0;
 		int fireRate;
+		bool area;
 
 		float healthUpdateRate;
 		float costUpdateRate;
@@ -64,6 +65,10 @@ class Building
 		int getBaseLife() const; //Returns Base Life
 		int getLevel() const;
 		int getCost() const;
+		int getPower() const;
+		int getRange() const;
+		int getFireRate() const;
+		bool getArea() const;
 
 		float getHealthUpdateRate() const;
 		float getCostUpdateRate() const;
