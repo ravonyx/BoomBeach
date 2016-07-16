@@ -259,27 +259,27 @@ void Base::triggerBuildingActions()
 			{
 
 			}
-			else if (_buildings[i]->getTargetType == 1) //Low HP Unit
+			else if (_buildings[i]->getTargetType() == 1) //Low HP Unit
 			{
 				//Boucler sur les unités voulues
 			}
-			else if (_buildings[i]->getTargetType == 2) //High HP Unit
+			else if (_buildings[i]->getTargetType() == 2) //High HP Unit
 			{
 
 			}
-			else if (_buildings[i]->getTargetType == 3) //Closest Unit
+			else if (_buildings[i]->getTargetType() == 3) //Closest Unit
 			{
 
 			}
-			else if (_buildings[i]->getTargetType == 4) //Closest to HQ
+			else if (_buildings[i]->getTargetType() == 4) //Closest to HQ
 			{
 
 			}
-			else if (_buildings[i]->getTargetType == 5) //Strongest Unit
+			else if (_buildings[i]->getTargetType() == 5) //Strongest Unit
 			{
 
 			}
-			else if (_buildings[i]->getTargetType == 6) //Closest Support Unit
+			else if (_buildings[i]->getTargetType() == 6) //Closest Support Unit
 			{
 
 			}

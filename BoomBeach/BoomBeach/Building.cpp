@@ -151,6 +151,11 @@ int Building::getMaxInstances() const
 	return maxInstances;
 }
 
+int Building::getTargetType() const
+{
+	return 0;
+}
+
 Zone Building::getZone() const
 {
 	return zone;
