@@ -29,6 +29,9 @@ void delete_building(int index);
 void enhance_unit(int index);
 void delete_unit(int index);
 
+void triggerBuildingActions();
+void goToNextTargetType(int index);
+
 
 std::vector<Building*> get_buildings();
 std::vector<Unit*> get_units();

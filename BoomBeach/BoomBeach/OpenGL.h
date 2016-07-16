@@ -170,6 +170,11 @@ namespace OpenGLForm
 			move_unit(index);
 		}
 
+		void ChangeBuildingTargetType(int index)
+		{
+			goToNextTargetType(index);
+		}
+
 
 		void mouseEnter(System::Object^  sender, System::EventArgs^  e)
 		{
