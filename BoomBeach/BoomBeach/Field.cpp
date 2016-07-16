@@ -137,6 +137,14 @@ bool Field::IsEmpty(Zone z)
 		return false;
 }
 
+bool Field::IsEmpty(int x, int y)
+{
+	if (_data[x + y * _width] == -1 || _data[x + y * _width] == -2)
+		return true;
+	else
+		return false;
+}
+
 Zone Field::FindEmptyZone(int w, int h)
 {
 	int lineNb = 0;

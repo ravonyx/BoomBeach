@@ -24,6 +24,7 @@ class Base
 		int getIndexOfBuilding(int id);
 		std::vector<Building*> getBuildingsPossibilities();
 		std::vector<Building*> getCurrentBuildings();
+		Building* GetNearestBuilding(int x, int y);
 	
 		BuildingFactory* getBuildingFactory();
 
@@ -41,8 +42,5 @@ class Base
 		int _currentId = 1;
 		Field *_field;
 		int _money;
-
-		
-
 };
 

@@ -1249,20 +1249,25 @@ private: System::Windows::Forms::Button^  combatButton;
 			this->counterText->Text = "You lose";
 		else
 		{
-			inCombat = false;
-			buildingsMenuItem->Enabled = true;
-			unitsMenu->Enabled = true;
-			save->Enabled = true;
-			load->Enabled = true;
-			combatButton->Enabled = true;
-
-			this->counterText->Text = "";
-			this->counter->Stop();
+			stopCombat();
 		}
 
 
 		
 	}
+
+	void stopCombat() {
+		inCombat = false;
+		buildingsMenuItem->Enabled = true;
+		unitsMenu->Enabled = true;
+		save->Enabled = true;
+		load->Enabled = true;
+		combatButton->Enabled = true;
+
+		this->counterText->Text = "";
+		this->counter->Stop();
+	}
+
 	private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e)
 	{
 		UNREFERENCED_PARAMETER(sender);
@@ -1288,6 +1293,9 @@ private: System::Windows::Forms::Button^  combatButton;
 			if (OpenGL->GetBuildingInstances(0) == 0)
 			{
 				//win
+				stopCombat();
+
+				this->counterText->Text = "You win";
 			}
 
 			//check number units
@@ -1302,6 +1310,7 @@ private: System::Windows::Forms::Button^  combatButton;
 			if (nbUnits == 0)
 			{
 				//lose
+				stopCombat();
 			}
 			counterValueUpdate++;
 			if (counterValueUpdate >= 201) {

@@ -298,6 +298,32 @@ std::vector<Building*> Base::getCurrentBuildings()
 	return _buildings;
 }
 
+float distance(int x1, int y1, int x2, int y2) {
+	return sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2));
+}
+
+Building * Base::GetNearestBuilding(int x, int y)
+{
+	float minLenght = 100;
+	float currentLenght = 0;
+	int minBuilding = 0;
+	for (unsigned int i = 0; i < _buildings.size(); i++)
+	{
+		currentLenght = distance(_buildings[i]->getZone().getX(), _buildings[i]->getZone().getY(), x, y);
+		if (currentLenght < minLenght) {
+			minLenght = currentLenght;
+			minBuilding = i;
+		}
+	}
+	
+	if(_buildings.size() > 0)
+		return _buildings[minBuilding];
+	else
+	{
+		return nullptr;
+	}
+}
+
 BuildingFactory* Base::getBuildingFactory()
 {
 	return _buildingFactory;

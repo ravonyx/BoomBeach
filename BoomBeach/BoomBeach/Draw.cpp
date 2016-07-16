@@ -2,6 +2,7 @@
 #include <iostream>
 #include "glut.h"
 #include "Tools.h"
+#include <algorithm>
 
 GLuint textureImage[11];
 std::vector <Building*> _buildingModels;
@@ -27,6 +28,8 @@ float squarex = 0;
 float squarey = 0;
 
 std::pair<int, int> positionOrder;
+
+bool goToDestination = false;
 
 void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
@@ -71,6 +74,8 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 
 		positionOrder.first = realx;
 		positionOrder.second = realy;
+		goToDestination = true;
+		std::cout << positionOrder.first << " " << positionOrder.second << std::endl;
 	}
 }
 
@@ -397,7 +402,7 @@ std::pair<int, int> FindPath(int dx, int dy, int ax, int ay) {
 	}
 
 	std::pair<int, int> result;
-	if (chemin.size() > 1) {
+	if (chemin.size() > 0) {
 		result.first = chemin[0].x;
 		result.second = chemin[0].y;
 	}
@@ -408,10 +413,6 @@ std::pair<int, int> FindPath(int dx, int dy, int ax, int ay) {
 
 
 	return result;
-}
-
-float distance(int x1, int y1, int x2, int y2) {
-	return sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2));
 }
 
 /*
@@ -521,14 +522,46 @@ void retrouver_chemin() {
 	}
 }
 
+std::pair<int, int>* findAroundEmptyTile(std::pair<int, int> &tmpPosition, int x, int y) {
+	while (!field->IsEmpty(tmpPosition.first, tmpPosition.second) && tmpPosition.first > 0 && tmpPosition.second > 0 && tmpPosition.first < field->getWidth() && tmpPosition.second < field->getHeight())
+	{
+		tmpPosition.first += std::max(-1, std::min(x - tmpPosition.first, 1));
+		tmpPosition.second += std::max(-1, std::min(y - tmpPosition.second, 1));
+	}
+	return &tmpPosition;
+}
+
 void move_unit(int index)
 {
 	int unitx = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().first;
 	int unity = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second;
 
-	int nearestBuilding = field->GetNearestBuilding(unitx, unity);
+	std::pair<int, int>* tmpPosition = &std::make_pair(0, 0);
 
-	if(unitx != positionOrder.first || unity != positionOrder.second)
-		army->moveUnit(index, FindPath(unitx, unity, positionOrder.first, positionOrder.second));
-	//std::cout << positionOrder.first << std::endl;
+	if (!goToDestination) {
+		Zone targetZone;
+		targetZone = base->GetNearestBuilding(unitx, unity)->getZone();
+
+		tmpPosition->first = targetZone.getX() + targetZone.getWidth() / 2;
+		tmpPosition->second = targetZone.getY() + targetZone.getHeight() / 2;
+
+		tmpPosition = findAroundEmptyTile(*tmpPosition, unitx, unity);
+
+		army->moveUnit(index, FindPath(unitx, unity, tmpPosition->first, tmpPosition->second));
+	}
+	else {
+		tmpPosition->first = positionOrder.first;
+		tmpPosition->second = positionOrder.second;
+
+		if (!field->IsEmpty(positionOrder.first, positionOrder.second)) {
+
+			tmpPosition = findAroundEmptyTile(*tmpPosition, unitx, unity);
+		}
+		army->moveUnit(index, FindPath(unitx, unity, tmpPosition->first, tmpPosition->second));
+	}
+
+	if (unitx == tmpPosition->first && unity == tmpPosition->second) {
+		goToDestination = false;
+	}
+		//std::cout << std::endl;
 }

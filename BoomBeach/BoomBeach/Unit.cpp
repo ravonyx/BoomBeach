@@ -46,7 +46,7 @@ Unit::Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdate
 
 Unit::Unit(const Unit& model)
 {
-	id = 0;
+	id = model.id;
 	type = model.type;
 	name = model.name;
 	level = model.level;

@@ -16,6 +16,7 @@ class Field
 		~Field();
 
 		bool IsEmpty(Zone);
+		bool IsEmpty(int x, int y);
 
 		Zone FindEmptyZone(int w, int h);
 		Zone FindEmptyZoneWithInd(int w, int h, int px, int py);
