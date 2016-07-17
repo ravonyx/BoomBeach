@@ -52,12 +52,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Common;..\libs;..\libs\AntTweakBar\include;..\Libs\freeglut\include;..\Libs\glew\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Common;..\libs;..\Libs\freeglut\include;..\Libs\glew\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Libs;..\libs\AntTweakBar\lib;..\Libs\freeglut\lib;..\Libs\glew\lib\Release\Win32</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Libs;..\Libs\freeglut\lib;..\Libs\glew\lib\Release\Win32</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

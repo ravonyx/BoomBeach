@@ -32,7 +32,7 @@ out VertexDataIn {
 // Vecteur vers le haut de l'hemisphere
 const vec3 UP = vec3(0.0, 1.0, 0.0);
 // Couleurs pour l'hemisphere Ambient Lighting
-const vec4 Blue = vec4(0.0, 0.0, 1.0, 1.0);
+const vec4 Blue = vec4(0.6, 0.1, 0.1, 1.0);
 const vec4 Green = vec4(0.0, 1.0, 0.0, 1.0);
 
 uniform float u_time;
@@ -57,8 +57,8 @@ void main(void)
 	//float NdotL = max(dot(L, N), 0.0);
 	//worldPosition.xyz += OUT.v_normal * NdotL * abs(cos(u_time));
 
-	float ambientFactor = (dot(N, UP) + 1.0) / 2.0;
-	OUT.v_color = objColor * mix(Green, Blue, ambientFactor);
+	float ambientFactor = (dot(N, UP) + 1.0)/2.5;
+	OUT.v_color = mix(objColor, mix(Blue, Green, ambientFactor), 0.6);
 
 	OUT.v_texcoords = a_texcoords;
 	gl_Position = u_projectionMatrix * u_viewMatrix * worldPosition;

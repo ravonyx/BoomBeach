@@ -44,6 +44,8 @@ dlldata.c
 *.ilk
 *.meta
 *.obj
+!cube.obj
+!rock.obj
 *.pch
 *.pdb
 *.pgc

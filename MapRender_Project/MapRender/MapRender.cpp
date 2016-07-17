@@ -1,8 +1,3 @@
-//
-// ESGI
-// MultipleObjects.cpp 
-//
-
 #include <cstdio>
 #include <cmath>
 
@@ -35,8 +30,6 @@
 #include "stb/stb_image.h"
 
 #include "tinyobjloader/tiny_obj_loader.h"
-
-// ---
 
 #include <vector>
 #include <iostream>
@@ -106,7 +99,6 @@ mat4 perspectiveFov(float fov, float width, float height, float znear, float zfa
 	w = w / aspect;
 	float h = 2 * znear / near_height;
  
-	// ne pas oublier il s'agit de colonnes !
 	mat.m[0]  = w; mat.m[1]  = 0.0f; mat.m[2]  = 0.0f; mat.m[3]  = 0.0f;
 	mat.m[4]  = 0.0f; mat.m[5]  = h; mat.m[6]  = 0.0f; mat.m[7]  = 0.0f;
 	mat.m[8]  = 0.0f; mat.m[9]  = 0.0f; mat.m[10] = q; mat.m[11] = -1.0f;
@@ -119,14 +111,10 @@ mat4 lookAt(const vec3& eye, const vec3& target, const vec3& up)
 {
 	mat4 mat(1.0f);
 
-	// TODO: une vraie lookAt matrix (cf TD au format doc)
-
 	mat.m[12] = -eye.x; mat.m[13] = -eye.y; mat.m[14] = -eye.z;
 
 	return mat;
 }
-
-// ---
 
 bool LoadAndCreateTexture(const char* nom, GLuint& textureObj)
 {
@@ -154,8 +142,6 @@ void DestroyTexture(GLuint textureObj)
 	glDeleteTextures(1, &textureObj);
 }
 
-// ---
-
 EsgiShader g_BasicShader;
 
 int previousTime = 0;
@@ -169,35 +155,32 @@ struct ViewProj
 
 struct Objet
 {
-	// transform
 	vec3 position;
 	vec3 rotation;
 	mat4 worldMatrix;	
-	// mesh
 	GLuint VBO;
 	GLuint IBO;
 	GLuint ElementCount;
 	GLenum PrimitiveType;
 	GLuint VAO;
-	// material
 	GLuint textureObj;
 };
 
-Objet g_Objet;
+Objet g_Cube;
+Objet g_Rock;
 Objet g_CubeMap;
 
-// decommenter afin d'utiliser la technique d'instancing via gl_InstanceID
-//#define USE_UNIFORM_INSTANCING 1
-//static const int MAX_OBJECTS = 100;
-//vec3 objectPositions[MAX_OBJECTS];
-//vec3 objectColors[MAX_OBJECTS];
-std::vector<vec3>& objectPositions = std::vector<vec3>();
-std::vector<vec3>& objectColors = std::vector<vec3>();
+// Nos structures de données
+std::vector<vec3>& cubePositions = std::vector<vec3>();
+std::vector<vec3>& cubeColors = std::vector<vec3>();
+std::vector<vec3>& rockPositions = std::vector<vec3>();
+std::vector<vec3>& rockColors = std::vector<vec3>();
+// VBO unique
 GLuint objPositionsVBO;
 GLuint objColorsVBO;
-// ---
 
-void LoadOBJ(const std::string &inputFile)
+// Charge l'obj et le place dans l'objet en parametre
+void LoadOBJ(const std::string &inputFile, Objet &obj)
 {	
 	std::vector<tinyobj::shape_t> shapes;
 	std::vector<tinyobj::material_t> materials;
@@ -208,7 +191,7 @@ void LoadOBJ(const std::string &inputFile)
 	const std::vector<float>& normals = shapes[0].mesh.normals;
 	const std::vector<float>& texcoords = shapes[0].mesh.texcoords;
 
-	g_Objet.ElementCount = indices.size();
+	obj.ElementCount = indices.size();
 	
 	uint32_t stride = 0;
 
@@ -225,18 +208,14 @@ void LoadOBJ(const std::string &inputFile)
 	const auto count = positions.size() / 3;
 	const auto totalSize = count * stride;
 	
-	glGenBuffers(1, &g_Objet.IBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, g_Objet.IBO);
+	glGenBuffers(1, &obj.IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj.IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), &indices[0], GL_STATIC_DRAW);
 
-	glGenBuffers(1, &g_Objet.VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, g_Objet.VBO);
+	glGenBuffers(1, &obj.VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, obj.VBO);
 	glBufferData(GL_ARRAY_BUFFER, totalSize, nullptr, GL_STATIC_DRAW);
 
-	// glMapBuffer retourne un pointeur sur la zone memoire allouee par glBufferData 
-	// du Buffer Object qui est actuellement actif - via glBindBuffer(<cible>, <id>)
-	// il est imperatif d'appeler glUnmapBuffer() une fois que l'on a termine car le
-	// driver peut tres bien etre amener a modifier l'emplacement memoire du BO.
 	float* vertices = (float*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);		
 	for (auto index = 0; index < count; ++index)
 	{
@@ -255,12 +234,12 @@ void LoadOBJ(const std::string &inputFile)
 	}
 	glUnmapBuffer(GL_ARRAY_BUFFER);
 
-	glGenVertexArrays(1, &g_Objet.VAO);
-	glBindVertexArray(g_Objet.VAO);
+	glGenVertexArrays(1, &obj.VAO);
+	glBindVertexArray(obj.VAO);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, g_Objet.IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj.IBO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, g_Objet.VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, obj.VBO);
 	uint32_t offset = 3 * sizeof(float);
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, stride, nullptr);
 	glEnableVertexAttribArray(0);
@@ -279,7 +258,7 @@ void LoadOBJ(const std::string &inputFile)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);	
 
-	LoadAndCreateTexture(materials[0].diffuse_texname.c_str(), g_Objet.textureObj);
+	LoadAndCreateTexture(materials[0].diffuse_texname.c_str(), obj.textureObj);
 }
 
 void CleanObjet(Objet& objet)
@@ -294,27 +273,26 @@ void CleanObjet(Objet& objet)
 		glDeleteBuffers(1, &objet.IBO);
 }
 
-// Initialisation et terminaison ---
-
 static const float randomFloat(float min, float max)
 {
 	float normalized = (float)rand() / (float)RAND_MAX;
 	return min + normalized * (max - min);
 }
 
-void loadBase();
+//------------------------------- Load Base
 
-vec3 startPos = vec3(-20, -10, 0);
+vec3 startPos = vec3(-19, -18, 0);
 vec3 currentPos = startPos;
 
 std::vector<int> _buildings;
 int _money;
 
 int MAX_OBJECTS = 0;
-
+int MAX_ROCKS = 0;
 
 struct Field {
 	std::vector<int> _data;
+	std::vector<int> _dataR;
 	int _width;
 	int _height;
 };
@@ -328,8 +306,8 @@ std::istream& operator >> (std::istream& is, Field& f)
 
 	const int size = f._width * f._height;
 	MAX_OBJECTS = f._width * f._height;
-	objectPositions.resize(MAX_OBJECTS);
-	objectColors.resize(MAX_OBJECTS);
+	cubePositions.resize(MAX_OBJECTS);
+	cubeColors.resize(MAX_OBJECTS);
 	int data;
 	int index = 0;
 	while (is.good())
@@ -338,9 +316,14 @@ std::istream& operator >> (std::istream& is, Field& f)
 		if (index < size)
 		{
 			f._data.push_back(data);
+			if(data == -3)
+				f._dataR.push_back(data);
 			index++;
 		}
 	}
+	MAX_ROCKS = f._dataR.size();
+	rockPositions.resize(MAX_ROCKS);
+	rockColors.resize(MAX_ROCKS);
 	return is;
 }
 
@@ -356,7 +339,7 @@ int ReadNextBuilding(std::istream &stream)
 	stream >> x;
 	stream >> y;
 
-	return 0;
+	return type;
 }
 
 void loadBase()
@@ -381,6 +364,8 @@ void loadBase()
 	myfile.close();
 }
 
+//--------------------------- Fin chargement base
+
 void Initialize()
 {
 	printf("Version Pilote OpenGL : %s\n", glGetString(GL_VERSION));
@@ -392,7 +377,6 @@ void Initialize()
 	
 	GLenum error = glewInit();
 	if (error != GL_NO_ERROR) {
-		// TODO
 	}
 
 	loadBase();
@@ -403,18 +387,10 @@ void Initialize()
 		printf("Extension[%d] : %s\n", index, glGetStringi(GL_EXTENSIONS, index));
 	}
 #endif
-	
-#ifdef _WIN32
-	// on coupe la synchro vertical pour voir l'effet du delta time
-	//wglSwapIntervalEXT(0);
-#endif
 
-	// render states par defaut
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);	
-
-	// Objets OpenGL
 
 	g_BasicShader.LoadVertexShader("basic.vs");
 	g_BasicShader.LoadFragmentShader("basic.fs");
@@ -424,21 +400,29 @@ void Initialize()
 
 	auto program = g_BasicShader.GetProgram();
 
-	// Setup
-
 	previousTime = glutGet(GLUT_ELAPSED_TIME);
 
-	const std::string inputFile = "rock.obj";
-	LoadOBJ(inputFile);
+	const std::string inputFileCube = "cube.obj";
+	LoadOBJ(inputFileCube, g_Cube);
+	const std::string  inputFileRock = "rock.obj";
+	LoadOBJ(inputFileRock, g_Rock);
 
-	// initialisation des tableaux random
-	//MAX_OBJECTS
-
+	// ---------------- Initialisation des donnees
 	int x = 0, y = 0;
+	int type = -1;
+	int indexRock = 0;
 	for (auto index = 0; index < _field->_height * _field->_width; ++index)
 	{
-		//objectPositions[index] = vec3(randomFloat(-10.0f, 10.0f), randomFloat(-10.0f, 10.0f), randomFloat(-10.0f, 10.0f));
-		objectPositions[index] = currentPos;
+		if (_field->_data[index] > 0) {
+			cubePositions[index] = vec3(currentPos.x, currentPos.y, currentPos.z+2);
+		}
+		else
+		{
+			cubePositions[index] = currentPos;
+		}
+		if (_field->_data[index] == -3) {
+			rockPositions[indexRock] = vec3(currentPos.x, currentPos.y, currentPos.z + 1);
+		}
 		currentPos.x += 2;
 		x++;
 		if (x >= _field->_width) {
@@ -448,26 +432,45 @@ void Initialize()
 			currentPos.y += 1;
 			currentPos.z -= 1.2;
 		}
-		//objectColors[index] = vec3(randomFloat(0.0f, 1.0f), randomFloat(0.0f, 1.0f), randomFloat(0.0f, 1.0f));
-		objectColors[index] = vec3(1-_field->_data[index]*2/10.0*-1.0, 1-_field->_data[index]*2 / 10.0 * -1.0, 1-_field->_data[index]*2 / 10.0 * -1.0);
+		if (_field->_data[index] >= 0) {
+			cubeColors[index] = vec3(1 - _field->_data[index] / 10.0, 0.0, 0.0) ;
+		}
+		else
+		{
+			cubeColors[index] = vec3(1 - _field->_data[index] * 3 / 10.0*-1.0 - randomFloat(0.0f, 0.2f), 1 - _field->_data[index] * 3 / 10.0 * -1.0 - randomFloat(0.0f, 0.2f), 1 - _field->_data[index] * 3 / 10.0 * -1.0 - randomFloat(0.0f, 0.2f));
+			if (_field->_data[index] == -3) {
+				rockColors[indexRock] = cubeColors[index];
+				indexRock++;
+			}
+		}
 	}
 
 #ifndef USE_UNIFORM_INSTANCING
-	glBindVertexArray(g_Objet.VAO);
-	// a. les 3 lignes ci apres ne sont pas prises en compte par le VAO
+	glBindVertexArray(g_Cube.VAO);
 	glGenBuffers(1, &objPositionsVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, objPositionsVBO);
-	glBufferData(GL_ARRAY_BUFFER, MAX_OBJECTS * sizeof(vec3), &objectPositions[0], GL_STREAM_DRAW);
-	// b. mais les 3 lignes suivantes SI !
+	glBufferData(GL_ARRAY_BUFFER, MAX_OBJECTS * sizeof(vec3), &cubePositions[0], GL_STREAM_DRAW);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), nullptr);
 	glVertexAttribDivisor(3, 1);
 	glEnableVertexAttribArray(3);
-	// idem a
 	glGenBuffers(1, &objColorsVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, objColorsVBO);
-	glBufferData(GL_ARRAY_BUFFER, MAX_OBJECTS * sizeof(vec3), &objectColors[0], GL_STREAM_DRAW);
-	// idem b
+	glBufferData(GL_ARRAY_BUFFER, MAX_OBJECTS * sizeof(vec3), &cubeColors[0], GL_STREAM_DRAW);
 	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), nullptr);
+	glVertexAttribDivisor(4, 1);
+	glEnableVertexAttribArray(4);
+
+	glBindVertexArray(g_Rock.VAO);
+	glGenBuffers(1, &objPositionsVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, objPositionsVBO);
+	glBufferData(GL_ARRAY_BUFFER, MAX_ROCKS * sizeof(vec3), &rockPositions[0], GL_STREAM_DRAW);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+	glVertexAttribDivisor(3, 1);
+	glEnableVertexAttribArray(3);
+	glGenBuffers(1, &objColorsVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, objColorsVBO);
+	glBufferData(GL_ARRAY_BUFFER, MAX_ROCKS * sizeof(vec3), &rockColors[0], GL_STREAM_DRAW);
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 	glVertexAttribDivisor(4, 1);
 	glEnableVertexAttribArray(4);
 
@@ -481,12 +484,11 @@ void Terminate()
 	glDeleteBuffers(1, &objPositionsVBO);
 	glDeleteBuffers(1, &objColorsVBO);
 
-	CleanObjet(g_Objet);
+	CleanObjet(g_Cube);
+	CleanObjet(g_Rock);
 
 	g_BasicShader.Destroy();
 }
-
-// boucle principale ---
 
 void Resize(GLint width, GLint height) 
 {
@@ -499,14 +501,6 @@ static float time = 0.0f;
 
 void Update() 
 {
-	auto currentTime = glutGet(GLUT_ELAPSED_TIME);
-	auto delta = currentTime - previousTime;
-	previousTime = currentTime;
-	auto elapsedTime = delta / 1000.0f;
-	time += elapsedTime;
-	//g_Objet.rotation += vec3(36.0f * elapsedTime);
-	//g_Camera.rotation.y += 10.f * elapsedTime;
-
 	glutPostRedisplay();
 }
 
@@ -515,19 +509,16 @@ void Render()
 	auto width = glutGet(GLUT_WINDOW_WIDTH);
 	auto height = glutGet(GLUT_WINDOW_HEIGHT);
 
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	
-	// variables uniformes (constantes) 
 
-	g_Camera.projectionMatrix = perspectiveFov(45.f, (float)width, (float)height, 0.1f, 1000.f);
+	g_Camera.projectionMatrix = perspectiveFov(55.f, (float)width, (float)height, 0.1f, 1000.f);
 	
-	vec3 camera_position(0.0f, 0.0f, 40.0f);
+	vec3 camera_position(0.0f, -10.0f, 35.0f);
 	g_Camera.viewMatrix = lookAt(vec3(camera_position), vec3(0.f), vec3(0.f, 1.f, 0.f));
 
-	g_Objet.worldMatrix.identity();
-
-	// rendu	
+	g_Cube.worldMatrix.identity();
+	g_Rock.worldMatrix.identity();
 
 	auto program = g_BasicShader.GetProgram();
 	glUseProgram(program);
@@ -542,19 +533,23 @@ void Render()
 	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, g_Camera.viewMatrix.m);
 	
 
-	glBindTexture(GL_TEXTURE_2D, g_Objet.textureObj);
+	glBindTexture(GL_TEXTURE_2D, g_Cube.textureObj);
 
-	glUniformMatrix4fv(worldLocation, 1, GL_FALSE, g_Objet.worldMatrix.m);
-#if USE_UNIFORM_INSTANCING
-	GLint colorsLocation = glGetUniformLocation(program, "u_objectColors");
-	glUniform3fv(colorsLocation, MAX_OBJECTS, &objectColors[0].x);
-	GLint positionsLocation = glGetUniformLocation(program, "u_objectPositions");
-	glUniform3fv(positionsLocation, MAX_OBJECTS, &objectPositions[0].x);
-#endif
+	glUniformMatrix4fv(worldLocation, 1, GL_FALSE, g_Cube.worldMatrix.m);
 
-	glBindVertexArray(g_Objet.VAO);	
+	glBindVertexArray(g_Cube.VAO);	
 
-	glDrawElementsInstanced(GL_TRIANGLES, g_Objet.ElementCount, GL_UNSIGNED_INT, 0, MAX_OBJECTS);
+	glDrawElementsInstanced(GL_TRIANGLES, g_Cube.ElementCount, GL_UNSIGNED_INT, 0, MAX_OBJECTS);
+
+
+
+	glBindTexture(GL_TEXTURE_2D, g_Rock.textureObj);
+
+	glUniformMatrix4fv(worldLocation, 1, GL_FALSE, g_Rock.worldMatrix.m);
+
+	glBindVertexArray(g_Rock.VAO);
+
+	glDrawElementsInstanced(GL_TRIANGLES, g_Rock.ElementCount, GL_UNSIGNED_INT, 0, MAX_ROCKS);
 
 	glutSwapBuffers();
 }
@@ -564,10 +559,9 @@ int main(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(800, 600);
-	glutCreateWindow("Multiple Objects with Instancing");
+	glutCreateWindow("MapRender");
 
 #ifdef FREEGLUT
-	// Note: glutSetOption n'est disponible qu'avec freeGLUT
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE,
 				  GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 #endif
