@@ -1646,7 +1646,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				| System::Windows::Forms::AnchorStyles::Right));
 			changeBehaviourButton->AutoSize = true;
 			changeBehaviourButton->TabIndex = 5;
-			changeBehaviourButton->Text = "Change Behaviour";
+			changeBehaviourButton->Text = "Change Behaviour : " + buildings[i]->getTargetType();
 			changeBehaviourButton->Click += gcnew System::EventHandler(this, &UIForm::changeBuildingBehaviour);
 			if (inCombat)
 				deleteButton->Enabled = false;

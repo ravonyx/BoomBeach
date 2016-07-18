@@ -16,6 +16,7 @@ Building::Building()
 	maxInstances = 1;
 
 	zone = Zone();
+	targetType = 0;
 }
 
 Building::Building(int pid, std::string pname, int ptype, int plife, int pcost, int plevel, int ppower, int prange, int pfireRate, bool parea, float phealthUpdateRate, float pcostUpdateRate,
@@ -41,6 +42,7 @@ Building::Building(int pid, std::string pname, int ptype, int plife, int pcost, 
 	maxInstances = pmaxInstances;
 
 	zone = pzone;
+	targetType = 0;
 }
 
 Building::Building(const Building& model)
@@ -66,6 +68,7 @@ Building::Building(const Building& model)
 	
 	maxInstances = model.maxInstances;
 	zone = Zone(model.zone);
+	targetType = 0;
 }
 
 int Building::nextUpdateCost()
@@ -206,18 +209,12 @@ void Building::setAddedLife(const int value)
 
 void Building::setTargetType(const int value)
 {
-	if (value < 0) {
+	if (value < 0) 
 		targetType = 0;
-	}
-	else if (targetType > 6)
-	{
+	else if (value > 6)
 		targetType = 0;
-	}
 	else
-	{
 		targetType = value;
-	}
-	
 }
 
 void Building::takeDamage(const int amount)
