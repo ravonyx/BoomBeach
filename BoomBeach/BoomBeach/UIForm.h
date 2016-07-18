@@ -785,7 +785,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->canonName->Name = L"canonName";
 				 this->canonName->Size = System::Drawing::Size(129, 31);
 				 this->canonName->TabIndex = 3;
-				 this->canonName->Text = L"canon";
+				 this->canonName->Text = L"Canon";
 				 this->canonName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // repareBuildingName
@@ -877,10 +877,14 @@ private: System::Windows::Forms::Button^  combatButton;
 				 // 
 				 // canonValue
 				 // 
+				 this->canonValue->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->canonValue->Location = System::Drawing::Point(138, 124);
 				 this->canonValue->Name = L"canonValue";
 				 this->canonValue->Size = System::Drawing::Size(74, 23);
 				 this->canonValue->TabIndex = 11;
+				 this->canonValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // repareBuildingValue
 				 // 
