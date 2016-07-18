@@ -74,6 +74,7 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::ToolStripMenuItem^  sniperTowerMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  lanceFlammeMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  mitrailleuseMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  canonMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  repareBuildingMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  shieldBuildingMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  energyBuildingMenuItem;
@@ -119,6 +120,7 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::Label^  sniperTowerName;
 	private: System::Windows::Forms::Label^  lanceflammeName;
 	private: System::Windows::Forms::Label^  mitrailleuseName;
+	private: System::Windows::Forms::Label^  canonName;
 	private: System::Windows::Forms::Label^  repareBuildingName;
 	private: System::Windows::Forms::Label^  shieldBuildingName;
 
@@ -127,6 +129,7 @@ namespace UIBoomBeach {
 	private: System::Windows::Forms::Label^  sniperTowerValue;
 	private: System::Windows::Forms::Label^  lanceflammeValue;
 	private: System::Windows::Forms::Label^  mitrailleuseValue;
+	private: System::Windows::Forms::Label^  canonValue;
 	private: System::Windows::Forms::Label^  repareBuildingValue;
 	private: System::Windows::Forms::Label^  shieldBuildingValue;
 	private: System::Windows::Forms::Label^  energyBuildingValue;
@@ -191,6 +194,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->sniperTowerName = (gcnew System::Windows::Forms::Label());
 				 this->lanceflammeName = (gcnew System::Windows::Forms::Label());
 				 this->mitrailleuseName = (gcnew System::Windows::Forms::Label());
+				 this->canonName = (gcnew System::Windows::Forms::Label());
 				 this->repareBuildingName = (gcnew System::Windows::Forms::Label());
 				 this->shieldBuildingName = (gcnew System::Windows::Forms::Label());
 				 this->energyBuildingName = (gcnew System::Windows::Forms::Label());
@@ -198,6 +202,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->sniperTowerValue = (gcnew System::Windows::Forms::Label());
 				 this->lanceflammeValue = (gcnew System::Windows::Forms::Label());
 				 this->mitrailleuseValue = (gcnew System::Windows::Forms::Label());
+				 this->canonValue = (gcnew System::Windows::Forms::Label());
 				 this->repareBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->shieldBuildingValue = (gcnew System::Windows::Forms::Label());
 				 this->energyBuildingValue = (gcnew System::Windows::Forms::Label());
@@ -218,6 +223,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->sniperTowerMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->lanceFlammeMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->mitrailleuseMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				 this->canonMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->repareBuildingMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->shieldBuildingMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				 this->energyBuildingMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -691,16 +697,18 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->layoutBuildings->Controls->Add(this->sniperTowerName, 0, 1);
 				 this->layoutBuildings->Controls->Add(this->lanceflammeName, 0, 2);
 				 this->layoutBuildings->Controls->Add(this->mitrailleuseName, 0, 3);
-				 this->layoutBuildings->Controls->Add(this->repareBuildingName, 0, 4);
-				 this->layoutBuildings->Controls->Add(this->shieldBuildingName, 0, 5);
-				 this->layoutBuildings->Controls->Add(this->energyBuildingName, 0, 6);
+				 this->layoutBuildings->Controls->Add(this->canonName, 0, 4);
+				 this->layoutBuildings->Controls->Add(this->repareBuildingName, 0, 5);
+				 this->layoutBuildings->Controls->Add(this->shieldBuildingName, 0, 6);
+				 this->layoutBuildings->Controls->Add(this->energyBuildingName, 0, 7);
 				 this->layoutBuildings->Controls->Add(this->QGValue, 1, 0);
 				 this->layoutBuildings->Controls->Add(this->sniperTowerValue, 1, 1);
 				 this->layoutBuildings->Controls->Add(this->lanceflammeValue, 1, 2);
 				 this->layoutBuildings->Controls->Add(this->mitrailleuseValue, 1, 3);
-				 this->layoutBuildings->Controls->Add(this->repareBuildingValue, 1, 4);
-				 this->layoutBuildings->Controls->Add(this->shieldBuildingValue, 1, 5);
-				 this->layoutBuildings->Controls->Add(this->energyBuildingValue, 1, 6);
+				 this->layoutBuildings->Controls->Add(this->canonValue, 1, 4);
+				 this->layoutBuildings->Controls->Add(this->repareBuildingValue, 1, 5);
+				 this->layoutBuildings->Controls->Add(this->shieldBuildingValue, 1, 6);
+				 this->layoutBuildings->Controls->Add(this->energyBuildingValue, 1, 7);
 				 this->layoutBuildings->Location = System::Drawing::Point(6, 19);
 				 this->layoutBuildings->Name = L"layoutBuildings";
 				 this->layoutBuildings->RowCount = 7;
@@ -711,6 +719,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->layoutBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.2F)));
 				 this->layoutBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.2F)));
 				 this->layoutBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 14.2F)));
+				 this->layoutBuildings->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
 				 this->layoutBuildings->Size = System::Drawing::Size(215, 243);
 				 this->layoutBuildings->TabIndex = 0;
 				 // 
@@ -722,7 +731,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->QGName->AutoSize = true;
 				 this->QGName->Location = System::Drawing::Point(3, 0);
 				 this->QGName->Name = L"QGName";
-				 this->QGName->Size = System::Drawing::Size(129, 34);
+				 this->QGName->Size = System::Drawing::Size(129, 31);
 				 this->QGName->TabIndex = 0;
 				 this->QGName->Text = L"QG";
 				 this->QGName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -733,9 +742,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->sniperTowerName->AutoSize = true;
-				 this->sniperTowerName->Location = System::Drawing::Point(3, 34);
+				 this->sniperTowerName->Location = System::Drawing::Point(3, 31);
 				 this->sniperTowerName->Name = L"sniperTowerName";
-				 this->sniperTowerName->Size = System::Drawing::Size(129, 34);
+				 this->sniperTowerName->Size = System::Drawing::Size(129, 31);
 				 this->sniperTowerName->TabIndex = 1;
 				 this->sniperTowerName->Text = L"SniperTower";
 				 this->sniperTowerName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -746,11 +755,11 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->lanceflammeName->AutoSize = true;
-				 this->lanceflammeName->Location = System::Drawing::Point(3, 68);
+				 this->lanceflammeName->Location = System::Drawing::Point(3, 62);
 				 this->lanceflammeName->Name = L"lanceflammeName";
-				 this->lanceflammeName->Size = System::Drawing::Size(129, 34);
+				 this->lanceflammeName->Size = System::Drawing::Size(129, 31);
 				 this->lanceflammeName->TabIndex = 2;
-				 this->lanceflammeName->Text = L"Lance Flamme";
+				 this->lanceflammeName->Text = L"FlamerTower";
 				 this->lanceflammeName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // mitrailleuseName
@@ -759,12 +768,25 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->mitrailleuseName->AutoSize = true;
-				 this->mitrailleuseName->Location = System::Drawing::Point(3, 102);
+				 this->mitrailleuseName->Location = System::Drawing::Point(3, 93);
 				 this->mitrailleuseName->Name = L"mitrailleuseName";
-				 this->mitrailleuseName->Size = System::Drawing::Size(129, 34);
+				 this->mitrailleuseName->Size = System::Drawing::Size(129, 31);
 				 this->mitrailleuseName->TabIndex = 3;
-				 this->mitrailleuseName->Text = L"Mitrailleuse";
+				 this->mitrailleuseName->Text = L"MachineGunTower";
 				 this->mitrailleuseName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+				 // 
+				 // canonName
+				 // 
+				 this->canonName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					 | System::Windows::Forms::AnchorStyles::Left)
+					 | System::Windows::Forms::AnchorStyles::Right));
+				 this->canonName->AutoSize = true;
+				 this->canonName->Location = System::Drawing::Point(3, 124);
+				 this->canonName->Name = L"canonName";
+				 this->canonName->Size = System::Drawing::Size(129, 31);
+				 this->canonName->TabIndex = 3;
+				 this->canonName->Text = L"canon";
+				 this->canonName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // repareBuildingName
 				 // 
@@ -772,9 +794,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->repareBuildingName->AutoSize = true;
-				 this->repareBuildingName->Location = System::Drawing::Point(3, 136);
+				 this->repareBuildingName->Location = System::Drawing::Point(3, 155);
 				 this->repareBuildingName->Name = L"repareBuildingName";
-				 this->repareBuildingName->Size = System::Drawing::Size(129, 34);
+				 this->repareBuildingName->Size = System::Drawing::Size(129, 31);
 				 this->repareBuildingName->TabIndex = 4;
 				 this->repareBuildingName->Text = L"Repare Building";
 				 this->repareBuildingName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -785,9 +807,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->shieldBuildingName->AutoSize = true;
-				 this->shieldBuildingName->Location = System::Drawing::Point(3, 170);
+				 this->shieldBuildingName->Location = System::Drawing::Point(3, 186);
 				 this->shieldBuildingName->Name = L"shieldBuildingName";
-				 this->shieldBuildingName->Size = System::Drawing::Size(129, 34);
+				 this->shieldBuildingName->Size = System::Drawing::Size(129, 31);
 				 this->shieldBuildingName->TabIndex = 5;
 				 this->shieldBuildingName->Text = L"Shield Building";
 				 this->shieldBuildingName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -798,9 +820,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->energyBuildingName->AutoSize = true;
-				 this->energyBuildingName->Location = System::Drawing::Point(3, 204);
+				 this->energyBuildingName->Location = System::Drawing::Point(3, 217);
 				 this->energyBuildingName->Name = L"energyBuildingName";
-				 this->energyBuildingName->Size = System::Drawing::Size(129, 39);
+				 this->energyBuildingName->Size = System::Drawing::Size(129, 26);
 				 this->energyBuildingName->TabIndex = 6;
 				 this->energyBuildingName->Text = L"Energy Building";
 				 this->energyBuildingName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -813,7 +835,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->QGValue->AutoSize = true;
 				 this->QGValue->Location = System::Drawing::Point(138, 0);
 				 this->QGValue->Name = L"QGValue";
-				 this->QGValue->Size = System::Drawing::Size(74, 34);
+				 this->QGValue->Size = System::Drawing::Size(74, 31);
 				 this->QGValue->TabIndex = 7;
 				 this->QGValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -823,9 +845,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->sniperTowerValue->AutoSize = true;
-				 this->sniperTowerValue->Location = System::Drawing::Point(138, 34);
+				 this->sniperTowerValue->Location = System::Drawing::Point(138, 31);
 				 this->sniperTowerValue->Name = L"sniperTowerValue";
-				 this->sniperTowerValue->Size = System::Drawing::Size(74, 34);
+				 this->sniperTowerValue->Size = System::Drawing::Size(74, 31);
 				 this->sniperTowerValue->TabIndex = 8;
 				 this->sniperTowerValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -835,9 +857,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->lanceflammeValue->AutoSize = true;
-				 this->lanceflammeValue->Location = System::Drawing::Point(138, 68);
+				 this->lanceflammeValue->Location = System::Drawing::Point(138, 62);
 				 this->lanceflammeValue->Name = L"lanceflammeValue";
-				 this->lanceflammeValue->Size = System::Drawing::Size(74, 34);
+				 this->lanceflammeValue->Size = System::Drawing::Size(74, 31);
 				 this->lanceflammeValue->TabIndex = 9;
 				 this->lanceflammeValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -847,11 +869,18 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->mitrailleuseValue->AutoSize = true;
-				 this->mitrailleuseValue->Location = System::Drawing::Point(138, 102);
+				 this->mitrailleuseValue->Location = System::Drawing::Point(138, 93);
 				 this->mitrailleuseValue->Name = L"mitrailleuseValue";
-				 this->mitrailleuseValue->Size = System::Drawing::Size(74, 34);
+				 this->mitrailleuseValue->Size = System::Drawing::Size(74, 31);
 				 this->mitrailleuseValue->TabIndex = 10;
 				 this->mitrailleuseValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+				 // 
+				 // canonValue
+				 // 
+				 this->canonValue->Location = System::Drawing::Point(138, 124);
+				 this->canonValue->Name = L"canonValue";
+				 this->canonValue->Size = System::Drawing::Size(74, 23);
+				 this->canonValue->TabIndex = 11;
 				 // 
 				 // repareBuildingValue
 				 // 
@@ -859,9 +888,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->repareBuildingValue->AutoSize = true;
-				 this->repareBuildingValue->Location = System::Drawing::Point(138, 136);
+				 this->repareBuildingValue->Location = System::Drawing::Point(138, 155);
 				 this->repareBuildingValue->Name = L"repareBuildingValue";
-				 this->repareBuildingValue->Size = System::Drawing::Size(74, 34);
+				 this->repareBuildingValue->Size = System::Drawing::Size(74, 31);
 				 this->repareBuildingValue->TabIndex = 11;
 				 this->repareBuildingValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -871,9 +900,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->shieldBuildingValue->AutoSize = true;
-				 this->shieldBuildingValue->Location = System::Drawing::Point(138, 170);
+				 this->shieldBuildingValue->Location = System::Drawing::Point(138, 186);
 				 this->shieldBuildingValue->Name = L"shieldBuildingValue";
-				 this->shieldBuildingValue->Size = System::Drawing::Size(74, 34);
+				 this->shieldBuildingValue->Size = System::Drawing::Size(74, 31);
 				 this->shieldBuildingValue->TabIndex = 12;
 				 this->shieldBuildingValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -883,9 +912,9 @@ private: System::Windows::Forms::Button^  combatButton;
 					 | System::Windows::Forms::AnchorStyles::Left)
 					 | System::Windows::Forms::AnchorStyles::Right));
 				 this->energyBuildingValue->AutoSize = true;
-				 this->energyBuildingValue->Location = System::Drawing::Point(138, 204);
+				 this->energyBuildingValue->Location = System::Drawing::Point(138, 217);
 				 this->energyBuildingValue->Name = L"energyBuildingValue";
-				 this->energyBuildingValue->Size = System::Drawing::Size(74, 39);
+				 this->energyBuildingValue->Size = System::Drawing::Size(74, 26);
 				 this->energyBuildingValue->TabIndex = 13;
 				 this->energyBuildingValue->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
@@ -912,11 +941,13 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 15)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 20)));
+					 18.23708F)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 20)));
+					 20.36474F)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 20)));
+					 21.58055F)));
+				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+					 134)));
 				 this->panelBuildings->Location = System::Drawing::Point(3, 3);
 				 this->panelBuildings->Name = L"panelBuildings";
 				 this->panelBuildings->RowCount = 1;
@@ -946,7 +977,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15.28497F)));
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.72539F)));
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.98446F)));
-				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 83)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 88)));
 				 this->panelUnits->Location = System::Drawing::Point(4, 3);
 				 this->panelUnits->Name = L"panelUnits";
 				 this->panelUnits->RowCount = 1;
@@ -1054,10 +1085,10 @@ private: System::Windows::Forms::Button^  combatButton;
 				 // 
 				 // buildingsMenuItem
 				 // 
-				 this->buildingsMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(7) {
+				 this->buildingsMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(8) {
 					 this->QGMenuItem,
-						 this->sniperTowerMenuItem, this->lanceFlammeMenuItem, this->mitrailleuseMenuItem, this->repareBuildingMenuItem, this->shieldBuildingMenuItem,
-						 this->energyBuildingMenuItem
+						 this->sniperTowerMenuItem, this->lanceFlammeMenuItem, this->mitrailleuseMenuItem, this->canonMenuItem, this->repareBuildingMenuItem,
+						 this->shieldBuildingMenuItem, this->energyBuildingMenuItem
 				 });
 				 this->buildingsMenuItem->Name = L"buildingsMenuItem";
 				 this->buildingsMenuItem->Size = System::Drawing::Size(68, 20);
@@ -1090,6 +1121,13 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->mitrailleuseMenuItem->Size = System::Drawing::Size(154, 22);
 				 this->mitrailleuseMenuItem->Text = L"Mitrailleuse";
 				 this->mitrailleuseMenuItem->Click += gcnew System::EventHandler(this, &UIForm::mitrailleuseClick);
+				 // 
+				 // canonMenuItem
+				 // 
+				 this->canonMenuItem->Name = L"canonMenuItem";
+				 this->canonMenuItem->Size = System::Drawing::Size(154, 22);
+				 this->canonMenuItem->Text = L"Canon";
+				 this->canonMenuItem->Click += gcnew System::EventHandler(this, &UIForm::canonClick);
 				 // 
 				 // repareBuildingMenuItem
 				 // 
@@ -1304,7 +1342,7 @@ private: System::Windows::Forms::Button^  combatButton;
 			}
 
 			//check number units
-			int nbUnits = 0;
+			/*int nbUnits = 0;
 			for (unsigned int i = 0; i < 8; i++)
 			{
 				nbUnits += OpenGL->GetUnitInstances(i);
@@ -1312,6 +1350,21 @@ private: System::Windows::Forms::Button^  combatButton;
 					break;
 			}
 			if (nbUnits == 0)
+			{
+				//lose
+				stopCombat();
+				this->counterText->Text = "You lose";
+			}*/
+			int nbUnitsUndeployed = 0;
+			std::vector<Unit*> units = OpenGL->GetUnits();
+			for (unsigned int i = 0; i < units.size(); i++)
+			{
+				if (!units[i]->getDeployed())
+					nbUnitsUndeployed++;
+				if (nbUnitsUndeployed > 0)
+					break;
+			}
+			if (nbUnitsUndeployed == 0 && attackUnits.size() == 0)
 			{
 				//lose
 				stopCombat();
@@ -1326,6 +1379,7 @@ private: System::Windows::Forms::Button^  combatButton;
 			{
 				if(counterValueUpdate % attackUnits[i]->getSpeed() == 0)
 					OpenGL->MoveUnit(attackUnits[i]->getId());
+
 				if (counterValueUpdate % attackUnits[i]->getFirerate() == 0)
 				{
 					OpenGL->AttackUnit(attackUnits[i]->getId());
@@ -1366,9 +1420,10 @@ private: System::Windows::Forms::Button^  combatButton;
 		this->sniperTowerValue->Text = OpenGL->GetBuildingInstances(1) + "/" + OpenGL->GetBuildingMax(1);
 		this->lanceflammeValue->Text = OpenGL->GetBuildingInstances(2) + "/" + OpenGL->GetBuildingMax(2);
 		this->mitrailleuseValue->Text = OpenGL->GetBuildingInstances(3) + "/" + OpenGL->GetBuildingMax(3);
-		this->repareBuildingValue->Text = OpenGL->GetBuildingInstances(4) + "/" + OpenGL->GetBuildingMax(4);
-		this->shieldBuildingValue->Text = OpenGL->GetBuildingInstances(5) + "/" + OpenGL->GetBuildingMax(5);
-		this->energyBuildingValue->Text = OpenGL->GetBuildingInstances(6) + "/" + OpenGL->GetBuildingMax(6);
+		this->canonValue->Text = OpenGL->GetBuildingInstances(3) + "/" + OpenGL->GetBuildingMax(4);
+		this->repareBuildingValue->Text = OpenGL->GetBuildingInstances(4) + "/" + OpenGL->GetBuildingMax(5);
+		this->shieldBuildingValue->Text = OpenGL->GetBuildingInstances(5) + "/" + OpenGL->GetBuildingMax(6);
+		this->energyBuildingValue->Text = OpenGL->GetBuildingInstances(6) + "/" + OpenGL->GetBuildingMax(7);
 
 		OpenGL->Render();
 		OpenGL->SwapOpenGLBuffers();
@@ -1401,17 +1456,21 @@ private: System::Windows::Forms::Button^  combatButton;
 	{
 		OpenGL->processBuildingMenu(3);
 	}
-	private: System::Void repareBuildingClick(System::Object^  sender, System::EventArgs^  e) 
+	private: System::Void canonClick(System::Object^  sender, System::EventArgs^  e)
 	{
 		OpenGL->processBuildingMenu(4);
 	}
-	private: System::Void shieldBuildingClick(System::Object^  sender, System::EventArgs^  e) 
+	private: System::Void repareBuildingClick(System::Object^  sender, System::EventArgs^  e) 
 	{
 		OpenGL->processBuildingMenu(5);
 	}
-	private: System::Void energyBuildingClick(System::Object^  sender, System::EventArgs^  e) 
+	private: System::Void shieldBuildingClick(System::Object^  sender, System::EventArgs^  e) 
 	{
 		OpenGL->processBuildingMenu(6);
+	}
+	private: System::Void energyBuildingClick(System::Object^  sender, System::EventArgs^  e) 
+	{
+		OpenGL->processBuildingMenu(7);
 	}
 
 	// UNITS CREATION
