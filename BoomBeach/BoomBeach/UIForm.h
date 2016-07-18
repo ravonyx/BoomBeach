@@ -1235,6 +1235,9 @@ private: System::Windows::Forms::Button^  combatButton;
 		save->Enabled = false;
 		load->Enabled = false;
 		combatButton->Enabled = false;
+
+		fillDataBuilding();
+		fillDataUnit();
 	}
 
 	private: System::Void counter_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -1264,6 +1267,8 @@ private: System::Windows::Forms::Button^  combatButton;
 		this->counter->Stop();
 
 		OpenGL->ClearAttackUnit();
+		fillDataBuilding();
+		fillDataUnit();
 	}
 
 	private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e)
