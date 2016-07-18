@@ -176,6 +176,7 @@ Zone Field::FindEmptyZoneWithInd(int w, int h, int px, int py)
 	int lineNb = 1;
 	for (int i = px; i < px + w; i++)
 	{
+		if (i == 0) i += 1;
 		if (i % _width == 0)
 			lineNb++;
 		for (int j = py; j < py + h; j++)
