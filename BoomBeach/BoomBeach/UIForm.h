@@ -759,7 +759,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->lanceflammeName->Name = L"lanceflammeName";
 				 this->lanceflammeName->Size = System::Drawing::Size(129, 31);
 				 this->lanceflammeName->TabIndex = 2;
-				 this->lanceflammeName->Text = L"Lance Flamme";
+				 this->lanceflammeName->Text = L"FlamerTower";
 				 this->lanceflammeName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // mitrailleuseName
@@ -772,7 +772,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->mitrailleuseName->Name = L"mitrailleuseName";
 				 this->mitrailleuseName->Size = System::Drawing::Size(129, 31);
 				 this->mitrailleuseName->TabIndex = 3;
-				 this->mitrailleuseName->Text = L"Mitrailleuse";
+				 this->mitrailleuseName->Text = L"MachineGunTower";
 				 this->mitrailleuseName->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 				 // 
 				 // canonName
@@ -941,13 +941,13 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
 					 15)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 20)));
+					 18.23708F)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 20)));
+					 20.36474F)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-					 20)));
+					 21.58055F)));
 				 this->panelBuildings->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-					 20)));
+					 134)));
 				 this->panelBuildings->Location = System::Drawing::Point(3, 3);
 				 this->panelBuildings->Name = L"panelBuildings";
 				 this->panelBuildings->RowCount = 1;
@@ -977,7 +977,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 15.28497F)));
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.72539F)));
 				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 20.98446F)));
-				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 85)));
+				 this->panelUnits->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 88)));
 				 this->panelUnits->Location = System::Drawing::Point(4, 3);
 				 this->panelUnits->Name = L"panelUnits";
 				 this->panelUnits->RowCount = 1;

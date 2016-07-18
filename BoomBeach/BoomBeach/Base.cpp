@@ -101,6 +101,7 @@ bool Base::addBuilding(const char *name, int x, int y)
 				// Rule for QG HPs
 				int qGAddedHealth = 0;
 				int qGindex = 0;
+				bool finded = false;
 				for (unsigned int i = 0; i < _buildings.size(); i++)
 				{
 					if (_buildings[i]->getType() != 1)
@@ -109,11 +110,12 @@ bool Base::addBuilding(const char *name, int x, int y)
 					}
 					else
 					{
+						finded = true;
 						qGindex = i;
 					}
 				}
-
-				_buildings[qGindex]->setAddedLife(qGAddedHealth);
+				if(finded)
+					_buildings[qGindex]->setAddedLife(qGAddedHealth);
 
 
 				std::cout << "Suceed to build building" << std::endl;

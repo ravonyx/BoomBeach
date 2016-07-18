@@ -65,17 +65,18 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 			if (tile == -2 && currentUnit != -1)
 			{
 				army->addAttackUnit(currentUnit, realx, realy);
-				std::cout << "ok" << std::endl;
 				currentUnit = -1;
 
 				inDrop = false;
 			}
+			else {
+				positionOrder.first = realx;
+				positionOrder.second = realy;
+				goToDestination = true;
+			}
 		}
 
-		positionOrder.first = realx;
-		positionOrder.second = realy;
-		goToDestination = true;
-		std::cout << positionOrder.first << " " << positionOrder.second << std::endl;
+		//std::cout << positionOrder.first << " " << positionOrder.second << std::endl;
 	}
 }
 
