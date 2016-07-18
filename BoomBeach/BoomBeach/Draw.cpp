@@ -603,115 +603,101 @@ void attack_unit(int index) {
 // Attaque des batiments
 void attack_building(int index)
 {
+	int damage = base->getBuilding(index)->getPower();
 	Zone buildingZone = base->getBuilding(index)->getZone();
-	std::pair<int, int> unitPos;
-	if (army->getCurrentAttackUnits().size() > 0) 
-	{
-		unitPos = army->GetNearestUnit(buildingZone.getX(), buildingZone.getY())->getPosition();
-		if (distance((float)unitPos.first + 1.0f / 2.0f, (float)unitPos.second + 1.0f / 2.0f,
-			buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f)
-			- distance((float)buildingZone.getX(), (float)buildingZone.getY(), buildingZone.getX() + buildingZone.getWidth() / 2.0f,
-				buildingZone.getY() + buildingZone.getHeight() / 2.0f) <= base->getBuilding(index)->getRange())
+	int range = base->getBuilding(index)->getRange();
+	float distanceToRem = distance((float)buildingZone.getX(), (float)buildingZone.getY(), buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+
+	int targetedIndex = -1;
 	
-			army->GetNearestUnit(buildingZone.getX(), buildingZone.getY())->takeDamage(base->getBuilding(index)->getPower());
-	}
-}
-
-void triggerBuildingActions()
-{
-
-	for (unsigned int i = 0; i < base->getCurrentBuildings().size(); i++)
+	if (base->getBuilding(index)->getType() == 5)
 	{
-		int targetedIndex;
-		int distance = 0;
-		//For Support Units
-		
-		if (base->getCurrentBuildings()[i]->getType() == 5)
-		{
-
-		}
-		else if (base->getCurrentBuildings()[i]->getType() == 6)
-		{
-
-		}
-		else if (base->getCurrentBuildings()[i]->getType() == 7)
-		{
-
-		}
-		else
-			//For Attack Units
-		{
-			if (base->getCurrentBuildings()[i]->getTargetType() == 0) //Nothing
-			{
-
-			}
-			else if (base->getCurrentBuildings()[i]->getTargetType() == 1) //Low HP Unit
-			{
-				//Boucler sur les unités voulues
-				int lowest=999999;
-				for (unsigned int j = 0; j < army->getCurrentUnits().size(); j++) {
-					if (army->getCurrentUnits()[j]->getLife() < lowest)
-					{
-						lowest = army->getCurrentUnits()[j]->getLife();
-						targetedIndex = j;
-					}
-				}
-
-				base->getCurrentBuildings()[i]->attackUnit(army->getCurrentUnits()[targetedIndex]);
-			}
-			else if (base->getCurrentBuildings()[i]->getTargetType() == 2) //High HP Unit
-			{
-				int heighest = 0;
-				for (unsigned int j = 0; j < army->getCurrentUnits().size(); j++) {
-					if (army->getCurrentUnits()[j]->getLife() > heighest)
-					{
-						heighest = army->getCurrentUnits()[j]->getLife();
-						targetedIndex = j;
-					}
-				}
-
-				base->getCurrentBuildings()[i]->attackUnit(army->getCurrentUnits()[targetedIndex]);
-			}
-			else if (base->getCurrentBuildings()[i]->getTargetType() == 3) //Closest Unit
-			{
-
-			}
-			else if (base->getCurrentBuildings()[i]->getTargetType() == 4) //Closest to HQ
-			{
-				
-			}
-			else if (base->getCurrentBuildings()[i]->getTargetType() == 5) //Strongest Unit
-			{
-				int heighest = 0;
-				for (unsigned int j = 0; j < army->getCurrentUnits().size(); j++) {
-					if (army->getCurrentUnits()[j]->getAttack() > heighest)
-					{
-						heighest = army->getCurrentUnits()[j]->getAttack();
-						targetedIndex = j;
-					}
-				}
-
-				base->getCurrentBuildings()[i]->attackUnit(army->getCurrentUnits()[targetedIndex]);
-			}
-			else if (base->getCurrentBuildings()[i]->getTargetType() == 6) //Closest Support Unit
-			{
-				int closest = 999;
-				for (unsigned int j = 0; j < army->getCurrentUnits().size(); j++) {
-					if (army->getCurrentUnits()[j]->getType() == 0 /*Mettre le type pour type d'unité de soutien*/) {
-						
-					}
-					
-				}
-			}
-		}
 
 	}
-}
+	else if (base->getBuilding(index)->getType() == 6)
+	{
 
+	}
+	else if (base->getBuilding(index)->getType() == 7)
+	{
+
+	}
+	else if (army->getCurrentAttackUnits().size() > 0)
+	{
+		if (base->getBuilding(index)->getTargetType() == 0) //Closest default
+		{
+			std::pair<int, int> unitPos = army->GetNearestUnit(buildingZone.getX(), buildingZone.getY())->getPosition();
+			float distanceFromUnit = distance((float)unitPos.first + 1.0f / 2.0f, (float)unitPos.second + 1.0f / 2.0f, buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+			if (distanceFromUnit - distanceToRem <= range)
+				army->GetNearestUnit(buildingZone.getX(), buildingZone.getY())->takeDamage(damage);
+		}
+		else if (base->getBuilding(index)->getTargetType() == 1) //Low HP Unit
+		{
+			//Boucler sur les unités voulues
+			int lowest = 999999;
+			for (unsigned int j = 0; j < army->getCurrentAttackUnits().size(); j++) {
+				if (army->getCurrentAttackUnits()[j]->getLife() < lowest)
+				{
+					lowest = army->getCurrentAttackUnits()[j]->getLife();
+					targetedIndex = j;
+				}
+			}
+			std::pair<int, int> unitPos = army->getCurrentAttackUnits()[targetedIndex]->getPosition();
+			float distanceFromUnit = distance((float)unitPos.first + 1.0f / 2.0f, (float)unitPos.second + 1.0f / 2.0f, buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+			if(distanceFromUnit - distanceToRem <= range)
+				army->getCurrentAttackUnits()[targetedIndex]->takeDamage(damage);
+		}
+		else if (base->getBuilding(index)->getTargetType() == 2) //High HP Unit
+		{
+			int heighest = 0;
+			for (unsigned int j = 0; j < army->getCurrentAttackUnits().size(); j++) {
+				if (army->getCurrentAttackUnits()[j]->getLife() > heighest)
+				{
+					heighest = army->getCurrentAttackUnits()[j]->getLife();
+					targetedIndex = j;
+				}
+			}
+			std::pair<int, int> unitPos = army->getCurrentAttackUnits()[targetedIndex]->getPosition();
+			float distanceFromUnit = distance((float)unitPos.first + 1.0f / 2.0f, (float)unitPos.second + 1.0f / 2.0f, buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+			if (distanceFromUnit - distanceToRem <= range)
+				army->getCurrentAttackUnits()[targetedIndex]->takeDamage(damage);
+		}
+		else if (base->getBuilding(index)->getTargetType() == 3) //Closest to HQ
+		{
+
+		}
+		else if (base->getBuilding(index)->getTargetType() == 4) //Strongest Unit
+		{
+			int heighest = 0;
+			for (unsigned int j = 0; j < army->getCurrentAttackUnits().size(); j++) {
+				if (army->getCurrentAttackUnits()[j]->getAttack() > heighest)
+				{
+					heighest = army->getCurrentAttackUnits()[j]->getAttack();
+					targetedIndex = j;
+				}
+			}
+			std::pair<int, int> unitPos = army->getCurrentAttackUnits()[targetedIndex]->getPosition();
+			float distanceFromUnit = distance((float)unitPos.first + 1.0f / 2.0f, (float)unitPos.second + 1.0f / 2.0f, buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+			if (distanceFromUnit - distanceToRem <= range)
+				army->getCurrentAttackUnits()[targetedIndex]->takeDamage(damage);
+		}
+
+
+		else if (base->getBuilding(index)->getTargetType() == 5) //Closest Support Unit
+		{
+			int closest = 999;
+			for (unsigned int j = 0; j < army->getCurrentAttackUnits().size(); j++) {
+				if (army->getCurrentAttackUnits()[j]->getType() == 0 /*Mettre le type pour type d'unité de soutien*/) {
+
+				}
+
+			}
+		}
+	}
+}
 
 void goToNextTargetType(int index)
 {
-
 	if (base->getCurrentBuildings()[index] != nullptr)
 	{
 		int a = base->getCurrentBuildings()[index]->getTargetType();

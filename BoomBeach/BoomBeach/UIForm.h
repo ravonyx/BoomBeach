@@ -1326,8 +1326,6 @@ private: System::Windows::Forms::Button^  combatButton;
 			{
 				if(counterValueUpdate % attackUnits[i]->getSpeed() == 0)
 					OpenGL->MoveUnit(attackUnits[i]->getId());
-				else 
-					//std::cout << "speed : " << attackUnits[i]->getSpeed() << " no : " << counterValueUpdate % (attackUnits[i]->getSpeed() ) << std::endl;
 				if (counterValueUpdate % attackUnits[i]->getFirerate() == 0)
 				{
 					OpenGL->AttackUnit(attackUnits[i]->getId());
@@ -1589,7 +1587,7 @@ private: System::Windows::Forms::Button^  combatButton;
 				| System::Windows::Forms::AnchorStyles::Right));
 			changeBehaviourButton->AutoSize = true;
 			changeBehaviourButton->TabIndex = 5;
-			changeBehaviourButton->Text = "Change Behaviour";
+			changeBehaviourButton->Text = "Change Behaviour : " + buildings[i]->getTargetType();
 			changeBehaviourButton->Click += gcnew System::EventHandler(this, &UIForm::changeBuildingBehaviour);
 			if (inCombat)
 				deleteButton->Enabled = false;
