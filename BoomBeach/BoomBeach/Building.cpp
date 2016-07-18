@@ -5,6 +5,7 @@ Building::Building()
 	id = 0;
 	name = "Default";
 	life = 2000;
+	lifeMax = 2000;
 	cost = 1000;
 	level = 0;
 
@@ -26,6 +27,7 @@ Building::Building(int pid, std::string pname, int ptype, int plife, int pcost, 
 	name = pname;
 	type = ptype;
 	life = plife;
+	lifeMax = life;
 	addedLife = 0;
 	cost = pcost;
 	level = plevel;
@@ -52,6 +54,7 @@ Building::Building(const Building& model)
 	type = model.type;
 
 	life = model.life;
+	lifeMax = life;
 	addedLife = 0;
 	cost = model.cost;
 	level = 0;
@@ -127,10 +130,6 @@ int Building::getLife() const
 {
 	return life + addedLife;
 }
-int Building::getBaseLife() const
-{
-	return life;
-}
 int Building::getLevel() const
 {
 	return level;
@@ -197,9 +196,12 @@ void Building::setZone(Zone pzone)
 	zone = pzone;
 }
 
-void Building::setBaseLife(const int value)
+void Building::addLife(const int value)
 {
-	life = value;
+	if (life + value >= lifeMax + addedLife)
+		life = lifeMax;
+	else
+		life += value;
 }
 
 void Building::setAddedLife(const int value)
@@ -220,11 +222,4 @@ void Building::setTargetType(const int value)
 void Building::takeDamage(const int amount)
 {
 	life -= amount;
-}
-
-void Building::attackUnit(Unit * unit)
-{
-	//Modifier les HP de l'unité visée 
-	//Faire une fonction TakeDamages ou setHP;
-	
 }

@@ -37,6 +37,7 @@ class Building
 		float costUpdateRate;
 
 		int targetType;
+		int lifeMax;
 		// Target Types
 		// 0 Nothing
 		// 1 Low HP Units
@@ -62,7 +63,6 @@ class Building
 		int getType() const;
 
 		int getLife() const; //Returns total Life
-		int getBaseLife() const; //Returns Base Life
 		int getLevel() const;
 		int getCost() const;
 		int getPower() const;
@@ -81,12 +81,9 @@ class Building
 		
 		void setId(int pid);
 		void setZone(Zone pzone);
-		void setBaseLife(const int value);
-		void setLife(const int value);
+		void addLife(const int value);
 		void setAddedLife(const int value);
 		void setTargetType(const int value);
 
 		void takeDamage(const int amount);
-
-		void attackUnit(Unit* unit);
 };

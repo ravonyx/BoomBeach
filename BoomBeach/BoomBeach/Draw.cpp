@@ -612,8 +612,16 @@ void attack_building(int index)
 	
 	if (base->getBuilding(index)->getType() == 5)
 	{
-
+		std::vector<Building*> buildings = base->getCurrentBuildings();
+		for (int i = 0; i < buildings.size(); i++)
+		{
+			float distanceFromUnit = distance(buildings[i]->getZone().getX() + buildings[i]->getZone().getWidth() / 2.0f, buildings[i]->getZone().getY() + buildings[i]->getZone().getHeight() / 2.0f,
+				buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+			if (distanceFromUnit - distanceToRem <= range)
+				buildings[i]->addLife(base->getBuilding(index)->getPower());
+		}
 	}
+
 	else if (base->getBuilding(index)->getType() == 6)
 	{
 
@@ -690,7 +698,6 @@ void attack_building(int index)
 				if (army->getCurrentAttackUnits()[j]->getType() == 0 /*Mettre le type pour type d'unité de soutien*/) {
 
 				}
-
 			}
 		}
 	}
