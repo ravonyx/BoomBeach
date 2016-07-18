@@ -1569,87 +1569,97 @@ private: System::Windows::Forms::Button^  combatButton;
 		Type^ myType = System::Windows::Forms::Control::typeid;
 		System::Reflection::PropertyInfo^ controlProperty = myType->GetProperty("DoubleBuffered", System::Reflection::BindingFlags::NonPublic | System::Reflection::BindingFlags::Instance);
 		controlProperty->SetValue(panelBuildings, true, nullptr);
-		//Clear all the controls
-		panelBuildings->Controls->Clear();
-		panelBuildings->RowStyles->Clear();
-		//Set the new count
-		panelBuildings->RowCount = buildings.size() + 1;
-
-		for (unsigned int i = 0; i < buildings.size(); i++)
+		
+		
+		if (!inCombat || panelBuildings->RowCount != buildings.size() + 1)
 		{
-			panelBuildings->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Absolute, 30));
+			//Clear all the controls
+			panelBuildings->Controls->Clear();
+			panelBuildings->RowStyles->Clear();
 
-			System::Windows::Forms::Label^ nameBuilding = (gcnew System::Windows::Forms::Label());
-			nameBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			nameBuilding->AutoSize = true;
-			nameBuilding->TabIndex = 0;
-			String^ str = gcnew String(buildings[i]->getName().c_str());
-			nameBuilding->Text = str;
-			nameBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			//Set the new count
+			panelBuildings->RowCount = buildings.size() + 1;
 
-			System::Windows::Forms::Label^ levelBuilding = (gcnew System::Windows::Forms::Label());
-			levelBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			levelBuilding->AutoSize = true;
-			levelBuilding->TabIndex = 1;
-			str = gcnew String(buildings[i]->getLevel().ToString());
-			levelBuilding->Text = str;
-			levelBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			for (unsigned int i = 0; i < buildings.size(); i++)
+			{
+				panelBuildings->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Absolute, 30));
 
-			System::Windows::Forms::Label^ lifeBuilding = (gcnew System::Windows::Forms::Label());
-			lifeBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			lifeBuilding->AutoSize = true;
-			lifeBuilding->TabIndex = 2;
-			str = gcnew String(buildings[i]->getLife().ToString());
-			lifeBuilding->Text = str;
-			lifeBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+				System::Windows::Forms::Label^ nameBuilding = (gcnew System::Windows::Forms::Label());
+				nameBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				nameBuilding->AutoSize = true;
+				nameBuilding->TabIndex = 0;
+				String^ str = gcnew String(buildings[i]->getName().c_str());
+				nameBuilding->Text = str;
+				nameBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 
-			System::Windows::Forms::Button^ enhanceButton = (gcnew System::Windows::Forms::Button());
-			enhanceButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			enhanceButton->AutoSize = true;
-			enhanceButton->TabIndex = 3;
-			enhanceButton->Text = "Enhance";
-			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceBuilding);
-			if (inCombat)
-				enhanceButton->Enabled = false;
+				System::Windows::Forms::Label^ levelBuilding = (gcnew System::Windows::Forms::Label());
+				levelBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				levelBuilding->AutoSize = true;
+				levelBuilding->TabIndex = 1;
+				str = gcnew String(buildings[i]->getLevel().ToString());
+				levelBuilding->Text = str;
+				levelBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 
-			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
-			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			deleteButton->AutoSize = true;
-			deleteButton->TabIndex = 4;
-			deleteButton->Text = "Delete";
-			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteBuilding);
-			if (inCombat)
-				deleteButton->Enabled = false;
+				System::Windows::Forms::Label^ lifeBuilding = (gcnew System::Windows::Forms::Label());
+				lifeBuilding->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				lifeBuilding->AutoSize = true;
+				lifeBuilding->TabIndex = 2;
+				str = gcnew String(buildings[i]->getLife().ToString());
+				lifeBuilding->Text = str;
+				lifeBuilding->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 
+				System::Windows::Forms::Button^ enhanceButton = (gcnew System::Windows::Forms::Button());
+				enhanceButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				enhanceButton->AutoSize = true;
+				enhanceButton->TabIndex = 3;
+				enhanceButton->Text = "Enhance";
+				enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceBuilding);
 
-			System::Windows::Forms::Button^ changeBehaviourButton = (gcnew System::Windows::Forms::Button());
-			changeBehaviourButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			changeBehaviourButton->AutoSize = true;
-			changeBehaviourButton->TabIndex = 5;
-			changeBehaviourButton->Text = "Change Behaviour : " + buildings[i]->getTargetType();
-			changeBehaviourButton->Click += gcnew System::EventHandler(this, &UIForm::changeBuildingBehaviour);
-			if (inCombat)
-				deleteButton->Enabled = false;
+				System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
+				deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				deleteButton->AutoSize = true;
+				deleteButton->TabIndex = 4;
+				deleteButton->Text = "Delete";
+				deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteBuilding);
 
 
-			panelBuildings->Controls->Add(nameBuilding, 0, i);
-			panelBuildings->Controls->Add(levelBuilding, 1, i);
-			panelBuildings->Controls->Add(lifeBuilding, 2, i);
-			panelBuildings->Controls->Add(enhanceButton, 3, i);
-			panelBuildings->Controls->Add(deleteButton, 4, i);
-			panelBuildings->Controls->Add(changeBehaviourButton, 5, i);
+				System::Windows::Forms::Button^ changeBehaviourButton = (gcnew System::Windows::Forms::Button());
+				changeBehaviourButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				changeBehaviourButton->AutoSize = true;
+				changeBehaviourButton->TabIndex = 5;
+				changeBehaviourButton->Text = "Change Behaviour : " + buildings[i]->getTargetType();
+				changeBehaviourButton->Click += gcnew System::EventHandler(this, &UIForm::changeBuildingBehaviour);
+
+				panelBuildings->Controls->Add(nameBuilding, 0, i);
+				panelBuildings->Controls->Add(levelBuilding, 1, i);
+				panelBuildings->Controls->Add(lifeBuilding, 2, i);
+				panelBuildings->Controls->Add(enhanceButton, 3, i);
+				panelBuildings->Controls->Add(deleteButton, 4, i);
+				panelBuildings->Controls->Add(changeBehaviourButton, 5, i);
+			}
+		}
+		else
+		{
+			for (unsigned int i = 0; i < buildings.size(); i++)
+			{
+				String^ str = gcnew String(buildings[i]->getLife().ToString());
+				static_cast<System::Windows::Forms::Label^>(panelBuildings->Controls[i * 6 + 2])->Text = str;
+
+				static_cast<System::Windows::Forms::Button^>(panelBuildings->Controls[i * 6 + 3])->Enabled = false;
+				static_cast<System::Windows::Forms::Button^>(panelBuildings->Controls[i * 6 + 5])->Enabled = false;
+			}
 		}
 	}
 
@@ -1660,47 +1670,90 @@ private: System::Windows::Forms::Button^  combatButton;
 		Type^ myType = System::Windows::Forms::Control::typeid;
 		System::Reflection::PropertyInfo^ controlProperty = myType->GetProperty("DoubleBuffered", System::Reflection::BindingFlags::NonPublic | System::Reflection::BindingFlags::Instance);
 		controlProperty->SetValue(panelUnits, true, nullptr);
-		//Clear all the controls
-		panelUnits->Controls->Clear();
-		panelUnits->RowStyles->Clear();
-		//Set the new count
-		panelUnits->RowCount = units.size() + 1;
-
-		for (unsigned int i = 0; i < units.size(); i++)
+	
+		if(!inCombat || panelUnits->RowCount != units.size() + 1)
 		{
-			panelUnits->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Absolute, 30));
-
-			System::Windows::Forms::Label^ nameUnit = (gcnew System::Windows::Forms::Label());
-			nameUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			nameUnit->AutoSize = true;
-			nameUnit->TabIndex = 0;
-			String^ str = gcnew String(units[i]->getName().c_str());
-			nameUnit->Text = str;
-			nameUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-
-			System::Windows::Forms::Label^ levelUnit = (gcnew System::Windows::Forms::Label());
-			levelUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			levelUnit->AutoSize = true;
-			levelUnit->TabIndex = 1;
-			str = gcnew String(units[i]->getLevel().ToString());
-			levelUnit->Text = str;
-			levelUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-
-			System::Windows::Forms::Label^ lifeUnit = (gcnew System::Windows::Forms::Label());
-			lifeUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			lifeUnit->AutoSize = true;
-			lifeUnit->TabIndex = 2;
-			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
-			if(!inCombat)
-				str = gcnew String(units[i]->getLife().ToString());
-			else 
+			//Clear all the controls
+			panelUnits->Controls->Clear();
+			panelUnits->RowStyles->Clear();
+			//Set the new count
+			panelUnits->RowCount = units.size() + 1;
+			for (unsigned int i = 0; i < units.size(); i++)
 			{
+				panelUnits->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Absolute, 30));
+
+				System::Windows::Forms::Label^ nameUnit = (gcnew System::Windows::Forms::Label());
+				nameUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				nameUnit->AutoSize = true;
+				nameUnit->TabIndex = 0;
+				String^ str = gcnew String(units[i]->getName().c_str());
+				nameUnit->Text = str;
+				nameUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+				System::Windows::Forms::Label^ levelUnit = (gcnew System::Windows::Forms::Label());
+				levelUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				levelUnit->AutoSize = true;
+				levelUnit->TabIndex = 1;
+				str = gcnew String(units[i]->getLevel().ToString());
+				levelUnit->Text = str;
+				levelUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+				System::Windows::Forms::Label^ lifeUnit = (gcnew System::Windows::Forms::Label());
+				lifeUnit->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				lifeUnit->AutoSize = true;
+				lifeUnit->TabIndex = 2;
+				str = gcnew String(units[i]->getLife().ToString());
+				lifeUnit->Text = str;
+				lifeUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+				System::Windows::Forms::Button^ enhanceButton = (gcnew System::Windows::Forms::Button());
+				enhanceButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				enhanceButton->AutoSize = true;
+				enhanceButton->TabIndex = 3;
+				enhanceButton->Text = "Enhance";
+				enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceUnit);
+
+				System::Windows::Forms::Button^ dropButton = (gcnew System::Windows::Forms::Button());
+				dropButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				dropButton->AutoSize = true;
+				dropButton->TabIndex = 4;
+				dropButton->Text = "Drop";
+				dropButton->Click += gcnew System::EventHandler(this, &UIForm::dropUnit);
+				dropButton->Enabled = false;
+
+				System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
+				deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+					| System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				deleteButton->AutoSize = true;
+				deleteButton->TabIndex = 5;
+				deleteButton->Text = "Delete";
+				deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteUnit);
+
+				panelUnits->Controls->Add(nameUnit, 0, i);
+				panelUnits->Controls->Add(levelUnit, 1, i);
+				panelUnits->Controls->Add(lifeUnit, 2, i);
+				panelUnits->Controls->Add(enhanceButton, 3, i);
+				panelUnits->Controls->Add(dropButton, 4, i);
+				panelUnits->Controls->Add(deleteButton, 5, i);
+			}
+		}
+		else
+		{
+			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
+			for (unsigned int i = 0; i < units.size(); i++)
+			{
+				String^ str;
 				if (units[i]->getDeployed() == true)
 				{
 					if (attackUnits.size() > 0)
@@ -1712,51 +1765,16 @@ private: System::Windows::Forms::Button^  combatButton;
 				}
 				else
 					str = gcnew String(units[i]->getLife().ToString());
+
+				static_cast<System::Windows::Forms::Label^>(panelUnits->Controls[i * 6 + 2])->Text = str;
+
+				if (units[i]->getDeployed())
+					static_cast<System::Windows::Forms::Button^>(panelUnits->Controls[i * 6 + 4])->Enabled = false;
+				else
+					static_cast<System::Windows::Forms::Button^>(panelUnits->Controls[i * 6 + 4])->Enabled = true;
+				static_cast<System::Windows::Forms::Button^>(panelUnits->Controls[i * 6 + 3])->Enabled = false;
+				static_cast<System::Windows::Forms::Button^>(panelUnits->Controls[i * 6 + 5])->Enabled = false;
 			}
-				
-			lifeUnit->Text = str;
-			lifeUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-
-			System::Windows::Forms::Button^ enhanceButton = (gcnew System::Windows::Forms::Button());
-			enhanceButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			enhanceButton->AutoSize = true;
-			enhanceButton->TabIndex = 3;
-			enhanceButton->Text = "Enhance";
-			enhanceButton->Click += gcnew System::EventHandler(this, &UIForm::enhanceUnit);
-			if (inCombat)
-				enhanceButton->Enabled = false;
-
-			System::Windows::Forms::Button^ dropButton = (gcnew System::Windows::Forms::Button());
-			dropButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			dropButton->AutoSize = true;
-			dropButton->TabIndex = 4;
-			dropButton->Text = "Drop";
-			
-			dropButton->Click += gcnew System::EventHandler(this, &UIForm::dropUnit);
-			if (!inCombat || units[i]->getDeployed())
-				dropButton->Enabled = false;
-
-			System::Windows::Forms::Button^ deleteButton = (gcnew System::Windows::Forms::Button());
-			deleteButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			deleteButton->AutoSize = true;
-			deleteButton->TabIndex = 5;
-			deleteButton->Text = "Delete";
-			deleteButton->Click += gcnew System::EventHandler(this, &UIForm::deleteUnit);
-			if (inCombat)
-				deleteButton->Enabled = false;
-
-			panelUnits->Controls->Add(nameUnit, 0, i);
-			panelUnits->Controls->Add(levelUnit, 1, i);
-			panelUnits->Controls->Add(lifeUnit, 2, i);
-			panelUnits->Controls->Add(enhanceButton, 3, i);
-			panelUnits->Controls->Add(dropButton, 4, i);
-			panelUnits->Controls->Add(deleteButton, 5, i);
 		}
 	}
 
