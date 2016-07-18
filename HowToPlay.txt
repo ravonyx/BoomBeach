@@ -1,0 +1,12 @@
+Le menu du haut permet de créer un batiment ou une unité.
+Pour créer un batiment, cliquez sur son nom puis sur un emplacement vide du terrain. 
+Pour créer une unité, cliquez seulement sur son nom.
+
+Les onglets à droite permettent de voir, améliorer et supprimer ses batiments et unités.
+
+Pour démarrer un combat, il faut placer un QC sur le terrain et créer une unité.
+
+Une fois en combat, l'onglet Unis permet de les placer sur le terrain. Appuyez sur le bouton drop puis sur un case de la plage.
+Appuyez sur un endroit avec le clic gauche pour que les unités s'y rendent.
+
+Vous pouvez changer le type de ciblage de la tourelle avec le bouton Chnage Behaviour.

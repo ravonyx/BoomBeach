@@ -1390,6 +1390,7 @@ private: System::Windows::Forms::Button^  combatButton;
 			{
 				if (counterValueUpdate % buildings[i]->getFireRate() == 0)
 				{
+					std::cout << buildings[i]->getFireRate();
 					OpenGL->AttackBuilding(buildings[i]->getId());
 					fillDataUnit();
 				}

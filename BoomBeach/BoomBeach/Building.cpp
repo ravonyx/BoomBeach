@@ -72,6 +72,8 @@ Building::Building(const Building& model)
 	maxInstances = model.maxInstances;
 	zone = Zone(model.zone);
 	targetType = 0;
+
+	initFireRate = fireRate;
 }
 
 int Building::nextUpdateCost()
@@ -203,6 +205,12 @@ void Building::addLife(const int value)
 	else
 		life += value;
 }
+
+void Building::addFireRate(const int value)
+{
+	fireRate = initFireRate + value;
+}
+
 
 void Building::setAddedLife(const int value)
 {

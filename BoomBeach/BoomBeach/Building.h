@@ -49,6 +49,8 @@ class Building
 		
 		Zone zone;
 
+		int initFireRate;
+
 	public:
 		friend class BuildingFactory;
 		friend std::ofstream& operator<< (std::ofstream& os, const Building &building);
@@ -86,4 +88,6 @@ class Building
 		void setTargetType(const int value);
 
 		void takeDamage(const int amount);
+
+		void addFireRate(const int value);
 };

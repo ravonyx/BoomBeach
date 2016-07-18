@@ -8,9 +8,9 @@ BuildingFactory::BuildingFactory()
 	Building* lanceflamme = new Building(0, "LanceFlamme", 3, 800, 300, 0, 10, 1, 30, false, 1.2f, 1.3f, 2, 2, 3, Zone());
 	Building* mitrailleuse = new Building(0, "Mitrailleuse", 4, 1000, 500, 0, 8, 2, 10, true, 1.1f, 1.3f, 2, 2, 1, Zone());
 	Building* canon = new Building(0, "Canon", 4, 500, 500, 0, 45, 2, 50, false, 1.1f, 1.3f, 2, 2, 1, Zone());
-	Building* repare = new Building(0, "RepareBuilding", 5, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 2, 1, 2, Zone());
-	Building* shield = new Building(0, "ShieldBuilding", 6, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 3, 2, 2, Zone());
-	Building* energy = new Building(0, "EnergyBuilding", 7, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 1, 3, 3, Zone());
+	Building* repare = new Building(0, "RepareBuilding", 5, 400, 500, 0, 100, 2, 50, false, 1.1f, 1.3f, 2, 1, 2, Zone());
+	Building* shield = new Building(0, "ShieldBuilding", 6, 500, 300, 0, 30, 2, 50, false, 1.1f, 1.3f, 3, 2, 2, Zone());
+	Building* energy = new Building(0, "EnergyBuilding", 7, 600, 200, 0, 10, 2, 50, false, 1.1f, 1.3f, 1, 3, 3, Zone());
 
 	buildingModels.push_back(house);
 	buildingModels.push_back(snipertower);

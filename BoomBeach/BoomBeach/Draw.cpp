@@ -5,7 +5,7 @@
 #include "Tools.h"
 #include <algorithm>
 
-GLuint textureImage[11];
+GLuint textureImage[15];
 std::vector <Building*> _buildingModels;
 std::vector <Unit*> _unitModels;
 Base *base;
@@ -121,7 +121,11 @@ void Initialize()
 	textureImage[8] = createTexture("tile-shield.png");
 	textureImage[9] = createTexture("tile-energy.png");
 
-	textureImage[10] = createTexture("tile-brute.png");
+	textureImage[10] = createTexture("unit-brute.png");
+	textureImage[11] = createTexture("unit-kamikaze.png");
+	textureImage[12] = createTexture("unit-fusilleur.png");
+	textureImage[13] = createTexture("unit-sniper.png");
+	textureImage[14] = createTexture("unit-bazooka.png");
 
 	_buildingModels = base->getBuildingsPossibilities();
 	_unitModels = army->getUnitsPossibilities();
@@ -132,6 +136,9 @@ void Initialize()
 
 void DrawRender()
 {
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
 	int tile;
 	glOrtho(0, widthMap, heightMap, 0, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
@@ -185,7 +192,24 @@ void DrawRender()
 	//draw army
 	for (unsigned int i = 0; i < army->getCurrentAttackUnits().size(); i++)
 	{
-		glBindTexture(GL_TEXTURE_2D, textureImage[10]);
+		if (army->getCurrentAttackUnits()[i]->getType() == 0) {
+			glBindTexture(GL_TEXTURE_2D, textureImage[10]);
+		}
+		else if (army->getCurrentAttackUnits()[i]->getType() == 1) {
+			glBindTexture(GL_TEXTURE_2D, textureImage[11]);
+		}
+		else if (army->getCurrentAttackUnits()[i]->getType() == 2) {
+			glBindTexture(GL_TEXTURE_2D, textureImage[12]);
+		}
+		else if (army->getCurrentAttackUnits()[i]->getType() == 3) {
+			glBindTexture(GL_TEXTURE_2D, textureImage[13]);
+		}
+		else if (army->getCurrentAttackUnits()[i]->getType() == 4) {
+			glBindTexture(GL_TEXTURE_2D, textureImage[14]);
+		}
+		else {
+			glBindTexture(GL_TEXTURE_2D, textureImage[10]);
+		}
 		float realx = army->getCurrentAttackUnits()[i]->getPosition().first * sizewidth;
 		float realy = army->getCurrentAttackUnits()[i]->getPosition().second * sizeheight;
 		glBegin(GL_QUADS);
@@ -603,6 +627,11 @@ void attack_building(int index)
 
 	int targetedIndex = -1;
 	
+	std::vector<Building*> buildings = base->getCurrentBuildings();
+	for (int i = 0; i < buildings.size(); i++)
+	{
+			buildings[i]->addFireRate(0);
+	}
 	//heal buildings in range
 	if (base->getBuilding(index)->getType() == 5)
 	{
@@ -619,12 +648,26 @@ void attack_building(int index)
 	//shield in range
 	else if (base->getBuilding(index)->getType() == 6)
 	{
-
+		std::vector<Building*> buildings = base->getCurrentBuildings();
+		for (int i = 0; i < buildings.size(); i++)
+		{
+			float distanceFromUnit = distance(buildings[i]->getZone().getX() + buildings[i]->getZone().getWidth() / 2.0f, buildings[i]->getZone().getY() + buildings[i]->getZone().getHeight() / 2.0f,
+				buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+			if (distanceFromUnit - distanceToRem <= range)
+				buildings[i]->setAddedLife(base->getBuilding(index)->getPower());
+		}
 	}
 	//fireupdate in range
 	else if (base->getBuilding(index)->getType() == 7)
 	{
-
+		std::vector<Building*> buildings = base->getCurrentBuildings();
+		for (int i = 0; i < buildings.size(); i++)
+		{
+			float distanceFromUnit = distance(buildings[i]->getZone().getX() + buildings[i]->getZone().getWidth() / 2.0f, buildings[i]->getZone().getY() + buildings[i]->getZone().getHeight() / 2.0f,
+				buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+			if (distanceFromUnit - distanceToRem <= range)
+				buildings[i]->addFireRate(base->getBuilding(index)->getPower());
+		}
 	}
 	else if (army->getCurrentAttackUnits().size() > 0)
 	{
