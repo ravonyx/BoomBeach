@@ -179,6 +179,11 @@ namespace OpenGLForm
 		{
 			drop_unit(index);
 		}
+		bool InDrop()
+		{
+			return in_drop();
+		}
+
 		void MoveUnit(int index)
 		{
 			move_unit(index);

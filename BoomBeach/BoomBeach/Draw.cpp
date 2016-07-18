@@ -31,6 +31,7 @@ float squarey = 0;
 std::pair<int, int> positionOrder;
 
 bool goToDestination = false;
+bool inDrop = false;
 
 void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
@@ -66,11 +67,8 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 				army->addAttackUnit(currentUnit, realx, realy);
 				std::cout << "ok" << std::endl;
 				currentUnit = -1;
-				/*if (base->addBuilding((_buildingModels[currentUnit]->getName()).c_str(), realx, realy) == true)
-				{
-					_map = field->getData();
-					currentUnit = -1;
-				}*/
+
+				inDrop = false;
 			}
 		}
 
@@ -253,6 +251,7 @@ void add_building(int nbBuilding)
 void drop_unit(int nbUnit)
 {
 	currentUnit = nbUnit;
+	inDrop = true;
 }
 
 void add_unit(int nbUnits)
@@ -324,7 +323,10 @@ void clear_attackUnit()
 {
 	army->clearAttackUnit();
 }
-
+bool in_drop()
+{
+	return inDrop;
+}
 #pragma endregion
 
 #pragma region A*
@@ -578,12 +580,19 @@ void attack_unit(int index) {
 	int unitY = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getPosition().second;
 	Zone targetZone;
 	targetZone = base->GetNearestBuilding(unitX, unitY)->getZone();
-	if(distance((float)unitX + 1.0f / 2.0f, (float)unitY + 1.0f / 2.0f, 
-		targetZone.getX() + targetZone.getWidth() / 2.0f, targetZone.getY() + targetZone.getHeight() / 2.0f) 
+	if (distance((float)unitX + 1.0f / 2.0f, (float)unitY + 1.0f / 2.0f,
+		targetZone.getX() + targetZone.getWidth() / 2.0f, targetZone.getY() + targetZone.getHeight() / 2.0f)
 		- distance((float)targetZone.getX(), (float)targetZone.getY(), targetZone.getX() + targetZone.getWidth() / 2.0f,
 			targetZone.getY() + targetZone.getHeight() / 2.0f) <= army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getRange())
+	{
+		Building* nearestBuilding = base->GetNearestBuilding(unitX, unitY);
+		AttackUnit* unit = army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)];
+		int damage = unit->getAttack();
+		if (unit->getType() == 1)
+			unit->takeDamage(unit->getLife());
 
-		base->GetNearestBuilding(unitX,unitY)->takeDamage(army->getCurrentAttackUnits()[army->getIndexOfAttackUnit(index)]->getAttack());
+		nearestBuilding->takeDamage(damage);
+	}
 }
 
 // Les batiments qui attaquent

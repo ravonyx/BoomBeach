@@ -53,6 +53,7 @@ bool Army::addAttackUnit(int id, int x, int y)
 	if (index != -1)
 	{
 		AttackUnit* attackUnit = new AttackUnit(*_units[index]);
+		_units[index]->setDeployed(true);
 		attackUnit->setPosition(x, y);
 		_attackUnits.push_back(attackUnit);
 		return true;
@@ -114,12 +115,6 @@ bool Army::deleteAttackUnit(int id)
 		it = find(_attackUnits.begin(), _attackUnits.end(), attackUnit);
 		_attackUnits.erase(it);
 		int _tmpId = 1;
-		for (unsigned int i = 0; i < _attackUnits.size(); i++)
-		{
-			_attackUnits[i]->setId(_tmpId);
-			_tmpId++;
-		}
-
 		return true;
 	}
 	std::cout << "L'id n'existe pas" << std::endl;
@@ -129,6 +124,10 @@ bool Army::deleteAttackUnit(int id)
 void Army::clearAttackUnit()
 {
 	_attackUnits.clear();
+	for (int i = 0; i < _units.size(); i++)
+	{
+		_units[i]->setDeployed(false);
+	}
 }
 
 bool Army::moveUnit(int id, std::pair<int, int> position)

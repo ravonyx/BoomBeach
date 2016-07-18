@@ -20,10 +20,11 @@ Unit::Unit()
 	health = 300 + (300 * level * healthUpdateRate);
 	speed = 10;
 	area = false;
+	deployed = false;
 }
 
 Unit::Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances,
-	float pattackupdaterate, float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth, int pspeed, bool parea)
+	float pattackupdaterate, float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth, int pspeed, bool parea, bool pdeployed)
 {
 	id = pid;
 	type = ptype;
@@ -42,6 +43,7 @@ Unit::Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdate
 	health = phealth;
 	speed = pspeed;
 	area = parea;
+	deployed = pdeployed;
 }
 
 Unit::Unit(const Unit& model)
@@ -63,6 +65,7 @@ Unit::Unit(const Unit& model)
 	health = model.health;
 	speed = model.speed;
 	area = model.area;
+	deployed = model.deployed;
 }
 
 int Unit::nextUpdateCost()
@@ -175,4 +178,13 @@ int Unit::getMaxInstances() const
 void Unit::setId(int pid)
 {
 	id = pid;
+}
+
+void Unit::setDeployed(bool pdeployed)
+{
+	deployed = pdeployed;
+}
+bool Unit::getDeployed() const
+{
+	return deployed;
 }

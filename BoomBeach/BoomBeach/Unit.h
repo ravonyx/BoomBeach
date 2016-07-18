@@ -9,7 +9,7 @@ class Unit
 		Unit();
 		Unit(const Unit& model);
 		Unit(int pid, int ptype, std::string pname, int pcost, float phealthUpdateRate, float pcostUpdateRate, int pmaxInstances, float pattackupdaterate,
-			float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth, int pspeed, bool parea);
+			float pfireupdaterate, float prangeupdaterate, int pattack, int pfirerate, int prange, int phealth, int pspeed, bool parea, bool deployed);
 		
 		int id;
 		int type;
@@ -24,6 +24,7 @@ class Unit
 		int level;
 		int speed;
 		bool area;
+		bool deployed;
 
 		float attackUpdateRate;
 		float firerateUpdateRate;
@@ -60,4 +61,6 @@ class Unit
 		int getMaxInstances() const;
 
 		void setId(int pid);
+		void setDeployed(bool pdeployed);
+		bool getDeployed() const;
 };

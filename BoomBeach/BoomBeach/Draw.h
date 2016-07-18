@@ -18,6 +18,7 @@ void attack_building(int index);
 void attack_unit(int index);
 void move_unit(int index);
 void drop_unit(int nbUnit);
+bool in_drop();
 
 int get_army_money();
 int get_base_money();
