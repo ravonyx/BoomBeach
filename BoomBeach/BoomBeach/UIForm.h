@@ -1329,14 +1329,17 @@ private: System::Windows::Forms::Button^  combatButton;
 				else 
 					//std::cout << "speed : " << attackUnits[i]->getSpeed() << " no : " << counterValueUpdate % (attackUnits[i]->getSpeed() ) << std::endl;
 				if (counterValueUpdate % attackUnits[i]->getFirerate() == 0)
+				{
 					OpenGL->AttackUnit(attackUnits[i]->getId());
+					fillDataBuilding();
+				}
 			}
 			for (unsigned int i = 0; i < buildings.size(); i++)
 			{
 				if (counterValueUpdate % buildings[i]->getFireRate() == 0)
 				{
 					OpenGL->AttackBuilding(buildings[i]->getId());
-					fillDataBuilding();
+					fillDataUnit();
 				}
 			}
 
@@ -1644,7 +1647,24 @@ private: System::Windows::Forms::Button^  combatButton;
 				| System::Windows::Forms::AnchorStyles::Right));
 			lifeUnit->AutoSize = true;
 			lifeUnit->TabIndex = 2;
-			str = gcnew String(units[i]->getLife().ToString());
+			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
+			if(!inCombat)
+				str = gcnew String(units[i]->getLife().ToString());
+			else 
+			{
+				if (units[i]->getDeployed() == true)
+				{
+					if (attackUnits.size() > 0)
+					{
+						int index = OpenGL->GetIndexAttackUnit(units[i]->getId());
+						if (index != -1)
+							str = gcnew String(attackUnits[index]->getLife().ToString());
+					}
+				}
+				else
+					str = gcnew String(units[i]->getLife().ToString());
+			}
+				
 			lifeUnit->Text = str;
 			lifeUnit->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 

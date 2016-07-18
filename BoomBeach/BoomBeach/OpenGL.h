@@ -146,6 +146,10 @@ namespace OpenGLForm
 		{
 			return get_attackunits();
 		}
+		int GetIndexAttackUnit(int id)
+		{
+			return get_indexattackunit(id);
+		}
 
 		void EnhanceBuilding(int index)
 		{

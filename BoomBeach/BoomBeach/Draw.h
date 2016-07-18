@@ -43,5 +43,7 @@ std::vector<Building*> get_buildings();
 std::vector<Unit*> get_units();
 std::vector<AttackUnit*> get_attackunits();
 
+int get_indexattackunit(int id);
+
 void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
 void mouseMotion(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
