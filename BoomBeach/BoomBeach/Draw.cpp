@@ -611,6 +611,7 @@ void attack_building(int index)
 
 	int targetedIndex = -1;
 	
+	//heal buildings in range
 	if (base->getBuilding(index)->getType() == 5)
 	{
 		std::vector<Building*> buildings = base->getCurrentBuildings();
@@ -623,10 +624,12 @@ void attack_building(int index)
 		}
 	}
 
+	//shield in range
 	else if (base->getBuilding(index)->getType() == 6)
 	{
 
 	}
+	//fireupdate in range
 	else if (base->getBuilding(index)->getType() == 7)
 	{
 
@@ -673,7 +676,24 @@ void attack_building(int index)
 		}
 		else if (base->getBuilding(index)->getTargetType() == 3) //Closest to HQ
 		{
-
+			std::vector<Building*> buildings = base->getCurrentBuildings();
+			int indexQG = -1;
+			for (int i = 0; i < buildings.size(); i++)
+			{
+				if (buildings[i]->getName() == "QG")
+				{
+					indexQG = i;
+					break;
+				}
+			}
+			if (indexQG != -1)
+			{
+				AttackUnit *unit = army->GetNearestUnit(buildings[indexQG]->getZone().getX(), buildings[indexQG]->getZone().getY());
+				std::pair<int, int> unitPos = unit->getPosition();
+				float distanceFromUnit = distance((float)unitPos.first + 1.0f / 2.0f, (float)unitPos.second + 1.0f / 2.0f, buildingZone.getX() + buildingZone.getWidth() / 2.0f, buildingZone.getY() + buildingZone.getHeight() / 2.0f);
+				if (distanceFromUnit - distanceToRem <= range)
+					unit->takeDamage(damage);
+			}
 		}
 		else if (base->getBuilding(index)->getTargetType() == 4) //Strongest Unit
 		{
