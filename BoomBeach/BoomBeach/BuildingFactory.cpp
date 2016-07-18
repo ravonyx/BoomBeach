@@ -2,11 +2,12 @@
 
 BuildingFactory::BuildingFactory()
 {
+	// power, range, fireRate , area
 	Building* house = new Building(0, "QG", 1, 2000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 1, 4, 4, Zone());
-	Building* snipertower = new Building(0, "SniperTower", 2, 500, 100, 0, 50, 4, 50, true, 1.3f, 1.2f, 4, 2, 2, Zone());
+	Building* snipertower = new Building(0, "SniperTower", 2, 500, 100, 0, 200, 4, 100, true, 1.3f, 1.2f, 4, 2, 2, Zone());
 	Building* lanceflamme = new Building(0, "LanceFlamme", 3, 800, 300, 0, 10, 1, 30, false, 1.2f, 1.3f, 2, 2, 3, Zone());
 	Building* mitrailleuse = new Building(0, "Mitrailleuse", 4, 1000, 500, 0, 8, 2, 10, true, 1.1f, 1.3f, 2, 2, 1, Zone());
-	Building* Canon = new Building(0, "Canon", 4, 500, 500, 0, 45, 2, 50, false, 1.1f, 1.3f, 2, 2, 1, Zone());
+	Building* canon = new Building(0, "Canon", 4, 500, 500, 0, 45, 2, 50, false, 1.1f, 1.3f, 2, 2, 1, Zone());
 	Building* repare = new Building(0, "RepareBuilding", 5, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 2, 1, 2, Zone());
 	Building* shield = new Building(0, "ShieldBuilding", 6, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 3, 2, 2, Zone());
 	Building* energy = new Building(0, "EnergyBuilding", 7, 1000, 500, 0, 0, 1, 50, false, 1.1f, 1.3f, 1, 3, 3, Zone());
@@ -15,6 +16,7 @@ BuildingFactory::BuildingFactory()
 	buildingModels.push_back(snipertower);
 	buildingModels.push_back(lanceflamme);
 	buildingModels.push_back(mitrailleuse);
+	buildingModels.push_back(canon);
 	buildingModels.push_back(repare);
 	buildingModels.push_back(shield);
 	buildingModels.push_back(energy);

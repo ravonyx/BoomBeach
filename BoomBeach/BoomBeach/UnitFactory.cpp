@@ -1,12 +1,12 @@
 #include "UnitFactory.h"
 
 UnitFactory::UnitFactory()
-{
-	Unit* brute = new Unit(0, 0, "Brute", 100, 1.3f, 1.4f, 2, 1.1f, 1.3f, 1.2f, 100, 50, 1, 500, 10, true, false);
-	Unit* kamikaze = new Unit(0, 1, "Kamikaze", 200, 1.2f, 1.4f, 4, 1.1f, 1.3f, 10, 100, 50, 1, 100, 20, false, false);
-	Unit* fusilleur = new Unit(0, 2, "Fusilleur", 100, 1.2f, 1.4f, 3, 1.1f, 1.3f, 1.4f, 2, 100, 2, 400, 50, false, false);
-	Unit* sniper = new Unit(0, 3, "Sniper", 100, 1.1f, 1.2f, 2, 1.1f, 1.3f, 1.4f, 2, 50, 7, 100, 300, false, false);
-	Unit* bazooka = new Unit(0, 4, "Bazooka", 50, 1.2f, 1.4f, 2, 1.1f, 1.3f, 1.2f, 2, 50, 5, 200, 200, true, false);
+{	//Attaque, vitesse attack, portee, sante, vitesse
+	Unit* brute = new Unit(0, 0, "Brute", 100, 1.3f, 1.4f, 2, 1.1f, 1.3f, 1.2f, 350, 50, 1, 500, 10, true, false);
+	Unit* kamikaze = new Unit(0, 1, "Kamikaze", 200, 1.2f, 1.4f, 4, 1.1f, 1.3f, 1.2f, 400, 10, 1, 150, 20, false, false);
+	Unit* fusilleur = new Unit(0, 2, "Fusilleur", 100, 1.2f, 1.4f, 3, 1.1f, 1.3f, 1.4f, 150, 20, 2, 400, 50, false, false);
+	Unit* sniper = new Unit(0, 3, "Sniper", 100, 1.1f, 1.2f, 2, 1.1f, 1.3f, 1.4f, 300, 50, 4, 200, 100, false, false);
+	Unit* bazooka = new Unit(0, 4, "Bazooka", 50, 1.2f, 1.4f, 2, 1.1f, 1.3f, 1.2f, 250, 50, 3, 200, 100, true, false);
 	Unit* medecinContact = new Unit(0, 5, "MedecinContact", 10, 1.2f, 1.2f, 4, 1.2f, 1.4f, 7, 3, 100, 1, 150, 20, false, false);
 	Unit* medecinSeringue = new Unit(0, 6, "MedecinSeringue", 50, 1.2f, 1.4f, 3, 1.4f, 1.3f, 1.3f, 5, 100, 2, 170, 50, false, false);
 	Unit* medecinZone = new Unit(0, 7, "MedecinZone", 100, 1.2f, 1.4f, 2, 1.1f, 1.3f, 1.2f, 2, 100, 2, 120, 100, true, false);
