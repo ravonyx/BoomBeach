@@ -18,7 +18,6 @@ void attack_building(int index);
 void attack_unit(int index);
 void move_unit(int index);
 void drop_unit(int nbUnit);
-bool in_drop();
 
 int get_army_money();
 int get_base_money();
@@ -35,9 +34,7 @@ void delete_unit(int index);
 void delete_attackUnit(int index);
 void clear_attackUnit();
 
-void triggerBuildingActions();
 void goToNextTargetType(int index);
-
 
 std::vector<Building*> get_buildings();
 std::vector<Unit*> get_units();

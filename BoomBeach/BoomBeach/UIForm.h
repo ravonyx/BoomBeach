@@ -41,15 +41,11 @@ namespace UIBoomBeach {
 		}
 	private: int counterValue;
 	private: int counterValueUpdate;
-	private: System::Windows::Forms::Button^ currentDropButton;
 	private: bool inCombat;
 	private: System::ComponentModel::IContainer^  components;
 	protected:
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
-
-
-
 
 	private:
 		/// <summary>
@@ -1398,13 +1394,6 @@ private: System::Windows::Forms::Button^  combatButton;
 					fillDataUnit();
 				}
 			}
-
-			bool inDrop = OpenGL->InDrop();
-			if (!inDrop && currentDropButton != nullptr && currentDropButton->Enabled == true)
-			{
-				fillDataUnit();
-				currentDropButton = nullptr;
-			}
 		}
 
 		this->armyMoney->Text = "Army Money : " + OpenGL->GetArmyMoney();
@@ -1555,7 +1544,6 @@ private: System::Windows::Forms::Button^  combatButton;
 
 		int row = (controller->Location.Y - 3) / 30;
 		OpenGL->DropUnit(row + 1);
-		currentDropButton = (System::Windows::Forms::Button^) sender;
 		fillDataUnit();
 	}
 

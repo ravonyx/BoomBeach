@@ -31,7 +31,6 @@ float squarey = 0;
 std::pair<int, int> positionOrder;
 
 bool goToDestination = false;
-bool inDrop = false;
 
 void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 {
@@ -66,8 +65,6 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 			{
 				army->addAttackUnit(currentUnit, realx, realy);
 				currentUnit = -1;
-
-				inDrop = false;
 			}
 			else {
 				positionOrder.first = realx;
@@ -252,7 +249,6 @@ void add_building(int nbBuilding)
 void drop_unit(int nbUnit)
 {
 	currentUnit = nbUnit;
-	inDrop = true;
 }
 
 void add_unit(int nbUnits)
@@ -328,10 +324,6 @@ void delete_attackUnit(int index)
 void clear_attackUnit()
 {
 	army->clearAttackUnit();
-}
-bool in_drop()
-{
-	return inDrop;
 }
 #pragma endregion
 
