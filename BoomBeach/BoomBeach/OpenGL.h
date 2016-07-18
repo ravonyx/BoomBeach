@@ -83,6 +83,8 @@ namespace OpenGLForm
 			DrawRender();
 		}		
 
+#pragma region callbacks
+
 		System::Void SwapOpenGLBuffers(System::Void)
 		{
 			SwapBuffers(m_hDC);
@@ -169,6 +171,10 @@ namespace OpenGLForm
 		{
 			delete_attackUnit(index);
 		}
+		void ClearAttackUnit()
+		{
+			clear_attackUnit();
+		}
 		void DropUnit(int index)
 		{
 			drop_unit(index);
@@ -187,6 +193,7 @@ namespace OpenGLForm
 			goToNextTargetType(index);
 		}
 
+#pragma endregion
 
 		void mouseEnter(System::Object^  sender, System::EventArgs^  e)
 		{
@@ -195,8 +202,8 @@ namespace OpenGLForm
 		void mouseLeave(System::Object^  sender, System::EventArgs^  e)
 		{
 			Cursor->Show();
-
 		}
+
 	private:
 		HDC m_hDC;
 		HGLRC m_hglrc;

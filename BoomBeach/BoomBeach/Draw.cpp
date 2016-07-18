@@ -58,7 +58,8 @@ void mouse(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 				currentBuilding = -1;
 			}
 		}
-		else {
+		else 
+		{
 			//if can drop unit on that tile
 			if (tile == -2 && currentUnit != -1)
 			{
@@ -143,6 +144,7 @@ void DrawRender()
 	float sizewidth = widthMap / (base->getField()->getWidth() - 0.05f);
 	float sizeheight = heightMap / (base->getField()->getHeight() - 0.05f);
 
+	//draw map
 	for (int y = 0; y < field->getHeight(); y++)
 	{
 		for (int x = 0; x < field->getWidth(); x++)
@@ -184,10 +186,12 @@ void DrawRender()
 		}
 	}
 
-	for (int x = 0; x < army->getCurrentAttackUnits().size(); x++) {
+	//draw army
+	for (unsigned int i = 0; i < army->getCurrentAttackUnits().size(); i++)
+	{
 		glBindTexture(GL_TEXTURE_2D, textureImage[10]);
-		float realx = army->getCurrentAttackUnits()[x]->getPosition().first * sizewidth;
-		float realy = army->getCurrentAttackUnits()[x]->getPosition().second * sizeheight;
+		float realx = army->getCurrentAttackUnits()[i]->getPosition().first * sizewidth;
+		float realy = army->getCurrentAttackUnits()[i]->getPosition().second * sizeheight;
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0f, 0.0f); glVertex3f(float(realx), float(realy), 0.0f);
 		glTexCoord2f(1.0f, 0.0f); glVertex3f(float(realx + sizewidth), float(realy), 0.0f);
@@ -197,29 +201,20 @@ void DrawRender()
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
-
+	//Draw cell selected on map
 	currentSquare.x = squarex * sizewidth;
 	currentSquare.y = squarey * sizeheight;
+	
+	float sizeheightCell = heightMap / (base->getField()->getHeight());
+	float sizewidthCell = widthMap / (base->getField()->getWidth());
+
+	currentSquare.width = sizewidthCell;
+	currentSquare.height = sizeheightCell;
 
 	if (currentBuilding != -1)
 	{
-		float sizeheight = heightMap / (base->getField()->getHeight());
-		float sizewidth = widthMap / (base->getField()->getWidth());
-
-		currentSquare.width = sizewidth;
-		currentSquare.height = sizeheight;
-
 		currentSquare.width *= _buildingModels[currentBuilding]->getWidth();
 		currentSquare.height *= _buildingModels[currentBuilding]->getHeight();
-	}
-
-	else
-	{
-		float sizeheight = heightMap / (base->getField()->getHeight());
-		float sizewidth = widthMap / (base->getField()->getWidth());
-
-		currentSquare.width = sizewidth;
-		currentSquare.height = sizeheight;
 	}
 
 	glBegin(GL_LINE_LOOP);
@@ -229,6 +224,8 @@ void DrawRender()
 	glVertex3f(float(currentSquare.x), float(currentSquare.y + currentSquare.height), 0.0f);
 	glEnd();
 }
+
+#pragma region callbacks_ui
 
 void SetDimensionMap(GLsizei width, GLsizei height)
 {
@@ -323,9 +320,14 @@ void delete_attackUnit(int index)
 {
 	army->deleteAttackUnit(index);
 }
+void clear_attackUnit()
+{
+	army->clearAttackUnit();
+}
 
+#pragma endregion
 
-
+#pragma region A*
 
 #include <cmath>
 #include <map>
@@ -603,7 +605,7 @@ void attack_building(int index)
 void triggerBuildingActions()
 {
 
-	for (int i = 0; i < base->getCurrentBuildings().size(); i++)
+	for (unsigned int i = 0; i < base->getCurrentBuildings().size(); i++)
 	{
 		int targetedIndex;
 		int distance = 0;
@@ -632,7 +634,7 @@ void triggerBuildingActions()
 			{
 				//Boucler sur les unités voulues
 				int lowest=999999;
-				for (int j = 0; j < army->getCurrentUnits().size(); j++) {
+				for (unsigned int j = 0; j < army->getCurrentUnits().size(); j++) {
 					if (army->getCurrentUnits()[j]->getLife() < lowest)
 					{
 						lowest = army->getCurrentUnits()[j]->getLife();
@@ -645,7 +647,7 @@ void triggerBuildingActions()
 			else if (base->getCurrentBuildings()[i]->getTargetType() == 2) //High HP Unit
 			{
 				int heighest = 0;
-				for (int j = 0; j < army->getCurrentUnits().size(); j++) {
+				for (unsigned int j = 0; j < army->getCurrentUnits().size(); j++) {
 					if (army->getCurrentUnits()[j]->getLife() > heighest)
 					{
 						heighest = army->getCurrentUnits()[j]->getLife();
@@ -666,7 +668,7 @@ void triggerBuildingActions()
 			else if (base->getCurrentBuildings()[i]->getTargetType() == 5) //Strongest Unit
 			{
 				int heighest = 0;
-				for (int j = 0; j < army->getCurrentUnits().size(); j++) {
+				for (unsigned int j = 0; j < army->getCurrentUnits().size(); j++) {
 					if (army->getCurrentUnits()[j]->getAttack() > heighest)
 					{
 						heighest = army->getCurrentUnits()[j]->getAttack();
@@ -679,7 +681,7 @@ void triggerBuildingActions()
 			else if (base->getCurrentBuildings()[i]->getTargetType() == 6) //Closest Support Unit
 			{
 				int closest = 999;
-				for (int j = 0; j < army->getCurrentUnits().size(); j++) {
+				for (unsigned int j = 0; j < army->getCurrentUnits().size(); j++) {
 					if (army->getCurrentUnits()[j]->getType() == 0 /*Mettre le type pour type d'unité de soutien*/) {
 						
 					}
@@ -701,3 +703,5 @@ void goToNextTargetType(int index)
 		base->getCurrentBuildings()[index]->setTargetType( a + 1);
 	}
 }
+
+#pragma endregion

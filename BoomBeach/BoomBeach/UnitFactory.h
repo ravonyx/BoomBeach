@@ -7,6 +7,7 @@
 
 class UnitFactory
 {
+
 private:
 	std::vector <Unit*>unitModels;
 	bool nameInList(std::string name);

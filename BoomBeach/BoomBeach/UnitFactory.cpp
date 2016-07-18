@@ -2,14 +2,14 @@
 
 UnitFactory::UnitFactory()
 {
-	Unit* brute = new Unit(0, 0, "Brute", 100, 1.3, 1.4, 2, 1.1, 1.3, 1.2, 100, 50, 1, 500, 10, true);
-	Unit* kamikaze = new Unit(0, 1, "Kamikaze", 200, 1.2, 1.4, 4, 1.1, 1.3, 10, 0, 50, 1, 100, 20, false);
-	Unit* fusilleur = new Unit(0, 2, "Fusilleur", 100, 1.2, 1.4, 3, 1.1, 1.3, 1.4, 2, 100, 2, 400, 50, false);
-	Unit* sniper = new Unit(0, 3, "Sniper", 100, 1.1, 1.2, 2, 1.1, 1.3, 1.4, 2, 50, 7, 100, 300, false);
-	Unit* bazooka = new Unit(0, 4, "Bazooka", 50, 1.2, 1.4, 2, 1.1, 1.3, 1.2, 2, 50, 5, 200, 200, true);
-	Unit* medecinContact = new Unit(0, 5, "MedecinContact", 10, 1.2, 1.2, 4, 1.2, 1.4, 7, 3, 100, 1, 150, 20, false);
-	Unit* medecinSeringue = new Unit(0, 6, "MedecinSeringue", 50, 1.2, 1.4, 3, 1.4, 1.3, 1.3, 5, 100, 2, 170, 50, false);
-	Unit* medecinZone = new Unit(0, 7, "MedecinZone", 100, 1.2, 1.4, 2, 1.1, 1.3, 1.2, 2, 100, 2, 120, 100, true);
+	Unit* brute = new Unit(0, 0, "Brute", 100, 1.3f, 1.4f, 2, 1.1f, 1.3f, 1.2f, 100, 50, 1, 500, 10, true);
+	Unit* kamikaze = new Unit(0, 1, "Kamikaze", 200, 1.2f, 1.4f, 4, 1.1f, 1.3f, 10, 0, 50, 1, 100, 20, false);
+	Unit* fusilleur = new Unit(0, 2, "Fusilleur", 100, 1.2f, 1.4f, 3, 1.1f, 1.3f, 1.4f, 2, 100, 2, 400, 50, false);
+	Unit* sniper = new Unit(0, 3, "Sniper", 100, 1.1f, 1.2f, 2, 1.1f, 1.3f, 1.4f, 2, 50, 7, 100, 300, false);
+	Unit* bazooka = new Unit(0, 4, "Bazooka", 50, 1.2f, 1.4f, 2, 1.1f, 1.3f, 1.2f, 2, 50, 5, 200, 200, true);
+	Unit* medecinContact = new Unit(0, 5, "MedecinContact", 10, 1.2f, 1.2f, 4, 1.2f, 1.4f, 7, 3, 100, 1, 150, 20, false);
+	Unit* medecinSeringue = new Unit(0, 6, "MedecinSeringue", 50, 1.2f, 1.4f, 3, 1.4f, 1.3f, 1.3f, 5, 100, 2, 170, 50, false);
+	Unit* medecinZone = new Unit(0, 7, "MedecinZone", 100, 1.2f, 1.4f, 2, 1.1f, 1.3f, 1.2f, 2, 100, 2, 120, 100, true);
 
 	unitModels.push_back(brute);
 	unitModels.push_back(kamikaze);
@@ -25,7 +25,7 @@ Unit* UnitFactory::create(const std::string name)
 {
 	if (nameInList(name))
 	{
-		for (int i = 0; i < unitModels.size(); i++)
+		for (unsigned int i = 0; i < unitModels.size(); i++)
 		{
 			if (unitModels[i]->getName() == name)
 			{
@@ -43,15 +43,13 @@ Unit* UnitFactory::create(const std::string name)
 		}
 	}
 	else
-	{
 		std::cout << "Wrong name" << std::endl;
-		return nullptr;
-	}
+	return nullptr;
 }
 
 bool UnitFactory::nameInList(std::string name)
 {
-	for (int i = 0; i < unitModels.size(); i++)
+	for (unsigned int i = 0; i < unitModels.size(); i++)
 	{
 		if (name == unitModels[i]->getName())
 		{
@@ -82,16 +80,17 @@ Unit* UnitFactory::readNextUnit(std::istream & stream)
 
 int UnitFactory::getInstances(std::string name)
 {
-	for (int i = 0; i < unitModels.size(); i++)
+	for (unsigned int i = 0; i < unitModels.size(); i++)
 	{
 		if (unitModels[i]->getName() == name)
 			return instances[i];
 	}
+	return -1;
 }
 
 void UnitFactory::addInstances(std::string name)
 {
-	for (int i = 0; i < unitModels.size(); i++)
+	for (unsigned int i = 0; i < unitModels.size(); i++)
 	{
 		if (unitModels[i]->getName() == name)
 			instances[i]++;
@@ -99,7 +98,7 @@ void UnitFactory::addInstances(std::string name)
 }
 void UnitFactory::removeInstances(std::string name)
 {
-	for (int i = 0; i < unitModels.size(); i++)
+	for (unsigned int i = 0; i < unitModels.size(); i++)
 	{
 		if (unitModels[i]->getName() == name)
 			instances[i]--;

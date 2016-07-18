@@ -56,7 +56,7 @@ bool Base::destroyBuilding(int id)
 		_field->Erase(building->getZone());
 
 		_currentId = 1;
-		for (int i = 0; i < _buildings.size(); i++)
+		for (unsigned int i = 0; i < _buildings.size(); i++)
 		{
 			_buildings[i]->setId(_currentId);
 			_currentId++;
@@ -101,11 +101,11 @@ bool Base::addBuilding(const char *name, int x, int y)
 				// Rule for QG HPs
 				int qGAddedHealth = 0;
 				int qGindex = 0;
-				for (int i = 0; i < _buildings.size(); i++)
+				for (unsigned int i = 0; i < _buildings.size(); i++)
 				{
 					if (_buildings[i]->getType() != 1)
 					{
-						qGAddedHealth += _buildings[i]->getLife() * 0.1;
+						qGAddedHealth += _buildings[i]->getLife() * 0.1f;
 					}
 					else
 					{

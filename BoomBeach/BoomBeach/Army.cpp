@@ -10,6 +10,15 @@ Army::Army()
 	_unitFactory = new UnitFactory();
 }
 
+Army::~Army()
+{
+	delete _unitFactory;
+	for (unsigned int i = 0; i < _units.size(); i++)
+	{
+		delete _units[i];
+	}
+}
+
 bool Army::addUnit(const char* name)
 {
 	int cost = 0;
@@ -83,7 +92,7 @@ bool Army::deleteUnit(int id)
 		_units.erase(it);
 		_unitFactory->removeInstances(unit->getName());
 		_currentId = 1;
-		for (int i = 0; i < _units.size(); i++)
+		for (unsigned int i = 0; i < _units.size(); i++)
 		{
 			_units[i]->setId(_currentId);
 			_currentId++;
@@ -105,7 +114,7 @@ bool Army::deleteAttackUnit(int id)
 		it = find(_attackUnits.begin(), _attackUnits.end(), attackUnit);
 		_attackUnits.erase(it);
 		int _tmpId = 1;
-		for (int i = 0; i < _attackUnits.size(); i++)
+		for (unsigned int i = 0; i < _attackUnits.size(); i++)
 		{
 			_attackUnits[i]->setId(_tmpId);
 			_tmpId++;
@@ -115,6 +124,11 @@ bool Army::deleteAttackUnit(int id)
 	}
 	std::cout << "L'id n'existe pas" << std::endl;
 	return false;
+}
+
+void Army::clearAttackUnit()
+{
+	_attackUnits.clear();
 }
 
 bool Army::moveUnit(int id, std::pair<int, int> position)

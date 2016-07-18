@@ -16,13 +16,14 @@ class Army
 
 	public:
 		Army();
-		~Army() { delete _unitFactory; };
+		~Army();
 
 		bool addUnit(const char* name);
 		bool addAttackUnit(int id, int x, int y);
 		void enhanceUnit(int id);
 		bool deleteUnit(int id);
 		bool deleteAttackUnit(int id);
+		void clearAttackUnit();
 		Unit* getUnit(int id);
 		AttackUnit* Army::getAttackUnit(int id);
 		int getIndexOfUnit(int id);
@@ -30,9 +31,6 @@ class Army
 		bool moveUnit(int id, std::pair<int, int> position);
 		AttackUnit * Army::GetNearestUnit(int x, int y);
 		
-		//void DeleteUnit(Unit &unit);
-		//void DeleteUnit(int type, int level);
-		//int LevelUpUnit(int i) { return _units[i]->levelUp(); }
 		std::vector<Unit*> getUnitsPossibilities();
 		std::vector<Unit*> getCurrentUnits();
 		std::vector<AttackUnit*> Army::getCurrentAttackUnits();
@@ -45,28 +43,3 @@ class Army
 		int getMoney() { return _money; }
 		void setMoney(int _money) { _money = _money; }
 };
-
-/*inline std::ofstream& operator << (std::ofstream& of, const Army& a)
-{
-	for (size_t i = 0; i < a.GetUnits().size(); i++)
-	{
-		of << a.GetUnits()[i];
-		if (i != a.GetUnits().size() - 1) {
-			of << std::endl;
-		}
-	}
-	return of;
-}
-
-inline std::ostream& operator << (std::ostream& os, const Army& a)
-{
-	if (a.GetUnits().size() <= 0)
-		std::cout << "No units" << std::endl;
-	else
-	for (size_t i = 0; i < a.GetUnits().size(); i++)
-	{
-		os << "(" << i + 1 << ") " << a.GetUnits()[i] << std::endl;;
-	}
-	return os;
-}*/
-

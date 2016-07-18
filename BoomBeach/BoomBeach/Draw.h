@@ -32,6 +32,7 @@ void delete_building(int index);
 void enhance_unit(int index);
 void delete_unit(int index);
 void delete_attackUnit(int index);
+void clear_attackUnit();
 
 void triggerBuildingActions();
 void goToNextTargetType(int index);

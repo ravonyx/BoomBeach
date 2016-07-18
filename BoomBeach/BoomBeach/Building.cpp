@@ -11,8 +11,8 @@ Building::Building()
 	width = 1;
 	height = 1;
 
-	healthUpdateRate = 0.1;
-	costUpdateRate = 0.2;
+	healthUpdateRate = 0.1f;
+	costUpdateRate = 0.2f;
 	maxInstances = 1;
 
 	zone = Zone();

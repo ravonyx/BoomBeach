@@ -8,11 +8,11 @@ Unit::Unit()
 	name = "Default";
 	level = 0;
 	maxInstances = 2;
-	attackUpdateRate = 1.2;
-	firerateUpdateRate = 1.1;
-	rangeUpdateRate = 1.1;
-	healthUpdateRate = 1.1;
-	costUpdateRate = 1.1;
+	attackUpdateRate = 1.2f;
+	firerateUpdateRate = 1.1f;
+	rangeUpdateRate = 1.1f;
+	healthUpdateRate = 1.1f;
+	costUpdateRate = 1.1f;
 	cost = 2000 + (2000 * level * costUpdateRate);
 	attack = 10 + (10 * level * attackUpdateRate);
 	firerate = 100 + (100 * level * firerateUpdateRate);

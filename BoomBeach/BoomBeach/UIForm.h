@@ -1248,15 +1248,11 @@ private: System::Windows::Forms::Button^  combatButton;
 		else if(counterValue != -2)
 			this->counterText->Text = "You lose";
 		else
-		{
 			stopCombat();
-		}
-
-
-		
 	}
 
-	void stopCombat() {
+	void stopCombat() 
+	{
 		inCombat = false;
 		buildingsMenuItem->Enabled = true;
 		unitsMenu->Enabled = true;
@@ -1266,6 +1262,8 @@ private: System::Windows::Forms::Button^  combatButton;
 
 		this->counterText->Text = "";
 		this->counter->Stop();
+
+		OpenGL->ClearAttackUnit();
 	}
 
 	private: System::Void timer_Tick(System::Object^  sender, System::EventArgs^  e)
@@ -1273,17 +1271,19 @@ private: System::Windows::Forms::Button^  combatButton;
 		UNREFERENCED_PARAMETER(sender);
 		UNREFERENCED_PARAMETER(e);
 
+		std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
 		if (inCombat)
 		{
-			//clean buildings and units if life < 0
+			//clean buildings if life < 0
 			std::vector<Building*> buildings = OpenGL->GetBuildings();
-			for (int i = 0; i < buildings.size(); i++)
+			for (unsigned int i = 0; i < buildings.size(); i++)
 			{
 				if(buildings[i]->getLife() <= 0)
 					OpenGL->DeleteBuilding(i+1);
 			}
+			//clean units if life < 0
 			std::vector<AttackUnit*> attackUnits = OpenGL->GetAttackUnits();
-			for (int i = 0; i < attackUnits.size(); i++)
+			for (unsigned int i = 0; i < attackUnits.size(); i++)
 			{
 				if (attackUnits[i]->getLife() <= 0)
 					OpenGL->DeleteAttackUnit(i+1);
@@ -1294,39 +1294,38 @@ private: System::Windows::Forms::Button^  combatButton;
 			{
 				//win
 				stopCombat();
-
 				this->counterText->Text = "You win";
 			}
 
 			//check number units
 			int nbUnits = 0;
-			for (int i = 0; i < 8; i++)
+			for (unsigned int i = 0; i < 8; i++)
 			{
 				nbUnits += OpenGL->GetUnitInstances(i);
 				if (nbUnits > 0)
 					break;
 			}
-
 			if (nbUnits == 0)
 			{
 				//lose
 				stopCombat();
+				this->counterText->Text = "You lose";
 			}
+
+			//Update position of units & attack part
 			counterValueUpdate++;
-			if (counterValueUpdate >= 201) {
+			if (counterValueUpdate >= 201) 
 				counterValueUpdate = 1;
-			}
-			for (int i = 0; i < attackUnits.size(); i++)
+			for (unsigned int i = 0; i < attackUnits.size(); i++)
 			{
 				if(counterValueUpdate % attackUnits[i]->getSpeed() == 0)
 					OpenGL->MoveUnit(attackUnits[i]->getId());
-				else {
+				else 
 					//std::cout << "speed : " << attackUnits[i]->getSpeed() << " no : " << counterValueUpdate % (attackUnits[i]->getSpeed() ) << std::endl;
-				}
 				if (counterValueUpdate % attackUnits[i]->getFirerate() == 0)
 					OpenGL->AttackUnit(attackUnits[i]->getId());
 			}
-			for (int i = 0; i < buildings.size(); i++)
+			for (unsigned int i = 0; i < buildings.size(); i++)
 			{
 				if (counterValueUpdate % buildings[i]->getFireRate() == 0)
 					OpenGL->AttackBuilding(buildings[i]->getId());
@@ -1508,7 +1507,7 @@ private: System::Windows::Forms::Button^  combatButton;
 		//Set the new count
 		panelBuildings->RowCount = buildings.size() + 1;
 
-		for (int i = 0; i < buildings.size(); i++)
+		for (unsigned int i = 0; i < buildings.size(); i++)
 		{
 			panelBuildings->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Absolute, 30));
 
@@ -1599,7 +1598,7 @@ private: System::Windows::Forms::Button^  combatButton;
 		//Set the new count
 		panelUnits->RowCount = units.size() + 1;
 
-		for (int i = 0; i < units.size(); i++)
+		for (unsigned int i = 0; i < units.size(); i++)
 		{
 			panelUnits->RowStyles->Add(gcnew RowStyle(System::Windows::Forms::SizeType::Absolute, 30));
 
